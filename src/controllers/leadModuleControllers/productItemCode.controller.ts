@@ -3,6 +3,7 @@ import {
     addProductItemCode,
     updateProductItemCode,
     getAllProductItemCodes,
+    updateProductItemCodeStatus,
 } from "../../services/leadModuleServices/productItemCode.service";
 import { ProductItemCodeInput } from "../../types/leadModule.types";
 
@@ -25,9 +26,7 @@ export const createProductItemCode = async (req: Request, res: Response) => {
             !vendor_id ||
             !item_code ||
             !product_structure_id ||
-            !sub_product_structure_id ||
-            !description ||
-            !specification
+            !sub_product_structure_id
         ) {
             console.warn("[CONTROLLER] Missing required fields", {
                 vendor_id,
@@ -39,17 +38,18 @@ export const createProductItemCode = async (req: Request, res: Response) => {
             });
             return res.status(400).json({
                 error:
-                    "vendor_id, item_code, product_structure_id, sub_product_structure_id, description and specification are required",
+                    "vendor_id, item_code, product_structure_id and sub_product_structure_id are required",
             });
         }
 
+        // Description and specification are optional; store empty as null.
         const itemCode = await addProductItemCode({
             vendor_id,
             item_code,
             product_structure_id,
             sub_product_structure_id,
-            description,
-            specification,
+            description: description?.trim() || null,
+            specification: specification?.trim() || null,
         });
 
         return res.status(201).json({ success: true, data: itemCode });
@@ -91,15 +91,15 @@ export const editProductItemCode = async (req: Request, res: Response) => {
         product_structure_id: Number(req.body.product_structure_id),
         sub_product_structure_id: Number(req.body.sub_product_structure_id),
         item_code: typeof req.body.item_code === "string" ? req.body.item_code.trim() : "",
-        description: typeof req.body.description === "string" ? req.body.description.trim() : "",
-        specification: typeof req.body.specification === "string" ? req.body.specification.trim() : "",
+        description: typeof req.body.description === "string" ? req.body.description.trim() || null : null,
+        specification: typeof req.body.specification === "string" ? req.body.specification.trim() || null : null,
     };
     if (
         ![id, payload.vendor_id, payload.product_structure_id, payload.sub_product_structure_id]
             .every((value) => Number.isSafeInteger(value) && value > 0) ||
-        !payload.item_code || !payload.description || !payload.specification
+        !payload.item_code
     ) {
-        return res.status(400).json({ success: false, error: "Valid IDs, item_code, description and specification are required" });
+        return res.status(400).json({ success: false, error: "Valid IDs and item_code are required" });
     }
 
     try {
@@ -110,5 +110,43 @@ export const editProductItemCode = async (req: Request, res: Response) => {
         return res.status(200).json({ success: true, data: itemCode });
     } catch (error: any) {
         return res.status(400).json({ success: false, error: error.message });
+    }
+};
+
+export const toggleProductItemCodeStatus = async (req: Request, res: Response) => {
+    console.log("[CONTROLLER] toggleProductItemCodeStatus called", {
+        params: req.params,
+        body: req.body,
+    });
+
+    try {
+        const id = Number(req.params.id);
+        const { status } = req.body as { status?: string };
+
+        if (!id) {
+            console.warn("[CONTROLLER] Missing product item code id");
+            return res.status(400).json({ error: "id is required" });
+        }
+
+        if (!status) {
+            console.warn("[CONTROLLER] Missing status");
+            return res.status(400).json({ error: "status is required" });
+        }
+
+        const normalizedStatus = status.toLowerCase();
+        if (!["active", "inactive"].includes(normalizedStatus)) {
+            console.warn("[CONTROLLER] Invalid status value", { status });
+            return res.status(400).json({
+                error: "status must be either 'active' or 'inactive'",
+            });
+        }
+
+        const updated = await updateProductItemCodeStatus(id, normalizedStatus);
+        return res.status(200).json({ success: true, data: updated });
+    } catch (error: any) {
+        console.error("[CONTROLLER] Error updating product item code status", {
+            error: error.message,
+        });
+        return res.status(500).json({ success: false, error: error.message });
     }
 };

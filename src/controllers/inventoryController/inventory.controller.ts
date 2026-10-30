@@ -56,6 +56,7 @@ export const getProductMaster = async (req: Request, res: Response) => {
   try {
     const vendor_id   = Number(req.params.vendor_id);
     const page        = Math.max(1, Number(req.query.page) || 1);
+    const pageSize    = Math.max(1, Math.min(100, Number(req.query.pageSize || req.query.page_size || req.query.limit) || 20));
     const search      = String(req.query.search ?? "").trim();
     const category_id = req.query.category_id ? Number(req.query.category_id) : undefined;
     const brand_id    = req.query.brand_id    ? Number(req.query.brand_id)    : undefined;
@@ -65,7 +66,7 @@ export const getProductMaster = async (req: Request, res: Response) => {
     if (isNaN(vendor_id))
       return res.status(400).json(ApiResponse.error("Invalid vendor_id", 400));
  console.log("getProductMaster");
-    const result = await inventoryService.getProductMasterService(vendor_id, page, search, category_id, brand_id, active, procurement);
+    const result = await inventoryService.getProductMasterService(vendor_id, page, search, category_id, brand_id, active, procurement, pageSize);
     if (result.status === 0)
       return res.status(500).json(ApiResponse.error(result.message, 500));
  

@@ -1437,91 +1437,59 @@ export class OrderLoginService {
         select: { is_this_vendor_is_custom_usertype_only: true },
       });
 
-      const useCustomUsersOnly =
-        vendor?.is_this_vendor_is_custom_usertype_only === true;
+      const postProdWoodworkPrivilegeCode =
+        "production.production.post_production_woodwork.upload";
+      const markAsCompletedPrivilegeCode =
+        "production.production.mark_as_completed.enable_disable";
 
-      let factoryUsers;
-
-      if (useCustomUsersOnly) {
-        factoryUsers = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: vendorId,
-            status: "active",
-            user_type: {
+      const factoryUsers = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          status: "active",
+          OR: [
+            {
               user_type: {
-                equals: "custom",
-                mode: "insensitive",
+                user_type: { equals: "super-admin", mode: "insensitive" },
               },
             },
-            AND: [
-              {
-                userPrivilegeMappings: {
-                  some: {
-                    is_allowed: true,
-                    privilege: {
-                      code: "production.production.pre_production_files.mark_pre_prod_done_action",
-                      is_active: true,
+            {
+              userPrivilegeMappings: {
+                some: {
+                  is_allowed: true,
+                  privilege: {
+                    code: {
+                      in: [
+                        postProdWoodworkPrivilegeCode,
+                        markAsCompletedPrivilegeCode,
+                      ],
                     },
+                    is_active: true,
                   },
                 },
               },
-              {
-                userPrivilegeMappings: {
-                  some: {
-                    is_allowed: true,
-                    privilege: {
-                      code: "production.production.under_production.enable_disable",
-                      is_active: true,
+            },
+            ...(vendor?.is_this_vendor_is_custom_usertype_only !== true
+              ? [
+                  {
+                    user_type: {
+                      user_type: {
+                        equals: "factory",
+                        mode: "insensitive" as const,
+                      },
                     },
                   },
-                },
-              },
-            ],
-          },
-          include: {
-            user_type: true,
-            documents: true,
-          },
-          orderBy: {
-            created_at: "desc",
-          },
-        });
-      } else {
-        // 1. Find the user type ID for 'factory'
-        const factoryUserType = await prisma.userTypeMaster.findFirst({
-          where: {
-            user_type: {
-              equals: "factory",
-              mode: "insensitive",
-            },
-          },
-        });
-
-        if (!factoryUserType) {
-          console.log("[SERVICE] Factory user type not found");
-          return [];
-        }
-
-        console.log(
-          `[SERVICE] Found Factory user type ID: ${factoryUserType.id}`,
-        );
-
-        // 2. Fetch all users with factory role for the specified vendor
-        factoryUsers = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: vendorId,
-            user_type_id: factoryUserType.id,
-            status: "active",
-          },
-          include: {
-            user_type: true,
-            documents: true,
-          },
-          orderBy: {
-            created_at: "desc",
-          },
-        });
-      }
+                ]
+              : []),
+          ],
+        },
+        include: {
+          user_type: true,
+          documents: true,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
 
       console.log(`[SERVICE] Found ${factoryUsers.length} Factory Users`);
 

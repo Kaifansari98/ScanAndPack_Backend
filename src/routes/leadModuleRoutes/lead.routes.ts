@@ -1,3 +1,5 @@
+import { updateSpecsMasterController, updateSpecsMasterStatusController } from "../../controllers/specsMaster.controller";
+import { updateBoqMasterController } from "../../controllers/boqMaster.controller";
 import { Router } from "express";
 import { verifyToken } from "../../middlewares/auth.middleware";
 import multer from "multer";
@@ -58,15 +60,18 @@ import {
   fetchAllProductStructureTypes,
   editProductStructureParent,
   removeProductStructureType,
+  toggleProductStructureStatus,
 } from "../../controllers/leadModuleControllers/productStructureType.controller";
 import {
   createProductSubStructure,
   fetchAllProductSubStructures,
+  toggleProductSubStructureStatus,
 } from "../../controllers/leadModuleControllers/productSubStructure.controller";
 import {
   createProductItemCode,
   editProductItemCode,
   fetchAllProductItemCodes,
+  toggleProductItemCodeStatus,
 } from "../../controllers/leadModuleControllers/productItemCode.controller";
 import { uploadLeadSitePhotos } from "../../utils/wasabiClient";
 import { handleMulterUpload } from "../../middlewares/handleMulterUpload";
@@ -105,19 +110,23 @@ import {
   addShutterSubType,
   fetchAllShutterMaterials,
   addShutterMaterial,
-  fetchShutterMaterialFinishes,
-  addShutterMaterialFinish,
-  fetchAllShutterMaterialFinishesForVendor,
-  uploadShutterMaterialFinishes,
-  fetchAllCarcassLegs,
-  addCarcassLegs,
-  fetchSkirtingCarcassLegs,
-  addSkirtingCarcassLegs,
-  fetchAllSkirtingCarcassLegsForVendor,
-  fetchSkirtingCarcassLegsColors,
-  addSkirtingCarcassLegsColor,
-  fetchAllSkirtingCarcassLegsColorsForVendor,
-  uploadSkirtingCarcassLegsColors,
+  fetchShutterOuterFinishes,
+  addShutterOuterFinish,
+  fetchAllShutterOuterFinishesForVendor,
+  uploadShutterOuterFinishes,
+  fetchShutterInnerFinishes,
+  addShutterInnerFinish,
+  fetchAllShutterInnerFinishesForVendor,
+  uploadShutterInnerFinishes,
+  fetchAllHardwareTypes,
+  addHardwareType,
+  fetchHardwareItems,
+  addHardwareItem,
+  fetchAllHardwareItemsForVendor,
+  fetchHardwareItemOptions,
+  addHardwareItemOption,
+  fetchAllHardwareItemOptionsForVendor,
+  uploadHardwareItemOptions,
   fetchAllLightCarcasTypes,
   addLightCarcasType,
   fetchLightCarcasUnits,
@@ -230,6 +239,9 @@ leadsRouter.patch(
 );
 leadsRouter.get("/get-all-carcass-types/:vendor_id", fetchAllCarcassTypes);
 leadsRouter.post("/create-carcass-type", addCarcassType);
+leadsRouter.put("/specs-masters/:kind/:id", verifyToken, updateSpecsMasterController);
+leadsRouter.patch("/specs-masters/:kind/status", verifyToken, updateSpecsMasterStatusController);
+leadsRouter.put("/boq-masters/:kind/:id", verifyToken, updateBoqMasterController);
 leadsRouter.get(
   "/get-all-carcas-materials/:vendor_id",
   fetchAllCarcasMaterials,
@@ -258,46 +270,60 @@ leadsRouter.get(
 );
 leadsRouter.post("/create-shutter-material", addShutterMaterial);
 leadsRouter.get(
-  "/get-shutter-material-finishes/:shutter_material_id",
-  fetchShutterMaterialFinishes,
+  "/get-shutter-outer-finishes/:shutter_material_id",
+  fetchShutterOuterFinishes,
 );
 leadsRouter.get(
-  "/get-all-shutter-material-finishes/:vendor_id",
-  fetchAllShutterMaterialFinishesForVendor,
+  "/get-all-shutter-outer-finishes/:vendor_id",
+  fetchAllShutterOuterFinishesForVendor,
 );
-leadsRouter.post("/create-shutter-material-finish", addShutterMaterialFinish);
+leadsRouter.post("/create-shutter-outer-finish", addShutterOuterFinish);
 leadsRouter.post(
-  "/upload-shutter-material-finish",
+  "/upload-shutter-outer-finish",
   excelUpload.single("file"),
-  uploadShutterMaterialFinishes,
-);
-leadsRouter.get("/get-all-carcass-legs/:vendor_id", fetchAllCarcassLegs);
-leadsRouter.post("/create-carcass-legs", addCarcassLegs);
-leadsRouter.get(
-  "/get-skirting-carcass-legs/:carcass_legs_id",
-  fetchSkirtingCarcassLegs,
+  uploadShutterOuterFinishes,
 );
 leadsRouter.get(
-  "/get-all-skirting-carcass-legs/:vendor_id",
-  fetchAllSkirtingCarcassLegsForVendor,
-);
-leadsRouter.post("/create-skirting-carcass-legs", addSkirtingCarcassLegs);
-leadsRouter.get(
-  "/get-skirting-carcass-legs-colors/:skirting_carcass_legs_id",
-  fetchSkirtingCarcassLegsColors,
+  "/get-shutter-inner-finishes/:shutter_material_id",
+  fetchShutterInnerFinishes,
 );
 leadsRouter.get(
-  "/get-all-skirting-carcass-legs-colors/:vendor_id",
-  fetchAllSkirtingCarcassLegsColorsForVendor,
+  "/get-all-shutter-inner-finishes/:vendor_id",
+  fetchAllShutterInnerFinishesForVendor,
 );
+leadsRouter.post("/create-shutter-inner-finish", addShutterInnerFinish);
 leadsRouter.post(
-  "/create-skirting-carcass-legs-color",
-  addSkirtingCarcassLegsColor,
-);
-leadsRouter.post(
-  "/upload-skirting-carcass-legs-color",
+  "/upload-shutter-inner-finish",
   excelUpload.single("file"),
-  uploadSkirtingCarcassLegsColors,
+  uploadShutterInnerFinishes,
+);
+leadsRouter.get("/get-all-hardware-types/:vendor_id", fetchAllHardwareTypes);
+leadsRouter.post("/create-hardware-type", addHardwareType);
+leadsRouter.get(
+  "/get-hardware-items/:hardware_type_id",
+  fetchHardwareItems,
+);
+leadsRouter.get(
+  "/get-all-hardware-items/:vendor_id",
+  fetchAllHardwareItemsForVendor,
+);
+leadsRouter.post("/create-hardware-item", addHardwareItem);
+leadsRouter.get(
+  "/get-hardware-item-options/:hardware_item_id",
+  fetchHardwareItemOptions,
+);
+leadsRouter.get(
+  "/get-all-hardware-item-options/:vendor_id",
+  fetchAllHardwareItemOptionsForVendor,
+);
+leadsRouter.post(
+  "/create-hardware-item-option",
+  addHardwareItemOption,
+);
+leadsRouter.post(
+  "/upload-hardware-item-options",
+  excelUpload.single("file"),
+  uploadHardwareItemOptions,
 );
 leadsRouter.get(
   "/get-all-light-carcas-types/:vendor_id",
@@ -367,6 +393,22 @@ leadsRouter.delete(
   "/delete-productStructure-type/:id",
   removeProductStructureType
 );
+leadsRouter.patch(
+  "/update-productStructure-status/:id",
+  toggleProductStructureStatus
+);
+leadsRouter.patch(
+  "/update-product-structure-status/:id",
+  toggleProductStructureStatus
+);
+leadsRouter.patch(
+  "/update-product-sub-structure-status/:id",
+  toggleProductSubStructureStatus
+);
+leadsRouter.patch(
+  "/update-product-item-code-status/:id",
+  toggleProductItemCodeStatus
+);
 leadsRouter.get("/get-all-source-types/:vendor_id", fetchAllSourceTypes);
 leadsRouter.delete("/delete-source-type/:id", removeSourceType);
 leadsRouter.patch("/update-source-type/:id", editSourceType);
@@ -377,7 +419,12 @@ leadsRouter.delete("/delete-payment-type/:id", removePaymentType);
 
 leadsRouter.post(
   "/create",
-  handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
+  handleMulterUpload(
+    uploadLeadSitePhotos.fields([
+      { name: "documents", maxCount: MAX_FILES },
+      { name: "site_dimension_documents", maxCount: MAX_FILES },
+    ]),
+  ),
   (req, res, next) => {
     if (req.body.walkin_answers !== undefined) return verifyToken(req, res, next);
     next();
@@ -389,6 +436,17 @@ leadsRouter.post(
   "/upload-more-site-photos",
   handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
   leadController.uploadMoreSitePhotos
+);
+
+// Current Site Dimension documents (large-scale vendors)
+leadsRouter.post(
+  "/upload-site-dimension-documents",
+  handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
+  leadController.uploadSiteDimensionDocuments
+);
+leadsRouter.get(
+  "/vendorId/:vendorId/leadId/:leadId/site-dimension-documents",
+  leadController.getSiteDimensionDocuments
 );
 
 // GET all leads by vendorId

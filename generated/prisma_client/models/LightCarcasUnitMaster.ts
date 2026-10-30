@@ -40,6 +40,7 @@ export type LightCarcasUnitMasterSumAggregateOutputType = {
 
 export type LightCarcasUnitMasterMinAggregateOutputType = {
   id: number | null
+  status: string | null
   vendor_id: number | null
   type: string | null
   light_carcas_type_id: number | null
@@ -49,6 +50,7 @@ export type LightCarcasUnitMasterMinAggregateOutputType = {
 
 export type LightCarcasUnitMasterMaxAggregateOutputType = {
   id: number | null
+  status: string | null
   vendor_id: number | null
   type: string | null
   light_carcas_type_id: number | null
@@ -58,6 +60,7 @@ export type LightCarcasUnitMasterMaxAggregateOutputType = {
 
 export type LightCarcasUnitMasterCountAggregateOutputType = {
   id: number
+  status: number
   vendor_id: number
   type: number
   light_carcas_type_id: number
@@ -81,6 +84,7 @@ export type LightCarcasUnitMasterSumAggregateInputType = {
 
 export type LightCarcasUnitMasterMinAggregateInputType = {
   id?: true
+  status?: true
   vendor_id?: true
   type?: true
   light_carcas_type_id?: true
@@ -90,6 +94,7 @@ export type LightCarcasUnitMasterMinAggregateInputType = {
 
 export type LightCarcasUnitMasterMaxAggregateInputType = {
   id?: true
+  status?: true
   vendor_id?: true
   type?: true
   light_carcas_type_id?: true
@@ -99,6 +104,7 @@ export type LightCarcasUnitMasterMaxAggregateInputType = {
 
 export type LightCarcasUnitMasterCountAggregateInputType = {
   id?: true
+  status?: true
   vendor_id?: true
   type?: true
   light_carcas_type_id?: true
@@ -195,6 +201,7 @@ export type LightCarcasUnitMasterGroupByArgs<ExtArgs extends runtime.Types.Exten
 
 export type LightCarcasUnitMasterGroupByOutputType = {
   id: number
+  status: string
   vendor_id: number
   type: string
   light_carcas_type_id: number
@@ -227,6 +234,7 @@ export type LightCarcasUnitMasterWhereInput = {
   OR?: Prisma.LightCarcasUnitMasterWhereInput[]
   NOT?: Prisma.LightCarcasUnitMasterWhereInput | Prisma.LightCarcasUnitMasterWhereInput[]
   id?: Prisma.IntFilter<"LightCarcasUnitMaster"> | number
+  status?: Prisma.StringFilter<"LightCarcasUnitMaster"> | string
   vendor_id?: Prisma.IntFilter<"LightCarcasUnitMaster"> | number
   type?: Prisma.StringFilter<"LightCarcasUnitMaster"> | string
   light_carcas_type_id?: Prisma.IntFilter<"LightCarcasUnitMaster"> | number
@@ -239,6 +247,7 @@ export type LightCarcasUnitMasterWhereInput = {
 
 export type LightCarcasUnitMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   light_carcas_type_id?: Prisma.SortOrder
@@ -254,6 +263,7 @@ export type LightCarcasUnitMasterWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.LightCarcasUnitMasterWhereInput | Prisma.LightCarcasUnitMasterWhereInput[]
   OR?: Prisma.LightCarcasUnitMasterWhereInput[]
   NOT?: Prisma.LightCarcasUnitMasterWhereInput | Prisma.LightCarcasUnitMasterWhereInput[]
+  status?: Prisma.StringFilter<"LightCarcasUnitMaster"> | string
   vendor_id?: Prisma.IntFilter<"LightCarcasUnitMaster"> | number
   type?: Prisma.StringFilter<"LightCarcasUnitMaster"> | string
   light_carcas_type_id?: Prisma.IntFilter<"LightCarcasUnitMaster"> | number
@@ -266,6 +276,7 @@ export type LightCarcasUnitMasterWhereUniqueInput = Prisma.AtLeast<{
 
 export type LightCarcasUnitMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   light_carcas_type_id?: Prisma.SortOrder
@@ -283,6 +294,7 @@ export type LightCarcasUnitMasterScalarWhereWithAggregatesInput = {
   OR?: Prisma.LightCarcasUnitMasterScalarWhereWithAggregatesInput[]
   NOT?: Prisma.LightCarcasUnitMasterScalarWhereWithAggregatesInput | Prisma.LightCarcasUnitMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"LightCarcasUnitMaster"> | number
+  status?: Prisma.StringWithAggregatesFilter<"LightCarcasUnitMaster"> | string
   vendor_id?: Prisma.IntWithAggregatesFilter<"LightCarcasUnitMaster"> | number
   type?: Prisma.StringWithAggregatesFilter<"LightCarcasUnitMaster"> | string
   light_carcas_type_id?: Prisma.IntWithAggregatesFilter<"LightCarcasUnitMaster"> | number
@@ -291,6 +303,7 @@ export type LightCarcasUnitMasterScalarWhereWithAggregatesInput = {
 }
 
 export type LightCarcasUnitMasterCreateInput = {
+  status?: string
   type: string
   is_active?: boolean
   created_at?: Date | string
@@ -301,6 +314,7 @@ export type LightCarcasUnitMasterCreateInput = {
 
 export type LightCarcasUnitMasterUncheckedCreateInput = {
   id?: number
+  status?: string
   vendor_id: number
   type: string
   light_carcas_type_id: number
@@ -310,6 +324,7 @@ export type LightCarcasUnitMasterUncheckedCreateInput = {
 }
 
 export type LightCarcasUnitMasterUpdateInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -320,6 +335,7 @@ export type LightCarcasUnitMasterUpdateInput = {
 
 export type LightCarcasUnitMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   light_carcas_type_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -330,6 +346,7 @@ export type LightCarcasUnitMasterUncheckedUpdateInput = {
 
 export type LightCarcasUnitMasterCreateManyInput = {
   id?: number
+  status?: string
   vendor_id: number
   type: string
   light_carcas_type_id: number
@@ -338,6 +355,7 @@ export type LightCarcasUnitMasterCreateManyInput = {
 }
 
 export type LightCarcasUnitMasterUpdateManyMutationInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -345,6 +363,7 @@ export type LightCarcasUnitMasterUpdateManyMutationInput = {
 
 export type LightCarcasUnitMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   light_carcas_type_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -364,6 +383,7 @@ export type LightCarcasUnitMasterOrderByRelationAggregateInput = {
 
 export type LightCarcasUnitMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   light_carcas_type_id?: Prisma.SortOrder
@@ -379,6 +399,7 @@ export type LightCarcasUnitMasterAvgOrderByAggregateInput = {
 
 export type LightCarcasUnitMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   light_carcas_type_id?: Prisma.SortOrder
@@ -388,6 +409,7 @@ export type LightCarcasUnitMasterMaxOrderByAggregateInput = {
 
 export type LightCarcasUnitMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   light_carcas_type_id?: Prisma.SortOrder
@@ -507,6 +529,7 @@ export type LightCarcasUnitMasterUpdateOneWithoutLeadMappingsNestedInput = {
 }
 
 export type LightCarcasUnitMasterCreateWithoutVendorInput = {
+  status?: string
   type: string
   is_active?: boolean
   created_at?: Date | string
@@ -516,6 +539,7 @@ export type LightCarcasUnitMasterCreateWithoutVendorInput = {
 
 export type LightCarcasUnitMasterUncheckedCreateWithoutVendorInput = {
   id?: number
+  status?: string
   type: string
   light_carcas_type_id: number
   is_active?: boolean
@@ -554,6 +578,7 @@ export type LightCarcasUnitMasterScalarWhereInput = {
   OR?: Prisma.LightCarcasUnitMasterScalarWhereInput[]
   NOT?: Prisma.LightCarcasUnitMasterScalarWhereInput | Prisma.LightCarcasUnitMasterScalarWhereInput[]
   id?: Prisma.IntFilter<"LightCarcasUnitMaster"> | number
+  status?: Prisma.StringFilter<"LightCarcasUnitMaster"> | string
   vendor_id?: Prisma.IntFilter<"LightCarcasUnitMaster"> | number
   type?: Prisma.StringFilter<"LightCarcasUnitMaster"> | string
   light_carcas_type_id?: Prisma.IntFilter<"LightCarcasUnitMaster"> | number
@@ -562,6 +587,7 @@ export type LightCarcasUnitMasterScalarWhereInput = {
 }
 
 export type LightCarcasUnitMasterCreateWithoutLightCarcasTypeInput = {
+  status?: string
   type: string
   is_active?: boolean
   created_at?: Date | string
@@ -571,6 +597,7 @@ export type LightCarcasUnitMasterCreateWithoutLightCarcasTypeInput = {
 
 export type LightCarcasUnitMasterUncheckedCreateWithoutLightCarcasTypeInput = {
   id?: number
+  status?: string
   vendor_id: number
   type: string
   is_active?: boolean
@@ -605,6 +632,7 @@ export type LightCarcasUnitMasterUpdateManyWithWhereWithoutLightCarcasTypeInput 
 }
 
 export type LightCarcasUnitMasterCreateWithoutLeadMappingsInput = {
+  status?: string
   type: string
   is_active?: boolean
   created_at?: Date | string
@@ -614,6 +642,7 @@ export type LightCarcasUnitMasterCreateWithoutLeadMappingsInput = {
 
 export type LightCarcasUnitMasterUncheckedCreateWithoutLeadMappingsInput = {
   id?: number
+  status?: string
   vendor_id: number
   type: string
   light_carcas_type_id: number
@@ -638,6 +667,7 @@ export type LightCarcasUnitMasterUpdateToOneWithWhereWithoutLeadMappingsInput = 
 }
 
 export type LightCarcasUnitMasterUpdateWithoutLeadMappingsInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -647,6 +677,7 @@ export type LightCarcasUnitMasterUpdateWithoutLeadMappingsInput = {
 
 export type LightCarcasUnitMasterUncheckedUpdateWithoutLeadMappingsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   light_carcas_type_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -656,6 +687,7 @@ export type LightCarcasUnitMasterUncheckedUpdateWithoutLeadMappingsInput = {
 
 export type LightCarcasUnitMasterCreateManyVendorInput = {
   id?: number
+  status?: string
   type: string
   light_carcas_type_id: number
   is_active?: boolean
@@ -663,6 +695,7 @@ export type LightCarcasUnitMasterCreateManyVendorInput = {
 }
 
 export type LightCarcasUnitMasterUpdateWithoutVendorInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -672,6 +705,7 @@ export type LightCarcasUnitMasterUpdateWithoutVendorInput = {
 
 export type LightCarcasUnitMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   light_carcas_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -681,6 +715,7 @@ export type LightCarcasUnitMasterUncheckedUpdateWithoutVendorInput = {
 
 export type LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   light_carcas_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -689,6 +724,7 @@ export type LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorInput = {
 
 export type LightCarcasUnitMasterCreateManyLightCarcasTypeInput = {
   id?: number
+  status?: string
   vendor_id: number
   type: string
   is_active?: boolean
@@ -696,6 +732,7 @@ export type LightCarcasUnitMasterCreateManyLightCarcasTypeInput = {
 }
 
 export type LightCarcasUnitMasterUpdateWithoutLightCarcasTypeInput = {
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -705,6 +742,7 @@ export type LightCarcasUnitMasterUpdateWithoutLightCarcasTypeInput = {
 
 export type LightCarcasUnitMasterUncheckedUpdateWithoutLightCarcasTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -714,6 +752,7 @@ export type LightCarcasUnitMasterUncheckedUpdateWithoutLightCarcasTypeInput = {
 
 export type LightCarcasUnitMasterUncheckedUpdateManyWithoutLightCarcasTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -753,6 +792,7 @@ export type LightCarcasUnitMasterCountOutputTypeCountLeadMappingsArgs<ExtArgs ex
 
 export type LightCarcasUnitMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  status?: boolean
   vendor_id?: boolean
   type?: boolean
   light_carcas_type_id?: boolean
@@ -766,6 +806,7 @@ export type LightCarcasUnitMasterSelect<ExtArgs extends runtime.Types.Extensions
 
 export type LightCarcasUnitMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  status?: boolean
   vendor_id?: boolean
   type?: boolean
   light_carcas_type_id?: boolean
@@ -777,6 +818,7 @@ export type LightCarcasUnitMasterSelectCreateManyAndReturn<ExtArgs extends runti
 
 export type LightCarcasUnitMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  status?: boolean
   vendor_id?: boolean
   type?: boolean
   light_carcas_type_id?: boolean
@@ -788,6 +830,7 @@ export type LightCarcasUnitMasterSelectUpdateManyAndReturn<ExtArgs extends runti
 
 export type LightCarcasUnitMasterSelectScalar = {
   id?: boolean
+  status?: boolean
   vendor_id?: boolean
   type?: boolean
   light_carcas_type_id?: boolean
@@ -795,7 +838,7 @@ export type LightCarcasUnitMasterSelectScalar = {
   created_at?: boolean
 }
 
-export type LightCarcasUnitMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "type" | "light_carcas_type_id" | "is_active" | "created_at", ExtArgs["result"]["lightCarcasUnitMaster"]>
+export type LightCarcasUnitMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "vendor_id" | "type" | "light_carcas_type_id" | "is_active" | "created_at", ExtArgs["result"]["lightCarcasUnitMaster"]>
 export type LightCarcasUnitMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   leadMappings?: boolean | Prisma.LightCarcasUnitMaster$leadMappingsArgs<ExtArgs>
   lightCarcasType?: boolean | Prisma.LightCarcasTypeMasterDefaultArgs<ExtArgs>
@@ -820,6 +863,7 @@ export type $LightCarcasUnitMasterPayload<ExtArgs extends runtime.Types.Extensio
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    status: string
     vendor_id: number
     type: string
     light_carcas_type_id: number
@@ -1252,6 +1296,7 @@ export interface Prisma__LightCarcasUnitMasterClient<T, Null = never, ExtArgs ex
  */
 export interface LightCarcasUnitMasterFieldRefs {
   readonly id: Prisma.FieldRef<"LightCarcasUnitMaster", 'Int'>
+  readonly status: Prisma.FieldRef<"LightCarcasUnitMaster", 'String'>
   readonly vendor_id: Prisma.FieldRef<"LightCarcasUnitMaster", 'Int'>
   readonly type: Prisma.FieldRef<"LightCarcasUnitMaster", 'String'>
   readonly light_carcas_type_id: Prisma.FieldRef<"LightCarcasUnitMaster", 'Int'>

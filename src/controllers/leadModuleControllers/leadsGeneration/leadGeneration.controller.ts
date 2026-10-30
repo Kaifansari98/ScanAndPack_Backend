@@ -22,6 +22,8 @@ import {
   isContactOrEmailExists,
   isSimilarLeadExists,
   uploadMoreSitePhotosService,
+  uploadSiteDimensionDocumentsService,
+  getSiteDimensionDocumentsService,
   checkSiteSupervisorAssigned,
   assignDesignerToLead,
   unassignDesignerFromLead,
@@ -266,7 +268,18 @@ export class LeadController {
     logger.info("[CONTROLLER] createLead called");
 
     try {
-      const files = (req.files as Express.Multer.File[]) || [];
+      // Site Photos come as "documents"; large-scale vendors may also send
+      // Current Site Dimension files as "site_dimension_documents".
+      const uploadedFileGroups = req.files as
+        | Express.Multer.File[]
+        | Record<string, Express.Multer.File[]>
+        | undefined;
+      const files = Array.isArray(uploadedFileGroups)
+        ? uploadedFileGroups
+        : uploadedFileGroups?.documents ?? [];
+      const siteDimensionFiles = Array.isArray(uploadedFileGroups)
+        ? []
+        : uploadedFileGroups?.site_dimension_documents ?? [];
       const { vendor_id, is_draft } = req.body;
       const draftMode = String(is_draft) === "true";
       const numericVendorId = Number(vendor_id);
@@ -396,8 +409,10 @@ export class LeadController {
       }
 
       const maxFilesAllowed = parseInt(process.env.UPLOAD_MAX_FILES || "40", 10);
-      if (files.length > maxFilesAllowed) {
-        logger.warn("Too many files uploaded", { count: files.length });
+      if (files.length + siteDimensionFiles.length > maxFilesAllowed) {
+        logger.warn("Too many files uploaded", {
+          count: files.length + siteDimensionFiles.length,
+        });
         return res.status(400).json({
           success: false,
           error: "Too many files",
@@ -409,6 +424,7 @@ export class LeadController {
       const result = await createLeadService(
         { ...value, is_draft: draftMode },
         files,
+        siteDimensionFiles,
       );
 
       if (!result.draft) {
@@ -648,7 +664,7 @@ export class LeadController {
         message: "Lead created successfully",
         data: {
           ...result,
-          documentsUploaded: files.length,
+          documentsUploaded: files.length + siteDimensionFiles.length,
           cadbidSync,
         },
       });
@@ -726,6 +742,80 @@ export class LeadController {
         error: "Internal server error",
         details:
           process.env.NODE_ENV === "development" ? error.message : undefined,
+      });
+    }
+  }
+
+  /**
+   * Upload Current Site Dimension documents for an existing lead
+   */
+  async uploadSiteDimensionDocuments(
+    req: Request,
+    res: Response,
+  ): Promise<Response> {
+    try {
+      const files = (req.files as Express.Multer.File[]) || [];
+      const { vendor_id, lead_id, created_by } = req.body;
+
+      const uploadedDocs = await uploadSiteDimensionDocumentsService(
+        {
+          vendor_id: Number(vendor_id),
+          lead_id: Number(lead_id),
+          created_by: Number(created_by),
+        },
+        files,
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Current site dimension documents uploaded successfully",
+        count: uploadedDocs.length,
+        data: uploadedDocs,
+      });
+    } catch (error: any) {
+      logger.error("[ERROR] uploadSiteDimensionDocuments failed", {
+        error: error.message,
+        stack: error.stack,
+      });
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        error: error.message || "Internal server error",
+      });
+    }
+  }
+
+  /**
+   * Fetch Current Site Dimension documents of a lead
+   */
+  async getSiteDimensionDocuments(
+    req: Request,
+    res: Response,
+  ): Promise<Response> {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          error: "vendorId and leadId are required",
+        });
+      }
+
+      const docs = await getSiteDimensionDocumentsService(vendorId, leadId);
+
+      return res.status(200).json({
+        success: true,
+        count: docs.length,
+        data: docs,
+      });
+    } catch (error: any) {
+      logger.error("[ERROR] getSiteDimensionDocuments failed", {
+        error: error.message,
+      });
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        error: error.message || "Internal server error",
       });
     }
   }

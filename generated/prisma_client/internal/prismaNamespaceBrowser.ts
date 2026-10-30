@@ -95,10 +95,11 @@ export const ModelName = {
   ShutterTypeMaster: 'ShutterTypeMaster',
   ShutterSubTypeMaster: 'ShutterSubTypeMaster',
   ShutterMaterialMaster: 'ShutterMaterialMaster',
-  ShutterMaterialFinishMaster: 'ShutterMaterialFinishMaster',
-  CarcassLegsMaster: 'CarcassLegsMaster',
-  SkirtingCarcassLegsMaster: 'SkirtingCarcassLegsMaster',
-  SkirtingCarcassLegsColorMaster: 'SkirtingCarcassLegsColorMaster',
+  ShutterOuterFinishMaster: 'ShutterOuterFinishMaster',
+  ShutterInnerFinishMaster: 'ShutterInnerFinishMaster',
+  HardwareTypeMaster: 'HardwareTypeMaster',
+  HardwareItemMaster: 'HardwareItemMaster',
+  HardwareItemOptionMaster: 'HardwareItemOptionMaster',
   LeadHardwareMapping: 'LeadHardwareMapping',
   LightCarcasTypeMaster: 'LightCarcasTypeMaster',
   LightCarcasUnitMaster: 'LightCarcasUnitMaster',
@@ -870,7 +871,8 @@ export const LeadShutterMaterialMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   shutter_type_id: 'shutter_type_id',
   shutter_material_id: 'shutter_material_id',
-  shutter_material_finish_id: 'shutter_material_finish_id',
+  shutter_outer_finish_id: 'shutter_outer_finish_id',
+  shutter_inner_finish_id: 'shutter_inner_finish_id',
   created_at: 'created_at',
   created_by: 'created_by',
   specs_id: 'specs_id',
@@ -1094,6 +1096,7 @@ export type LeadRequirementMaterialMappingScalarFieldEnum = (typeof LeadRequirem
 
 export const CarcassTypeMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   vendor_id: 'vendor_id',
   can_do_fast_production: 'can_do_fast_production'
@@ -1104,6 +1107,7 @@ export type CarcassTypeMasterScalarFieldEnum = (typeof CarcassTypeMasterScalarFi
 
 export const CarcasMaterialMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   vendor_id: 'vendor_id'
 } as const
@@ -1113,6 +1117,7 @@ export type CarcasMaterialMasterScalarFieldEnum = (typeof CarcasMaterialMasterSc
 
 export const CarcassMaterialFinishMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   carcas_material_id: 'carcas_material_id'
 } as const
@@ -1122,6 +1127,7 @@ export type CarcassMaterialFinishMasterScalarFieldEnum = (typeof CarcassMaterial
 
 export const ShutterTypeMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   vendor_id: 'vendor_id'
 } as const
@@ -1140,6 +1146,7 @@ export type ShutterSubTypeMasterScalarFieldEnum = (typeof ShutterSubTypeMasterSc
 
 export const ShutterMaterialMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   vendor_id: 'vendor_id'
 } as const
@@ -1147,51 +1154,65 @@ export const ShutterMaterialMasterScalarFieldEnum = {
 export type ShutterMaterialMasterScalarFieldEnum = (typeof ShutterMaterialMasterScalarFieldEnum)[keyof typeof ShutterMaterialMasterScalarFieldEnum]
 
 
-export const ShutterMaterialFinishMasterScalarFieldEnum = {
+export const ShutterOuterFinishMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
   shutter_material_id: 'shutter_material_id'
 } as const
 
-export type ShutterMaterialFinishMasterScalarFieldEnum = (typeof ShutterMaterialFinishMasterScalarFieldEnum)[keyof typeof ShutterMaterialFinishMasterScalarFieldEnum]
+export type ShutterOuterFinishMasterScalarFieldEnum = (typeof ShutterOuterFinishMasterScalarFieldEnum)[keyof typeof ShutterOuterFinishMasterScalarFieldEnum]
 
 
-export const CarcassLegsMasterScalarFieldEnum = {
+export const ShutterInnerFinishMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
+  name: 'name',
+  shutter_material_id: 'shutter_material_id'
+} as const
+
+export type ShutterInnerFinishMasterScalarFieldEnum = (typeof ShutterInnerFinishMasterScalarFieldEnum)[keyof typeof ShutterInnerFinishMasterScalarFieldEnum]
+
+
+export const HardwareTypeMasterScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
   name: 'name',
   vendor_id: 'vendor_id'
 } as const
 
-export type CarcassLegsMasterScalarFieldEnum = (typeof CarcassLegsMasterScalarFieldEnum)[keyof typeof CarcassLegsMasterScalarFieldEnum]
+export type HardwareTypeMasterScalarFieldEnum = (typeof HardwareTypeMasterScalarFieldEnum)[keyof typeof HardwareTypeMasterScalarFieldEnum]
 
 
-export const SkirtingCarcassLegsMasterScalarFieldEnum = {
+export const HardwareItemMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   name: 'name',
-  carcass_legs_id: 'carcass_legs_id',
+  hardware_type_id: 'hardware_type_id',
   inScope: 'inScope'
 } as const
 
-export type SkirtingCarcassLegsMasterScalarFieldEnum = (typeof SkirtingCarcassLegsMasterScalarFieldEnum)[keyof typeof SkirtingCarcassLegsMasterScalarFieldEnum]
+export type HardwareItemMasterScalarFieldEnum = (typeof HardwareItemMasterScalarFieldEnum)[keyof typeof HardwareItemMasterScalarFieldEnum]
 
 
-export const SkirtingCarcassLegsColorMasterScalarFieldEnum = {
+export const HardwareItemOptionMasterScalarFieldEnum = {
   id: 'id',
-  carcass_legs_id: 'carcass_legs_id',
-  skirting_carcass_legs_id: 'skirting_carcass_legs_id',
-  color: 'color'
+  status: 'status',
+  hardware_type_id: 'hardware_type_id',
+  hardware_item_id: 'hardware_item_id',
+  name: 'name'
 } as const
 
-export type SkirtingCarcassLegsColorMasterScalarFieldEnum = (typeof SkirtingCarcassLegsColorMasterScalarFieldEnum)[keyof typeof SkirtingCarcassLegsColorMasterScalarFieldEnum]
+export type HardwareItemOptionMasterScalarFieldEnum = (typeof HardwareItemOptionMasterScalarFieldEnum)[keyof typeof HardwareItemOptionMasterScalarFieldEnum]
 
 
 export const LeadHardwareMappingScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
-  carcass_legs_id: 'carcass_legs_id',
-  skirting_carcass_legs_id: 'skirting_carcass_legs_id',
-  skirting_carcass_legs_color_id: 'skirting_carcass_legs_color_id',
+  hardware_type_id: 'hardware_type_id',
+  hardware_item_id: 'hardware_item_id',
+  hardware_item_option_id: 'hardware_item_option_id',
   note: 'note',
   created_at: 'created_at',
   created_by: 'created_by',
@@ -1211,6 +1232,7 @@ export type LeadHardwareMappingScalarFieldEnum = (typeof LeadHardwareMappingScal
 
 export const LightCarcasTypeMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   vendor_id: 'vendor_id',
   type: 'type',
   is_active: 'is_active',
@@ -1222,6 +1244,7 @@ export type LightCarcasTypeMasterScalarFieldEnum = (typeof LightCarcasTypeMaster
 
 export const LightCarcasUnitMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   vendor_id: 'vendor_id',
   type: 'type',
   light_carcas_type_id: 'light_carcas_type_id',
@@ -1256,6 +1279,7 @@ export type LeadLightCarcasUnitMappingScalarFieldEnum = (typeof LeadLightCarcasU
 
 export const OtherAppliancesMasterScalarFieldEnum = {
   id: 'id',
+  status: 'status',
   vendor_id: 'vendor_id',
   article_number: 'article_number',
   description: 'description',
@@ -1527,6 +1551,26 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   is_post_production: 'is_post_production',
   pre_prod_remark: 'pre_prod_remark',
   isLargeScaleProjectInstance: 'isLargeScaleProjectInstance',
+  required_date_for_dispatch: 'required_date_for_dispatch',
+  onsite_contact_person_name: 'onsite_contact_person_name',
+  onsite_contact_person_number: 'onsite_contact_person_number',
+  alt_onsite_contact_person_name: 'alt_onsite_contact_person_name',
+  alt_onsite_contact_person_number: 'alt_onsite_contact_person_number',
+  material_lift_availability: 'material_lift_availability',
+  material_lift_size: 'material_lift_size',
+  vehicle_approachability_for_dispatch: 'vehicle_approachability_for_dispatch',
+  dispatch_planning_remark: 'dispatch_planning_remark',
+  dispatch_date: 'dispatch_date',
+  driver_name: 'driver_name',
+  driver_number: 'driver_number',
+  vehicle_no: 'vehicle_no',
+  dispatch_remark: 'dispatch_remark',
+  actual_installation_start_date: 'actual_installation_start_date',
+  expected_installation_end_date: 'expected_installation_end_date',
+  is_carcass_installation_completed: 'is_carcass_installation_completed',
+  carcass_installation_completion_date: 'carcass_installation_completion_date',
+  is_shutter_installation_completed: 'is_shutter_installation_completed',
+  shutter_installation_completion_date: 'shutter_installation_completion_date',
   product_item_code_id: 'product_item_code_id',
   quantity: 'quantity',
   sub_product_structure_id: 'sub_product_structure_id'
@@ -1565,7 +1609,8 @@ export const PaymentInfoScalarFieldEnum = {
   gst_amount: 'gst_amount',
   gst_percentage: 'gst_percentage',
   total_amount: 'total_amount',
-  is_booking_received_amt: 'is_booking_received_amt'
+  is_booking_received_amt: 'is_booking_received_amt',
+  instance_id: 'instance_id'
 } as const
 
 export type PaymentInfoScalarFieldEnum = (typeof PaymentInfoScalarFieldEnum)[keyof typeof PaymentInfoScalarFieldEnum]
@@ -2140,6 +2185,7 @@ export const SiteReadinessScalarFieldEnum = {
   vendor_id: 'vendor_id',
   account_id: 'account_id',
   lead_id: 'lead_id',
+  instance_id: 'instance_id',
   type: 'type',
   remark: 'remark',
   value: 'value',
@@ -2171,6 +2217,7 @@ export const InstallerUserMappingScalarFieldEnum = {
   account_id: 'account_id',
   lead_id: 'lead_id',
   installer_id: 'installer_id',
+  instance_id: 'instance_id',
   assigned_by: 'assigned_by',
   assigned_date: 'assigned_date'
 } as const
@@ -2183,6 +2230,7 @@ export const InstallationUpdateScalarFieldEnum = {
   vendor_id: 'vendor_id',
   account_id: 'account_id',
   lead_id: 'lead_id',
+  instance_id: 'instance_id',
   update_date: 'update_date',
   remark: 'remark',
   created_by: 'created_by',

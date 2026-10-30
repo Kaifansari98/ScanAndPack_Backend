@@ -6,6 +6,40 @@ import { cache } from "../../../utils/cache";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
 import { syncTrackTraceBoxCount } from "../../production/post-production/trackTraceBoxCount.service";
 
+/** Large-scale vendors run the Dispatch stage per instance; it must belong to the lead. */
+async function findInstanceOfLead(
+  vendorId: number,
+  leadId: number,
+  instanceId: number | null,
+) {
+  if (!instanceId) return null;
+  const instance = await prisma.leadProductStructureInstance.findFirst({
+    where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+    select: {
+      id: true,
+      title: true,
+      no_of_boxes: true,
+      required_date_for_dispatch: true,
+      onsite_contact_person_name: true,
+      onsite_contact_person_number: true,
+      material_lift_availability: true,
+      material_lift_size: true,
+      vehicle_approachability_for_dispatch: true,
+      dispatch_date: true,
+      driver_name: true,
+      driver_number: true,
+      vehicle_no: true,
+      dispatch_remark: true,
+    },
+  });
+  if (!instance) {
+    throw Object.assign(new Error("Instance not found for this lead"), {
+      statusCode: 404,
+    });
+  }
+  return instance;
+}
+
 export class DispatchStageService {
   /** ✅ Fetch all leads with status = Type 14 (Dispatch Stage) */
   async getLeadsWithStatusDispatchStage(
@@ -133,7 +167,11 @@ export class DispatchStageService {
   }
 
   /** ✅ Get required_date_for_dispatch by Lead ID and Vendor ID */
-  async getRequiredDateForDispatch(vendorId: number, leadId: number) {
+  async getRequiredDateForDispatch(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
     const lead = await prisma.leadMaster.findFirst({
       where: {
         id: leadId,
@@ -159,6 +197,23 @@ export class DispatchStageService {
       );
     }
 
+    const instance = await findInstanceOfLead(vendorId, leadId, instanceId);
+    if (instance) {
+      return {
+        id: lead.id,
+        vendor_id: lead.vendor_id,
+        instance_id: instance.id,
+        required_date_for_dispatch: instance.required_date_for_dispatch,
+        no_of_boxes: instance.no_of_boxes,
+        onsite_contact_person_name: instance.onsite_contact_person_name,
+        onsite_contact_person_number: instance.onsite_contact_person_number,
+        material_lift_availability: instance.material_lift_availability,
+        material_lift_size: instance.material_lift_size,
+        vehicle_approachability_for_dispatch:
+          instance.vehicle_approachability_for_dispatch,
+      };
+    }
+
     return lead;
   }
 
@@ -173,7 +228,8 @@ export class DispatchStageService {
       vehicle_no: string;
       dispatch_remark?: string;
       updated_by: number;
-    }
+    },
+    instanceId: number | null = null,
   ) {
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId, is_deleted: false },
@@ -185,35 +241,52 @@ export class DispatchStageService {
       );
     }
 
+    // Per-instance dispatch: the details live on the instance.
+    const instance = await findInstanceOfLead(vendorId, leadId, instanceId);
+    const current = instance ?? lead;
+
     const hadDispatchDetails = Boolean(
-      lead.dispatch_date ||
-      lead.vehicle_no ||
-      lead.driver_name ||
-      lead.driver_number ||
-      lead.dispatch_remark,
+      current.dispatch_date ||
+      current.vehicle_no ||
+      current.driver_name ||
+      current.driver_number ||
+      current.dispatch_remark,
     );
 
-    const updated = await prisma.leadMaster.update({
-      where: { id: leadId },
-      data: {
-        dispatch_date: data.dispatch_date ? new Date(data.dispatch_date) : null,
-        driver_name: data.driver_name,
-        driver_number: data.driver_number,
-        vehicle_no: data.vehicle_no,
-        dispatch_remark: data.dispatch_remark,
-        updated_by: data.updated_by,
-        updated_at: new Date(),
-      },
-      select: {
-        id: true,
-        vendor_id: true,
-        dispatch_date: true,
-        driver_name: true,
-        driver_number: true,
-        vehicle_no: true,
-        dispatch_remark: true,
-      },
-    });
+    const detailsData = {
+      dispatch_date: data.dispatch_date ? new Date(data.dispatch_date) : null,
+      driver_name: data.driver_name,
+      driver_number: data.driver_number,
+      vehicle_no: data.vehicle_no,
+      dispatch_remark: data.dispatch_remark,
+      updated_by: data.updated_by,
+      updated_at: new Date(),
+    };
+    const detailsSelect = {
+      id: true,
+      vendor_id: true,
+      dispatch_date: true,
+      driver_name: true,
+      driver_number: true,
+      vehicle_no: true,
+      dispatch_remark: true,
+    };
+
+    const updated = instance
+      ? {
+          ...(await prisma.leadProductStructureInstance.update({
+            where: { id: instance.id },
+            data: detailsData,
+            select: detailsSelect,
+          })),
+          id: leadId,
+          instance_id: instance.id,
+        }
+      : await prisma.leadMaster.update({
+          where: { id: leadId },
+          data: detailsData,
+          select: detailsSelect,
+        });
 
     if (lead.account_id) {
       const formattedDispatchDate = data.dispatch_date
@@ -224,9 +297,10 @@ export class DispatchStageService {
         })
         : "N/A";
 
+      const subject = instance ? `Dispatch details for instance "${instance.title}"` : "Dispatch details";
       const action = hadDispatchDetails
-        ? `Dispatch details updated. Dispatch Date: ${formattedDispatchDate}, Vehicle No: ${data.vehicle_no}, Driver Name: ${data.driver_name?.trim() || "N/A"}, Driver Number: ${data.driver_number?.trim() || "N/A"}, Remark: ${data.dispatch_remark?.trim() || "N/A"}.`
-        : `Dispatch details added. Dispatch Date: ${formattedDispatchDate}, Vehicle No: ${data.vehicle_no}, Driver Name: ${data.driver_name?.trim() || "N/A"}, Driver Number: ${data.driver_number?.trim() || "N/A"}, Remark: ${data.dispatch_remark?.trim() || "N/A"}.`;
+        ? `${subject} updated. Dispatch Date: ${formattedDispatchDate}, Vehicle No: ${data.vehicle_no}, Driver Name: ${data.driver_name?.trim() || "N/A"}, Driver Number: ${data.driver_number?.trim() || "N/A"}, Remark: ${data.dispatch_remark?.trim() || "N/A"}.`
+        : `${subject} added. Dispatch Date: ${formattedDispatchDate}, Vehicle No: ${data.vehicle_no}, Driver Name: ${data.driver_name?.trim() || "N/A"}, Driver Number: ${data.driver_number?.trim() || "N/A"}, Remark: ${data.dispatch_remark?.trim() || "N/A"}.`;
 
       await createLeadLog(prisma, {
         vendor_id: vendorId,
@@ -236,6 +310,7 @@ export class DispatchStageService {
         action_type: hadDispatchDetails ? "UPDATE" : "CREATE",
         history_type: "Lead",
         created_by: data.updated_by,
+        instance_id: instance?.id,
       });
     }
 
@@ -243,7 +318,11 @@ export class DispatchStageService {
   }
 
   /** ✅ Get Dispatch details by Lead ID and Vendor ID */
-  async getDispatchDetails(vendorId: number, leadId: number) {
+  async getDispatchDetails(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
     const lead = await prisma.leadMaster.findFirst({
       where: {
         id: leadId,
@@ -267,6 +346,20 @@ export class DispatchStageService {
       );
     }
 
+    const instance = await findInstanceOfLead(vendorId, leadId, instanceId);
+    if (instance) {
+      return {
+        id: lead.id,
+        vendor_id: lead.vendor_id,
+        instance_id: instance.id,
+        dispatch_date: instance.dispatch_date,
+        driver_name: instance.driver_name,
+        driver_number: instance.driver_number,
+        vehicle_no: instance.vehicle_no,
+        dispatch_remark: instance.dispatch_remark,
+      };
+    }
+
     return lead;
   }
 
@@ -276,13 +369,16 @@ export class DispatchStageService {
     leadId: number,
     accountId: number | null,
     userId: number,
-    files: { originalName: string; sysName: string }[]
+    files: { originalName: string; sysName: string }[],
+    instanceId: number | null = null,
   ) {
     if (!vendorId || !leadId || !userId)
       throw Object.assign(
         new Error("vendorId, leadId and userId are required"),
         { statusCode: 400 }
       );
+
+    const instance = await findInstanceOfLead(vendorId, leadId, instanceId);
 
     // 🔹 Get DocType for Dispatch Photos/Documents (Type 20)
     const dispatchDocType = await prisma.documentTypeMaster.findFirst({
@@ -307,6 +403,7 @@ export class DispatchStageService {
           account_id: accountId,
           created_by: userId,
           doc_type_id: dispatchDocType.id, // ✅ Type 21 → Dispatch Photos & Docs
+          product_structure_instance_id: instance?.id ?? null,
         },
       });
 
@@ -318,10 +415,11 @@ export class DispatchStageService {
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: accountId,
-        action: `${uploadedDocs.length} Dispatch Document${uploadedDocs.length > 1 ? "s" : ""} uploaded successfully.`,
+        action: `${uploadedDocs.length} Dispatch Document${uploadedDocs.length > 1 ? "s" : ""} uploaded successfully${instance ? ` for instance "${instance.title}"` : ""}.`,
         action_type: "CREATE",
         history_type: "Lead",
         created_by: userId,
+        instance_id: instance?.id,
       });
 
       await prisma.leadDocumentLogs.createMany({
@@ -340,11 +438,17 @@ export class DispatchStageService {
   }
 
   // ✅ Get Dispatch Photos & Documents with Signed URLs
-  async getDispatchDocuments(vendorId: number, leadId: number) {
+  async getDispatchDocuments(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
     if (!vendorId || !leadId)
       throw Object.assign(new Error("vendorId and leadId are required"), {
         statusCode: 400,
       });
+
+    await findInstanceOfLead(vendorId, leadId, instanceId);
 
     // 🔹 Get DocType for Dispatch Docs (Type 20)
     const dispatchDocType = await prisma.documentTypeMaster.findFirst({
@@ -364,6 +468,7 @@ export class DispatchStageService {
         lead_id: leadId,
         doc_type_id: dispatchDocType.id,
         is_deleted: false,
+        ...(instanceId ? { product_structure_instance_id: instanceId } : {}),
       },
       select: {
         id: true,
@@ -394,8 +499,40 @@ export class DispatchStageService {
   }
 
   // ✅ Check if Lead is Ready for Post-Dispatch
-  async checkReadyForPostDispatch(vendorId: number, leadId: number) {
+  async checkReadyForPostDispatch(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
     await syncTrackTraceBoxCount(vendorId, leadId);
+
+    // Per-instance dispatch: check the instance's own details, boxes and documents.
+    const instance = await findInstanceOfLead(vendorId, leadId, instanceId);
+    if (instance) {
+      const instanceDocs = await prisma.leadDocuments.count({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          product_structure_instance_id: instance.id,
+          is_deleted: false,
+          documentType: { tag: "Type 21" },
+        },
+      });
+      const missing: string[] = [];
+      if (!instance.dispatch_date) missing.push("Dispatch Date");
+      if (!instance.vehicle_no) missing.push("Vehicle Number");
+      if (!instance.no_of_boxes || instance.no_of_boxes <= 0)
+        missing.push("Box Count");
+      if (instanceDocs === 0) missing.push("Dispatch Documents");
+      const readyForPostDispatch = missing.length === 0;
+      return {
+        readyForPostDispatch,
+        message: readyForPostDispatch
+          ? "Instance is ready for Post-Dispatch stage."
+          : `Missing: ${missing.join(", ")}`,
+        missingFields: missing,
+      };
+    }
 
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId, is_deleted: false },
@@ -580,8 +717,11 @@ export class DispatchStageService {
     assigneeUserId: number,
     createdBy: number,
     dueDate: Date,
-    remark?: string
+    remark?: string,
+    instanceId: number | null = null,
   ) {
+    const instance = await findInstanceOfLead(vendorId, leadId, instanceId);
+
     const leadStageRecord = await prisma.leadMaster.findUnique({
       where: { id: leadId },
       select: { status_id: true, franchise_id: true },
@@ -634,6 +774,7 @@ export class DispatchStageService {
         due_date: new Date(dueDate),
         remark: remark || null,
         created_by: createdBy,
+        instance_id: instance?.id ?? null,
       },
     });
 
@@ -704,17 +845,24 @@ export class DispatchStageService {
   }
 
   // ✅ Fetch all Pending Material Tasks
-  async getPendingMaterialTasks(vendorId: number, leadId: number) {
+  async getPendingMaterialTasks(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
     if (!vendorId || !leadId)
       throw Object.assign(new Error("vendorId and leadId are required"), {
         statusCode: 400,
       });
+
+    await findInstanceOfLead(vendorId, leadId, instanceId);
 
     const tasks = await prisma.userLeadTask.findMany({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
         task_type: "Pending Materials",
+        ...(instanceId ? { instance_id: instanceId } : {}),
       },
       orderBy: { created_at: "desc" },
       select: {

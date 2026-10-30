@@ -381,9 +381,11 @@ export const getProductMasterService = async (
   brand_id?: number,
   active?: string,
   procurement?: string,
+  pageSize: number = 20,
 ) => {
   try {
-    const skip = (page - 1) * PAGE_SIZE;
+    const limit = Math.max(1, Math.min(100, Number(pageSize) || 20));
+    const skip = (page - 1) * limit;
 
     const where: any = {
       vendor_id,
@@ -410,10 +412,11 @@ export const getProductMasterService = async (
       prisma.productMaster.findMany({
         where,
         skip,
-        take: PAGE_SIZE,
+        take: limit,
         orderBy: { id: "desc" },
         select: {
           id: true,
+          vendor_id: true,
           item_id: true,
           product_name: true,
           article_code: true,
@@ -487,8 +490,8 @@ export const getProductMasterService = async (
       products,
       total,
       page,
-      page_size: PAGE_SIZE,
-      total_pages: Math.ceil(total / PAGE_SIZE),
+      page_size: limit,
+      total_pages: Math.ceil(total / limit),
     });
   } catch (error) {
     console.error("getProductMasterService error:", error);

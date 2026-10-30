@@ -1,3 +1,4 @@
+import { nextDesignFileRevision } from "../../../utils/designFileRevision";
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import { ApiResponse } from "../../../utils/apiResponse";
@@ -45,6 +46,66 @@ const isValidMeetingTime = (value?: string): boolean =>
   typeof value === "string" && meetingTimePattern.test(value);
 
 export class DesigingStageController {
+  /**
+   * Meeting file names. Custom-usertype vendors get M<n>-<ClientName>-<MeetingDate>.<ext>,
+   * numbered across all of the lead's meeting files; other vendors keep the original name.
+   */
+  private static async buildMeetingDocNames(
+    vendorId: number,
+    leadId: number,
+    meetingDate: Date | string,
+    files: Express.Multer.File[],
+  ): Promise<string[]> {
+    const originalNames = files.map((file) => file.originalname);
+    if (files.length === 0) return originalNames;
+
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { is_this_vendor_is_custom_usertype_only: true },
+    });
+    if (vendor?.is_this_vendor_is_custom_usertype_only !== true) return originalNames;
+
+    const lead = await prisma.leadMaster.findFirst({
+      where: { id: leadId, vendor_id: vendorId },
+      select: { firstname: true, lastname: true },
+    });
+    const clientNameSegment = sanitizeFilename(
+      `${lead?.firstname ?? ""}${lead?.lastname ?? ""}` || "Client",
+    )
+      .replace(/_+/g, "_")
+      .slice(0, 50);
+
+    const parsedDate = new Date(meetingDate);
+    const date = Number.isNaN(parsedDate.getTime()) ? new Date() : parsedDate;
+    const dateSegment = [
+      date.getFullYear(),
+      String(date.getMonth() + 1).padStart(2, "0"),
+      String(date.getDate()).padStart(2, "0"),
+    ].join("-");
+
+    const mappedDocs = await prisma.leadDesignMeetingDocumentsMapping.findMany({
+      where: { vendor_id: vendorId, lead_id: leadId },
+      select: { document_id: true },
+    });
+    const existingDocs = await prisma.leadDocuments.findMany({
+      where: {
+        id: { in: mappedDocs.map((doc) => doc.document_id) },
+        is_deleted: false,
+      },
+      select: { doc_og_name: true },
+    });
+    let nextRevision =
+      existingDocs.reduce((maxRevision, doc) => {
+        const match = doc.doc_og_name?.match(/^M(\d+)-/i);
+        return match ? Math.max(maxRevision, Number(match[1])) : maxRevision;
+      }, -1) + 1;
+
+    return files.map((file) => {
+      const extension = path.extname(file.originalname || "");
+      return `M${nextRevision++}-${clientNameSegment}-${dateSegment}${extension}`;
+    });
+  }
+
   private static normalizeSpecItemCodeId(value: number | null | undefined) {
     return value ?? -1;
   }
@@ -741,20 +802,27 @@ export class DesigingStageController {
       }
 
       const uploadedFiles: { originalName: string; sysName: string }[] = [];
+      const docNames = await DesigingStageController.buildMeetingDocNames(
+        Number(vendorId),
+        Number(leadId),
+        date,
+        files,
+      );
 
-      for (const file of files) {
+      for (const [index, file] of files.entries()) {
+        const docName = docNames[index];
         const sysName = await uploadToWasabiMeetingDocsFile(
           file.path,
           Number(vendorId),
           Number(leadId),
-          file.originalname,
+          docName,
           file.mimetype,
         );
 
         await fs.unlink(file.path);
 
-        uploadedFiles.push({ originalName: file.originalname, sysName });
-        logs.push({ fileUploaded: file.originalname, sysName });
+        uploadedFiles.push({ originalName: docName, sysName });
+        logs.push({ fileUploaded: docName, sysName });
       }
 
       const { meeting, documents, mapping } = await prisma.$transaction(
@@ -956,19 +1024,30 @@ export class DesigingStageController {
           .json({ success: false, message: "No files uploaded" });
 
       const uploadedFiles: { originalName: string; sysName: string }[] = [];
+      const meetingForName = await prisma.leadDesignMeeting.findFirst({
+        where: { id: Number(meetingId), vendor_id: Number(vendorId) },
+        select: { date: true },
+      });
+      const docNames = await DesigingStageController.buildMeetingDocNames(
+        Number(vendorId),
+        Number(leadId),
+        meetingForName?.date ?? new Date(),
+        files,
+      );
 
-      for (const file of files) {
+      for (const [index, file] of files.entries()) {
+        const docName = docNames[index];
         const sysName = await uploadToWasabiMeetingDocsFile(
           file.path,
           Number(vendorId),
           Number(leadId),
-          file.originalname,
+          docName,
           file.mimetype,
         );
 
         await fs.unlink(file.path);
 
-        uploadedFiles.push({ originalName: file.originalname, sysName });
+        uploadedFiles.push({ originalName: docName, sysName });
       }
 
       const { uploadedDocs } = await prisma.$transaction(async (tx) => {
@@ -1409,6 +1488,9 @@ export class DesigingStageController {
               String(now.getDate()).padStart(2, "0"),
             ].join("-");
 
+            // Serialize revision allocation for simultaneous uploads to the same lead.
+            await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${Number(leadId)} AND vendor_id = ${Number(vendorId)} FOR UPDATE`;
+
             const existingDesignDocs = await tx.leadDocuments.findMany({
               where: {
                 vendor_id: Number(vendorId),
@@ -1419,38 +1501,11 @@ export class DesigingStageController {
               select: { doc_og_name: true },
             });
 
-            nextRevision =
-              existingDesignDocs.reduce((maxRevision, doc) => {
-                const match = doc.doc_og_name?.match(
-                  /^D(\d+)_([^_]+)_(.+?)(?:\.[^.]+)?$/i,
-                );
-                if (!match) {
-                  return maxRevision;
-                }
-
-                const [, revisionText, existingDesignType = "", nameBody = ""] =
-                  match;
-                if (
-                  existingDesignType.trim().toLowerCase() !==
-                  designTypeSegment.toLowerCase()
-                ) {
-                  return maxRevision;
-                }
-
-                const isSameProductType =
-                  nameBody.includes(`_${structureSegment}_`) ||
-                  nameBody.endsWith(`_${structureSegment}`) ||
-                  nameBody.startsWith(`${structureSegment}_`);
-
-                if (!isSameProductType) {
-                  return maxRevision;
-                }
-
-                const revision = Number(revisionText);
-                return Number.isFinite(revision)
-                  ? Math.max(maxRevision, revision)
-                  : maxRevision;
-              }, -1) + 1;
+            nextRevision = nextDesignFileRevision(
+              existingDesignDocs,
+              designTypeSegment,
+              structureSegment,
+            );
 
             if (selectedInstances.length === 1) {
               instanceIdToPersist = selectedInstances[0].id;
@@ -2549,7 +2604,8 @@ export class DesigingStageController {
             });
             nextRevision =
               existingFDocs.reduce((maxRevision, doc) => {
-                const match = doc.doc_og_name?.match(/^F(\d+)-/i);
+                // FSM-<n>- (current) or F<n>- (older uploads), so numbering continues.
+                const match = doc.doc_og_name?.match(/^(?:FSM-|F)(\d+)-/i);
                 const revision = match ? Number(match[1]) : -1;
                 return Number.isFinite(revision)
                   ? Math.max(maxRevision, revision)
@@ -2565,7 +2621,7 @@ export class DesigingStageController {
             const finalOriginalName = useCustomVendorFlow
               ? (() => {
                   const extension = path.extname(file.originalname || "");
-                  const renamedOriginalName = `F${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                  const renamedOriginalName = `FSM-${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
                   nextRevision += 1;
                   return renamedOriginalName;
                 })()
@@ -2894,20 +2950,27 @@ export class DesigingStageController {
 
       // 5️⃣ Upload new files if provided
       if (files.length > 0) {
-        for (const file of files) {
+        const docNames = await DesigingStageController.buildMeetingDocNames(
+          Number(vendorId),
+          existingMeeting.lead_id,
+          updatedMeeting.date,
+          files,
+        );
+        for (const [index, file] of files.entries()) {
+          const docName = docNames[index];
           // Upload to Wasabi
           const sysName = await uploadToWasabiMeetingDocs(
             file.buffer,
             Number(vendorId),
             existingMeeting.lead_id,
-            file.originalname,
+            docName,
           );
-          logs.push({ fileUploaded: file.originalname, sysName });
+          logs.push({ fileUploaded: docName, sysName });
 
           // Create LeadDocument
           const doc = await prisma.leadDocuments.create({
             data: {
-              doc_og_name: file.originalname,
+              doc_og_name: docName,
               doc_sys_name: sysName,
               vendor_id: Number(vendorId),
               lead_id: existingMeeting.lead_id,
@@ -3880,7 +3943,8 @@ export class DesigingStageController {
               is_deleted_item: true,
               shutterType: { select: { name: true } },
               shutterMaterial: { select: { name: true } },
-              shutterMaterialFinish: { select: { name: true } },
+              shutterOuterFinish: { select: { name: true } },
+              shutterInnerFinish: { select: { name: true } },
             },
           },
           LeadHardwareMapping: {
@@ -3889,9 +3953,9 @@ export class DesigingStageController {
               is_approved: true,
               is_amended: true,
               is_deleted_item: true,
-              carcassLegs: { select: { name: true } },
-              skirtingCarcassLegs: { select: { name: true, inScope: true } },
-              skirtingCarcassLegsColor: { select: { color: true } },
+              hardwareType: { select: { name: true } },
+              hardwareItem: { select: { name: true, inScope: true } },
+              hardwareItemOption: { select: { name: true } },
               note: true,
             },
           },
@@ -4049,14 +4113,15 @@ export class DesigingStageController {
                 select: {
                   shutter_type_id: true,
                   shutter_material_id: true,
-                  shutter_material_finish_id: true,
+                  shutter_outer_finish_id: true,
+                  shutter_inner_finish_id: true,
                 },
               },
               LeadHardwareMapping: {
                 select: {
-                  carcass_legs_id: true,
-                  skirting_carcass_legs_id: true,
-                  skirting_carcass_legs_color_id: true,
+                  hardware_type_id: true,
+                  hardware_item_id: true,
+                  hardware_item_option_id: true,
                   note: true,
                 },
               },
@@ -4164,8 +4229,10 @@ export class DesigingStageController {
                   specs_id: createdSpecification.id,
                   shutter_type_id: mapping.shutter_type_id,
                   shutter_material_id: mapping.shutter_material_id,
-                  shutter_material_finish_id:
-                    mapping.shutter_material_finish_id,
+                  shutter_outer_finish_id:
+                    mapping.shutter_outer_finish_id,
+                  shutter_inner_finish_id:
+                    mapping.shutter_inner_finish_id,
                   created_by: Number(created_by),
                 }),
               ),
@@ -4179,10 +4246,10 @@ export class DesigingStageController {
                   vendor_id: Number(vendorId),
                   lead_id: Number(leadId),
                   specs_id: createdSpecification.id,
-                  carcass_legs_id: mapping.carcass_legs_id,
-                  skirting_carcass_legs_id: mapping.skirting_carcass_legs_id,
-                  skirting_carcass_legs_color_id:
-                    mapping.skirting_carcass_legs_color_id,
+                  hardware_type_id: mapping.hardware_type_id,
+                  hardware_item_id: mapping.hardware_item_id,
+                  hardware_item_option_id:
+                    mapping.hardware_item_option_id,
                   note: mapping.note,
                   created_by: Number(created_by),
                 }),
@@ -4659,7 +4726,8 @@ export class DesigingStageController {
         include: {
           shutterType: { select: { id: true, name: true } },
           shutterMaterial: { select: { id: true, name: true } },
-          shutterMaterialFinish: { select: { id: true, name: true } },
+          shutterOuterFinish: { select: { id: true, name: true } },
+          shutterInnerFinish: { select: { id: true, name: true } },
         },
         orderBy: { id: "asc" },
       });
@@ -4690,9 +4758,13 @@ export class DesigingStageController {
       const specsId = Number(req.body.specs_id);
       const shutterTypeId = Number(req.body.shutter_type_id);
       const shutterMaterialId = Number(req.body.shutter_material_id);
-      const shutterMaterialFinishId = Number(
-        req.body.shutter_material_finish_id,
+      const shutterOuterFinishId = Number(
+        req.body.shutter_outer_finish_id,
       );
+      // Optional: a material may have no inner finishes.
+      const shutterInnerFinishId = req.body.shutter_inner_finish_id
+        ? Number(req.body.shutter_inner_finish_id)
+        : null;
       const createdBy = Number(req.body.created_by);
       const reviewStateData = DesigingStageController.buildReviewStateData(
         req.body,
@@ -4704,13 +4776,13 @@ export class DesigingStageController {
         !specsId ||
         !shutterTypeId ||
         !shutterMaterialId ||
-        !shutterMaterialFinishId ||
+        !shutterOuterFinishId ||
         !createdBy
       ) {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, specs_id, shutter_type_id, shutter_material_id, shutter_material_finish_id and created_by are required",
+            "vendor_id, lead_id, specs_id, shutter_type_id, shutter_material_id, shutter_outer_finish_id and created_by are required",
         });
       }
 
@@ -4720,13 +4792,31 @@ export class DesigingStageController {
         createdBy,
       );
 
+      if (shutterInnerFinishId !== null) {
+        const innerFinish = await prisma.shutterInnerFinishMaster.findFirst({
+          where: {
+            id: shutterInnerFinishId,
+            shutter_material_id: shutterMaterialId,
+          },
+          select: { id: true },
+        });
+        if (!innerFinish) {
+          return res.status(400).json({
+            success: false,
+            message:
+              "The selected shutter inner finish does not belong to the selected shutter material.",
+          });
+        }
+      }
+
       const data = {
         vendor_id: vendorId,
         lead_id: leadId,
         specs_id: specsId,
         shutter_type_id: shutterTypeId,
         shutter_material_id: shutterMaterialId,
-        shutter_material_finish_id: shutterMaterialFinishId,
+        shutter_outer_finish_id: shutterOuterFinishId,
+        shutter_inner_finish_id: shutterInnerFinishId,
         created_by: createdBy,
         ...reviewStateData,
       };
@@ -4739,7 +4829,8 @@ export class DesigingStageController {
             specs_id: specsId,
             shutter_type_id: shutterTypeId,
             shutter_material_id: shutterMaterialId,
-            shutter_material_finish_id: shutterMaterialFinishId,
+            shutter_outer_finish_id: shutterOuterFinishId,
+            shutter_inner_finish_id: shutterInnerFinishId,
             ...(id ? { NOT: { id } } : {}),
           },
           select: { id: true },
@@ -4749,7 +4840,7 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "This shutter type, material, and finish combination already exists for this specification.",
+            "This shutter type, material, and finishes combination already exists for this specification.",
         });
       }
 
@@ -4760,7 +4851,8 @@ export class DesigingStageController {
             include: {
               shutterType: { select: { id: true, name: true } },
               shutterMaterial: { select: { id: true, name: true } },
-              shutterMaterialFinish: { select: { id: true, name: true } },
+              shutterOuterFinish: { select: { id: true, name: true } },
+              shutterInnerFinish: { select: { id: true, name: true } },
             },
           })
         : await prisma.leadShutterMaterialMapping.create({
@@ -4768,7 +4860,8 @@ export class DesigingStageController {
             include: {
               shutterType: { select: { id: true, name: true } },
               shutterMaterial: { select: { id: true, name: true } },
-              shutterMaterialFinish: { select: { id: true, name: true } },
+              shutterOuterFinish: { select: { id: true, name: true } },
+              shutterInnerFinish: { select: { id: true, name: true } },
             },
           });
 
@@ -4809,11 +4902,11 @@ export class DesigingStageController {
           specs_id: specsId,
         },
         include: {
-          carcassLegs: { select: { id: true, name: true } },
-          skirtingCarcassLegs: {
+          hardwareType: { select: { id: true, name: true } },
+          hardwareItem: {
             select: { id: true, name: true, inScope: true },
           },
-          skirtingCarcassLegsColor: { select: { id: true, color: true } },
+          hardwareItemOption: { select: { id: true, name: true } },
         },
         orderBy: { id: "asc" },
       });
@@ -4839,10 +4932,10 @@ export class DesigingStageController {
       const vendorId = Number(req.body.vendor_id);
       const leadId = Number(req.body.lead_id);
       const specsId = Number(req.body.specs_id);
-      const carcassLegsId = Number(req.body.carcass_legs_id);
-      const skirtingCarcassLegsId = Number(req.body.skirting_carcass_legs_id);
-      const skirtingCarcassLegsColorId = req.body.skirting_carcass_legs_color_id
-        ? Number(req.body.skirting_carcass_legs_color_id)
+      const hardwareTypeId = Number(req.body.hardware_type_id);
+      const hardwareItemId = Number(req.body.hardware_item_id);
+      const hardwareItemOptionId = req.body.hardware_item_option_id
+        ? Number(req.body.hardware_item_option_id)
         : null;
       const note =
         typeof req.body.note === "string" && req.body.note.trim().length > 0
@@ -4857,14 +4950,14 @@ export class DesigingStageController {
         !vendorId ||
         !leadId ||
         !specsId ||
-        !carcassLegsId ||
-        !skirtingCarcassLegsId ||
+        !hardwareTypeId ||
+        !hardwareItemId ||
         !createdBy
       ) {
         return res.status(400).json({
           success: false,
           message:
-            "vendor_id, lead_id, specs_id, carcass_legs_id, skirting_carcass_legs_id and created_by are required",
+            "vendor_id, lead_id, specs_id, hardware_type_id, hardware_item_id and created_by are required",
         });
       }
 
@@ -4878,9 +4971,9 @@ export class DesigingStageController {
         vendor_id: vendorId,
         lead_id: leadId,
         specs_id: specsId,
-        carcass_legs_id: carcassLegsId,
-        skirting_carcass_legs_id: skirtingCarcassLegsId,
-        skirting_carcass_legs_color_id: skirtingCarcassLegsColorId,
+        hardware_type_id: hardwareTypeId,
+        hardware_item_id: hardwareItemId,
+        hardware_item_option_id: hardwareItemOptionId,
         note,
         created_by: createdBy,
         ...reviewStateData,
@@ -4891,9 +4984,9 @@ export class DesigingStageController {
           vendor_id: vendorId,
           lead_id: leadId,
           specs_id: specsId,
-          carcass_legs_id: carcassLegsId,
-          skirting_carcass_legs_id: skirtingCarcassLegsId,
-          skirting_carcass_legs_color_id: skirtingCarcassLegsColorId,
+          hardware_type_id: hardwareTypeId,
+          hardware_item_id: hardwareItemId,
+          hardware_item_option_id: hardwareItemOptionId,
           ...(id ? { NOT: { id } } : {}),
         },
         select: { id: true },
@@ -4903,16 +4996,16 @@ export class DesigingStageController {
         return res.status(400).json({
           success: false,
           message:
-            "This carcass legs, skirting, and color combination already exists for this specification.",
+            "This hardware type, hardware item, and option combination already exists for this specification.",
         });
       }
 
       const includeShape = {
-        carcassLegs: { select: { id: true, name: true } },
-        skirtingCarcassLegs: {
+        hardwareType: { select: { id: true, name: true } },
+        hardwareItem: {
           select: { id: true, name: true, inScope: true },
         },
-        skirtingCarcassLegsColor: { select: { id: true, color: true } },
+        hardwareItemOption: { select: { id: true, name: true } },
       };
 
       const mapping = id

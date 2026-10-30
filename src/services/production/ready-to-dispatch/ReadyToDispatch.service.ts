@@ -18,27 +18,34 @@ const assignTaskSiteReadinessSchema = Joi.object({
   remark: Joi.string().allow(null, ""),
   assignee_user_id: Joi.number().required(),
   created_by: Joi.number().required(),
+  instance_id: Joi.number().integer().positive().allow(null),
 });
 
 const RESTRICTED_TASK_TYPE = "Site Readiness" as const;
 const FOLLOW_UP_TASK_TYPE = "Follow Up" as const;
 
 export class ReadyToDispatchService {
-  async getSiteReadinessTaskConflicts(leadId: number) {
+  async getSiteReadinessTaskConflicts(leadId: number, instanceId: number | null = null) {
     const lead = await prisma.leadMaster.findUnique({
       where: { id: leadId },
-      select: { id: true },
+      select: { id: true, vendor: { select: { handlesLargeScaleProjects: true } } },
     });
 
     if (!lead) {
       throw new Error(`Lead ${leadId} not found`);
     }
 
+    // Large-scale vendors run Site Readiness per instance, so only that
+    // instance's open Site Readiness task blocks a new one.
+    const scopeToInstance =
+      lead.vendor?.handlesLargeScaleProjects === true && !!instanceId;
+
     const restrictedTaskConflicts = await prisma.userLeadTask.findMany({
       where: {
         lead_id: leadId,
         task_type: RESTRICTED_TASK_TYPE,
         status: { not: "completed" },
+        ...(scopeToInstance ? { instance_id: instanceId } : {}),
       },
       select: {
         id: true,
@@ -229,13 +236,27 @@ export class ReadyToDispatchService {
     leadId: number,
     accountId: number | null,
     userId: number,
-    files: { originalName: string; sysName: string }[]
+    files: { originalName: string; sysName: string }[],
+    instanceId: number | null = null
   ) {
     if (!vendorId || !leadId || !userId)
       throw Object.assign(
         new Error("vendorId, leadId and userId are required"),
         { statusCode: 400 }
       );
+
+    // 🔹 Photos belong to one product instance when the page is opened for one
+    if (instanceId) {
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+        select: { id: true },
+      });
+
+      if (!instance)
+        throw Object.assign(new Error("Instance not found for this lead"), {
+          statusCode: 404,
+        });
+    }
 
     // 🔹 Get DocType for Current Site Photos (Type 16)
     const sitePhotoDocType = await prisma.documentTypeMaster.findFirst({
@@ -262,6 +283,7 @@ export class ReadyToDispatchService {
           account_id: accountId,
           created_by: userId,
           doc_type_id: sitePhotoDocType.id, // Type 16 → Current Site Photos
+          product_structure_instance_id: instanceId,
         },
       });
 
@@ -274,7 +296,8 @@ export class ReadyToDispatchService {
   // ✅ Get Current Site Photos at Ready-To-Dispatch
   async getCurrentSitePhotosAtReadyToDispatch(
     vendorId: number,
-    leadId: number
+    leadId: number,
+    instanceId: number | null = null
   ) {
     if (!vendorId || !leadId)
       throw Object.assign(new Error("vendorId and leadId are required"), {
@@ -294,14 +317,15 @@ export class ReadyToDispatchService {
 
     const prefix = `ready_to_dispatch/current_site_photos/${vendorId}/${leadId}/`;
 
-    // 🔹 Fetch all uploaded Current Site Photos for this lead
+    // 🔹 Fetch uploaded Current Site Photos for this lead (or one of its instances)
     const documents = await prisma.leadDocuments.findMany({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
         doc_type_id: sitePhotoDocType.id,
         is_deleted: false,
-        doc_sys_name: { startsWith: prefix }
+        doc_sys_name: { startsWith: prefix },
+        ...(instanceId ? { product_structure_instance_id: instanceId } : {}),
       },
       orderBy: { created_at: "desc" },
     });
@@ -319,7 +343,8 @@ export class ReadyToDispatchService {
 
   async getCurrentSitePhotosCountAtReadyToDispatch(
     vendorId: number,
-    leadId: number
+    leadId: number,
+    instanceId: number | null = null
   ) {
     if (!vendorId || !leadId)
       throw Object.assign(new Error("vendorId and leadId are required"), {
@@ -339,13 +364,15 @@ export class ReadyToDispatchService {
 
     const prefix = `ready_to_dispatch/current_site_photos/${vendorId}/${leadId}/`;
 
-    // 🔹 Count all uploaded Current Site Photos for this lead
+    // 🔹 Count uploaded Current Site Photos for this lead (or one of its instances)
     const count = await prisma.leadDocuments.count({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
         doc_type_id: sitePhotoDocType.id,
+        is_deleted: false,
         doc_sys_name: { startsWith: prefix },
+        ...(instanceId ? { product_structure_instance_id: instanceId } : {}),
       },
     });
 
@@ -371,6 +398,7 @@ export class ReadyToDispatchService {
       remark,
       assignee_user_id,
       created_by,
+      instance_id,
     } = value;
 
     return prisma.$transaction(async (tx) => {
@@ -383,9 +411,34 @@ export class ReadyToDispatchService {
           account_id: true,
           status_id: true,
           franchise_id: true,
+          statusType: { select: { tag: true } },
+          vendor: { select: { handlesLargeScaleProjects: true } },
         },
       });
       if (!lead) throw new Error(`Lead ${lead_id} not found`);
+
+      // Large-scale vendors move each product instance through the stages on its own.
+      const isLargeScale = lead.vendor?.handlesLargeScaleProjects === true;
+      const instance =
+        isLargeScale && instance_id
+          ? await tx.leadProductStructureInstance.findFirst({
+              where: {
+                id: instance_id,
+                lead_id: lead.id,
+                vendor_id: lead.vendor_id,
+                is_archived: false,
+              },
+              select: {
+                id: true,
+                title: true,
+                stage_status_id: true,
+                stageStatus: { select: { tag: true } },
+              },
+            })
+          : null;
+      if (isLargeScale && instance_id && !instance) {
+        throw new Error("Instance not found for this lead");
+      }
 
       const leadStage = lead.status_id
         ? (
@@ -439,12 +492,43 @@ export class ReadyToDispatchService {
         }
       }
 
+      const movesStage =
+        task_type.toLowerCase() !== "follow up" && !isSelfAssignTask;
+
+      if (isLargeScale && movesStage) {
+        if (!instance) {
+          throw new Error("Select an instance to move to Site Readiness");
+        }
+
+        const currentTag = instance.stageStatus?.tag ?? lead.statusType?.tag;
+        if (currentTag !== "Type 11") {
+          throw new Error("This instance is not in Ready To Dispatch");
+        }
+
+        // Current Site Photos are uploaded per instance on the Ready To Dispatch page.
+        const sitePhotoCount = await tx.leadDocuments.count({
+          where: {
+            vendor_id: lead.vendor_id,
+            lead_id: lead.id,
+            product_structure_instance_id: instance.id,
+            is_deleted: false,
+            documentType: { tag: "Type 18" },
+          },
+        });
+        if (sitePhotoCount === 0) {
+          throw new Error(
+            "Please upload current site photos for this instance before moving it to Site Readiness."
+          );
+        }
+      }
+
       if (task_type === RESTRICTED_TASK_TYPE) {
         const existingTask = await tx.userLeadTask.findFirst({
           where: {
             lead_id: lead.id,
             task_type,
             status: { not: "completed" },
+            ...(instance ? { instance_id: instance.id } : {}),
           },
           select: {
             id: true,
@@ -457,7 +541,7 @@ export class ReadyToDispatchService {
 
         if (existingTask) {
           throw new Error(
-            `${task_type} task already exists for this lead and is not completed`
+            `${task_type} task already exists for this ${instance ? "instance" : "lead"} and is not completed`
           );
         }
       }
@@ -470,6 +554,7 @@ export class ReadyToDispatchService {
           vendor_id: lead.vendor_id,
           franchise_id: lead.franchise_id ?? null,
           user_id: assignee_user_id,
+          instance_id: instance?.id ?? null,
           task_type,
           lead_stage: leadStage,
           due_date: new Date(due_date),
@@ -494,9 +579,46 @@ export class ReadyToDispatchService {
         account_id: number | null;
         vendor_id: number;
         status_id: number | null;
-      } = { ...lead, status_id: null };
+      } = {
+        id: lead.id,
+        account_id: lead.account_id,
+        vendor_id: lead.vendor_id,
+        status_id: null,
+      };
 
-      if (task_type.toLowerCase() !== "follow up" && !isSelfAssignTask) {
+      if (movesStage && isLargeScale && instance) {
+        // Large-scale: only this instance moves; the lead's own status stays as it is.
+        const [fromStatus, toStatus] = await Promise.all([
+          tx.statusTypeMaster.findFirst({
+            where: { vendor_id: lead.vendor_id, tag: "Type 11" },
+            select: { id: true },
+          }),
+          tx.statusTypeMaster.findFirst({
+            where: { vendor_id: lead.vendor_id, tag: "Type 12" },
+            select: { id: true },
+          }),
+        ]);
+        if (!toStatus) {
+          throw new Error(
+            `Status 'Type 12' (Site Readiness) not found for vendor ${lead.vendor_id}`
+          );
+        }
+
+        await tx.leadProductStructureInstance.update({
+          where: { id: instance.id },
+          data: { stage_status_id: toStatus.id, updated_by: created_by },
+        });
+        await tx.instanceStageHistory.create({
+          data: {
+            instance_id: instance.id,
+            vendor_id: lead.vendor_id,
+            from_status_id: instance.stage_status_id ?? fromStatus?.id ?? null,
+            to_status_id: toStatus.id,
+            created_by,
+          },
+        });
+        updatedLead = { ...updatedLead, status_id: lead.status_id };
+      } else if (movesStage) {
         const toStatus = await tx.statusTypeMaster.findFirst({
           where: { vendor_id: lead.vendor_id, tag: "Type 12" }, // 🔸 Use Type 12 for Site Readiness
           select: { id: true },
@@ -539,6 +661,8 @@ export class ReadyToDispatchService {
         actionMessage = `Lead has been assigned to ${assignee.user_name} for Follow Up.`;
       } else if (isSelfAssignTask) {
         actionMessage = `Lead has been assigned to ${assignee.user_name} for ${task_type}. Due Date: ${formattedDate}.`;
+      } else if (instance) {
+        actionMessage = `Site Readiness task has been created for ${assignee.user_name} for instance "${instance.title}", which moved to Site Readiness. Due Date: ${formattedDate}.`;
       } else {
         actionMessage = `Site Readiness task has been created for ${assignee.user_name}. Due Date: ${formattedDate}.`;
       }
@@ -557,10 +681,12 @@ export class ReadyToDispatchService {
         action_type: "CREATE",
         created_by,
         created_at: new Date(),
+        instance_id: instance?.id ?? undefined,
       });
 
       logger.info("[SERVICE] Site Readiness task assigned successfully", {
         lead_id: lead.id,
+        instance_id: instance?.id ?? null,
         task_id: task.id,
         assignee: assignee.user_name,
         due_date: formattedDate,

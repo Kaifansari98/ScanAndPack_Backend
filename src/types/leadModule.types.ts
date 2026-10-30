@@ -90,8 +90,8 @@ export interface ProductItemCodeInput {
   item_code: string;
   product_structure_id: number;
   sub_product_structure_id: number;
-  description: string;
-  specification: string;
+  description?: string | null;
+  specification?: string | null;
 }
 
 export interface ProductItemCodeType {
@@ -153,7 +153,14 @@ export interface CarcasMaterial {
   finishes?: CarcasMaterialFinish[];
 }
 
-export interface ShutterMaterialFinish {
+export interface ShutterOuterFinish {
+  id: number;
+  name: string;
+  shutter_material_id: number;
+  material?: { id: number; name: string };
+}
+
+export interface ShutterInnerFinish {
   id: number;
   name: string;
   shutter_material_id: number;
@@ -164,31 +171,32 @@ export interface ShutterMaterial {
   id: number;
   name: string;
   vendor_id: number;
-  finishes?: ShutterMaterialFinish[];
+  outerFinishes?: ShutterOuterFinish[];
+  innerFinishes?: ShutterInnerFinish[];
 }
 
-export interface SkirtingCarcassLegsColor {
+export interface HardwareItemOption {
   id: number;
-  carcass_legs_id: number;
-  skirting_carcass_legs_id: number;
-  color: string;
-  skirtingCarcassLegs?: { id: number; name: string };
+  hardware_type_id: number;
+  hardware_item_id: number;
+  name: string;
+  hardwareItem?: { id: number; name: string };
 }
 
-export interface SkirtingCarcassLegs {
+export interface HardwareItem {
   id: number;
   name: string;
-  carcass_legs_id: number;
+  hardware_type_id: number;
   inScope: boolean;
-  colors?: SkirtingCarcassLegsColor[];
-  carcassLegs?: { id: number; name: string };
+  hardwareItemOptions?: HardwareItemOption[];
+  hardwareType?: { id: number; name: string };
 }
 
-export interface CarcassLegs {
+export interface HardwareType {
   id: number;
   name: string;
   vendor_id: number;
-  skirtings?: SkirtingCarcassLegs[];
+  hardwareItems?: HardwareItem[];
 }
 
 export interface LightCarcasUnit {
@@ -835,6 +843,8 @@ export interface AssignTaskFMInput {
   assignee_user_id: number;
   created_by: number;
   baseUrl?: string;
+  /** Large-scale vendors: the product instance the task (and stage move) is for. */
+  instance_id?: number | null;
 }
 
 export interface AssignTaskBookingInput {

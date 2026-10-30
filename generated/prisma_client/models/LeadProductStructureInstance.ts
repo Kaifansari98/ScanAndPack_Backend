@@ -98,6 +98,26 @@ export type LeadProductStructureInstanceMinAggregateOutputType = {
   is_post_production: boolean | null
   pre_prod_remark: string | null
   isLargeScaleProjectInstance: boolean | null
+  required_date_for_dispatch: Date | null
+  onsite_contact_person_name: string | null
+  onsite_contact_person_number: string | null
+  alt_onsite_contact_person_name: string | null
+  alt_onsite_contact_person_number: string | null
+  material_lift_availability: boolean | null
+  material_lift_size: string | null
+  vehicle_approachability_for_dispatch: boolean | null
+  dispatch_planning_remark: string | null
+  dispatch_date: Date | null
+  driver_name: string | null
+  driver_number: string | null
+  vehicle_no: string | null
+  dispatch_remark: string | null
+  actual_installation_start_date: Date | null
+  expected_installation_end_date: Date | null
+  is_carcass_installation_completed: boolean | null
+  carcass_installation_completion_date: Date | null
+  is_shutter_installation_completed: boolean | null
+  shutter_installation_completion_date: Date | null
   product_item_code_id: number | null
   quantity: number | null
   sub_product_structure_id: number | null
@@ -139,6 +159,26 @@ export type LeadProductStructureInstanceMaxAggregateOutputType = {
   is_post_production: boolean | null
   pre_prod_remark: string | null
   isLargeScaleProjectInstance: boolean | null
+  required_date_for_dispatch: Date | null
+  onsite_contact_person_name: string | null
+  onsite_contact_person_number: string | null
+  alt_onsite_contact_person_name: string | null
+  alt_onsite_contact_person_number: string | null
+  material_lift_availability: boolean | null
+  material_lift_size: string | null
+  vehicle_approachability_for_dispatch: boolean | null
+  dispatch_planning_remark: string | null
+  dispatch_date: Date | null
+  driver_name: string | null
+  driver_number: string | null
+  vehicle_no: string | null
+  dispatch_remark: string | null
+  actual_installation_start_date: Date | null
+  expected_installation_end_date: Date | null
+  is_carcass_installation_completed: boolean | null
+  carcass_installation_completion_date: Date | null
+  is_shutter_installation_completed: boolean | null
+  shutter_installation_completion_date: Date | null
   product_item_code_id: number | null
   quantity: number | null
   sub_product_structure_id: number | null
@@ -180,6 +220,26 @@ export type LeadProductStructureInstanceCountAggregateOutputType = {
   is_post_production: number
   pre_prod_remark: number
   isLargeScaleProjectInstance: number
+  required_date_for_dispatch: number
+  onsite_contact_person_name: number
+  onsite_contact_person_number: number
+  alt_onsite_contact_person_name: number
+  alt_onsite_contact_person_number: number
+  material_lift_availability: number
+  material_lift_size: number
+  vehicle_approachability_for_dispatch: number
+  dispatch_planning_remark: number
+  dispatch_date: number
+  driver_name: number
+  driver_number: number
+  vehicle_no: number
+  dispatch_remark: number
+  actual_installation_start_date: number
+  expected_installation_end_date: number
+  is_carcass_installation_completed: number
+  carcass_installation_completion_date: number
+  is_shutter_installation_completed: number
+  shutter_installation_completion_date: number
   product_item_code_id: number
   quantity: number
   sub_product_structure_id: number
@@ -259,6 +319,26 @@ export type LeadProductStructureInstanceMinAggregateInputType = {
   is_post_production?: true
   pre_prod_remark?: true
   isLargeScaleProjectInstance?: true
+  required_date_for_dispatch?: true
+  onsite_contact_person_name?: true
+  onsite_contact_person_number?: true
+  alt_onsite_contact_person_name?: true
+  alt_onsite_contact_person_number?: true
+  material_lift_availability?: true
+  material_lift_size?: true
+  vehicle_approachability_for_dispatch?: true
+  dispatch_planning_remark?: true
+  dispatch_date?: true
+  driver_name?: true
+  driver_number?: true
+  vehicle_no?: true
+  dispatch_remark?: true
+  actual_installation_start_date?: true
+  expected_installation_end_date?: true
+  is_carcass_installation_completed?: true
+  carcass_installation_completion_date?: true
+  is_shutter_installation_completed?: true
+  shutter_installation_completion_date?: true
   product_item_code_id?: true
   quantity?: true
   sub_product_structure_id?: true
@@ -300,6 +380,26 @@ export type LeadProductStructureInstanceMaxAggregateInputType = {
   is_post_production?: true
   pre_prod_remark?: true
   isLargeScaleProjectInstance?: true
+  required_date_for_dispatch?: true
+  onsite_contact_person_name?: true
+  onsite_contact_person_number?: true
+  alt_onsite_contact_person_name?: true
+  alt_onsite_contact_person_number?: true
+  material_lift_availability?: true
+  material_lift_size?: true
+  vehicle_approachability_for_dispatch?: true
+  dispatch_planning_remark?: true
+  dispatch_date?: true
+  driver_name?: true
+  driver_number?: true
+  vehicle_no?: true
+  dispatch_remark?: true
+  actual_installation_start_date?: true
+  expected_installation_end_date?: true
+  is_carcass_installation_completed?: true
+  carcass_installation_completion_date?: true
+  is_shutter_installation_completed?: true
+  shutter_installation_completion_date?: true
   product_item_code_id?: true
   quantity?: true
   sub_product_structure_id?: true
@@ -341,6 +441,26 @@ export type LeadProductStructureInstanceCountAggregateInputType = {
   is_post_production?: true
   pre_prod_remark?: true
   isLargeScaleProjectInstance?: true
+  required_date_for_dispatch?: true
+  onsite_contact_person_name?: true
+  onsite_contact_person_number?: true
+  alt_onsite_contact_person_name?: true
+  alt_onsite_contact_person_number?: true
+  material_lift_availability?: true
+  material_lift_size?: true
+  vehicle_approachability_for_dispatch?: true
+  dispatch_planning_remark?: true
+  dispatch_date?: true
+  driver_name?: true
+  driver_number?: true
+  vehicle_no?: true
+  dispatch_remark?: true
+  actual_installation_start_date?: true
+  expected_installation_end_date?: true
+  is_carcass_installation_completed?: true
+  carcass_installation_completion_date?: true
+  is_shutter_installation_completed?: true
+  shutter_installation_completion_date?: true
   product_item_code_id?: true
   quantity?: true
   sub_product_structure_id?: true
@@ -469,6 +589,26 @@ export type LeadProductStructureInstanceGroupByOutputType = {
   is_post_production: boolean | null
   pre_prod_remark: string | null
   isLargeScaleProjectInstance: boolean
+  required_date_for_dispatch: Date | null
+  onsite_contact_person_name: string | null
+  onsite_contact_person_number: string | null
+  alt_onsite_contact_person_name: string | null
+  alt_onsite_contact_person_number: string | null
+  material_lift_availability: boolean | null
+  material_lift_size: string | null
+  vehicle_approachability_for_dispatch: boolean | null
+  dispatch_planning_remark: string | null
+  dispatch_date: Date | null
+  driver_name: string | null
+  driver_number: string | null
+  vehicle_no: string | null
+  dispatch_remark: string | null
+  actual_installation_start_date: Date | null
+  expected_installation_end_date: Date | null
+  is_carcass_installation_completed: boolean | null
+  carcass_installation_completion_date: Date | null
+  is_shutter_installation_completed: boolean | null
+  shutter_installation_completion_date: Date | null
   product_item_code_id: number | null
   quantity: number | null
   sub_product_structure_id: number | null
@@ -533,12 +673,34 @@ export type LeadProductStructureInstanceWhereInput = {
   is_post_production?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   pre_prod_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFilter<"LeadProductStructureInstance"> | boolean
+  required_date_for_dispatch?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  alt_onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  alt_onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  material_lift_availability?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  material_lift_size?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  vehicle_approachability_for_dispatch?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  dispatch_planning_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  driver_name?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  driver_number?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  vehicle_no?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  actual_installation_start_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  expected_installation_end_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_carcass_installation_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  carcass_installation_completion_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_shutter_installation_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  shutter_installation_completion_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
   product_item_code_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   quantity?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   sub_product_structure_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
   stageStatus?: Prisma.XOR<Prisma.StatusTypeMasterNullableScalarRelationFilter, Prisma.StatusTypeMasterWhereInput> | null
   stageHistory?: Prisma.InstanceStageHistoryListRelationFilter
+  installerMappings?: Prisma.InstallerUserMappingListRelationFilter
+  installationUpdates?: Prisma.InstallationUpdateListRelationFilter
   fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
   designSelections?: Prisma.LeadDesignSelectionListRelationFilter
   documents?: Prisma.LeadDocumentsListRelationFilter
@@ -553,6 +715,8 @@ export type LeadProductStructureInstanceWhereInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogListRelationFilter
   tasks?: Prisma.UserLeadTaskListRelationFilter
   trackTraceProjects?: Prisma.ProjectMasterListRelationFilter
+  siteReadinessAnswers?: Prisma.SiteReadinessListRelationFilter
+  payments?: Prisma.PaymentInfoListRelationFilter
 }
 
 export type LeadProductStructureInstanceOrderByWithRelationInput = {
@@ -591,12 +755,34 @@ export type LeadProductStructureInstanceOrderByWithRelationInput = {
   is_post_production?: Prisma.SortOrderInput | Prisma.SortOrder
   pre_prod_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   isLargeScaleProjectInstance?: Prisma.SortOrder
+  required_date_for_dispatch?: Prisma.SortOrderInput | Prisma.SortOrder
+  onsite_contact_person_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  onsite_contact_person_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  alt_onsite_contact_person_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  alt_onsite_contact_person_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  material_lift_availability?: Prisma.SortOrderInput | Prisma.SortOrder
+  material_lift_size?: Prisma.SortOrderInput | Prisma.SortOrder
+  vehicle_approachability_for_dispatch?: Prisma.SortOrderInput | Prisma.SortOrder
+  dispatch_planning_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  dispatch_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  driver_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  driver_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  vehicle_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  dispatch_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  actual_installation_start_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  expected_installation_end_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_carcass_installation_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  carcass_installation_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_shutter_installation_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  shutter_installation_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
   product_item_code_id?: Prisma.SortOrderInput | Prisma.SortOrder
   quantity?: Prisma.SortOrderInput | Prisma.SortOrder
   sub_product_structure_id?: Prisma.SortOrderInput | Prisma.SortOrder
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionOrderByRelationAggregateInput
   stageStatus?: Prisma.StatusTypeMasterOrderByWithRelationInput
   stageHistory?: Prisma.InstanceStageHistoryOrderByRelationAggregateInput
+  installerMappings?: Prisma.InstallerUserMappingOrderByRelationAggregateInput
+  installationUpdates?: Prisma.InstallationUpdateOrderByRelationAggregateInput
   fastProductionRequests?: Prisma.FastProductionRequestOrderByRelationAggregateInput
   designSelections?: Prisma.LeadDesignSelectionOrderByRelationAggregateInput
   documents?: Prisma.LeadDocumentsOrderByRelationAggregateInput
@@ -611,6 +797,8 @@ export type LeadProductStructureInstanceOrderByWithRelationInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogOrderByRelationAggregateInput
   tasks?: Prisma.UserLeadTaskOrderByRelationAggregateInput
   trackTraceProjects?: Prisma.ProjectMasterOrderByRelationAggregateInput
+  siteReadinessAnswers?: Prisma.SiteReadinessOrderByRelationAggregateInput
+  payments?: Prisma.PaymentInfoOrderByRelationAggregateInput
 }
 
 export type LeadProductStructureInstanceWhereUniqueInput = Prisma.AtLeast<{
@@ -653,12 +841,34 @@ export type LeadProductStructureInstanceWhereUniqueInput = Prisma.AtLeast<{
   is_post_production?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   pre_prod_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFilter<"LeadProductStructureInstance"> | boolean
+  required_date_for_dispatch?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  alt_onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  alt_onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  material_lift_availability?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  material_lift_size?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  vehicle_approachability_for_dispatch?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  dispatch_planning_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  driver_name?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  driver_number?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  vehicle_no?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  actual_installation_start_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  expected_installation_end_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_carcass_installation_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  carcass_installation_completion_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_shutter_installation_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  shutter_installation_completion_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
   product_item_code_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   quantity?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   sub_product_structure_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
   stageStatus?: Prisma.XOR<Prisma.StatusTypeMasterNullableScalarRelationFilter, Prisma.StatusTypeMasterWhereInput> | null
   stageHistory?: Prisma.InstanceStageHistoryListRelationFilter
+  installerMappings?: Prisma.InstallerUserMappingListRelationFilter
+  installationUpdates?: Prisma.InstallationUpdateListRelationFilter
   fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
   designSelections?: Prisma.LeadDesignSelectionListRelationFilter
   documents?: Prisma.LeadDocumentsListRelationFilter
@@ -673,6 +883,8 @@ export type LeadProductStructureInstanceWhereUniqueInput = Prisma.AtLeast<{
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogListRelationFilter
   tasks?: Prisma.UserLeadTaskListRelationFilter
   trackTraceProjects?: Prisma.ProjectMasterListRelationFilter
+  siteReadinessAnswers?: Prisma.SiteReadinessListRelationFilter
+  payments?: Prisma.PaymentInfoListRelationFilter
 }, "id" | "uniq_structure_instance">
 
 export type LeadProductStructureInstanceOrderByWithAggregationInput = {
@@ -711,6 +923,26 @@ export type LeadProductStructureInstanceOrderByWithAggregationInput = {
   is_post_production?: Prisma.SortOrderInput | Prisma.SortOrder
   pre_prod_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   isLargeScaleProjectInstance?: Prisma.SortOrder
+  required_date_for_dispatch?: Prisma.SortOrderInput | Prisma.SortOrder
+  onsite_contact_person_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  onsite_contact_person_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  alt_onsite_contact_person_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  alt_onsite_contact_person_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  material_lift_availability?: Prisma.SortOrderInput | Prisma.SortOrder
+  material_lift_size?: Prisma.SortOrderInput | Prisma.SortOrder
+  vehicle_approachability_for_dispatch?: Prisma.SortOrderInput | Prisma.SortOrder
+  dispatch_planning_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  dispatch_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  driver_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  driver_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  vehicle_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  dispatch_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  actual_installation_start_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  expected_installation_end_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_carcass_installation_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  carcass_installation_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_shutter_installation_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  shutter_installation_completion_date?: Prisma.SortOrderInput | Prisma.SortOrder
   product_item_code_id?: Prisma.SortOrderInput | Prisma.SortOrder
   quantity?: Prisma.SortOrderInput | Prisma.SortOrder
   sub_product_structure_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -760,6 +992,26 @@ export type LeadProductStructureInstanceScalarWhereWithAggregatesInput = {
   is_post_production?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
   pre_prod_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
   isLargeScaleProjectInstance?: Prisma.BoolWithAggregatesFilter<"LeadProductStructureInstance"> | boolean
+  required_date_for_dispatch?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  onsite_contact_person_name?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  onsite_contact_person_number?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  alt_onsite_contact_person_name?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  alt_onsite_contact_person_number?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  material_lift_availability?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  material_lift_size?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  vehicle_approachability_for_dispatch?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  dispatch_planning_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  driver_name?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  driver_number?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  vehicle_no?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadProductStructureInstance"> | string | null
+  actual_installation_start_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  expected_installation_end_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_carcass_installation_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  carcass_installation_completion_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_shutter_installation_completed?: Prisma.BoolNullableWithAggregatesFilter<"LeadProductStructureInstance"> | boolean | null
+  shutter_installation_completion_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadProductStructureInstance"> | Date | string | null
   product_item_code_id?: Prisma.IntNullableWithAggregatesFilter<"LeadProductStructureInstance"> | number | null
   quantity?: Prisma.IntNullableWithAggregatesFilter<"LeadProductStructureInstance"> | number | null
   sub_product_structure_id?: Prisma.IntNullableWithAggregatesFilter<"LeadProductStructureInstance"> | number | null
@@ -793,10 +1045,32 @@ export type LeadProductStructureInstanceCreateInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -811,6 +1085,8 @@ export type LeadProductStructureInstanceCreateInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateInput = {
@@ -849,17 +1125,41 @@ export type LeadProductStructureInstanceUncheckedCreateInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUpdateInput = {
@@ -890,10 +1190,32 @@ export type LeadProductStructureInstanceUpdateInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -908,6 +1230,8 @@ export type LeadProductStructureInstanceUpdateInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateInput = {
@@ -946,17 +1270,41 @@ export type LeadProductStructureInstanceUncheckedUpdateInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceCreateManyInput = {
@@ -995,6 +1343,26 @@ export type LeadProductStructureInstanceCreateManyInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -1028,6 +1396,26 @@ export type LeadProductStructureInstanceUpdateManyMutationInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
@@ -1067,6 +1455,26 @@ export type LeadProductStructureInstanceUncheckedUpdateManyInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1130,6 +1538,26 @@ export type LeadProductStructureInstanceCountOrderByAggregateInput = {
   is_post_production?: Prisma.SortOrder
   pre_prod_remark?: Prisma.SortOrder
   isLargeScaleProjectInstance?: Prisma.SortOrder
+  required_date_for_dispatch?: Prisma.SortOrder
+  onsite_contact_person_name?: Prisma.SortOrder
+  onsite_contact_person_number?: Prisma.SortOrder
+  alt_onsite_contact_person_name?: Prisma.SortOrder
+  alt_onsite_contact_person_number?: Prisma.SortOrder
+  material_lift_availability?: Prisma.SortOrder
+  material_lift_size?: Prisma.SortOrder
+  vehicle_approachability_for_dispatch?: Prisma.SortOrder
+  dispatch_planning_remark?: Prisma.SortOrder
+  dispatch_date?: Prisma.SortOrder
+  driver_name?: Prisma.SortOrder
+  driver_number?: Prisma.SortOrder
+  vehicle_no?: Prisma.SortOrder
+  dispatch_remark?: Prisma.SortOrder
+  actual_installation_start_date?: Prisma.SortOrder
+  expected_installation_end_date?: Prisma.SortOrder
+  is_carcass_installation_completed?: Prisma.SortOrder
+  carcass_installation_completion_date?: Prisma.SortOrder
+  is_shutter_installation_completed?: Prisma.SortOrder
+  shutter_installation_completion_date?: Prisma.SortOrder
   product_item_code_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   sub_product_structure_id?: Prisma.SortOrder
@@ -1189,6 +1617,26 @@ export type LeadProductStructureInstanceMaxOrderByAggregateInput = {
   is_post_production?: Prisma.SortOrder
   pre_prod_remark?: Prisma.SortOrder
   isLargeScaleProjectInstance?: Prisma.SortOrder
+  required_date_for_dispatch?: Prisma.SortOrder
+  onsite_contact_person_name?: Prisma.SortOrder
+  onsite_contact_person_number?: Prisma.SortOrder
+  alt_onsite_contact_person_name?: Prisma.SortOrder
+  alt_onsite_contact_person_number?: Prisma.SortOrder
+  material_lift_availability?: Prisma.SortOrder
+  material_lift_size?: Prisma.SortOrder
+  vehicle_approachability_for_dispatch?: Prisma.SortOrder
+  dispatch_planning_remark?: Prisma.SortOrder
+  dispatch_date?: Prisma.SortOrder
+  driver_name?: Prisma.SortOrder
+  driver_number?: Prisma.SortOrder
+  vehicle_no?: Prisma.SortOrder
+  dispatch_remark?: Prisma.SortOrder
+  actual_installation_start_date?: Prisma.SortOrder
+  expected_installation_end_date?: Prisma.SortOrder
+  is_carcass_installation_completed?: Prisma.SortOrder
+  carcass_installation_completion_date?: Prisma.SortOrder
+  is_shutter_installation_completed?: Prisma.SortOrder
+  shutter_installation_completion_date?: Prisma.SortOrder
   product_item_code_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   sub_product_structure_id?: Prisma.SortOrder
@@ -1230,6 +1678,26 @@ export type LeadProductStructureInstanceMinOrderByAggregateInput = {
   is_post_production?: Prisma.SortOrder
   pre_prod_remark?: Prisma.SortOrder
   isLargeScaleProjectInstance?: Prisma.SortOrder
+  required_date_for_dispatch?: Prisma.SortOrder
+  onsite_contact_person_name?: Prisma.SortOrder
+  onsite_contact_person_number?: Prisma.SortOrder
+  alt_onsite_contact_person_name?: Prisma.SortOrder
+  alt_onsite_contact_person_number?: Prisma.SortOrder
+  material_lift_availability?: Prisma.SortOrder
+  material_lift_size?: Prisma.SortOrder
+  vehicle_approachability_for_dispatch?: Prisma.SortOrder
+  dispatch_planning_remark?: Prisma.SortOrder
+  dispatch_date?: Prisma.SortOrder
+  driver_name?: Prisma.SortOrder
+  driver_number?: Prisma.SortOrder
+  vehicle_no?: Prisma.SortOrder
+  dispatch_remark?: Prisma.SortOrder
+  actual_installation_start_date?: Prisma.SortOrder
+  expected_installation_end_date?: Prisma.SortOrder
+  is_carcass_installation_completed?: Prisma.SortOrder
+  carcass_installation_completion_date?: Prisma.SortOrder
+  is_shutter_installation_completed?: Prisma.SortOrder
+  shutter_installation_completion_date?: Prisma.SortOrder
   product_item_code_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   sub_product_structure_id?: Prisma.SortOrder
@@ -1646,6 +2114,22 @@ export type EnumProductInstanceStatusFieldUpdateOperationsInput = {
   set?: $Enums.ProductInstanceStatus
 }
 
+export type LeadProductStructureInstanceCreateNestedOneWithoutPaymentsInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutPaymentsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutPaymentsInput
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+}
+
+export type LeadProductStructureInstanceUpdateOneWithoutPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutPaymentsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutPaymentsInput
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithoutPaymentsInput
+  disconnect?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  delete?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateToOneWithWhereWithoutPaymentsInput, Prisma.LeadProductStructureInstanceUpdateWithoutPaymentsInput>, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutPaymentsInput>
+}
+
 export type LeadProductStructureInstanceCreateNestedManyWithoutStageStatusInput = {
   create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutStageStatusInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutStageStatusInput> | Prisma.LeadProductStructureInstanceCreateWithoutStageStatusInput[] | Prisma.LeadProductStructureInstanceUncheckedCreateWithoutStageStatusInput[]
   connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutStageStatusInput | Prisma.LeadProductStructureInstanceCreateOrConnectWithoutStageStatusInput[]
@@ -1748,6 +2232,54 @@ export type LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRe
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateToOneWithWhereWithoutFastProductionRequestsInput, Prisma.LeadProductStructureInstanceUpdateWithoutFastProductionRequestsInput>, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutFastProductionRequestsInput>
 }
 
+export type LeadProductStructureInstanceCreateNestedOneWithoutSiteReadinessAnswersInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutSiteReadinessAnswersInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSiteReadinessAnswersInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutSiteReadinessAnswersInput
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+}
+
+export type LeadProductStructureInstanceUpdateOneWithoutSiteReadinessAnswersNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutSiteReadinessAnswersInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSiteReadinessAnswersInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutSiteReadinessAnswersInput
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithoutSiteReadinessAnswersInput
+  disconnect?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  delete?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateToOneWithWhereWithoutSiteReadinessAnswersInput, Prisma.LeadProductStructureInstanceUpdateWithoutSiteReadinessAnswersInput>, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutSiteReadinessAnswersInput>
+}
+
+export type LeadProductStructureInstanceCreateNestedOneWithoutInstallerMappingsInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutInstallerMappingsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutInstallerMappingsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutInstallerMappingsInput
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+}
+
+export type LeadProductStructureInstanceUpdateOneWithoutInstallerMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutInstallerMappingsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutInstallerMappingsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutInstallerMappingsInput
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithoutInstallerMappingsInput
+  disconnect?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  delete?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateToOneWithWhereWithoutInstallerMappingsInput, Prisma.LeadProductStructureInstanceUpdateWithoutInstallerMappingsInput>, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutInstallerMappingsInput>
+}
+
+export type LeadProductStructureInstanceCreateNestedOneWithoutInstallationUpdatesInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutInstallationUpdatesInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutInstallationUpdatesInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutInstallationUpdatesInput
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+}
+
+export type LeadProductStructureInstanceUpdateOneWithoutInstallationUpdatesNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutInstallationUpdatesInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutInstallationUpdatesInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutInstallationUpdatesInput
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithoutInstallationUpdatesInput
+  disconnect?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  delete?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateToOneWithWhereWithoutInstallationUpdatesInput, Prisma.LeadProductStructureInstanceUpdateWithoutInstallationUpdatesInput>, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutInstallationUpdatesInput>
+}
+
 export type LeadProductStructureInstanceCreateNestedOneWithoutProductsRequiredForProductionInput = {
   create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutProductsRequiredForProductionInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutProductsRequiredForProductionInput>
   connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutProductsRequiredForProductionInput
@@ -1792,10 +2324,32 @@ export type LeadProductStructureInstanceCreateWithoutVendorInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -1809,6 +2363,8 @@ export type LeadProductStructureInstanceCreateWithoutVendorInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutVendorInput = {
@@ -1846,17 +2402,41 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutVendorInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutVendorInput = {
@@ -1924,6 +2504,26 @@ export type LeadProductStructureInstanceScalarWhereInput = {
   is_post_production?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
   pre_prod_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFilter<"LeadProductStructureInstance"> | boolean
+  required_date_for_dispatch?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  alt_onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  alt_onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  material_lift_availability?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  material_lift_size?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  vehicle_approachability_for_dispatch?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  dispatch_planning_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  driver_name?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  driver_number?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  vehicle_no?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  dispatch_remark?: Prisma.StringNullableFilter<"LeadProductStructureInstance"> | string | null
+  actual_installation_start_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  expected_installation_end_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_carcass_installation_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  carcass_installation_completion_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
+  is_shutter_installation_completed?: Prisma.BoolNullableFilter<"LeadProductStructureInstance"> | boolean | null
+  shutter_installation_completion_date?: Prisma.DateTimeNullableFilter<"LeadProductStructureInstance"> | Date | string | null
   product_item_code_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   quantity?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
   sub_product_structure_id?: Prisma.IntNullableFilter<"LeadProductStructureInstance"> | number | null
@@ -1957,10 +2557,32 @@ export type LeadProductStructureInstanceCreateWithoutUpdatedByInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -1974,6 +2596,8 @@ export type LeadProductStructureInstanceCreateWithoutUpdatedByInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutUpdatedByInput = {
@@ -2011,17 +2635,41 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutUpdatedByInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutUpdatedByInput = {
@@ -2078,10 +2726,32 @@ export type LeadProductStructureInstanceCreateWithoutTrackTraceProjectsInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -2095,6 +2765,8 @@ export type LeadProductStructureInstanceCreateWithoutTrackTraceProjectsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutTrackTraceProjectsInput = {
@@ -2133,16 +2805,40 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutTrackTraceProjects
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutTrackTraceProjectsInput = {
@@ -2189,10 +2885,32 @@ export type LeadProductStructureInstanceUpdateWithoutTrackTraceProjectsInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -2206,6 +2924,8 @@ export type LeadProductStructureInstanceUpdateWithoutTrackTraceProjectsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutTrackTraceProjectsInput = {
@@ -2244,16 +2964,40 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutTrackTraceProjects
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceCreateWithoutLeadInput = {
@@ -2284,10 +3028,32 @@ export type LeadProductStructureInstanceCreateWithoutLeadInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -2301,6 +3067,8 @@ export type LeadProductStructureInstanceCreateWithoutLeadInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutLeadInput = {
@@ -2338,17 +3106,41 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutLeadInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutLeadInput = {
@@ -2405,10 +3197,32 @@ export type LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -2422,6 +3236,8 @@ export type LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogsInput = {
@@ -2460,16 +3276,40 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogs
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutActivityStatusLogsInput = {
@@ -2516,10 +3356,32 @@ export type LeadProductStructureInstanceUpdateWithoutActivityStatusLogsInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -2533,6 +3395,8 @@ export type LeadProductStructureInstanceUpdateWithoutActivityStatusLogsInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutActivityStatusLogsInput = {
@@ -2571,16 +3435,40 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutActivityStatusLogs
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceCreateWithoutAccountInput = {
@@ -2611,10 +3499,32 @@ export type LeadProductStructureInstanceCreateWithoutAccountInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -2628,6 +3538,8 @@ export type LeadProductStructureInstanceCreateWithoutAccountInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutAccountInput = {
@@ -2665,17 +3577,41 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutAccountInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutAccountInput = {
@@ -2732,10 +3668,32 @@ export type LeadProductStructureInstanceCreateWithoutProductTypeInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -2749,6 +3707,8 @@ export type LeadProductStructureInstanceCreateWithoutProductTypeInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutProductTypeInput = {
@@ -2786,17 +3746,41 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductTypeInput =
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutProductTypeInput = {
@@ -2853,10 +3837,32 @@ export type LeadProductStructureInstanceCreateWithoutDocumentsInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
@@ -2870,6 +3876,8 @@ export type LeadProductStructureInstanceCreateWithoutDocumentsInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutDocumentsInput = {
@@ -2908,16 +3916,40 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutDocumentsInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutDocumentsInput = {
@@ -2964,10 +3996,32 @@ export type LeadProductStructureInstanceUpdateWithoutDocumentsInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
@@ -2981,6 +4035,8 @@ export type LeadProductStructureInstanceUpdateWithoutDocumentsInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutDocumentsInput = {
@@ -3019,16 +4075,40 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDocumentsInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceCreateWithoutProductStructureInput = {
@@ -3059,10 +4139,32 @@ export type LeadProductStructureInstanceCreateWithoutProductStructureInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -3076,6 +4178,8 @@ export type LeadProductStructureInstanceCreateWithoutProductStructureInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutProductStructureInput = {
@@ -3113,17 +4217,41 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductStructureIn
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutProductStructureInput = {
@@ -3180,10 +4308,32 @@ export type LeadProductStructureInstanceCreateWithoutSubProductStructureInput = 
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -3197,6 +4347,8 @@ export type LeadProductStructureInstanceCreateWithoutSubProductStructureInput = 
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructureInput = {
@@ -3235,16 +4387,40 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructur
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutSubProductStructureInput = {
@@ -3301,10 +4477,32 @@ export type LeadProductStructureInstanceCreateWithoutProductItemCodeInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -3318,6 +4516,8 @@ export type LeadProductStructureInstanceCreateWithoutProductItemCodeInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInput = {
@@ -3356,16 +4556,40 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInp
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutProductItemCodeInput = {
@@ -3392,6 +4616,308 @@ export type LeadProductStructureInstanceUpdateWithWhereUniqueWithoutProductItemC
 export type LeadProductStructureInstanceUpdateManyWithWhereWithoutProductItemCodeInput = {
   where: Prisma.LeadProductStructureInstanceScalarWhereInput
   data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateManyMutationInput, Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductItemCodeInput>
+}
+
+export type LeadProductStructureInstanceCreateWithoutPaymentsInput = {
+  is_archived?: boolean
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
+  stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
+  trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceUncheckedCreateWithoutPaymentsInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  stage_status_id?: number | null
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
+  trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceCreateOrConnectWithoutPaymentsInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutPaymentsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutPaymentsInput>
+}
+
+export type LeadProductStructureInstanceUpsertWithoutPaymentsInput = {
+  update: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutPaymentsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutPaymentsInput>
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutPaymentsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutPaymentsInput>
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
+export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutPaymentsInput = {
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutPaymentsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type LeadProductStructureInstanceUpdateWithoutPaymentsInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
+  stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
+  trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateWithoutPaymentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  stage_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
+  trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceCreateWithoutStageStatusInput = {
@@ -3422,9 +4948,31 @@ export type LeadProductStructureInstanceCreateWithoutStageStatusInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -3439,6 +4987,8 @@ export type LeadProductStructureInstanceCreateWithoutStageStatusInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutStageStatusInput = {
@@ -3476,17 +5026,41 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutStageStatusInput =
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutStageStatusInput = {
@@ -3543,9 +5117,31 @@ export type LeadProductStructureInstanceCreateWithoutStageHistoryInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -3560,6 +5156,8 @@ export type LeadProductStructureInstanceCreateWithoutStageHistoryInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutStageHistoryInput = {
@@ -3598,16 +5196,40 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutStageHistoryInput 
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutStageHistoryInput = {
@@ -3654,9 +5276,31 @@ export type LeadProductStructureInstanceUpdateWithoutStageHistoryInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -3671,6 +5315,8 @@ export type LeadProductStructureInstanceUpdateWithoutStageHistoryInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutStageHistoryInput = {
@@ -3709,16 +5355,40 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutStageHistoryInput 
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceCreateWithoutDesignSelectionsInput = {
@@ -3749,10 +5419,32 @@ export type LeadProductStructureInstanceCreateWithoutDesignSelectionsInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
   account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
@@ -3766,6 +5458,8 @@ export type LeadProductStructureInstanceCreateWithoutDesignSelectionsInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutDesignSelectionsInput = {
@@ -3804,16 +5498,40 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutDesignSelectionsIn
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutDesignSelectionsInput = {
@@ -3860,10 +5578,32 @@ export type LeadProductStructureInstanceUpdateWithoutDesignSelectionsInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
@@ -3877,6 +5617,8 @@ export type LeadProductStructureInstanceUpdateWithoutDesignSelectionsInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutDesignSelectionsInput = {
@@ -3915,16 +5657,40 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDesignSelectionsIn
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceCreateWithoutTasksInput = {
@@ -3955,10 +5721,32 @@ export type LeadProductStructureInstanceCreateWithoutTasksInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -3972,6 +5760,8 @@ export type LeadProductStructureInstanceCreateWithoutTasksInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutTasksInput = {
@@ -4010,16 +5800,40 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutTasksInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutTasksInput = {
@@ -4066,10 +5880,32 @@ export type LeadProductStructureInstanceUpdateWithoutTasksInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -4083,6 +5919,8 @@ export type LeadProductStructureInstanceUpdateWithoutTasksInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutTasksInput = {
@@ -4121,16 +5959,40 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutTasksInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceCreateWithoutFastProductionRequestsInput = {
@@ -4161,10 +6023,32 @@ export type LeadProductStructureInstanceCreateWithoutFastProductionRequestsInput
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
   account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
@@ -4178,6 +6062,8 @@ export type LeadProductStructureInstanceCreateWithoutFastProductionRequestsInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutFastProductionRequestsInput = {
@@ -4216,16 +6102,40 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutFastProductionRequ
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutFastProductionRequestsInput = {
@@ -4272,10 +6182,32 @@ export type LeadProductStructureInstanceUpdateWithoutFastProductionRequestsInput
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
@@ -4289,6 +6221,8 @@ export type LeadProductStructureInstanceUpdateWithoutFastProductionRequestsInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutFastProductionRequestsInput = {
@@ -4327,16 +6261,946 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutFastProductionRequ
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceCreateWithoutSiteReadinessAnswersInput = {
+  is_archived?: boolean
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
+  stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
+  trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceUncheckedCreateWithoutSiteReadinessAnswersInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  stage_status_id?: number | null
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
+  trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceCreateOrConnectWithoutSiteReadinessAnswersInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutSiteReadinessAnswersInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSiteReadinessAnswersInput>
+}
+
+export type LeadProductStructureInstanceUpsertWithoutSiteReadinessAnswersInput = {
+  update: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutSiteReadinessAnswersInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutSiteReadinessAnswersInput>
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutSiteReadinessAnswersInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutSiteReadinessAnswersInput>
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
+export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutSiteReadinessAnswersInput = {
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutSiteReadinessAnswersInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutSiteReadinessAnswersInput>
+}
+
+export type LeadProductStructureInstanceUpdateWithoutSiteReadinessAnswersInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
+  stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
+  trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateWithoutSiteReadinessAnswersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  stage_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
+  trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceCreateWithoutInstallerMappingsInput = {
+  is_archived?: boolean
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
+  stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
+  trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceUncheckedCreateWithoutInstallerMappingsInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  stage_status_id?: number | null
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
+  trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceCreateOrConnectWithoutInstallerMappingsInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutInstallerMappingsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutInstallerMappingsInput>
+}
+
+export type LeadProductStructureInstanceUpsertWithoutInstallerMappingsInput = {
+  update: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutInstallerMappingsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutInstallerMappingsInput>
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutInstallerMappingsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutInstallerMappingsInput>
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
+export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutInstallerMappingsInput = {
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutInstallerMappingsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutInstallerMappingsInput>
+}
+
+export type LeadProductStructureInstanceUpdateWithoutInstallerMappingsInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
+  stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
+  trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateWithoutInstallerMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  stage_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
+  trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceCreateWithoutInstallationUpdatesInput = {
+  is_archived?: boolean
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  quantity?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutInstanceInput
+  stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
+  stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
+  trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceUncheckedCreateWithoutInstallationUpdatesInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  is_archived?: boolean
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  stage_status_id?: number | null
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutInstanceInput
+  stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
+  trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceCreateOrConnectWithoutInstallationUpdatesInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutInstallationUpdatesInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutInstallationUpdatesInput>
+}
+
+export type LeadProductStructureInstanceUpsertWithoutInstallationUpdatesInput = {
+  update: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutInstallationUpdatesInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutInstallationUpdatesInput>
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutInstallationUpdatesInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutInstallationUpdatesInput>
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
+export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutInstallationUpdatesInput = {
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutInstallationUpdatesInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutInstallationUpdatesInput>
+}
+
+export type LeadProductStructureInstanceUpdateWithoutInstallationUpdatesInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
+  stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
+  stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
+  trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateWithoutInstallationUpdatesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  stage_status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
+  stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
+  trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceCreateWithoutProductsRequiredForProductionInput = {
@@ -4367,9 +7231,31 @@ export type LeadProductStructureInstanceCreateWithoutProductsRequiredForProducti
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   stageStatus?: Prisma.StatusTypeMasterCreateNestedOneWithoutStageInstancesInput
   stageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
@@ -4384,6 +7270,8 @@ export type LeadProductStructureInstanceCreateWithoutProductsRequiredForProducti
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutProductsRequiredForProductionInput = {
@@ -4422,16 +7310,40 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductsRequiredFo
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
   stageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutInstanceInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutInstanceInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutInstanceInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutInstanceInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutInstanceInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutProductsRequiredForProductionInput = {
@@ -4478,9 +7390,31 @@ export type LeadProductStructureInstanceUpdateWithoutProductsRequiredForProducti
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -4495,6 +7429,8 @@ export type LeadProductStructureInstanceUpdateWithoutProductsRequiredForProducti
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutProductsRequiredForProductionInput = {
@@ -4533,16 +7469,40 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductsRequiredFo
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceCreateManyVendorInput = {
@@ -4580,6 +7540,26 @@ export type LeadProductStructureInstanceCreateManyVendorInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -4613,10 +7593,32 @@ export type LeadProductStructureInstanceUpdateWithoutVendorInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -4630,6 +7632,8 @@ export type LeadProductStructureInstanceUpdateWithoutVendorInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutVendorInput = {
@@ -4667,17 +7671,41 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutVendorInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorInput = {
@@ -4715,6 +7743,26 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorInput = 
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4755,6 +7803,26 @@ export type LeadProductStructureInstanceCreateManyUpdatedByInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -4788,10 +7856,32 @@ export type LeadProductStructureInstanceUpdateWithoutUpdatedByInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -4805,6 +7895,8 @@ export type LeadProductStructureInstanceUpdateWithoutUpdatedByInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutUpdatedByInput = {
@@ -4842,17 +7934,41 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutUpdatedByInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -4890,6 +8006,26 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByInput
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4930,6 +8066,26 @@ export type LeadProductStructureInstanceCreateManyLeadInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -4963,10 +8119,32 @@ export type LeadProductStructureInstanceUpdateWithoutLeadInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -4980,6 +8158,8 @@ export type LeadProductStructureInstanceUpdateWithoutLeadInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutLeadInput = {
@@ -5017,17 +8197,41 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutLeadInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadInput = {
@@ -5065,6 +8269,26 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5105,6 +8329,26 @@ export type LeadProductStructureInstanceCreateManyAccountInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -5138,10 +8382,32 @@ export type LeadProductStructureInstanceUpdateWithoutAccountInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -5155,6 +8421,8 @@ export type LeadProductStructureInstanceUpdateWithoutAccountInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutAccountInput = {
@@ -5192,17 +8460,41 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutAccountInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountInput = {
@@ -5240,6 +8532,26 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountInput =
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5280,6 +8592,26 @@ export type LeadProductStructureInstanceCreateManyProductTypeInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -5313,10 +8645,32 @@ export type LeadProductStructureInstanceUpdateWithoutProductTypeInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -5330,6 +8684,8 @@ export type LeadProductStructureInstanceUpdateWithoutProductTypeInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutProductTypeInput = {
@@ -5367,17 +8723,41 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductTypeInput =
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeInput = {
@@ -5415,6 +8795,26 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeInp
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5455,6 +8855,26 @@ export type LeadProductStructureInstanceCreateManyProductStructureInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -5488,10 +8908,32 @@ export type LeadProductStructureInstanceUpdateWithoutProductStructureInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -5505,6 +8947,8 @@ export type LeadProductStructureInstanceUpdateWithoutProductStructureInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutProductStructureInput = {
@@ -5542,17 +8986,41 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductStructureIn
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructureInput = {
@@ -5590,6 +9058,26 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructu
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5631,6 +9119,26 @@ export type LeadProductStructureInstanceCreateManySubProductStructureInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
 }
@@ -5663,10 +9171,32 @@ export type LeadProductStructureInstanceUpdateWithoutSubProductStructureInput = 
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -5680,6 +9210,8 @@ export type LeadProductStructureInstanceUpdateWithoutSubProductStructureInput = 
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutSubProductStructureInput = {
@@ -5718,16 +9250,40 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutSubProductStructur
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutSubProductStructureInput = {
@@ -5766,6 +9322,26 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutSubProductStru
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -5806,6 +9382,26 @@ export type LeadProductStructureInstanceCreateManyProductItemCodeInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   quantity?: number | null
   sub_product_structure_id?: number | null
 }
@@ -5838,10 +9434,32 @@ export type LeadProductStructureInstanceUpdateWithoutProductItemCodeInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageStatus?: Prisma.StatusTypeMasterUpdateOneWithoutStageInstancesNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -5855,6 +9473,8 @@ export type LeadProductStructureInstanceUpdateWithoutProductItemCodeInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutProductItemCodeInput = {
@@ -5893,16 +9513,40 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductItemCodeInp
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductItemCodeInput = {
@@ -5941,6 +9585,26 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductItemCod
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -5980,6 +9644,26 @@ export type LeadProductStructureInstanceCreateManyStageStatusInput = {
   is_post_production?: boolean | null
   pre_prod_remark?: string | null
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: Date | string | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  dispatch_planning_remark?: string | null
+  dispatch_date?: Date | string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  dispatch_remark?: string | null
+  actual_installation_start_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  carcass_installation_completion_date?: Date | string | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
   product_item_code_id?: number | null
   quantity?: number | null
   sub_product_structure_id?: number | null
@@ -6013,9 +9697,31 @@ export type LeadProductStructureInstanceUpdateWithoutStageStatusInput = {
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
@@ -6030,6 +9736,8 @@ export type LeadProductStructureInstanceUpdateWithoutStageStatusInput = {
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutStageStatusInput = {
@@ -6067,17 +9775,41 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutStageStatusInput =
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceNestedInput
   stageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutInstanceNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutInstanceNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutInstanceNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
   trackTraceProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutInstanceNestedInput
+  siteReadinessAnswers?: Prisma.SiteReadinessUncheckedUpdateManyWithoutInstanceNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateManyWithoutStageStatusInput = {
@@ -6115,6 +9847,26 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutStageStatusInp
   is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6128,23 +9880,31 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutStageStatusInp
 export type LeadProductStructureInstanceCountOutputType = {
   productsRequiredForProduction: number
   stageHistory: number
+  installerMappings: number
+  installationUpdates: number
   fastProductionRequests: number
   designSelections: number
   documents: number
   activityStatusLogs: number
   tasks: number
   trackTraceProjects: number
+  siteReadinessAnswers: number
+  payments: number
 }
 
 export type LeadProductStructureInstanceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productsRequiredForProduction?: boolean | LeadProductStructureInstanceCountOutputTypeCountProductsRequiredForProductionArgs
   stageHistory?: boolean | LeadProductStructureInstanceCountOutputTypeCountStageHistoryArgs
+  installerMappings?: boolean | LeadProductStructureInstanceCountOutputTypeCountInstallerMappingsArgs
+  installationUpdates?: boolean | LeadProductStructureInstanceCountOutputTypeCountInstallationUpdatesArgs
   fastProductionRequests?: boolean | LeadProductStructureInstanceCountOutputTypeCountFastProductionRequestsArgs
   designSelections?: boolean | LeadProductStructureInstanceCountOutputTypeCountDesignSelectionsArgs
   documents?: boolean | LeadProductStructureInstanceCountOutputTypeCountDocumentsArgs
   activityStatusLogs?: boolean | LeadProductStructureInstanceCountOutputTypeCountActivityStatusLogsArgs
   tasks?: boolean | LeadProductStructureInstanceCountOutputTypeCountTasksArgs
   trackTraceProjects?: boolean | LeadProductStructureInstanceCountOutputTypeCountTrackTraceProjectsArgs
+  siteReadinessAnswers?: boolean | LeadProductStructureInstanceCountOutputTypeCountSiteReadinessAnswersArgs
+  payments?: boolean | LeadProductStructureInstanceCountOutputTypeCountPaymentsArgs
 }
 
 /**
@@ -6169,6 +9929,20 @@ export type LeadProductStructureInstanceCountOutputTypeCountProductsRequiredForP
  */
 export type LeadProductStructureInstanceCountOutputTypeCountStageHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.InstanceStageHistoryWhereInput
+}
+
+/**
+ * LeadProductStructureInstanceCountOutputType without action
+ */
+export type LeadProductStructureInstanceCountOutputTypeCountInstallerMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InstallerUserMappingWhereInput
+}
+
+/**
+ * LeadProductStructureInstanceCountOutputType without action
+ */
+export type LeadProductStructureInstanceCountOutputTypeCountInstallationUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InstallationUpdateWhereInput
 }
 
 /**
@@ -6213,6 +9987,20 @@ export type LeadProductStructureInstanceCountOutputTypeCountTrackTraceProjectsAr
   where?: Prisma.ProjectMasterWhereInput
 }
 
+/**
+ * LeadProductStructureInstanceCountOutputType without action
+ */
+export type LeadProductStructureInstanceCountOutputTypeCountSiteReadinessAnswersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SiteReadinessWhereInput
+}
+
+/**
+ * LeadProductStructureInstanceCountOutputType without action
+ */
+export type LeadProductStructureInstanceCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentInfoWhereInput
+}
+
 
 export type LeadProductStructureInstanceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -6250,12 +10038,34 @@ export type LeadProductStructureInstanceSelect<ExtArgs extends runtime.Types.Ext
   is_post_production?: boolean
   pre_prod_remark?: boolean
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: boolean
+  onsite_contact_person_name?: boolean
+  onsite_contact_person_number?: boolean
+  alt_onsite_contact_person_name?: boolean
+  alt_onsite_contact_person_number?: boolean
+  material_lift_availability?: boolean
+  material_lift_size?: boolean
+  vehicle_approachability_for_dispatch?: boolean
+  dispatch_planning_remark?: boolean
+  dispatch_date?: boolean
+  driver_name?: boolean
+  driver_number?: boolean
+  vehicle_no?: boolean
+  dispatch_remark?: boolean
+  actual_installation_start_date?: boolean
+  expected_installation_end_date?: boolean
+  is_carcass_installation_completed?: boolean
+  carcass_installation_completion_date?: boolean
+  is_shutter_installation_completed?: boolean
+  shutter_installation_completion_date?: boolean
   product_item_code_id?: boolean
   quantity?: boolean
   sub_product_structure_id?: boolean
   productsRequiredForProduction?: boolean | Prisma.LeadProductStructureInstance$productsRequiredForProductionArgs<ExtArgs>
   stageStatus?: boolean | Prisma.LeadProductStructureInstance$stageStatusArgs<ExtArgs>
   stageHistory?: boolean | Prisma.LeadProductStructureInstance$stageHistoryArgs<ExtArgs>
+  installerMappings?: boolean | Prisma.LeadProductStructureInstance$installerMappingsArgs<ExtArgs>
+  installationUpdates?: boolean | Prisma.LeadProductStructureInstance$installationUpdatesArgs<ExtArgs>
   fastProductionRequests?: boolean | Prisma.LeadProductStructureInstance$fastProductionRequestsArgs<ExtArgs>
   designSelections?: boolean | Prisma.LeadProductStructureInstance$designSelectionsArgs<ExtArgs>
   documents?: boolean | Prisma.LeadProductStructureInstance$documentsArgs<ExtArgs>
@@ -6270,6 +10080,8 @@ export type LeadProductStructureInstanceSelect<ExtArgs extends runtime.Types.Ext
   activityStatusLogs?: boolean | Prisma.LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs>
   tasks?: boolean | Prisma.LeadProductStructureInstance$tasksArgs<ExtArgs>
   trackTraceProjects?: boolean | Prisma.LeadProductStructureInstance$trackTraceProjectsArgs<ExtArgs>
+  siteReadinessAnswers?: boolean | Prisma.LeadProductStructureInstance$siteReadinessAnswersArgs<ExtArgs>
+  payments?: boolean | Prisma.LeadProductStructureInstance$paymentsArgs<ExtArgs>
   _count?: boolean | Prisma.LeadProductStructureInstanceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadProductStructureInstance"]>
 
@@ -6309,6 +10121,26 @@ export type LeadProductStructureInstanceSelectCreateManyAndReturn<ExtArgs extend
   is_post_production?: boolean
   pre_prod_remark?: boolean
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: boolean
+  onsite_contact_person_name?: boolean
+  onsite_contact_person_number?: boolean
+  alt_onsite_contact_person_name?: boolean
+  alt_onsite_contact_person_number?: boolean
+  material_lift_availability?: boolean
+  material_lift_size?: boolean
+  vehicle_approachability_for_dispatch?: boolean
+  dispatch_planning_remark?: boolean
+  dispatch_date?: boolean
+  driver_name?: boolean
+  driver_number?: boolean
+  vehicle_no?: boolean
+  dispatch_remark?: boolean
+  actual_installation_start_date?: boolean
+  expected_installation_end_date?: boolean
+  is_carcass_installation_completed?: boolean
+  carcass_installation_completion_date?: boolean
+  is_shutter_installation_completed?: boolean
+  shutter_installation_completion_date?: boolean
   product_item_code_id?: boolean
   quantity?: boolean
   sub_product_structure_id?: boolean
@@ -6359,6 +10191,26 @@ export type LeadProductStructureInstanceSelectUpdateManyAndReturn<ExtArgs extend
   is_post_production?: boolean
   pre_prod_remark?: boolean
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: boolean
+  onsite_contact_person_name?: boolean
+  onsite_contact_person_number?: boolean
+  alt_onsite_contact_person_name?: boolean
+  alt_onsite_contact_person_number?: boolean
+  material_lift_availability?: boolean
+  material_lift_size?: boolean
+  vehicle_approachability_for_dispatch?: boolean
+  dispatch_planning_remark?: boolean
+  dispatch_date?: boolean
+  driver_name?: boolean
+  driver_number?: boolean
+  vehicle_no?: boolean
+  dispatch_remark?: boolean
+  actual_installation_start_date?: boolean
+  expected_installation_end_date?: boolean
+  is_carcass_installation_completed?: boolean
+  carcass_installation_completion_date?: boolean
+  is_shutter_installation_completed?: boolean
+  shutter_installation_completion_date?: boolean
   product_item_code_id?: boolean
   quantity?: boolean
   sub_product_structure_id?: boolean
@@ -6409,16 +10261,38 @@ export type LeadProductStructureInstanceSelectScalar = {
   is_post_production?: boolean
   pre_prod_remark?: boolean
   isLargeScaleProjectInstance?: boolean
+  required_date_for_dispatch?: boolean
+  onsite_contact_person_name?: boolean
+  onsite_contact_person_number?: boolean
+  alt_onsite_contact_person_name?: boolean
+  alt_onsite_contact_person_number?: boolean
+  material_lift_availability?: boolean
+  material_lift_size?: boolean
+  vehicle_approachability_for_dispatch?: boolean
+  dispatch_planning_remark?: boolean
+  dispatch_date?: boolean
+  driver_name?: boolean
+  driver_number?: boolean
+  vehicle_no?: boolean
+  dispatch_remark?: boolean
+  actual_installation_start_date?: boolean
+  expected_installation_end_date?: boolean
+  is_carcass_installation_completed?: boolean
+  carcass_installation_completion_date?: boolean
+  is_shutter_installation_completed?: boolean
+  shutter_installation_completion_date?: boolean
   product_item_code_id?: boolean
   quantity?: boolean
   sub_product_structure_id?: boolean
 }
 
-export type LeadProductStructureInstanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "is_archived" | "product_structure_id" | "quantity_index" | "title" | "status" | "stage_status_id" | "description" | "created_by" | "created_at" | "updated_by" | "updated_at" | "is_tech_check_completed" | "tech_check_completed_at" | "is_order_login_completed" | "order_login_completed_at" | "is_production_completed" | "production_completed_at" | "woodwork_packing_details_remark" | "hardware_packing_details_remark" | "no_of_boxes" | "no_of_client_documents_initially_submitted" | "is_order_login_filled" | "is_pre_prod_done" | "is_under_production" | "pre_prod_done_at" | "under_production_at" | "production_erd_date" | "is_post_production" | "pre_prod_remark" | "isLargeScaleProjectInstance" | "product_item_code_id" | "quantity" | "sub_product_structure_id", ExtArgs["result"]["leadProductStructureInstance"]>
+export type LeadProductStructureInstanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "is_archived" | "product_structure_id" | "quantity_index" | "title" | "status" | "stage_status_id" | "description" | "created_by" | "created_at" | "updated_by" | "updated_at" | "is_tech_check_completed" | "tech_check_completed_at" | "is_order_login_completed" | "order_login_completed_at" | "is_production_completed" | "production_completed_at" | "woodwork_packing_details_remark" | "hardware_packing_details_remark" | "no_of_boxes" | "no_of_client_documents_initially_submitted" | "is_order_login_filled" | "is_pre_prod_done" | "is_under_production" | "pre_prod_done_at" | "under_production_at" | "production_erd_date" | "is_post_production" | "pre_prod_remark" | "isLargeScaleProjectInstance" | "required_date_for_dispatch" | "onsite_contact_person_name" | "onsite_contact_person_number" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "material_lift_availability" | "material_lift_size" | "vehicle_approachability_for_dispatch" | "dispatch_planning_remark" | "dispatch_date" | "driver_name" | "driver_number" | "vehicle_no" | "dispatch_remark" | "actual_installation_start_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "carcass_installation_completion_date" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "product_item_code_id" | "quantity" | "sub_product_structure_id", ExtArgs["result"]["leadProductStructureInstance"]>
 export type LeadProductStructureInstanceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productsRequiredForProduction?: boolean | Prisma.LeadProductStructureInstance$productsRequiredForProductionArgs<ExtArgs>
   stageStatus?: boolean | Prisma.LeadProductStructureInstance$stageStatusArgs<ExtArgs>
   stageHistory?: boolean | Prisma.LeadProductStructureInstance$stageHistoryArgs<ExtArgs>
+  installerMappings?: boolean | Prisma.LeadProductStructureInstance$installerMappingsArgs<ExtArgs>
+  installationUpdates?: boolean | Prisma.LeadProductStructureInstance$installationUpdatesArgs<ExtArgs>
   fastProductionRequests?: boolean | Prisma.LeadProductStructureInstance$fastProductionRequestsArgs<ExtArgs>
   designSelections?: boolean | Prisma.LeadProductStructureInstance$designSelectionsArgs<ExtArgs>
   documents?: boolean | Prisma.LeadProductStructureInstance$documentsArgs<ExtArgs>
@@ -6433,6 +10307,8 @@ export type LeadProductStructureInstanceInclude<ExtArgs extends runtime.Types.Ex
   activityStatusLogs?: boolean | Prisma.LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs>
   tasks?: boolean | Prisma.LeadProductStructureInstance$tasksArgs<ExtArgs>
   trackTraceProjects?: boolean | Prisma.LeadProductStructureInstance$trackTraceProjectsArgs<ExtArgs>
+  siteReadinessAnswers?: boolean | Prisma.LeadProductStructureInstance$siteReadinessAnswersArgs<ExtArgs>
+  payments?: boolean | Prisma.LeadProductStructureInstance$paymentsArgs<ExtArgs>
   _count?: boolean | Prisma.LeadProductStructureInstanceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadProductStructureInstanceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6464,6 +10340,8 @@ export type $LeadProductStructureInstancePayload<ExtArgs extends runtime.Types.E
     productsRequiredForProduction: Prisma.$ProductsRequiredForProductionPayload<ExtArgs>[]
     stageStatus: Prisma.$StatusTypeMasterPayload<ExtArgs> | null
     stageHistory: Prisma.$InstanceStageHistoryPayload<ExtArgs>[]
+    installerMappings: Prisma.$InstallerUserMappingPayload<ExtArgs>[]
+    installationUpdates: Prisma.$InstallationUpdatePayload<ExtArgs>[]
     fastProductionRequests: Prisma.$FastProductionRequestPayload<ExtArgs>[]
     designSelections: Prisma.$LeadDesignSelectionPayload<ExtArgs>[]
     documents: Prisma.$LeadDocumentsPayload<ExtArgs>[]
@@ -6478,6 +10356,8 @@ export type $LeadProductStructureInstancePayload<ExtArgs extends runtime.Types.E
     activityStatusLogs: Prisma.$LeadScopedActivityStatusLogPayload<ExtArgs>[]
     tasks: Prisma.$UserLeadTaskPayload<ExtArgs>[]
     trackTraceProjects: Prisma.$ProjectMasterPayload<ExtArgs>[]
+    siteReadinessAnswers: Prisma.$SiteReadinessPayload<ExtArgs>[]
+    payments: Prisma.$PaymentInfoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -6515,6 +10395,26 @@ export type $LeadProductStructureInstancePayload<ExtArgs extends runtime.Types.E
     is_post_production: boolean | null
     pre_prod_remark: string | null
     isLargeScaleProjectInstance: boolean
+    required_date_for_dispatch: Date | null
+    onsite_contact_person_name: string | null
+    onsite_contact_person_number: string | null
+    alt_onsite_contact_person_name: string | null
+    alt_onsite_contact_person_number: string | null
+    material_lift_availability: boolean | null
+    material_lift_size: string | null
+    vehicle_approachability_for_dispatch: boolean | null
+    dispatch_planning_remark: string | null
+    dispatch_date: Date | null
+    driver_name: string | null
+    driver_number: string | null
+    vehicle_no: string | null
+    dispatch_remark: string | null
+    actual_installation_start_date: Date | null
+    expected_installation_end_date: Date | null
+    is_carcass_installation_completed: boolean | null
+    carcass_installation_completion_date: Date | null
+    is_shutter_installation_completed: boolean | null
+    shutter_installation_completion_date: Date | null
     product_item_code_id: number | null
     quantity: number | null
     sub_product_structure_id: number | null
@@ -6915,6 +10815,8 @@ export interface Prisma__LeadProductStructureInstanceClient<T, Null = never, Ext
   productsRequiredForProduction<T extends Prisma.LeadProductStructureInstance$productsRequiredForProductionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$productsRequiredForProductionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductsRequiredForProductionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stageStatus<T extends Prisma.LeadProductStructureInstance$stageStatusArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$stageStatusArgs<ExtArgs>>): Prisma.Prisma__StatusTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$StatusTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   stageHistory<T extends Prisma.LeadProductStructureInstance$stageHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$stageHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstanceStageHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  installerMappings<T extends Prisma.LeadProductStructureInstance$installerMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$installerMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallerUserMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  installationUpdates<T extends Prisma.LeadProductStructureInstance$installationUpdatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$installationUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallationUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fastProductionRequests<T extends Prisma.LeadProductStructureInstance$fastProductionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$fastProductionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   designSelections<T extends Prisma.LeadProductStructureInstance$designSelectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$designSelectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignSelectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.LeadProductStructureInstance$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -6929,6 +10831,8 @@ export interface Prisma__LeadProductStructureInstanceClient<T, Null = never, Ext
   activityStatusLogs<T extends Prisma.LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadScopedActivityStatusLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.LeadProductStructureInstance$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   trackTraceProjects<T extends Prisma.LeadProductStructureInstance$trackTraceProjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$trackTraceProjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  siteReadinessAnswers<T extends Prisma.LeadProductStructureInstance$siteReadinessAnswersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$siteReadinessAnswersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteReadinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  payments<T extends Prisma.LeadProductStructureInstance$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6993,6 +10897,26 @@ export interface LeadProductStructureInstanceFieldRefs {
   readonly is_post_production: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
   readonly pre_prod_remark: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
   readonly isLargeScaleProjectInstance: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly required_date_for_dispatch: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly onsite_contact_person_name: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly onsite_contact_person_number: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly alt_onsite_contact_person_name: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly alt_onsite_contact_person_number: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly material_lift_availability: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly material_lift_size: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly vehicle_approachability_for_dispatch: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly dispatch_planning_remark: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly dispatch_date: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly driver_name: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly driver_number: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly vehicle_no: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly dispatch_remark: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>
+  readonly actual_installation_start_date: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly expected_installation_end_date: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly is_carcass_installation_completed: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly carcass_installation_completion_date: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
+  readonly is_shutter_installation_completed: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
+  readonly shutter_installation_completion_date: Prisma.FieldRef<"LeadProductStructureInstance", 'DateTime'>
   readonly product_item_code_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly quantity: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly sub_product_structure_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
@@ -7464,6 +11388,54 @@ export type LeadProductStructureInstance$stageHistoryArgs<ExtArgs extends runtim
 }
 
 /**
+ * LeadProductStructureInstance.installerMappings
+ */
+export type LeadProductStructureInstance$installerMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InstallerUserMapping
+   */
+  select?: Prisma.InstallerUserMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InstallerUserMapping
+   */
+  omit?: Prisma.InstallerUserMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InstallerUserMappingInclude<ExtArgs> | null
+  where?: Prisma.InstallerUserMappingWhereInput
+  orderBy?: Prisma.InstallerUserMappingOrderByWithRelationInput | Prisma.InstallerUserMappingOrderByWithRelationInput[]
+  cursor?: Prisma.InstallerUserMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InstallerUserMappingScalarFieldEnum | Prisma.InstallerUserMappingScalarFieldEnum[]
+}
+
+/**
+ * LeadProductStructureInstance.installationUpdates
+ */
+export type LeadProductStructureInstance$installationUpdatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InstallationUpdate
+   */
+  select?: Prisma.InstallationUpdateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InstallationUpdate
+   */
+  omit?: Prisma.InstallationUpdateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InstallationUpdateInclude<ExtArgs> | null
+  where?: Prisma.InstallationUpdateWhereInput
+  orderBy?: Prisma.InstallationUpdateOrderByWithRelationInput | Prisma.InstallationUpdateOrderByWithRelationInput[]
+  cursor?: Prisma.InstallationUpdateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InstallationUpdateScalarFieldEnum | Prisma.InstallationUpdateScalarFieldEnum[]
+}
+
+/**
  * LeadProductStructureInstance.fastProductionRequests
  */
 export type LeadProductStructureInstance$fastProductionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7662,6 +11634,54 @@ export type LeadProductStructureInstance$trackTraceProjectsArgs<ExtArgs extends 
   take?: number
   skip?: number
   distinct?: Prisma.ProjectMasterScalarFieldEnum | Prisma.ProjectMasterScalarFieldEnum[]
+}
+
+/**
+ * LeadProductStructureInstance.siteReadinessAnswers
+ */
+export type LeadProductStructureInstance$siteReadinessAnswersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SiteReadiness
+   */
+  select?: Prisma.SiteReadinessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SiteReadiness
+   */
+  omit?: Prisma.SiteReadinessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SiteReadinessInclude<ExtArgs> | null
+  where?: Prisma.SiteReadinessWhereInput
+  orderBy?: Prisma.SiteReadinessOrderByWithRelationInput | Prisma.SiteReadinessOrderByWithRelationInput[]
+  cursor?: Prisma.SiteReadinessWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SiteReadinessScalarFieldEnum | Prisma.SiteReadinessScalarFieldEnum[]
+}
+
+/**
+ * LeadProductStructureInstance.payments
+ */
+export type LeadProductStructureInstance$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentInfo
+   */
+  select?: Prisma.PaymentInfoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentInfo
+   */
+  omit?: Prisma.PaymentInfoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInfoInclude<ExtArgs> | null
+  where?: Prisma.PaymentInfoWhereInput
+  orderBy?: Prisma.PaymentInfoOrderByWithRelationInput | Prisma.PaymentInfoOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentInfoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentInfoScalarFieldEnum | Prisma.PaymentInfoScalarFieldEnum[]
 }
 
 /**

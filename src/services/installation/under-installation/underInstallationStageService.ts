@@ -3,6 +3,7 @@ import { resolveMiscTask } from "./resolveMiscTask";
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import { createLeadLog } from "../../../utils/leadDetailedLog";
+import { DispatchStageService } from "../dispatch/DispatchStage.service";
 import logger from "../../../utils/logger";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
@@ -116,6 +117,77 @@ interface UsableHandoverPayload {
   files: { originalName: string; sysName: string; isImage: boolean }[];
 }
 
+const installationInstanceSelect = {
+  id: true,
+  title: true,
+  stage_status_id: true,
+  stageStatus: { select: { tag: true } },
+  actual_installation_start_date: true,
+  expected_installation_end_date: true,
+  is_carcass_installation_completed: true,
+  carcass_installation_completion_date: true,
+  is_shutter_installation_completed: true,
+  shutter_installation_completion_date: true,
+} satisfies Prisma.LeadProductStructureInstanceSelect;
+
+/**
+ * Large-scale vendors run Under Installation per instance. Returns the instance
+ * (validated against the lead), or null when the vendor works per lead.
+ * Writes need an instance that is currently in Under Installation.
+ */
+async function findInstallationInstance(
+  db: Prisma.TransactionClient,
+  vendorId: number,
+  leadId: number,
+  instanceId: number | null,
+  { forWrite = false }: { forWrite?: boolean } = {},
+) {
+  const vendor = await db.vendorMaster.findUnique({
+    where: { id: vendorId },
+    select: { handlesLargeScaleProjects: true },
+  });
+  if (vendor?.handlesLargeScaleProjects !== true) return null;
+  if (!instanceId) {
+    if (!forWrite) return null;
+    throw Object.assign(new Error("Select an instance first"), {
+      statusCode: 400,
+    });
+  }
+
+  const instance = await db.leadProductStructureInstance.findFirst({
+    where: {
+      id: instanceId,
+      lead_id: leadId,
+      vendor_id: vendorId,
+      is_archived: false,
+    },
+    select: installationInstanceSelect,
+  });
+  if (!instance) {
+    throw Object.assign(new Error("Instance not found for this lead"), {
+      statusCode: 404,
+    });
+  }
+  if (forWrite && instance.stageStatus?.tag !== "Type 15") {
+    throw Object.assign(
+      new Error("This instance is not in Under Installation"),
+      { statusCode: 409 },
+    );
+  }
+  return instance;
+}
+
+/** Instance actions are logged against the instance's stage; the lead's own status stays behind. */
+const instanceLogFields = (
+  instance: { id: number; stage_status_id: number | null } | null,
+) =>
+  instance
+    ? { instance_id: instance.id, stage_id: instance.stage_status_id ?? undefined }
+    : {};
+
+const forInstance = (instance: { title: string } | null) =>
+  instance ? ` for instance "${instance.title}"` : "";
+
 export class UnderInstallationStageService {
   private static addMonthsPreservingDay(date: Date, monthsToAdd: number) {
     const result = new Date(date);
@@ -142,7 +214,41 @@ export class UnderInstallationStageService {
     leadId: number,
     updatedBy: number,
     baseUrl: string,
+    instanceId: number | null = null,
   ) {
+    // Large-scale vendors move one product instance at a time, and only once its
+    // own Dispatch (details, boxes, documents) is complete.
+    const largeScaleVendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { handlesLargeScaleProjects: true },
+    });
+    const isLargeScale = largeScaleVendor?.handlesLargeScaleProjects === true;
+    if (isLargeScale) {
+      if (!instanceId) {
+        throw Object.assign(
+          new Error("Select an instance to move to Under Installation"),
+          { statusCode: 400 },
+        );
+      }
+      const readiness = await new DispatchStageService().checkReadyForPostDispatch(
+        vendorId,
+        leadId,
+        instanceId,
+      );
+      if (!readiness.readyForPostDispatch) {
+        throw Object.assign(
+          new Error(`Complete Dispatch for this instance first. ${readiness.message}`),
+          { statusCode: 409 },
+        );
+      }
+    }
+
+    let movedInstance: {
+      id: number;
+      title: string;
+      dispatch_date: Date | null;
+    } | null = null;
+
     // ==========================
     // CORE TRANSACTION LAYER
     // ==========================
@@ -151,12 +257,47 @@ export class UnderInstallationStageService {
       // 1️⃣ Validate Lead
       const lead = await tx.leadMaster.findUnique({
         where: { id: leadId },
-        select: { id: true, vendor_id: true, account_id: true },
+        select: {
+          id: true,
+          vendor_id: true,
+          account_id: true,
+          statusType: { select: { tag: true } },
+        },
       });
 
       if (!lead) throw new Error(`Lead ${leadId} not found`);
       if (lead.vendor_id !== vendorId)
         throw new Error(`Lead does not belong to vendor ${vendorId}`);
+
+      const instance = isLargeScale
+        ? await tx.leadProductStructureInstance.findFirst({
+            where: {
+              id: instanceId!,
+              lead_id: leadId,
+              vendor_id: vendorId,
+              is_archived: false,
+            },
+            select: {
+              id: true,
+              title: true,
+              dispatch_date: true,
+              stage_status_id: true,
+              stageStatus: { select: { tag: true } },
+            },
+          })
+        : null;
+      if (isLargeScale) {
+        if (!instance) {
+          throw Object.assign(new Error("Instance not found for this lead"), {
+            statusCode: 404,
+          });
+        }
+        if ((instance.stageStatus?.tag ?? lead.statusType?.tag) !== "Type 14") {
+          throw Object.assign(new Error("This instance is not in Dispatch"), {
+            statusCode: 409,
+          });
+        }
+      }
 
       // 2️⃣ Fetch Under Installation Status
       const toStatus = await tx.statusTypeMaster.findFirst({
@@ -167,35 +308,81 @@ export class UnderInstallationStageService {
       if (!toStatus)
         throw new Error(`Under Installation Stage (Type 15) not configured`);
 
-      // 3️⃣ Update Lead Status
-      const updatedLead = await tx.leadMaster.update({
-        where: { id: lead.id },
-        data: {
-          status_id: toStatus.id,
-          updated_by: updatedBy,
-          updated_at: new Date(),
-        },
-      });
+      // 3️⃣ Update Status
+      let updatedLead;
+      if (instance) {
+        // Large-scale: only this instance moves; the lead's own status stays as it is.
+        const dispatchStatus = await tx.statusTypeMaster.findFirst({
+          where: { vendor_id: vendorId, tag: "Type 14" },
+          select: { id: true },
+        });
+        await tx.leadProductStructureInstance.update({
+          where: { id: instance.id },
+          data: { stage_status_id: toStatus.id, updated_by: updatedBy },
+        });
+        await tx.instanceStageHistory.create({
+          data: {
+            instance_id: instance.id,
+            vendor_id: vendorId,
+            from_status_id:
+              instance.stage_status_id ?? dispatchStatus?.id ?? null,
+            to_status_id: toStatus.id,
+            created_by: updatedBy,
+          },
+        });
+        updatedLead = await tx.leadMaster.findUniqueOrThrow({
+          where: { id: lead.id },
+        });
+        movedInstance = {
+          id: instance.id,
+          title: instance.title,
+          dispatch_date: instance.dispatch_date,
+        };
+      } else {
+        updatedLead = await tx.leadMaster.update({
+          where: { id: lead.id },
+          data: {
+            status_id: toStatus.id,
+            updated_by: updatedBy,
+            updated_at: new Date(),
+          },
+        });
 
-      await ensureLeadStatusLog(tx, {
-        vendorId,
-        leadId: lead.id,
-        accountId: lead.account_id,
-        statusId: toStatus.id,
-        createdBy: updatedBy,
-      });
+        await ensureLeadStatusLog(tx, {
+          vendorId,
+          leadId: lead.id,
+          accountId: lead.account_id,
+          statusId: toStatus.id,
+          createdBy: updatedBy,
+        });
+      }
 
       // 4️⃣ Activity Log
       await createLeadLog(tx, {
         vendor_id: vendorId,
         lead_id: lead.id,
         account_id: lead.account_id!,
-        action: "Lead moved to Under Installation stage.",
+        action: instance
+          ? `Instance "${instance.title}" moved to Under Installation stage.`
+          : "Lead moved to Under Installation stage.",
         action_type: "UPDATE",
         created_by: updatedBy,
+        instance_id: instance?.id,
       });
 
-      // 5️⃣ Close Dispatch Planning Task (if any)
+      // 5️⃣ Close Dispatch Planning Task (if any) — the instance's own task for
+      // large-scale vendors; a lead-level one only when it is the lead's single
+      // instance (tasks created before instance-level dispatch).
+      let instanceTaskScope: Prisma.UserLeadTaskWhereInput = {};
+      if (instance) {
+        const instanceCount = await tx.leadProductStructureInstance.count({
+          where: { lead_id: leadId, vendor_id: vendorId, is_archived: false },
+        });
+        instanceTaskScope =
+          instanceCount === 1
+            ? { OR: [{ instance_id: instance.id }, { instance_id: null }] }
+            : { instance_id: instance.id };
+      }
       const dispatchTask = await tx.userLeadTask.findFirst({
         where: {
           lead_id: leadId,
@@ -203,6 +390,7 @@ export class UnderInstallationStageService {
           task_type: "Dispatch",
           lead_stage: "dispatch-planning-stage",
           status: "open",
+          ...instanceTaskScope,
         },
       });
 
@@ -235,11 +423,22 @@ export class UnderInstallationStageService {
           action: "Dispatch preparation task marked as Completed.",
           action_type: "UPDATE",
           created_by: updatedBy,
+          instance_id: instance?.id,
         });
       }
 
-      return updatedLead;
+      return {
+        ...updatedLead,
+        instance_id: instance?.id ?? null,
+        instance_title: instance?.title ?? null,
+      };
     });
+
+    const moved = movedInstance as {
+      id: number;
+      title: string;
+      dispatch_date: Date | null;
+    } | null;
 
     // ===============================
     // UNDER INSTALLATION NOTIFICATION
@@ -268,7 +467,11 @@ export class UnderInstallationStageService {
           select: { user_name: true },
         }),
         prisma.leadProductStructureInstance.findFirst({
-          where: { lead_id: leadId, vendor_id: vendorId },
+          where: {
+            lead_id: leadId,
+            vendor_id: vendorId,
+            ...(moved ? { id: moved.id } : {}),
+          },
           select: { id: true },
           orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
         }),
@@ -276,7 +479,8 @@ export class UnderInstallationStageService {
 
       if (!lead) return result;
 
-      const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+      const baseLeadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+      const leadName = moved ? `${baseLeadName} (${moved.title})` : baseLeadName;
       const leadCode = lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
       const dispatchedBy = actor?.user_name ?? "System";
       const dispatchedAt = new Date().toLocaleString("en-IN", {
@@ -285,7 +489,8 @@ export class UnderInstallationStageService {
         year: "numeric",
       });
       const franchiseId = lead.franchise_id ?? null;
-      const stageTag = lead.statusType?.tag;
+      // A moved instance is Under Installation even though the lead's status is unchanged.
+      const stageTag = moved ? "Type 15" : lead.statusType?.tag;
 
       // Build redirect URL using STAGE_PATH_BY_TAG + instance_id
       const uiBase = stageTag && STAGE_PATH_BY_TAG[stageTag]
@@ -384,10 +589,11 @@ export class UnderInstallationStageService {
         );
 
         const supervisorUser = siteSupervisorMapping?.user ?? null;
-        const smallOrderRedirectPath = `/dashboard/installation/under-installation/details/${leadId}?accountId=${lead.account_id}`;
+        const smallOrderRedirectPath = `/dashboard/installation/under-installation/details/${leadId}?accountId=${lead.account_id}${moved ? `&instance_id=${moved.id}` : ""}`;
         const smallOrderProjectUrl = `${baseUrl}${smallOrderRedirectPath}`;
-        const dispatchDateStr = lead.dispatch_date
-          ? new Date(lead.dispatch_date).toLocaleString("en-IN", {
+        const dispatchDate = moved ? moved.dispatch_date : lead.dispatch_date;
+        const dispatchDateStr = dispatchDate
+          ? new Date(dispatchDate).toLocaleString("en-IN", {
               day: "2-digit",
               month: "short",
               year: "numeric",
@@ -641,6 +847,7 @@ export class UnderInstallationStageService {
     leadId: number,
     updatedBy: number,
     actualInstallationStartDate: Date,
+    instanceId: number | null = null,
   ) {
     return prisma.$transaction(async (tx) => {
       // 1️⃣ Validate lead
@@ -652,6 +859,59 @@ export class UnderInstallationStageService {
       if (!lead) throw new Error(`Lead ${leadId} not found`);
       if (lead.vendor_id !== vendorId)
         throw new Error(`Lead does not belong to vendor ${vendorId}`);
+
+      // Large-scale vendors start installation one product instance at a time.
+      const instance = await findInstallationInstance(
+        tx,
+        vendorId,
+        leadId,
+        instanceId,
+        { forWrite: true },
+      );
+      if (instance) {
+        if (instance.actual_installation_start_date) {
+          throw Object.assign(
+            new Error("Installation has already been started for this instance"),
+            { statusCode: 409 },
+          );
+        }
+
+        const updatedInstance = await tx.leadProductStructureInstance.update({
+          where: { id: instance.id },
+          data: {
+            actual_installation_start_date: actualInstallationStartDate,
+            updated_by: updatedBy,
+          },
+          select: { id: true, actual_installation_start_date: true },
+        });
+
+        await createLeadLog(tx, {
+          vendor_id: vendorId,
+          lead_id: lead.id,
+          account_id: lead.account_id!,
+          action: `Installation has been started for instance "${instance.title}"`,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+          created_at: new Date(),
+          ...instanceLogFields(instance),
+        });
+
+        logger.info("[SERVICE] Actual installation start date set for instance", {
+          lead_id: lead.id,
+          instance_id: instance.id,
+          vendor_id: vendorId,
+          updated_by: updatedBy,
+        });
+
+        return {
+          id: lead.id,
+          vendor_id: vendorId,
+          account_id: lead.account_id,
+          instance_id: updatedInstance.id,
+          actual_installation_start_date:
+            updatedInstance.actual_installation_start_date,
+        };
+      }
 
       // 2️⃣ Update date
       const updatedLead = await tx.leadMaster.update({
@@ -693,7 +953,11 @@ export class UnderInstallationStageService {
   /**
    * ✅ Get Under Installation details for a lead
    */
-  static async getUnderInstallationDetails(vendorId: number, leadId: number) {
+  static async getUnderInstallationDetails(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId },
       select: {
@@ -712,6 +976,30 @@ export class UnderInstallationStageService {
         `Lead ${leadId} not found or doesn't belong to vendor ${vendorId}`,
       );
 
+    // Per-instance installation: the details live on the instance.
+    const instance = await findInstallationInstance(
+      prisma,
+      vendorId,
+      leadId,
+      instanceId,
+    );
+    if (instance) {
+      return {
+        id: lead.id,
+        instance_id: instance.id,
+        actual_installation_start_date: instance.actual_installation_start_date,
+        expected_installation_end_date: instance.expected_installation_end_date,
+        is_carcass_installation_completed:
+          instance.is_carcass_installation_completed,
+        carcass_installation_completion_date:
+          instance.carcass_installation_completion_date,
+        is_shutter_installation_completed:
+          instance.is_shutter_installation_completed,
+        shutter_installation_completion_date:
+          instance.shutter_installation_completion_date,
+      };
+    }
+
     return lead;
   }
 
@@ -724,6 +1012,7 @@ export class UnderInstallationStageService {
     updatedBy: number,
     expectedEndDate: Date,
     installers: { installer_id: number }[],
+    instanceId: number | null = null,
   ) {
     return prisma.$transaction(async (tx) => {
       // 1️⃣ Validate the lead and get account_id
@@ -743,27 +1032,40 @@ export class UnderInstallationStageService {
       if (!lead.account_id)
         throw new Error(`Lead ${leadId} does not have an associated account`);
 
+      const instance = await findInstallationInstance(
+        tx,
+        vendorId,
+        leadId,
+        instanceId,
+        { forWrite: true },
+      );
+
       // 2️⃣ Update expected installation end date
-      const updatedLead = await tx.leadMaster.update({
-        where: { id: lead.id },
-        data: {
-          expected_installation_end_date: expectedEndDate,
-          updated_by: updatedBy,
-          updated_at: new Date(),
-        },
-        select: {
-          id: true,
-          vendor_id: true,
-          account_id: true,
-          expected_installation_end_date: true,
-        },
-      });
+      const updatedLead = instance
+        ? await tx.leadProductStructureInstance.update({
+            where: { id: instance.id },
+            data: {
+              expected_installation_end_date: expectedEndDate,
+              updated_by: updatedBy,
+            },
+            select: { expected_installation_end_date: true },
+          })
+        : await tx.leadMaster.update({
+            where: { id: lead.id },
+            data: {
+              expected_installation_end_date: expectedEndDate,
+              updated_by: updatedBy,
+              updated_at: new Date(),
+            },
+            select: { expected_installation_end_date: true },
+          });
 
       // 3️⃣ Prepare Installer mappings
       const mappingsData = installers.map((i) => ({
         vendor_id: vendorId,
         account_id: lead.account_id!, // ✅ use account_id from lead
         lead_id: lead.id,
+        instance_id: instance?.id ?? null,
         installer_id: i.installer_id,
         assigned_by: updatedBy,
         assigned_date: new Date(),
@@ -789,10 +1091,11 @@ export class UnderInstallationStageService {
         lead_id: lead.id,
         account_id: lead.account_id!,
         action: `Set expected installation end date (${formattedExpectedEndDate}) & added ${installers.length
-          } installer(s)`,
+          } installer(s)${forInstance(instance)}`,
         action_type: "UPDATE",
         created_by: updatedBy,
         created_at: new Date(),
+        ...instanceLogFields(instance),
       });
 
       logger.info("[SERVICE] Installers added & expected end date set", {
@@ -804,6 +1107,7 @@ export class UnderInstallationStageService {
       return {
         lead_id: lead.id,
         vendor_id: vendorId,
+        instance_id: instance?.id ?? null,
         expected_installation_end_date:
           updatedLead.expected_installation_end_date,
         installers_assigned: installers.length,
@@ -814,7 +1118,11 @@ export class UnderInstallationStageService {
   /**
    * ✅ Get all installers mapped to a lead
    */
-  static async getMappedInstallers(vendorId: number, leadId: number) {
+  static async getMappedInstallers(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
     // 1️⃣ Verify lead existence (optional safety)
     const lead = await prisma.leadMaster.findUnique({
       where: { id: leadId },
@@ -825,9 +1133,20 @@ export class UnderInstallationStageService {
     if (lead.vendor_id !== vendorId)
       throw new Error(`Lead does not belong to vendor ${vendorId}`);
 
-    // 2️⃣ Fetch installers mapped to the lead
+    const instance = await findInstallationInstance(
+      prisma,
+      vendorId,
+      leadId,
+      instanceId,
+    );
+
+    // 2️⃣ Fetch installers mapped to the lead (or its instance)
     const installers = await prisma.installerUserMapping.findMany({
-      where: { vendor_id: vendorId, lead_id: leadId },
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        ...(instance ? { instance_id: instance.id } : {}),
+      },
       include: {
         installer: {
           select: {
@@ -864,6 +1183,7 @@ export class UnderInstallationStageService {
     updatedBy: number,
     expectedEndDate?: Date,
     installers?: { installer_id: number }[],
+    instanceId: number | null = null,
   ) {
     return prisma.$transaction(async (tx) => {
       // 1️⃣ Validate lead
@@ -883,6 +1203,14 @@ export class UnderInstallationStageService {
       if (!lead.account_id)
         throw new Error(`Lead ${leadId} does not have an associated account`);
 
+      const instance = await findInstallationInstance(
+        tx,
+        vendorId,
+        leadId,
+        instanceId,
+        { forWrite: true },
+      );
+
       const updates: string[] = [];
 
       // 2️⃣ Update expected installation end date (if provided)
@@ -896,14 +1224,24 @@ export class UnderInstallationStageService {
           },
         );
 
-        await tx.leadMaster.update({
-          where: { id: lead.id },
-          data: {
-            expected_installation_end_date: expectedEndDate,
-            updated_by: updatedBy,
-            updated_at: new Date(),
-          },
-        });
+        if (instance) {
+          await tx.leadProductStructureInstance.update({
+            where: { id: instance.id },
+            data: {
+              expected_installation_end_date: expectedEndDate,
+              updated_by: updatedBy,
+            },
+          });
+        } else {
+          await tx.leadMaster.update({
+            where: { id: lead.id },
+            data: {
+              expected_installation_end_date: expectedEndDate,
+              updated_by: updatedBy,
+              updated_at: new Date(),
+            },
+          });
+        }
         updates.push(
           `expected installation end date → ${formattedExpectedEndDate}`,
         );
@@ -913,7 +1251,11 @@ export class UnderInstallationStageService {
       if (Array.isArray(installers) && installers.length > 0) {
         // Remove existing mappings
         await tx.installerUserMapping.deleteMany({
-          where: { vendor_id: vendorId, lead_id: lead.id },
+          where: {
+            vendor_id: vendorId,
+            lead_id: lead.id,
+            ...(instance ? { instance_id: instance.id } : {}),
+          },
         });
 
         // Add new mappings
@@ -921,6 +1263,7 @@ export class UnderInstallationStageService {
           vendor_id: vendorId,
           account_id: lead.account_id!,
           lead_id: lead.id,
+          instance_id: instance?.id ?? null,
           installer_id: i.installer_id,
           assigned_by: updatedBy,
           assigned_date: new Date(),
@@ -936,7 +1279,7 @@ export class UnderInstallationStageService {
       // 4️⃣ Log what was updated
       const actionMessage =
         updates.length > 0
-          ? `Updated ${updates.join(" and ")}`
+          ? `Updated ${updates.join(" and ")}${forInstance(instance)}`
           : "No changes were made";
 
       await createLeadLog(tx, {
@@ -947,6 +1290,7 @@ export class UnderInstallationStageService {
         action_type: "UPDATE",
         created_by: updatedBy,
         created_at: new Date(),
+        ...instanceLogFields(instance),
       });
 
       logger.info("[SERVICE] Installation details updated", {
@@ -974,6 +1318,7 @@ export class UnderInstallationStageService {
     updatedBy: number,
     isCarcassCompleted?: boolean,
     isShutterCompleted?: boolean,
+    instanceId: number | null = null,
   ) {
     return prisma.$transaction(async (tx) => {
       // 1️⃣ Validate lead
@@ -993,6 +1338,14 @@ export class UnderInstallationStageService {
         throw new Error(`Lead does not belong to vendor ${vendorId}`);
       if (!lead.account_id)
         throw new Error(`Lead ${leadId} does not have an associated account`);
+
+      const instance = await findInstallationInstance(
+        tx,
+        vendorId,
+        leadId,
+        instanceId,
+        { forWrite: true },
+      );
 
       const updateData: any = {};
       const actionMessages: string[] = [];
@@ -1023,18 +1376,25 @@ export class UnderInstallationStageService {
         }
       }
 
-      // 4️⃣ Update the lead
-      await tx.leadMaster.update({
-        where: { id: lead.id },
-        data: {
-          ...updateData,
-          updated_by: updatedBy,
-          updated_at: new Date(),
-        },
-      });
+      // 4️⃣ Update the lead (or its instance)
+      if (instance) {
+        await tx.leadProductStructureInstance.update({
+          where: { id: instance.id },
+          data: { ...updateData, updated_by: updatedBy },
+        });
+      } else {
+        await tx.leadMaster.update({
+          where: { id: lead.id },
+          data: {
+            ...updateData,
+            updated_by: updatedBy,
+            updated_at: new Date(),
+          },
+        });
+      }
 
       // 5️⃣ Log the action
-      const logMessage = actionMessages.join(" & ");
+      const logMessage = actionMessages.join(" & ") + forInstance(instance);
 
       await createLeadLog(tx, {
         vendor_id: vendorId,
@@ -1044,6 +1404,7 @@ export class UnderInstallationStageService {
         action_type: "UPDATE",
         created_by: updatedBy,
         created_at: new Date(),
+        ...instanceLogFields(instance),
       });
 
       logger.info("[SERVICE] Installation completion status updated", {
@@ -1074,6 +1435,7 @@ export class UnderInstallationStageService {
     updateDate: Date,
     remark: string | null,
     files: { originalName: string; sysName: string }[],
+    instanceId: number | null = null,
   ) {
     if (!vendorId || !leadId || !userId)
       throw Object.assign(
@@ -1110,6 +1472,14 @@ export class UnderInstallationStageService {
     if (!finalAccountId)
       throw new Error(`Lead ${leadId} does not have an associated account`);
 
+    const instance = await findInstallationInstance(
+      prisma,
+      vendorId,
+      leadId,
+      instanceId,
+      { forWrite: true },
+    );
+
     // ------------------------------------------
     // 1️⃣ RUN PRISMA TRANSACTION (FAST, SAFE)
     // ------------------------------------------
@@ -1119,6 +1489,7 @@ export class UnderInstallationStageService {
         data: {
           vendor_id: vendorId,
           lead_id: leadId,
+          instance_id: instance?.id ?? null,
           account_id: finalAccountId,
           update_date: updateDate,
           remark,
@@ -1139,6 +1510,7 @@ export class UnderInstallationStageService {
             account_id: finalAccountId,
             created_by: userId,
             doc_type_id: docType.id,
+            product_structure_instance_id: instance?.id ?? null,
           },
         });
 
@@ -1158,10 +1530,11 @@ export class UnderInstallationStageService {
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: finalAccountId,
-        action: `Uploaded ${files.length} Installation Update document(s) for ${updateDate.toDateString()}`,
+        action: `Uploaded ${files.length} Installation Update document(s) for ${updateDate.toDateString()}${forInstance(instance)}`,
         action_type: "UPLOAD",
         created_by: userId,
         created_at: new Date(),
+        ...instanceLogFields(instance),
       });
 
       return uploadedDocs;
@@ -1171,12 +1544,24 @@ export class UnderInstallationStageService {
   /**
    * ✅ Get Installation Updates – Day Wise
    */
-  static async getInstallationUpdatesDayWise(vendorId: number, leadId: number) {
+  static async getInstallationUpdatesDayWise(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
+    const instance = await findInstallationInstance(
+      prisma,
+      vendorId,
+      leadId,
+      instanceId,
+    );
+
     // 1️⃣ Fetch all updates (Day wise)
     const updates = await prisma.installationUpdate.findMany({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
+        ...(instance ? { instance_id: instance.id } : {}),
       },
       include: {
         documents: {
@@ -5531,8 +5916,12 @@ export class UnderInstallationStageService {
     return result;
   }
 
-  async checkUsableHandoverReady(vendorId: number, leadId: number) {
-    // Fetch base lead fields
+  /** Installation fields of the lead, or of its instance for large-scale vendors. */
+  private async getInstallationState(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null,
+  ) {
     const lead = await prisma.leadMaster.findFirst({
       where: {
         id: leadId,
@@ -5548,13 +5937,44 @@ export class UnderInstallationStageService {
 
     if (!lead) return null;
 
-    // Check installer count
+    const instance = await findInstallationInstance(
+      prisma,
+      vendorId,
+      leadId,
+      instanceId,
+    );
+
     const installerCount = await prisma.installerUserMapping.count({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
+        ...(instance ? { instance_id: instance.id } : {}),
       },
     });
+
+    return {
+      lead: instance
+        ? {
+            is_carcass_installation_completed:
+              instance.is_carcass_installation_completed,
+            is_shutter_installation_completed:
+              instance.is_shutter_installation_completed,
+            expected_installation_end_date:
+              instance.expected_installation_end_date,
+          }
+        : lead,
+      installerCount,
+    };
+  }
+
+  async checkUsableHandoverReady(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
+    const state = await this.getInstallationState(vendorId, leadId, instanceId);
+    if (!state) return null;
+    const { lead, installerCount } = state;
 
     const conditions = {
       carcassCompleted: lead.is_carcass_installation_completed === true,
@@ -5583,35 +6003,17 @@ export class UnderInstallationStageService {
   private async checkInstallationBaseConditions(
     vendorId: number,
     leadId: number,
+    instanceId: number | null = null,
   ) {
-    // Get essential fields
-    const lead = await prisma.leadMaster.findFirst({
-      where: {
-        id: leadId,
-        vendor_id: vendorId,
-        is_deleted: false,
-      },
-      select: {
-        is_carcass_installation_completed: true,
-        is_shutter_installation_completed: true,
-        expected_installation_end_date: true,
-      },
-    });
+    const state = await this.getInstallationState(vendorId, leadId, instanceId);
 
-    if (!lead) {
+    if (!state) {
       return {
         ok: false,
         msg: "Lead not found.",
       };
     }
-
-    // Installer check
-    const installerCount = await prisma.installerUserMapping.count({
-      where: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-      },
-    });
+    const { lead, installerCount } = state;
 
     // Compute readiness
     const isReady =
@@ -5682,9 +6084,17 @@ export class UnderInstallationStageService {
     };
   }
 
-  async checkLeadReadyForFinalHandover(vendorId: number, leadId: number) {
+  async checkLeadReadyForFinalHandover(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
     // Step 1: Installation Base Conditions
-    const base = await this.checkInstallationBaseConditions(vendorId, leadId);
+    const base = await this.checkInstallationBaseConditions(
+      vendorId,
+      leadId,
+      instanceId,
+    );
     if (!base.ok)
       return {
         isReady: false,

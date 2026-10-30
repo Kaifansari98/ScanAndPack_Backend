@@ -71,16 +71,25 @@ export const getAllProductSubStructures = async (
     const subStructures = await prisma.productSubStructure.findMany({
         where: {
             vendor_id,
-            status: "active",
         },
         include: {
             productStructure: {
                 select: {
                     id: true,
                     type: true,
+                    status: true,
+                    product_type_id: true,
+                    productType: {
+                        select: {
+                            id: true,
+                            type: true,
+                            status: true,
+                        },
+                    },
                 },
             },
         },
+        orderBy: { id: "asc" },
     });
 
     console.log("[SERVICE] Found product sub structures", {
@@ -88,4 +97,42 @@ export const getAllProductSubStructures = async (
     });
 
     return subStructures as ProductSubStructureType[];
+};
+
+export const updateProductSubStructureStatus = async (
+    id: number,
+    status: string
+): Promise<ProductSubStructureType> => {
+    console.log("[SERVICE] updateProductSubStructureStatus called", { id, status });
+
+    const existing = await prisma.productSubStructure.findUnique({ where: { id } });
+    if (!existing) {
+        console.error("[SERVICE] ProductSubStructure not found for status update", { id });
+        throw new Error("ProductSubStructure not found");
+    }
+
+    const updated = await prisma.productSubStructure.update({
+        where: { id },
+        data: { status },
+        include: {
+            productStructure: {
+                select: {
+                    id: true,
+                    type: true,
+                    status: true,
+                    product_type_id: true,
+                    productType: {
+                        select: {
+                            id: true,
+                            type: true,
+                            status: true,
+                        },
+                    },
+                },
+            },
+        },
+    });
+
+    console.log("[SERVICE] ProductSubStructure status updated successfully", updated);
+    return updated as ProductSubStructureType;
 };

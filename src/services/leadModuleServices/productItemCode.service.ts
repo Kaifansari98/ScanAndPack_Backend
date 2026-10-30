@@ -122,15 +122,19 @@ export const getAllProductItemCodes = async (
     const itemCodes = await prisma.productItemCode.findMany({
         where: {
             vendor_id,
-            status: "active",
         },
         include: {
             productStructure: {
-                include: {
+                select: {
+                    id: true,
+                    type: true,
+                    status: true,
+                    product_type_id: true,
                     productType: {
                         select: {
                             id: true,
                             type: true,
+                            status: true,
                         },
                     },
                 },
@@ -139,9 +143,27 @@ export const getAllProductItemCodes = async (
                 select: {
                     id: true,
                     type: true,
+                    status: true,
+                    product_structure_id: true,
+                    productStructure: {
+                        select: {
+                            id: true,
+                            type: true,
+                            status: true,
+                            product_type_id: true,
+                            productType: {
+                                select: {
+                                    id: true,
+                                    type: true,
+                                    status: true,
+                                },
+                            },
+                        },
+                    },
                 },
             },
         },
+        orderBy: { id: "asc" },
     });
 
     console.log("[SERVICE] Found product item codes", {
@@ -197,4 +219,25 @@ export const updateProductItemCode = async (
             specification: payload.specification,
         },
     });
+};
+
+export const updateProductItemCodeStatus = async (
+    id: number,
+    status: string
+) => {
+    console.log("[SERVICE] updateProductItemCodeStatus called", { id, status });
+
+    const existing = await prisma.productItemCode.findUnique({ where: { id } });
+    if (!existing) {
+        console.error("[SERVICE] ProductItemCode not found for status update", { id });
+        throw new Error("ProductItemCode not found");
+    }
+
+    const updated = await prisma.productItemCode.update({
+        where: { id },
+        data: { status },
+    });
+
+    console.log("[SERVICE] ProductItemCode status updated successfully", updated);
+    return updated;
 };

@@ -18,19 +18,25 @@ import {
   createShutterSubType,
   getAllShutterMaterials,
   createShutterMaterial,
-  getShutterMaterialFinishes,
-  createShutterMaterialFinish,
-  getAllShutterMaterialFinishesForVendor,
-  bulkUploadShutterMaterialFinishes,
-  getAllCarcassLegs,
-  createCarcassLegs,
-  getSkirtingCarcassLegs,
-  createSkirtingCarcassLegs,
-  getAllSkirtingCarcassLegsForVendor,
-  getSkirtingCarcassLegsColors,
-  createSkirtingCarcassLegsColor,
-  getAllSkirtingCarcassLegsColorsForVendor,
-  bulkUploadSkirtingCarcassLegsColors,
+  getShutterOuterFinishes,
+  createShutterOuterFinish,
+  getAllShutterOuterFinishesForVendor,
+  bulkUploadShutterOuterFinishes,
+  getShutterInnerFinishes,
+  createShutterInnerFinish,
+  getAllShutterInnerFinishesForVendor,
+  bulkUploadShutterInnerFinishes,
+  getAllHardwareTypes,
+  createHardwareType,
+  getHardwareItems,
+  createHardwareItem,
+  createHardwareItems,
+  getAllHardwareItemsForVendor,
+  getHardwareItemOptions,
+  createHardwareItemOption,
+  createHardwareItemOptions,
+  getAllHardwareItemOptionsForVendor,
+  bulkUploadHardwareItemOptions,
   getAllLightCarcasTypes,
   createLightCarcasType,
   getLightCarcasUnits,
@@ -276,7 +282,7 @@ export const addShutterMaterial = async (req: Request, res: Response) => {
   }
 };
 
-export const fetchShutterMaterialFinishes = async (
+export const fetchShutterOuterFinishes = async (
   req: Request,
   res: Response,
 ) => {
@@ -288,14 +294,14 @@ export const fetchShutterMaterialFinishes = async (
         .json({ error: "shutter_material_id is required" });
     }
 
-    const finishes = await getShutterMaterialFinishes(shutter_material_id);
+    const finishes = await getShutterOuterFinishes(shutter_material_id);
     return res.status(200).json({ success: true, data: finishes });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const fetchAllShutterMaterialFinishesForVendor = async (
+export const fetchAllShutterOuterFinishesForVendor = async (
   req: Request,
   res: Response,
 ) => {
@@ -303,14 +309,14 @@ export const fetchAllShutterMaterialFinishesForVendor = async (
     const vendor_id = getVendorId(req, res);
     if (!vendor_id) return;
 
-    const finishes = await getAllShutterMaterialFinishesForVendor(vendor_id);
+    const finishes = await getAllShutterOuterFinishesForVendor(vendor_id);
     return res.status(200).json({ success: true, data: finishes });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const addShutterMaterialFinish = async (req: Request, res: Response) => {
+export const addShutterOuterFinish = async (req: Request, res: Response) => {
   try {
     const { shutter_material_id, name } = req.body;
 
@@ -321,7 +327,7 @@ export const addShutterMaterialFinish = async (req: Request, res: Response) => {
       });
     }
 
-    const finish = await createShutterMaterialFinish(
+    const finish = await createShutterOuterFinish(
       Number(shutter_material_id),
       name,
     );
@@ -331,7 +337,7 @@ export const addShutterMaterialFinish = async (req: Request, res: Response) => {
   }
 };
 
-export const uploadShutterMaterialFinishes = async (
+export const uploadShutterOuterFinishes = async (
   req: Request,
   res: Response,
 ) => {
@@ -355,7 +361,7 @@ export const uploadShutterMaterialFinishes = async (
     const isCsv =
       file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
 
-    const result = await bulkUploadShutterMaterialFinishes(
+    const result = await bulkUploadShutterOuterFinishes(
       vendor_id,
       file.buffer,
       isCsv,
@@ -366,53 +372,26 @@ export const uploadShutterMaterialFinishes = async (
   }
 };
 
-export const fetchAllCarcassLegs = async (req: Request, res: Response) => {
+export const fetchShutterInnerFinishes = async (
+  req: Request,
+  res: Response,
+) => {
   try {
-    const vendor_id = getVendorId(req, res);
-    if (!vendor_id) return;
-
-    const legs = await getAllCarcassLegs(vendor_id);
-    return res.status(200).json({ success: true, data: legs });
-  } catch (error: any) {
-    return res.status(500).json({ success: false, error: error.message });
-  }
-};
-
-export const addCarcassLegs = async (req: Request, res: Response) => {
-  try {
-    const { vendor_id, name } = req.body;
-
-    if (!vendor_id || !name) {
+    const shutter_material_id = Number(req.params.shutter_material_id);
+    if (!shutter_material_id) {
       return res
         .status(400)
-        .json({ success: false, error: "vendor_id and name are required" });
+        .json({ error: "shutter_material_id is required" });
     }
 
-    const legs = await createCarcassLegs(Number(vendor_id), name);
-    return res.status(201).json({ success: true, data: legs });
+    const finishes = await getShutterInnerFinishes(shutter_material_id);
+    return res.status(200).json({ success: true, data: finishes });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const fetchSkirtingCarcassLegs = async (
-  req: Request,
-  res: Response,
-) => {
-  try {
-    const carcass_legs_id = Number(req.params.carcass_legs_id);
-    if (!carcass_legs_id) {
-      return res.status(400).json({ error: "carcass_legs_id is required" });
-    }
-
-    const skirtings = await getSkirtingCarcassLegs(carcass_legs_id);
-    return res.status(200).json({ success: true, data: skirtings });
-  } catch (error: any) {
-    return res.status(500).json({ success: false, error: error.message });
-  }
-};
-
-export const fetchAllSkirtingCarcassLegsForVendor = async (
+export const fetchAllShutterInnerFinishesForVendor = async (
   req: Request,
   res: Response,
 ) => {
@@ -420,100 +399,35 @@ export const fetchAllSkirtingCarcassLegsForVendor = async (
     const vendor_id = getVendorId(req, res);
     if (!vendor_id) return;
 
-    const skirtings = await getAllSkirtingCarcassLegsForVendor(vendor_id);
-    return res.status(200).json({ success: true, data: skirtings });
+    const finishes = await getAllShutterInnerFinishesForVendor(vendor_id);
+    return res.status(200).json({ success: true, data: finishes });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const addSkirtingCarcassLegs = async (req: Request, res: Response) => {
+export const addShutterInnerFinish = async (req: Request, res: Response) => {
   try {
-    const { carcass_legs_id, name, inScope } = req.body;
+    const { shutter_material_id, name } = req.body;
 
-    if (!carcass_legs_id || !name) {
+    if (!shutter_material_id || !name) {
       return res.status(400).json({
         success: false,
-        error: "carcass_legs_id and name are required",
+        error: "shutter_material_id and name are required",
       });
     }
 
-    const skirting = await createSkirtingCarcassLegs(
-      Number(carcass_legs_id),
+    const finish = await createShutterInnerFinish(
+      Number(shutter_material_id),
       name,
-      inScope !== false,
     );
-    return res.status(201).json({ success: true, data: skirting });
+    return res.status(201).json({ success: true, data: finish });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export const fetchSkirtingCarcassLegsColors = async (
-  req: Request,
-  res: Response,
-) => {
-  try {
-    const skirting_carcass_legs_id = Number(
-      req.params.skirting_carcass_legs_id,
-    );
-    if (!skirting_carcass_legs_id) {
-      return res
-        .status(400)
-        .json({ error: "skirting_carcass_legs_id is required" });
-    }
-
-    const colors = await getSkirtingCarcassLegsColors(
-      skirting_carcass_legs_id,
-    );
-    return res.status(200).json({ success: true, data: colors });
-  } catch (error: any) {
-    return res.status(500).json({ success: false, error: error.message });
-  }
-};
-
-export const fetchAllSkirtingCarcassLegsColorsForVendor = async (
-  req: Request,
-  res: Response,
-) => {
-  try {
-    const vendor_id = getVendorId(req, res);
-    if (!vendor_id) return;
-
-    const colors = await getAllSkirtingCarcassLegsColorsForVendor(vendor_id);
-    return res.status(200).json({ success: true, data: colors });
-  } catch (error: any) {
-    return res.status(500).json({ success: false, error: error.message });
-  }
-};
-
-export const addSkirtingCarcassLegsColor = async (
-  req: Request,
-  res: Response,
-) => {
-  try {
-    const { carcass_legs_id, skirting_carcass_legs_id, color } = req.body;
-
-    if (!carcass_legs_id || !skirting_carcass_legs_id || !color) {
-      return res.status(400).json({
-        success: false,
-        error:
-          "carcass_legs_id, skirting_carcass_legs_id and color are required",
-      });
-    }
-
-    const colorEntry = await createSkirtingCarcassLegsColor(
-      Number(carcass_legs_id),
-      Number(skirting_carcass_legs_id),
-      color,
-    );
-    return res.status(201).json({ success: true, data: colorEntry });
-  } catch (error: any) {
-    return res.status(500).json({ success: false, error: error.message });
-  }
-};
-
-export const uploadSkirtingCarcassLegsColors = async (
+export const uploadShutterInnerFinishes = async (
   req: Request,
   res: Response,
 ) => {
@@ -537,7 +451,230 @@ export const uploadSkirtingCarcassLegsColors = async (
     const isCsv =
       file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
 
-    const result = await bulkUploadSkirtingCarcassLegsColors(
+    const result = await bulkUploadShutterInnerFinishes(
+      vendor_id,
+      file.buffer,
+      isCsv,
+    );
+    return res.status(200).json({ success: true, data: result });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchAllHardwareTypes = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = getVendorId(req, res);
+    if (!vendor_id) return;
+
+    const hardwareTypes = await getAllHardwareTypes(vendor_id);
+    return res.status(200).json({ success: true, data: hardwareTypes });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const addHardwareType = async (req: Request, res: Response) => {
+  try {
+    const { vendor_id, name } = req.body;
+
+    if (!vendor_id || !name) {
+      return res
+        .status(400)
+        .json({ success: false, error: "vendor_id and name are required" });
+    }
+
+    const hardwareType = await createHardwareType(Number(vendor_id), name);
+    return res.status(201).json({ success: true, data: hardwareType });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchHardwareItems = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const hardware_type_id = Number(req.params.hardware_type_id);
+    if (!hardware_type_id) {
+      return res.status(400).json({ error: "hardware_type_id is required" });
+    }
+
+    const hardwareItems = await getHardwareItems(hardware_type_id);
+    return res.status(200).json({ success: true, data: hardwareItems });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchAllHardwareItemsForVendor = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const vendor_id = getVendorId(req, res);
+    if (!vendor_id) return;
+
+    const hardwareItems = await getAllHardwareItemsForVendor(vendor_id);
+    return res.status(200).json({ success: true, data: hardwareItems });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const addHardwareItem = async (req: Request, res: Response) => {
+  try {
+    const { hardware_type_id, hardware_type_ids, name, inScope } = req.body;
+
+    // Several hardware types: the same item is created once under each of them.
+    if (Array.isArray(hardware_type_ids)) {
+      const ids = hardware_type_ids.map(Number);
+      if (
+        !name ||
+        ids.length === 0 ||
+        !ids.every((id) => Number.isSafeInteger(id) && id > 0)
+      ) {
+        return res.status(400).json({
+          success: false,
+          error: "hardware_type_ids and name are required",
+        });
+      }
+
+      const hardwareItems = await createHardwareItems(
+        ids,
+        name,
+        inScope !== false,
+      );
+      return res.status(201).json({ success: true, data: hardwareItems });
+    }
+
+    if (!hardware_type_id || !name) {
+      return res.status(400).json({
+        success: false,
+        error: "hardware_type_id and name are required",
+      });
+    }
+
+    const hardwareItem = await createHardwareItem(
+      Number(hardware_type_id),
+      name,
+      inScope !== false,
+    );
+    return res.status(201).json({ success: true, data: hardwareItem });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchHardwareItemOptions = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const hardware_item_id = Number(
+      req.params.hardware_item_id,
+    );
+    if (!hardware_item_id) {
+      return res
+        .status(400)
+        .json({ error: "hardware_item_id is required" });
+    }
+
+    const options = await getHardwareItemOptions(
+      hardware_item_id,
+    );
+    return res.status(200).json({ success: true, data: options });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchAllHardwareItemOptionsForVendor = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const vendor_id = getVendorId(req, res);
+    if (!vendor_id) return;
+
+    const options = await getAllHardwareItemOptionsForVendor(vendor_id);
+    return res.status(200).json({ success: true, data: options });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const addHardwareItemOption = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const { hardware_type_id, hardware_item_id, hardware_item_ids, name } =
+      req.body;
+
+    // Several hardware items: the option is added to each (its type comes from the item).
+    if (Array.isArray(hardware_item_ids)) {
+      const ids = hardware_item_ids.map(Number);
+      if (
+        !name ||
+        ids.length === 0 ||
+        !ids.every((id) => Number.isSafeInteger(id) && id > 0)
+      ) {
+        return res.status(400).json({
+          success: false,
+          error: "hardware_item_ids and name are required",
+        });
+      }
+
+      const options = await createHardwareItemOptions(ids, name);
+      return res.status(201).json({ success: true, data: options });
+    }
+
+    if (!hardware_type_id || !hardware_item_id || !name) {
+      return res.status(400).json({
+        success: false,
+        error:
+          "hardware_type_id, hardware_item_id and name are required",
+      });
+    }
+
+    const optionEntry = await createHardwareItemOption(
+      Number(hardware_type_id),
+      Number(hardware_item_id),
+      name,
+    );
+    return res.status(201).json({ success: true, data: optionEntry });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const uploadHardwareItemOptions = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res
+        .status(400)
+        .json({ success: false, error: "CSV or XLSX file is required" });
+    }
+
+    const vendor_id = Number(
+      req.body.vendor_id || req.body.vendorId || req.params.vendor_id,
+    );
+    if (!vendor_id) {
+      return res
+        .status(400)
+        .json({ success: false, error: "vendor_id is required" });
+    }
+
+    const isCsv =
+      file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
+
+    const result = await bulkUploadHardwareItemOptions(
       vendor_id,
       file.buffer,
       isCsv,

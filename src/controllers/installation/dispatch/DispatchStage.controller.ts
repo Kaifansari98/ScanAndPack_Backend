@@ -66,6 +66,10 @@ const getProductionStageFactoryUser = async (
   return productionStageMapping?.user ?? null;
 };
 
+/** Large-scale vendors scope the Dispatch stage to one instance. */
+const instanceIdFrom = (value: unknown): number | null =>
+  Number(Array.isArray(value) ? value[0] : value) || null;
+
 export class DispatchStageController {
   /** ✅ Get all leads under Dispatch Stage (Type 14) */
   async getAllDispatchStageLeads(req: Request, res: Response) {
@@ -120,7 +124,11 @@ export class DispatchStageController {
           .json(ApiResponse.error("Vendor ID and Lead ID are required", 400));
       }
 
-      const lead = await service.getRequiredDateForDispatch(vendorId, leadId);
+      const lead = await service.getRequiredDateForDispatch(
+        vendorId,
+        leadId,
+        instanceIdFrom(req.query.instance_id)
+      );
 
       return res
         .status(200)
@@ -135,9 +143,10 @@ export class DispatchStageController {
         "[DispatchStageController] getRequiredDateForDispatch Error:",
         error
       );
+      const statusCode = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error", 500));
+        .status(statusCode)
+        .json(ApiResponse.error(error.message || "Internal server error", statusCode));
     }
   }
 
@@ -168,7 +177,7 @@ export class DispatchStageController {
         vehicle_no,
         dispatch_remark,
         updated_by,
-      });
+      }, instanceIdFrom(req.body.instance_id));
 
       return res
         .status(200)
@@ -179,7 +188,7 @@ export class DispatchStageController {
         error.message,
         error.stack
       );
-      return res.status(500).json({
+      return res.status(error.statusCode || 500).json({
         success: false,
         message: error.message || "Internal server error",
       });
@@ -198,7 +207,11 @@ export class DispatchStageController {
           .json(ApiResponse.error("Vendor ID and Lead ID are required", 400));
       }
 
-      const data = await service.getDispatchDetails(vendorId, leadId);
+      const data = await service.getDispatchDetails(
+        vendorId,
+        leadId,
+        instanceIdFrom(req.query.instance_id)
+      );
 
       return res
         .status(200)
@@ -210,9 +223,10 @@ export class DispatchStageController {
         "[DispatchStageController] getDispatchDetails Error:",
         error
       );
+      const statusCode = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error", 500));
+        .status(statusCode)
+        .json(ApiResponse.error(error.message || "Internal server error", statusCode));
     }
   }
 
@@ -261,7 +275,8 @@ export class DispatchStageController {
         Number(leadId),
         account_id ? Number(account_id) : null,
         Number(created_by),
-        uploadedFiles
+        uploadedFiles,
+        instanceIdFrom(req.body.instance_id)
       );
 
       return res.status(200).json({
@@ -298,7 +313,8 @@ export class DispatchStageController {
 
       const docs = await service.getDispatchDocuments(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
+        instanceIdFrom(req.query.instance_id)
       );
 
       return res.status(200).json({
@@ -335,7 +351,8 @@ export class DispatchStageController {
 
       const result = await service.checkReadyForPostDispatch(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
+        instanceIdFrom(req.query.instance_id)
       );
 
       return res.status(200).json({
@@ -347,7 +364,7 @@ export class DispatchStageController {
         "[DispatchStageController] checkReadyForPostDispatch Error:",
         error
       );
-      return res.status(500).json({
+      return res.status(error.statusCode || 500).json({
         success: false,
         message:
           error.message ||
@@ -504,7 +521,8 @@ export class DispatchStageController {
         factoryUser.id,
         Number(created_by),
         due_date,
-        remark
+        remark,
+        instanceIdFrom(req.body.instance_id)
       );
 
       try {
@@ -785,7 +803,8 @@ export class DispatchStageController {
 
       const tasks = await service.getPendingMaterialTasks(
         Number(vendorId),
-        Number(leadId)
+        Number(leadId),
+        instanceIdFrom(req.query.instance_id)
       );
 
       return res.status(200).json({

@@ -10,6 +10,38 @@ import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/l
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
+/** Dispatch Planning Information fields; large-scale vendors keep them per instance. */
+const DISPATCH_INFO_SELECT = {
+  required_date_for_dispatch: true,
+  onsite_contact_person_name: true,
+  onsite_contact_person_number: true,
+  alt_onsite_contact_person_name: true,
+  alt_onsite_contact_person_number: true,
+  material_lift_availability: true,
+  material_lift_size: true,
+  vehicle_approachability_for_dispatch: true,
+  dispatch_planning_remark: true,
+} as const;
+
+async function findInstanceOfLead(
+  db: Prisma.TransactionClient | typeof prisma,
+  vendorId: number,
+  leadId: number,
+  instanceId: number | null,
+) {
+  if (!instanceId) return null;
+  const instance = await db.leadProductStructureInstance.findFirst({
+    where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+    select: { id: true, title: true, ...DISPATCH_INFO_SELECT },
+  });
+  if (!instance) {
+    throw Object.assign(new Error("Instance not found for this lead"), {
+      statusCode: 404,
+    });
+  }
+  return instance;
+}
+
 export class DispatchPlanningService {
   /** ✅ Fetch all leads with status = Type 13 (Dispatch Planning) */
   async getLeadsWithStatusDispatchPlanning(
@@ -143,20 +175,29 @@ export class DispatchPlanningService {
       lead_id: number;
       dispatchDate: Date;
       updated_by: number;
+      instance_id?: number | null;
     },
   ) {
-    const { vendor_id, lead_id, dispatchDate, updated_by } = params;
+    const { vendor_id, lead_id, dispatchDate, updated_by, instance_id } =
+      params;
 
     /**
-     * Update LeadMaster Dispatch Date
+     * Update Dispatch Date (on the instance when planning per instance)
      */
-    await tx.leadMaster.update({
-      where: { id: lead_id },
-      data: {
-        required_date_for_dispatch: dispatchDate,
-        updated_by,
-      },
-    });
+    if (instance_id) {
+      await tx.leadProductStructureInstance.update({
+        where: { id: instance_id },
+        data: { required_date_for_dispatch: dispatchDate, updated_by },
+      });
+    } else {
+      await tx.leadMaster.update({
+        where: { id: lead_id },
+        data: {
+          required_date_for_dispatch: dispatchDate,
+          updated_by,
+        },
+      });
+    }
 
     /**
      * Update Task Due Date (if already exists)
@@ -168,6 +209,7 @@ export class DispatchPlanningService {
         task_type: "Dispatch",
         lead_stage: "dispatch-planning-stage",
         status: "open",
+        ...(instance_id ? { instance_id } : {}),
       },
       data: {
         due_date: dispatchDate,
@@ -191,6 +233,7 @@ export class DispatchPlanningService {
       vehicle_approachability,
       dispatch_planning_remark,
       created_by,
+      instance_id = null,
     } = payload;
 
     const dispatchDate = required_date_for_dispatch
@@ -209,23 +252,39 @@ export class DispatchPlanningService {
     }
 
     return await prisma.$transaction(async (tx) => {
+      const instance = await findInstanceOfLead(
+        tx,
+        vendor_id,
+        lead_id,
+        instance_id,
+      );
+
       /**
        * STEP 1 — Update Remaining Dispatch Fields
        */
-      await tx.leadMaster.update({
-        where: { id: lead_id },
-        data: {
-          onsite_contact_person_name,
-          onsite_contact_person_number,
-          alt_onsite_contact_person_name,
-          alt_onsite_contact_person_number,
-          material_lift_availability,
-          material_lift_size,
-          vehicle_approachability_for_dispatch: vehicle_approachability,
-          dispatch_planning_remark,
-          updated_by: created_by,
-        },
-      });
+      const dispatchFields = {
+        onsite_contact_person_name,
+        onsite_contact_person_number,
+        alt_onsite_contact_person_name,
+        alt_onsite_contact_person_number,
+        material_lift_availability,
+        material_lift_size,
+        vehicle_approachability_for_dispatch: vehicle_approachability,
+        dispatch_planning_remark,
+        updated_by: created_by,
+      };
+
+      if (instance) {
+        await tx.leadProductStructureInstance.update({
+          where: { id: instance.id },
+          data: dispatchFields,
+        });
+      } else {
+        await tx.leadMaster.update({
+          where: { id: lead_id },
+          data: dispatchFields,
+        });
+      }
 
       /**
        * STEP 2 — Sync Dispatch Date ↔ Task Due Date
@@ -235,12 +294,18 @@ export class DispatchPlanningService {
         lead_id,
         dispatchDate,
         updated_by: created_by,
+        instance_id: instance?.id ?? null,
       });
 
       /**
        * STEP 3 — Ensure Factory Task Exists
        */
-      return { lead_id, vendor_id, updated: true };
+      return {
+        lead_id,
+        vendor_id,
+        instance_id: instance?.id ?? null,
+        updated: true,
+      };
     });
   }
 
@@ -254,9 +319,17 @@ export class DispatchPlanningService {
       pending_payment_details,
       payment_proof_file,
       created_by,
+      instance_id = null,
     } = payload;
 
     return prisma.$transaction(async (tx) => {
+      const instance = await findInstanceOfLead(
+        tx,
+        vendor_id,
+        lead_id,
+        instance_id,
+      );
+
       // 1️⃣ Handle Payment Proof Upload (Type 20)
       let uploadedDocument = null;
       if (payment_proof_file) {
@@ -276,6 +349,7 @@ export class DispatchPlanningService {
             doc_type_id: docType.id,
             doc_og_name: payment_proof_file.originalName,
             doc_sys_name: payment_proof_file.sysName,
+            product_structure_instance_id: instance?.id ?? null,
           },
         });
       }
@@ -306,6 +380,7 @@ export class DispatchPlanningService {
           amount: pending_payment,
           payment_text: pending_payment_details || null,
           payment_file_id: uploadedDocument?.id ?? null,
+          instance_id: instance?.id ?? null,
         },
       });
 
@@ -350,8 +425,11 @@ export class DispatchPlanningService {
         lead_id,
         account_id,
         created_by,
-        action: `Dispatch Planning Payment of ₹${pending_payment} recorded.`,
+        action: instance
+          ? `Dispatch Planning Payment of ₹${pending_payment} recorded for instance "${instance.title}".`
+          : `Dispatch Planning Payment of ₹${pending_payment} recorded.`,
         action_type: "UPDATE",
+        instance_id: instance?.id,
       });
 
       // 6️⃣ If document uploaded → create LeadDocumentLogs entry
@@ -371,6 +449,7 @@ export class DispatchPlanningService {
       return {
         lead_id,
         vendor_id,
+        instance_id: instance?.id ?? null,
         payment_id: payment.id,
         uploaded_doc_id: uploadedDocument?.id || null,
         detailed_log_id: detailedLog.id,
@@ -380,38 +459,58 @@ export class DispatchPlanningService {
   }
 
   /** ✅ 1️⃣ Get Dispatch Planning Info */
-  async getDispatchPlanningInfoService(vendorId: number, leadId: number) {
+  async getDispatchPlanningInfoService(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId },
       select: {
         id: true,
         lead_code: true,
-        required_date_for_dispatch: true,
-        onsite_contact_person_name: true,
-        onsite_contact_person_number: true,
-        alt_onsite_contact_person_name: true,
-        alt_onsite_contact_person_number: true,
-        material_lift_availability: true,
-        material_lift_size: true,
-        vehicle_approachability_for_dispatch: true,
-        dispatch_planning_remark: true,
+        ...DISPATCH_INFO_SELECT,
         updated_at: true,
       },
     });
 
     if (!lead) throw new Error("Lead not found");
 
+    const instance = await findInstanceOfLead(
+      prisma,
+      vendorId,
+      leadId,
+      instanceId,
+    );
+    if (instance) {
+      const { id, title, ...info } = instance;
+      return {
+        id: lead.id,
+        lead_code: lead.lead_code,
+        instance_id: id,
+        instance_title: title,
+        ...info,
+      };
+    }
+
     return lead;
   }
 
   /** ✅ 2️⃣ Get Dispatch Planning Payment Info */
-  async getDispatchPlanningPaymentService(vendorId: number, leadId: number) {
+  async getDispatchPlanningPaymentService(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
+    await findInstanceOfLead(prisma, vendorId, leadId, instanceId);
+
     // Fetch Dispatch Planning PaymentInfo (Type 5)
     const payment = await prisma.paymentInfo.findFirst({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
         paymentType: { tag: "Type 5" }, // ✅ Only Dispatch Planning payment
+        ...(instanceId ? { instance_id: instanceId } : {}),
       },
       orderBy: { created_at: "desc" },
       include: {
@@ -450,6 +549,7 @@ export class DispatchPlanningService {
         lead_id: leadId,
         vendor_id: vendorId,
         action: { contains: "Dispatch Planning Payment" },
+        ...(instanceId ? { instance_id: instanceId } : {}),
       },
       orderBy: { created_at: "desc" },
       select: {
@@ -495,24 +595,31 @@ export class DispatchPlanningService {
   /**
    * ✅ Check if all required Dispatch fields are filled
    */
-  static async checkDispatchReadiness(vendorId: number, leadId: number) {
-    const lead = await prisma.leadMaster.findFirst({
+  static async checkDispatchReadiness(
+    vendorId: number,
+    leadId: number,
+    instanceId: number | null = null,
+  ) {
+    const leadRow = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId, is_deleted: false },
       select: {
         id: true,
         lead_code: true,
-        required_date_for_dispatch: true,
-        onsite_contact_person_name: true,
-        onsite_contact_person_number: true,
-        material_lift_availability: true,
-        material_lift_size: true,
-        vehicle_approachability_for_dispatch: true,
-        dispatch_planning_remark: true,
+        ...DISPATCH_INFO_SELECT,
       },
     });
 
-    if (!lead)
+    if (!leadRow)
       throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
+
+    // Per-instance planning: check the instance's own fields.
+    const instance = await findInstanceOfLead(
+      prisma,
+      vendorId,
+      leadId,
+      instanceId,
+    );
+    const lead = instance ? { ...instance, id: leadRow.id } : leadRow;
 
     // ✅ Check each field
     const missingFields: string[] = [];
@@ -538,6 +645,7 @@ export class DispatchPlanningService {
     return {
       lead_id: lead.id,
       vendor_id: vendorId,
+      instance_id: instance?.id ?? null,
       is_ready_for_dispatch: isReadyForDispatch,
       missing_fields: missingFields,
     };
@@ -548,7 +656,38 @@ export class DispatchPlanningService {
     leadId: number,
     updatedBy: number,
     baseUrl: string,
+    instanceId: number | null = null,
   ) {
+    // Large-scale vendors move one product instance at a time, and only once its
+    // own Dispatch Planning Information is complete.
+    const largeScaleVendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { handlesLargeScaleProjects: true },
+    });
+    const isLargeScale = largeScaleVendor?.handlesLargeScaleProjects === true;
+    if (isLargeScale) {
+      if (!instanceId) {
+        throw Object.assign(new Error("Select an instance to move to Dispatch"), {
+          statusCode: 400,
+        });
+      }
+      const readiness = await DispatchPlanningService.checkDispatchReadiness(
+        vendorId,
+        leadId,
+        instanceId,
+      );
+      if (!readiness.is_ready_for_dispatch) {
+        throw Object.assign(
+          new Error(
+            `Complete the Dispatch Planning Information for this instance first: ${readiness.missing_fields.join(", ")}`,
+          ),
+          { statusCode: 409 },
+        );
+      }
+    }
+
+    let movedInstance: { id: number; title: string } | null = null;
+
     // ==========================
     // CORE TRANSACTION LAYER
     // ==========================
@@ -556,12 +695,48 @@ export class DispatchPlanningService {
     const result = await prisma.$transaction(async (tx) => {
       const lead = await tx.leadMaster.findUnique({
         where: { id: leadId },
-        select: { id: true, vendor_id: true, account_id: true },
+        select: {
+          id: true,
+          vendor_id: true,
+          account_id: true,
+          statusType: { select: { tag: true } },
+        },
       });
 
       if (!lead) throw new Error(`Lead ${leadId} not found`);
       if (lead.vendor_id !== vendorId)
         throw new Error(`Lead does not belong to vendor ${vendorId}`);
+
+      const instance = isLargeScale
+        ? await tx.leadProductStructureInstance.findFirst({
+            where: {
+              id: instanceId!,
+              lead_id: leadId,
+              vendor_id: vendorId,
+              is_archived: false,
+            },
+            select: {
+              id: true,
+              title: true,
+              stage_status_id: true,
+              stageStatus: { select: { tag: true } },
+              ...DISPATCH_INFO_SELECT,
+            },
+          })
+        : null;
+      if (isLargeScale) {
+        if (!instance) {
+          throw Object.assign(new Error("Instance not found for this lead"), {
+            statusCode: 404,
+          });
+        }
+        if ((instance.stageStatus?.tag ?? lead.statusType?.tag) !== "Type 13") {
+          throw Object.assign(
+            new Error("This instance is not in Dispatch Planning"),
+            { statusCode: 409 },
+          );
+        }
+      }
 
       const toStatus = await tx.statusTypeMaster.findFirst({
         where: { vendor_id: vendorId, tag: "Type 14" },
@@ -570,31 +745,61 @@ export class DispatchPlanningService {
 
       if (!toStatus) throw new Error(`Dispatch Stage (Type 14) not configured`);
 
-      const updatedLead = await tx.leadMaster.update({
-        where: { id: lead.id },
-        data: {
-          status_id: toStatus.id,
-          updated_by: updatedBy,
-          updated_at: new Date(),
-        },
-      });
+      let updatedLead;
+      if (instance) {
+        // Large-scale: only this instance moves; the lead's own status stays as it is.
+        const dispatchPlanningStatus = await tx.statusTypeMaster.findFirst({
+          where: { vendor_id: vendorId, tag: "Type 13" },
+          select: { id: true },
+        });
+        await tx.leadProductStructureInstance.update({
+          where: { id: instance.id },
+          data: { stage_status_id: toStatus.id, updated_by: updatedBy },
+        });
+        await tx.instanceStageHistory.create({
+          data: {
+            instance_id: instance.id,
+            vendor_id: vendorId,
+            from_status_id:
+              instance.stage_status_id ?? dispatchPlanningStatus?.id ?? null,
+            to_status_id: toStatus.id,
+            created_by: updatedBy,
+          },
+        });
+        updatedLead = await tx.leadMaster.findUniqueOrThrow({
+          where: { id: lead.id },
+        });
+        movedInstance = { id: instance.id, title: instance.title };
+      } else {
+        updatedLead = await tx.leadMaster.update({
+          where: { id: lead.id },
+          data: {
+            status_id: toStatus.id,
+            updated_by: updatedBy,
+            updated_at: new Date(),
+          },
+        });
 
-      await ensureLeadStatusLog(tx, {
-        vendorId,
-        leadId: lead.id,
-        accountId: lead.account_id,
-        statusId: toStatus.id,
-        createdBy: updatedBy,
-      });
+        await ensureLeadStatusLog(tx, {
+          vendorId,
+          leadId: lead.id,
+          accountId: lead.account_id,
+          statusId: toStatus.id,
+          createdBy: updatedBy,
+        });
+      }
 
       await createLeadLog(tx, {
         vendor_id: vendorId,
         lead_id: lead.id,
         account_id: lead.account_id!,
-        action: "Lead moved to Dispatch stage.",
+        action: instance
+          ? `Instance "${instance.title}" moved to Dispatch stage.`
+          : "Lead moved to Dispatch stage.",
         action_type: "UPDATE",
         history_type: "Lead",
         created_by: updatedBy,
+        instance_id: instance?.id,
       });
 
       const leadPlanningData = await tx.leadMaster.findUnique({
@@ -609,6 +814,15 @@ export class DispatchPlanningService {
 
       if (!leadPlanningData?.account_id) {
         throw new Error("Lead Account not found.");
+      }
+
+      // Per-instance planning: the dispatch date/remark live on the instance
+      // and the Dispatch task belongs to it.
+      if (instance) {
+        leadPlanningData.required_date_for_dispatch =
+          instance.required_date_for_dispatch;
+        leadPlanningData.dispatch_planning_remark =
+          instance.dispatch_planning_remark;
       }
 
       if (!leadPlanningData.required_date_for_dispatch) {
@@ -633,12 +847,25 @@ export class DispatchPlanningService {
         throw new Error("Production-stage factory mapping not found for this lead.");
       }
 
+      // The instance's own Dispatch task; a lead-level one only when it is the
+      // lead's single instance (tasks created before instance-level dispatch).
+      let instanceTaskScope: Prisma.UserLeadTaskWhereInput = {};
+      if (instance) {
+        const instanceCount = await tx.leadProductStructureInstance.count({
+          where: { lead_id: leadId, vendor_id: vendorId, is_archived: false },
+        });
+        instanceTaskScope =
+          instanceCount === 1
+            ? { OR: [{ instance_id: instance.id }, { instance_id: null }] }
+            : { instance_id: instance.id };
+      }
       const existingTask = await tx.userLeadTask.findFirst({
         where: {
           lead_id: leadId,
           vendor_id: vendorId,
           task_type: "Dispatch",
           lead_stage: "dispatch-planning-stage",
+          ...instanceTaskScope,
         },
       });
 
@@ -649,6 +876,7 @@ export class DispatchPlanningService {
             due_date: leadPlanningData.required_date_for_dispatch,
             updated_by: updatedBy,
             updated_at: new Date(),
+            ...(instance ? { instance_id: instance.id } : {}),
           },
         });
 
@@ -680,6 +908,7 @@ export class DispatchPlanningService {
             status: "open",
             created_by: updatedBy,
             lead_stage: "dispatch-planning-stage",
+            instance_id: instance?.id ?? null,
           },
         });
 
@@ -691,7 +920,11 @@ export class DispatchPlanningService {
         });
       }
 
-      return updatedLead;
+      return {
+        ...updatedLead,
+        instance_id: instance?.id ?? null,
+        instance_title: instance?.title ?? null,
+      };
     });
 
     // ===============================
@@ -716,7 +949,11 @@ export class DispatchPlanningService {
           },
         }),
         prisma.leadProductStructureInstance.findFirst({
-          where: { lead_id: leadId, vendor_id: vendorId },
+          where: {
+            lead_id: leadId,
+            vendor_id: vendorId,
+            ...(movedInstance ? { id: (movedInstance as { id: number }).id } : {}),
+          },
           select: { id: true },
           orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
         }),
@@ -728,7 +965,10 @@ export class DispatchPlanningService {
 
       if (!lead) return result;
 
-      const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+      const baseLeadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+      const leadName = movedInstance
+        ? `${baseLeadName} (${(movedInstance as { title: string }).title})`
+        : baseLeadName;
       const leadCode = lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
       const movedBy = actor?.user_name ?? "System";
       const movedAt = new Date().toLocaleString("en-IN", {
@@ -737,8 +977,9 @@ export class DispatchPlanningService {
         year: "numeric",
       });
       const franchiseId = lead.franchise_id ?? null;
-      const stageTag = lead.statusType?.tag;
-      const instanceId = firstInstance?.id;
+      // A moved instance is in Dispatch even though the lead's status is unchanged.
+      const stageTag = movedInstance ? "Type 14" : lead.statusType?.tag;
+      const redirectInstanceId = firstInstance?.id;
 
       // Build redirect using STAGE_PATH_BY_TAG
       const dpBase = stageTag && STAGE_PATH_BY_TAG[stageTag]
@@ -746,7 +987,8 @@ export class DispatchPlanningService {
         : `/dashboard/installation/dispatch-stage/details/${leadId}`;
       const dpParams = new URLSearchParams();
       if (lead.account_id) dpParams.set("accountId", String(lead.account_id));
-      if (instanceId) dpParams.set("instance_id", String(instanceId));
+      if (redirectInstanceId)
+        dpParams.set("instance_id", String(redirectInstanceId));
       const dpQs = dpParams.toString();
       const redirectPath = dpQs ? `${dpBase}?${dpQs}` : dpBase;
       const projectUrl = `${baseUrl}${redirectPath}`;
@@ -822,7 +1064,7 @@ export class DispatchPlanningService {
       );
 
       if (lead.is_small_order_request && factoryUser) {
-        const smallOrderRedirectPath = `/dashboard/installation/dispatch-stage/details/${leadId}?accountId=${lead.account_id}`;
+        const smallOrderRedirectPath = `/dashboard/installation/dispatch-stage/details/${leadId}?accountId=${lead.account_id}${redirectInstanceId ? `&instance_id=${redirectInstanceId}` : ""}`;
         const smallOrderProjectUrl = `${baseUrl}${smallOrderRedirectPath}`;
 
         await Promise.allSettled([

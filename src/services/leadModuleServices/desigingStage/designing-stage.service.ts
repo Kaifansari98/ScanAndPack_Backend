@@ -531,6 +531,10 @@ export class DesigingStage {
         (vendor?.handlesLargeScaleProjects === true || vendor?.is_this_vendor_is_custom_usertype_only === true)
           ? selectedDesignDocument?.product_type_id ?? null
           : null;
+      // Keep the quotation on the same item group as the design it was made for
+      const inheritedInstanceId = useCustomNaming
+        ? selectedDesignDocument?.product_structure_instance_id ?? null
+        : null;
       const uploadedDocs: any[] = [];
 
       // 3️⃣ Upload + LeadDocuments
@@ -562,6 +566,7 @@ export class DesigingStage {
             doc_type_id: quotationDocType.id,
             created_by: data.userId,
             product_type_id: inheritedProductTypeId,
+            product_structure_instance_id: inheritedInstanceId,
           },
         });
 

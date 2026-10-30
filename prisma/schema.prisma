@@ -75,7 +75,7 @@ model VendorMaster {
   broadcastCategories                          BroadcastCategoryMaster[]                      @relation("VendorBroadcastCategories")
   broadcasts                                   BroadcastMaster[]                              @relation("VendorBroadcasts")
   carcasMaterials                              CarcasMaterialMaster[]
-  carcassLegs                                  CarcassLegsMaster[]
+  hardwareTypes                                HardwareTypeMaster[]
   carcassTypes                                 CarcassTypeMaster[]
   categoryNamingStructures                     CategoryNamingStructure[]
   clientBankAccounts                           ClientBankDetail[]
@@ -1100,7 +1100,8 @@ model LeadShutterMaterialMapping {
   lead_id                    Int
   shutter_type_id            Int
   shutter_material_id        Int
-  shutter_material_finish_id Int
+  shutter_outer_finish_id    Int
+  shutter_inner_finish_id    Int?
   created_at                 DateTime                    @default(now())
   created_by                 Int
   specs_id                   Int
@@ -1114,7 +1115,8 @@ model LeadShutterMaterialMapping {
   deleted_remark             String?
   createdBy                  UserMaster                  @relation("LeadShutterMaterialMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                       LeadMaster                  @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  shutterMaterialFinish      ShutterMaterialFinishMaster @relation(fields: [shutter_material_finish_id], references: [id], onDelete: Cascade)
+  shutterOuterFinish         ShutterOuterFinishMaster    @relation(fields: [shutter_outer_finish_id], references: [id], onDelete: Cascade)
+  shutterInnerFinish         ShutterInnerFinishMaster?   @relation(fields: [shutter_inner_finish_id], references: [id], onDelete: SetNull)
   shutterMaterial            ShutterMaterialMaster       @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
   shutterType                ShutterTypeMaster           @relation(fields: [shutter_type_id], references: [id], onDelete: Cascade)
   LeadSpecificationsMaster   LeadSpecificationsMaster    @relation(fields: [specs_id], references: [id], onDelete: Cascade)
@@ -1124,7 +1126,8 @@ model LeadShutterMaterialMapping {
   @@index([lead_id])
   @@index([shutter_type_id])
   @@index([shutter_material_id])
-  @@index([shutter_material_finish_id])
+  @@index([shutter_outer_finish_id])
+  @@index([shutter_inner_finish_id])
   @@index([created_by])
   @@index([specs_id])
 }
@@ -1439,6 +1442,7 @@ model LeadRequirementMaterialMapping {
 
 model CarcassTypeMaster {
   id                     Int                          @id @default(autoincrement())
+  status                 String                       @default("active")
   name                   String
   vendor_id              Int
   can_do_fast_production Boolean                      @default(true)
@@ -1450,6 +1454,7 @@ model CarcassTypeMaster {
 
 model CarcasMaterialMaster {
   id           Int                           @id @default(autoincrement())
+  status       String                        @default("active")
   name         String
   vendor_id    Int
   vendor       VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -1459,6 +1464,7 @@ model CarcasMaterialMaster {
 
 model CarcassMaterialFinishMaster {
   id                 Int                          @id @default(autoincrement())
+  status             String                       @default("active")
   name               String
   carcas_material_id Int
   material           CarcasMaterialMaster         @relation(fields: [carcas_material_id], references: [id], onDelete: Cascade)
@@ -1467,6 +1473,7 @@ model CarcassMaterialFinishMaster {
 
 model ShutterTypeMaster {
   id                   Int                          @id @default(autoincrement())
+  status               String                       @default("active")
   name                 String
   vendor_id            Int
   leadMappings         LeadShutterMaterialMapping[]
@@ -1486,58 +1493,73 @@ model ShutterSubTypeMaster {
 
 model ShutterMaterialMaster {
   id           Int                           @id @default(autoincrement())
+  status       String                        @default("active")
   name         String
   vendor_id    Int
   leadMappings LeadShutterMaterialMapping[]
-  finishes     ShutterMaterialFinishMaster[]
+  outerFinishes ShutterOuterFinishMaster[]
+  innerFinishes ShutterInnerFinishMaster[]
   vendor       VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
-model ShutterMaterialFinishMaster {
+model ShutterOuterFinishMaster {
   id                  Int                          @id @default(autoincrement())
+  status              String                       @default("active")
   name                String
   shutter_material_id Int
   leadMappings        LeadShutterMaterialMapping[]
   material            ShutterMaterialMaster        @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
 }
 
-model CarcassLegsMaster {
-  id           Int                              @id @default(autoincrement())
-  name         String
-  vendor_id    Int
-  vendor       VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  leadMappings LeadHardwareMapping[]
-  colors       SkirtingCarcassLegsColorMaster[]
-  skirtings    SkirtingCarcassLegsMaster[]
+model ShutterInnerFinishMaster {
+  id                  Int                          @id @default(autoincrement())
+  status              String                       @default("active")
+  name                String
+  shutter_material_id Int
+  leadMappings        LeadShutterMaterialMapping[]
+  material            ShutterMaterialMaster        @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
 }
 
-model SkirtingCarcassLegsMaster {
-  id              Int                              @id @default(autoincrement())
-  name            String
-  carcass_legs_id Int
-  inScope         Boolean                          @default(true)
-  leadMappings    LeadHardwareMapping[]
-  colors          SkirtingCarcassLegsColorMaster[]
-  carcassLegs     CarcassLegsMaster                @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
+model HardwareTypeMaster {
+  id                  Int                        @id @default(autoincrement())
+  status              String                     @default("active")
+  name                String
+  vendor_id           Int
+  vendor              VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leadMappings        LeadHardwareMapping[]
+  hardwareItemOptions HardwareItemOptionMaster[]
+  hardwareItems       HardwareItemMaster[]
 }
 
-model SkirtingCarcassLegsColorMaster {
-  id                       Int                       @id @default(autoincrement())
-  carcass_legs_id          Int
-  skirting_carcass_legs_id Int
-  color                    String
-  leadMappings             LeadHardwareMapping[]
-  carcassLegs              CarcassLegsMaster         @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
-  skirtingCarcassLegs      SkirtingCarcassLegsMaster @relation(fields: [skirting_carcass_legs_id], references: [id], onDelete: Cascade)
+model HardwareItemMaster {
+  id                  Int                        @id @default(autoincrement())
+  status              String                     @default("active")
+  name                String
+  hardware_type_id    Int
+  inScope             Boolean                    @default(true)
+  leadMappings        LeadHardwareMapping[]
+  hardwareItemOptions HardwareItemOptionMaster[]
+  hardwareType        HardwareTypeMaster         @relation(fields: [hardware_type_id], references: [id], onDelete: Cascade)
+}
+
+model HardwareItemOptionMaster {
+  id               Int                   @id @default(autoincrement())
+  status           String                @default("active")
+  hardware_type_id Int
+  hardware_item_id Int
+  name             String
+  leadMappings     LeadHardwareMapping[]
+  hardwareType     HardwareTypeMaster    @relation(fields: [hardware_type_id], references: [id], onDelete: Cascade)
+  hardwareItem     HardwareItemMaster    @relation(fields: [hardware_item_id], references: [id], onDelete: Cascade)
 }
 
 model LeadHardwareMapping {
   id                             Int                             @id @default(autoincrement())
   vendor_id                      Int
   lead_id                        Int
-  carcass_legs_id                Int
-  skirting_carcass_legs_id       Int
-  skirting_carcass_legs_color_id Int?
+  hardware_type_id               Int
+  hardware_item_id               Int
+  hardware_item_option_id        Int?
   note                           String?
   created_at                     DateTime                        @default(now())
   created_by                     Int
@@ -1550,25 +1572,26 @@ model LeadHardwareMapping {
   is_deleted_item                Boolean                         @default(false)
   amended_remark                 String?
   deleted_remark                 String?
-  carcassLegs                    CarcassLegsMaster               @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
+  hardwareType                   HardwareTypeMaster              @relation(fields: [hardware_type_id], references: [id], onDelete: Cascade)
   createdBy                      UserMaster                      @relation("LeadHardwareMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                           LeadMaster                      @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  skirtingCarcassLegsColor       SkirtingCarcassLegsColorMaster? @relation(fields: [skirting_carcass_legs_color_id], references: [id], onDelete: Cascade)
-  skirtingCarcassLegs            SkirtingCarcassLegsMaster       @relation(fields: [skirting_carcass_legs_id], references: [id], onDelete: Cascade)
+  hardwareItemOption             HardwareItemOptionMaster?       @relation(fields: [hardware_item_option_id], references: [id], onDelete: Cascade)
+  hardwareItem                   HardwareItemMaster              @relation(fields: [hardware_item_id], references: [id], onDelete: Cascade)
   LeadSpecificationsMaster       LeadSpecificationsMaster        @relation(fields: [specs_id], references: [id], onDelete: Cascade)
   vendor                         VendorMaster                    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@index([vendor_id])
   @@index([lead_id])
-  @@index([carcass_legs_id])
-  @@index([skirting_carcass_legs_id])
-  @@index([skirting_carcass_legs_color_id])
+  @@index([hardware_type_id])
+  @@index([hardware_item_id])
+  @@index([hardware_item_option_id])
   @@index([created_by])
   @@index([specs_id])
 }
 
 model LightCarcasTypeMaster {
   id         Int                     @id @default(autoincrement())
+  status     String                  @default("active")
   vendor_id  Int
   type       String
   is_active  Boolean                 @default(true)
@@ -1581,6 +1604,7 @@ model LightCarcasTypeMaster {
 
 model LightCarcasUnitMaster {
   id                   Int                          @id @default(autoincrement())
+  status               String                       @default("active")
   vendor_id            Int
   type                 String
   light_carcas_type_id Int
@@ -1626,6 +1650,7 @@ model LeadLightCarcasUnitMapping {
 
 model OtherAppliancesMaster {
   id             Int                          @id @default(autoincrement())
+  status         String                       @default("active")
   vendor_id      Int
   article_number String
   description    String
@@ -1984,6 +2009,31 @@ model LeadProductStructureInstance {
   is_post_production                         Boolean?
   pre_prod_remark                            String?                         @db.VarChar(2000)
   isLargeScaleProjectInstance                Boolean                         @default(false)
+  // Dispatch Planning Information (large-scale vendors plan dispatch per instance)
+  required_date_for_dispatch                 DateTime?
+  onsite_contact_person_name                 String?
+  onsite_contact_person_number               String?
+  alt_onsite_contact_person_name             String?
+  alt_onsite_contact_person_number           String?
+  material_lift_availability                 Boolean?
+  material_lift_size                         String?
+  vehicle_approachability_for_dispatch       Boolean?
+  dispatch_planning_remark                   String?                         @db.VarChar(2000)
+  // Dispatch Details (large-scale vendors dispatch per instance)
+  dispatch_date                              DateTime?
+  driver_name                                String?                         @db.VarChar(255)
+  driver_number                              String?                         @db.VarChar(50)
+  vehicle_no                                 String?                         @db.VarChar(100)
+  dispatch_remark                            String?                         @db.VarChar(2000)
+  // Under Installation (large-scale vendors run installation per instance)
+  actual_installation_start_date             DateTime?
+  expected_installation_end_date             DateTime?
+  is_carcass_installation_completed          Boolean?                        @default(false)
+  carcass_installation_completion_date       DateTime?
+  is_shutter_installation_completed          Boolean?                        @default(false)
+  shutter_installation_completion_date       DateTime?
+  installerMappings                          InstallerUserMapping[]
+  installationUpdates                        InstallationUpdate[]
   product_item_code_id                       Int?
   quantity                                   Int?
   sub_product_structure_id                   Int?
@@ -2001,6 +2051,8 @@ model LeadProductStructureInstance {
   activityStatusLogs                         LeadScopedActivityStatusLog[]
   tasks                                      UserLeadTask[]
   trackTraceProjects                         ProjectMaster[]
+  siteReadinessAnswers                       SiteReadiness[]
+  payments                                   PaymentInfo[]
 
 
   @@index([vendor_id, stage_status_id, lead_id])
@@ -2042,7 +2094,9 @@ model PaymentInfo {
   gst_percentage          Float?
   total_amount            Float?
   is_booking_received_amt Boolean            @default(false)
+  instance_id             Int?
   account                 AccountMaster      @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  instance                LeadProductStructureInstance? @relation(fields: [instance_id], references: [id], onDelete: SetNull)
   createdBy               UserMaster         @relation(fields: [created_by], references: [id], onDelete: Cascade)
   lead                    LeadMaster         @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   document                LeadDocuments?     @relation(fields: [payment_file_id], references: [id])
@@ -2052,6 +2106,7 @@ model PaymentInfo {
   vendor                  VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@index([product_type_id])
+  @@index([lead_id, instance_id])
 }
 
 model Ledger {
@@ -2811,6 +2866,7 @@ model SiteReadiness {
   vendor_id             Int
   account_id            Int
   lead_id               Int
+  instance_id           Int?
   type                  String
   remark                String?         @db.VarChar(2000)
   value                 Boolean?
@@ -2821,11 +2877,13 @@ model SiteReadiness {
   account               AccountMaster   @relation(fields: [account_id], references: [id], onDelete: Cascade)
   createdBy             UserMaster      @relation("SiteReadinessCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                  LeadMaster      @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  instance              LeadProductStructureInstance? @relation(fields: [instance_id], references: [id], onDelete: Cascade)
   updatedBy             UserMaster?     @relation("SiteReadinessUpdatedBy", fields: [updated_by], references: [id])
   vendor                VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   site_readiness_photos LeadDocuments[] @relation("LeadDocumentsToSiteReadiness")
 
   @@index([lead_id, vendor_id, type])
+  @@index([lead_id, instance_id])
 }
 
 model InstallerUserMaster {
@@ -2847,6 +2905,7 @@ model InstallerUserMapping {
   account_id    Int
   lead_id       Int
   installer_id  Int
+  instance_id   Int?
   assigned_by   Int
   assigned_date DateTime            @default(now())
   account       AccountMaster       @relation(fields: [account_id], references: [id], onDelete: Cascade)
@@ -2854,6 +2913,9 @@ model InstallerUserMapping {
   installer     InstallerUserMaster @relation(fields: [installer_id], references: [id], onDelete: Cascade)
   lead          LeadMaster          @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   vendor        VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  instance      LeadProductStructureInstance? @relation(fields: [instance_id], references: [id], onDelete: Cascade)
+
+  @@index([lead_id, instance_id])
 }
 
 model InstallationUpdate {
@@ -2861,6 +2923,7 @@ model InstallationUpdate {
   vendor_id   Int
   account_id  Int
   lead_id     Int
+  instance_id Int?
   update_date DateTime
   remark      String?                       @db.VarChar(2000)
   created_by  Int
@@ -2869,7 +2932,10 @@ model InstallationUpdate {
   createdBy   UserMaster                    @relation(fields: [created_by], references: [id], onDelete: Cascade)
   lead        LeadMaster                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   vendor      VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  instance    LeadProductStructureInstance? @relation(fields: [instance_id], references: [id], onDelete: Cascade)
   documents   InstallationUpdateDocuments[]
+
+  @@index([lead_id, instance_id])
 }
 
 model InstallationUpdateDocuments {

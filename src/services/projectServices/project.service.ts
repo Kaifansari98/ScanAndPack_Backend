@@ -390,7 +390,7 @@ export const getAllProjectsTrackTrace = async (
   |--------------------------------------------------------------------------
   */
 
-  const [total, projects] =
+  const [total, projects, vendor] =
     await prisma.$transaction([
       prisma.projectMaster.count({
         where,
@@ -406,7 +406,25 @@ export const getAllProjectsTrackTrace = async (
 
         orderBy,
       }),
+
+      prisma.vendorMaster.findUnique({
+        where: { id: vendor_id },
+        select: {
+          time_zone: true,
+          time_zone_id: true,
+          time_zone_master: {
+            select: {
+              time_zone_name: true,
+            },
+          },
+        },
+      }),
     ]);
+
+  const vendor_time_zone =
+    vendor?.time_zone_master?.time_zone_name ||
+    vendor?.time_zone ||
+    "UTC";
 
   const totalPages =
     total === 0
@@ -414,7 +432,12 @@ export const getAllProjectsTrackTrace = async (
       : Math.ceil(total / limit);
 
   return {
-    projects,
+    projects: projects.map((project) => ({
+      ...project,
+      vendor_time_zone,
+    })),
+
+    vendor_time_zone,
 
     pagination: {
       page,

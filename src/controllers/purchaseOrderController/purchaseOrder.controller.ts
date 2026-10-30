@@ -42,10 +42,11 @@ export const convertPIToPO = async (req: Request, res: Response) => {
 export const listPurchaseOrders = async (req: Request, res: Response) => {
   const vendor_id = getVendorId(req);
   if (!vendor_id) return res.status(400).json(ApiResponse.error("Invalid vendor_id", 400));
-  const page   = Math.max(1, Number(req.query.page) || 1);
-  const status = req.query.status ? String(req.query.status) : undefined;
-  const search = req.query.search ? String(req.query.search) : undefined;
-  const result = await listPurchaseOrdersService(vendor_id, page, status, search);
+  const page     = Math.max(1, Number(req.query.page) || 1);
+  const pageSize = Number(req.query.limit || req.query.pageSize || req.query.page_size) || 20;
+  const status   = req.query.status ? String(req.query.status) : undefined;
+  const search   = req.query.search ? String(req.query.search) : undefined;
+  const result   = await listPurchaseOrdersService(vendor_id, page, status, search, pageSize);
   return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
 };
 

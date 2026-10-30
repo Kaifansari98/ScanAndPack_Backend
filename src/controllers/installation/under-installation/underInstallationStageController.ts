@@ -16,6 +16,10 @@ import { ReturnOrderDeliveryMethod } from "../../../prisma/generated";
 
 const service = new UnderInstallationStageService();
 
+/** Large-scale vendors scope Under Installation to one instance. */
+const instanceIdFrom = (value: unknown): number | null =>
+  Number(Array.isArray(value) ? value[0] : value) || null;
+
 export class UnderInstallationStageController {
   /**
    * ✅ Move Lead to Under Installation Stage (Type 15)
@@ -45,6 +49,7 @@ export class UnderInstallationStageController {
           leadId,
           updated_by,
           baseUrl,
+          Number(req.body.instance_id) || null,
         );
 
       return res
@@ -60,9 +65,12 @@ export class UnderInstallationStageController {
         "[UnderInstallationStageController] moveLeadToUnderInstallation Error:",
         error,
       );
+      const statusCode = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(statusCode)
+        .json(
+          ApiResponse.error(error.message || "Internal server error", statusCode),
+        );
     }
   }
 
@@ -303,6 +311,7 @@ export class UnderInstallationStageController {
           leadId,
           updated_by,
           new Date(actual_installation_start_date),
+          instanceIdFrom(req.body.instance_id),
         );
 
       return res
@@ -318,9 +327,10 @@ export class UnderInstallationStageController {
         "[UnderInstallationStageController] setActualInstallationStartDate Error:",
         error,
       );
+      const status = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(status)
+        .json(ApiResponse.error(error.message || "Internal server error", status));
     }
   }
 
@@ -343,6 +353,7 @@ export class UnderInstallationStageController {
         await UnderInstallationStageService.getUnderInstallationDetails(
           vendorId,
           leadId,
+          instanceIdFrom(req.query.instance_id),
         );
 
       return res
@@ -355,9 +366,10 @@ export class UnderInstallationStageController {
         "[UnderInstallationStageController] getUnderInstallationDetails Error:",
         error,
       );
+      const status = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(status)
+        .json(ApiResponse.error(error.message || "Internal server error", status));
     }
   }
 
@@ -407,6 +419,7 @@ export class UnderInstallationStageController {
           updated_by,
           new Date(expected_installation_end_date),
           installers,
+          instanceIdFrom(req.body.instance_id),
         );
 
       return res
@@ -422,9 +435,10 @@ export class UnderInstallationStageController {
         "[UnderInstallationStageController] addInstallersAndSetEndDate Error:",
         error,
       );
+      const status = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(status)
+        .json(ApiResponse.error(error.message || "Internal server error", status));
     }
   }
 
@@ -447,6 +461,7 @@ export class UnderInstallationStageController {
         await UnderInstallationStageService.getMappedInstallers(
           vendorId,
           leadId,
+          instanceIdFrom(req.query.instance_id),
         );
 
       return res
@@ -462,9 +477,10 @@ export class UnderInstallationStageController {
         "[UnderInstallationStageController] getMappedInstallers Error:",
         error,
       );
+      const status = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(status)
+        .json(ApiResponse.error(error.message || "Internal server error", status));
     }
   }
 
@@ -513,6 +529,7 @@ export class UnderInstallationStageController {
             ? new Date(expected_installation_end_date)
             : undefined,
           installers,
+          instanceIdFrom(req.body.instance_id),
         );
 
       return res
@@ -528,9 +545,10 @@ export class UnderInstallationStageController {
         "[UnderInstallationStageController] updateInstallationDetails Error:",
         error,
       );
+      const status = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(status)
+        .json(ApiResponse.error(error.message || "Internal server error", status));
     }
   }
 
@@ -580,6 +598,7 @@ export class UnderInstallationStageController {
           updated_by,
           is_carcass_installation_completed,
           is_shutter_installation_completed,
+          instanceIdFrom(req.body.instance_id),
         );
 
       return res
@@ -595,9 +614,10 @@ export class UnderInstallationStageController {
         "[UnderInstallationStageController] setInstallationCompletionStatus Error:",
         error,
       );
+      const status = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(status)
+        .json(ApiResponse.error(error.message || "Internal server error", status));
     }
   }
 
@@ -648,6 +668,7 @@ export class UnderInstallationStageController {
           updated_by,
           is_carcass_installation_completed,
           is_shutter_installation_completed,
+          instanceIdFrom(req.body.instance_id),
         );
 
       return res
@@ -663,9 +684,10 @@ export class UnderInstallationStageController {
         "[UnderInstallationStageController] updateInstallationCompletionStatus Error:",
         error,
       );
+      const status = error.statusCode || 500;
       return res
-        .status(500)
-        .json(ApiResponse.error(error.message || "Internal server error"));
+        .status(status)
+        .json(ApiResponse.error(error.message || "Internal server error", status));
     }
   }
 
@@ -730,6 +752,7 @@ export class UnderInstallationStageController {
           new Date(update_date),
           remark || null,
           uploadedFiles,
+          instanceIdFrom(req.body.instance_id),
         );
 
       return res.status(200).json({
@@ -770,6 +793,7 @@ export class UnderInstallationStageController {
         await UnderInstallationStageService.getInstallationUpdatesDayWise(
           Number(vendorId),
           Number(leadId),
+          instanceIdFrom(req.query.instance_id),
         );
 
       return res.status(200).json({
@@ -1941,7 +1965,11 @@ export class UnderInstallationStageController {
       const vendorId = Number(req.params.vendorId);
       const leadId = Number(req.params.leadId);
 
-      const result = await service.checkUsableHandoverReady(vendorId, leadId);
+      const result = await service.checkUsableHandoverReady(
+        vendorId,
+        leadId,
+        instanceIdFrom(req.query.instance_id),
+      );
 
       if (!result) {
         return res.status(404).json({
@@ -1993,6 +2021,7 @@ export class UnderInstallationStageController {
       const result = await service.checkLeadReadyForFinalHandover(
         Number(vendorId),
         Number(leadId),
+        instanceIdFrom(req.query.instance_id),
       );
 
       return res.json({

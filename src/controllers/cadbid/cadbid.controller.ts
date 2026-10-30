@@ -209,6 +209,34 @@ export const getStudioSsoUrlController = async (
       });
     }
 
+    let editorDestination: string | undefined;
+    if (req.body?.leadId !== undefined) {
+      const leadId = Number(req.body.leadId);
+      if (!Number.isSafeInteger(leadId) || leadId <= 0) {
+        return res.status(400).json({ success: false, message: "A valid leadId is required" });
+      }
+      const user = await prisma.userMaster.findUnique({
+        where: { id: userId }, select: { vendor_id: true },
+      });
+      if (!user) return res.status(401).json({ success: false, message: "Unauthorized" });
+      const lead = await prisma.leadMaster.findFirst({
+        where: { id: leadId, vendor_id: user.vendor_id, is_deleted: false },
+        select: { cadbid_customer_id: true, firstname: true, lastname: true },
+      });
+      if (!lead) return res.status(404).json({ success: false, message: "Lead not found" });
+      if (!lead.cadbid_customer_id) {
+        return res.status(409).json({
+          success: false,
+          message: "This lead is not linked to a Cadbid customer yet. Sync the lead to Cadbid before creating a design.",
+        });
+      }
+      const editorParams = new URLSearchParams({
+        customerId: String(lead.cadbid_customer_id),
+        customerName: `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim() || "-",
+      });
+      editorDestination = `/editor?${editorParams.toString()}`;
+    }
+
     const ticketResult = await requestStudioSsoTicket(token);
     if (!ticketResult.ticket) {
       return res.status(502).json({
@@ -217,7 +245,9 @@ export const getStudioSsoUrlController = async (
       });
     }
 
-    const studioUrl = `${getStudioBaseUrl()}/sso?ticket=${encodeURIComponent(ticketResult.ticket)}`;
+    const ssoParams = new URLSearchParams({ ticket: ticketResult.ticket });
+    if (editorDestination) ssoParams.set("next", editorDestination);
+    const studioUrl = `${getStudioBaseUrl()}/sso?${ssoParams.toString()}`;
 
     return res.status(200).json({
       success: true,
