@@ -17,6 +17,7 @@ import fs from "node:fs/promises";
 import fsSync from "node:fs";
 import path from "node:path";
 import { prisma } from "../../../prisma/client";
+import { sanitizeFilename } from "../../../utils/fileUtils";
 import {
   sendLeadAssignedToSiteSupervisorEmail,
   sendTaskAssignedEmail,
@@ -76,6 +77,79 @@ const normalizeNumberArray = (value: unknown): number[] | undefined => {
   return Number.isFinite(normalized) && normalized > 0
     ? [normalized]
     : undefined;
+};
+
+/**
+ * Booking payment details file name. Custom-usertype vendors get
+ * BP-<n>-<ClientName>-<Structure>-<Date>.<ext>, numbered across the lead's
+ * booking payment files; other vendors keep the original name.
+ */
+const buildBookingPaymentDocName = async (
+  vendorId: number,
+  leadId: number,
+  productTypeId: number | undefined,
+  useCustomUsersOnly: boolean,
+  file: Express.Multer.File,
+): Promise<string> => {
+  if (!useCustomUsersOnly) return file.originalname;
+
+  const lead = await prisma.leadMaster.findFirst({
+    where: { id: leadId, vendor_id: vendorId },
+    select: { firstname: true, lastname: true },
+  });
+  const clientNameSegment = sanitizeFilename(
+    `${lead?.firstname ?? ""}${lead?.lastname ?? ""}` || "Client",
+  )
+    .replace(/_+/g, "_")
+    .slice(0, 50);
+
+  const leadInstances = await prisma.leadProductStructureInstance.findMany({
+    where: {
+      lead_id: leadId,
+      vendor_id: vendorId,
+      ...(productTypeId ? { product_type_id: productTypeId } : {}),
+    },
+    select: { productType: { select: { type: true } } },
+  });
+  const uniqueStructureNames = [
+    ...new Set(
+      leadInstances
+        .map((instance) => instance.productType?.type)
+        .filter(Boolean),
+    ),
+  ];
+  const structureSegment = sanitizeFilename(
+    uniqueStructureNames.length > 0
+      ? uniqueStructureNames.join("_")
+      : "General",
+  )
+    .replace(/_+/g, "_")
+    .slice(0, 80);
+
+  const now = new Date();
+  const dateSegment = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0"),
+  ].join("-");
+
+  const existingDocs = await prisma.leadDocuments.findMany({
+    where: {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      doc_og_name: { startsWith: "BP-" },
+      is_deleted: false,
+    },
+    select: { doc_og_name: true },
+  });
+  const nextRevision =
+    existingDocs.reduce((maxRevision, doc) => {
+      const match = doc.doc_og_name?.match(/^BP-(\d+)-/i);
+      return match ? Math.max(maxRevision, Number(match[1])) : maxRevision;
+    }, -1) + 1;
+
+  const extension = path.extname(file.originalname || "");
+  return `BP-${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
 };
 
 export class BookingStageController {
@@ -237,18 +311,28 @@ export class BookingStageController {
       let uploadedPaymentFile: UploadedFileRef | undefined;
 
       if (bookingAmountPaymentDetailsFile) {
+        const paymentFileName = await buildBookingPaymentDocName(
+          Number(vendor_id),
+          Number(lead_id),
+          product_type_id && Number(product_type_id) > 0
+            ? Number(product_type_id)
+            : undefined,
+          useCustomUsersOnly,
+          bookingAmountPaymentDetailsFile,
+        );
+
         const sysName = await uploadToWasabiBookingPaymentDetailsFile(
           bookingAmountPaymentDetailsFile.path,
           Number(vendor_id),
           Number(lead_id),
-          bookingAmountPaymentDetailsFile.originalname,
+          paymentFileName,
           bookingAmountPaymentDetailsFile.mimetype,
         );
 
         await fs.unlink(bookingAmountPaymentDetailsFile.path);
 
         uploadedPaymentFile = {
-          originalName: bookingAmountPaymentDetailsFile.originalname,
+          originalName: paymentFileName,
           sysName,
         };
       }
