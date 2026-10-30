@@ -293,19 +293,60 @@ export class AuthService {
           is_active: true,
         },
       },
-      select: {
-        privilege: {
-          select: {
-            code: true,
-          },
-        },
-      },
+      select: { privilege: { select: { code: true, action: true } } },
       orderBy: {
         privilege_id: "asc",
       },
     });
 
-    return [...new Set(mappings.map((mapping) => mapping.privilege.code))];
+    const selectedCodes = mappings.map((mapping) => mapping.privilege.code);
+
+    // A common action is an alias for every stage privilege whose action has
+    // the same stable slug. This works with persisted General aliases and with
+    // the UI fallback that exposes an existing stage privilege as the common action.
+    const stagePrivileges = await prisma.privilegeMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        is_active: true,
+        NOT: { parent_module: "General" },
+      },
+      select: { code: true, parent_module: true, child_module: true, action: true },
+    });
+
+    const slugify = (value: string) =>
+      value.trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+
+    const commonActionGroups = new Map<string, { children: Set<string>; parents: Set<string> }>();
+    stagePrivileges.forEach((privilege) => {
+      const slug = slugify(privilege.action);
+      const group = commonActionGroups.get(slug) ?? {
+        children: new Set<string>(),
+        parents: new Set<string>(),
+      };
+      group.children.add(privilege.child_module.trim().toLowerCase());
+      group.parents.add(privilege.parent_module.trim().toLowerCase());
+      commonActionGroups.set(slug, group);
+    });
+
+    const commonActionSlugs = new Set(
+      selectedCodes
+        .filter((code) => code.startsWith("general.common_action."))
+        .map((code) => code.slice("general.common_action.".length)),
+    );
+    stagePrivileges
+      .filter((privilege) => selectedCodes.includes(privilege.code))
+      .forEach((privilege) => {
+        const group = commonActionGroups.get(slugify(privilege.action));
+        if (group && (group.children.size > 1 || group.parents.size > 1)) {
+          commonActionSlugs.add(slugify(privilege.action));
+        }
+      });
+
+    const expandedCodes = stagePrivileges
+      .filter((privilege) => commonActionSlugs.has(slugify(privilege.action)))
+      .map((privilege) => privilege.code);
+
+    return [...new Set([...selectedCodes, ...expandedCodes])];
   }
 
   private async cacheSession(session: {

@@ -17,6 +17,31 @@ import { resolveClientBaseUrl } from "../../../../utils/fileUtils";
 
 const service = new OrderLoginService();
 
+const hasRequiredMaterialsPrivilege = async (
+  userId: number,
+  vendorId: number,
+  code: string,
+) => {
+  const user = await prisma.userMaster.findFirst({
+    where: { id: userId, vendor_id: vendorId },
+    select: { user_type: { select: { user_type: true } } },
+  });
+
+  if (!user) return false;
+  if (user.user_type.user_type.trim().toLowerCase() !== "custom") return true;
+
+  return Boolean(
+    await prisma.userPrivilegeMapping.count({
+      where: {
+        vendor_id: vendorId,
+        user_id: userId,
+        is_allowed: true,
+        privilege: { code, is_active: true },
+      },
+    }),
+  );
+};
+
 export class OrderLoginController {
   async uploadFileBreakups(req: Request, res: Response) {
     try {
@@ -347,6 +372,16 @@ export class OrderLoginController {
 
       const actor = (req as any).user;
       if (actor?.vendor_id !== Number(vendorId)) return res.status(403).json({ message: "Vendor access denied" });
+      if (
+        req.body.material_rows &&
+        !(await hasRequiredMaterialsPrivilege(
+          Number(actor.id),
+          Number(vendorId),
+          "production.order_login.required_production_materials.upload",
+        ))
+      ) {
+        return res.status(403).json({ message: "You don't have permission to upload Required Production Materials." });
+      }
       // Production uploads are vendor-scoped; the user may belong to another franchise.
       const lead = await prisma.leadMaster.findFirst({
         where: { id: Number(leadId), vendor_id: Number(vendorId) },
@@ -441,6 +476,16 @@ export class OrderLoginController {
       const instanceId = req.query.instance_id === undefined
         ? undefined
         : Number(req.query.instance_id);
+      if (
+        actor?.vendor_id !== vendor_id ||
+        !(await hasRequiredMaterialsPrivilege(
+          Number(actor?.id),
+          vendor_id,
+          "production.order_login.required_production_materials.view",
+        ))
+      ) {
+        return res.status(403).json({ message: "You don't have permission to view Required Production Materials." });
+      }
       if (instanceId !== undefined && (!Number.isSafeInteger(instanceId) || instanceId <= 0)) {
         return res.status(400).json({ message: "instance_id must be a positive integer" });
       }
@@ -488,6 +533,15 @@ export class OrderLoginController {
       const vendor_id = Number(req.params.vendorId);
       const lead_id = Number(req.params.leadId);
       if (actor?.vendor_id !== vendor_id) return res.status(403).json({ message: "Vendor access denied" });
+      if (
+        !(await hasRequiredMaterialsPrivilege(
+          Number(actor.id),
+          vendor_id,
+          "production.order_login.required_production_materials.freeze",
+        ))
+      ) {
+        return res.status(403).json({ message: "You don't have permission to freeze Required Production Materials." });
+      }
       const items = Array.isArray(req.body?.items) ? req.body.items : [];
       const updated = await service.freezeRequiredMaterials(vendor_id, lead_id, Number(actor.id), items);
       return res.json({ success: true, message: "Selected materials frozen successfully", data: updated });
@@ -506,6 +560,15 @@ export class OrderLoginController {
       const vendor_id = Number(req.params.vendorId);
       const lead_id = Number(req.params.leadId);
       if (actor?.vendor_id !== vendor_id) return res.status(403).json({ message: "Vendor access denied" });
+      if (
+        !(await hasRequiredMaterialsPrivilege(
+          Number(actor.id),
+          vendor_id,
+          "production.order_login.required_production_materials.issue",
+        ))
+      ) {
+        return res.status(403).json({ message: "You don't have permission to issue Required Production Materials." });
+      }
       const items = Array.isArray(req.body?.items) ? req.body.items : [];
       const updated = await service.issueRequiredMaterials(vendor_id, lead_id, Number(actor.id), items);
       return res.json({ success: true, message: "Selected materials issued successfully", data: updated });

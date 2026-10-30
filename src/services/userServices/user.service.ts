@@ -672,6 +672,15 @@ export const getPrivilegeMastersByVendorService = async (
     );
   };
 
+  const getDynamicGroupsByChild = (
+    parentModuleName: string,
+    childModuleName: string,
+    idPrefix: string,
+  ) =>
+    getDynamicGroups(parentModuleName, idPrefix).filter(
+      (group) => group.title.trim().toLowerCase() === childModuleName.toLowerCase(),
+    );
+
   const sections = [
     {
       id: "leads",
@@ -832,7 +841,11 @@ export const getPrivilegeMastersByVendorService = async (
         {
           id: "general_tools",
           title: "General Tools",
-          groups: getDynamicGroups("Lead Detail", "general-tools"),
+          groups: [
+            ...getDynamicGroups("Lead Detail", "general-tools"),
+            ...getDynamicGroupsByChild("General", "Servicing", "general-common-actions")
+              .map((group) => ({ ...group, title: "Common Actions" })),
+          ],
         },
       ],
     },

@@ -39,7 +39,7 @@ export async function outsourceProductionMaterials({ vendorId, leadId, userId, i
     const role = user.user_type.user_type.toLowerCase();
     const customAllowed = role === "custom" && await tx.userPrivilegeMapping.count({ where: {
       vendor_id: vendorId, user_id: userId, is_allowed: true,
-      privilege: { code: "production.order_login.production_files.upload", is_active: true },
+      privilege: { code: "production.order_login.required_production_materials.outsource", is_active: true },
     } });
     const isOrderLoginStage = instance
       ? instance.is_tech_check_completed && !instance.is_order_login_completed
