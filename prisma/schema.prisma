@@ -1095,32 +1095,32 @@ model LeadCarcassMaterialMapping {
 }
 
 model LeadShutterMaterialMapping {
-  id                         Int                         @id @default(autoincrement())
-  vendor_id                  Int
-  lead_id                    Int
-  shutter_type_id            Int
-  shutter_material_id        Int
-  shutter_outer_finish_id    Int
-  shutter_inner_finish_id    Int?
-  created_at                 DateTime                    @default(now())
-  created_by                 Int
-  specs_id                   Int
-  amended_at                 DateTime?
-  approved_at                DateTime?
-  deleted_item_at            DateTime?
-  is_amended                 Boolean                     @default(false)
-  is_approved                Boolean                     @default(false)
-  is_deleted_item            Boolean                     @default(false)
-  amended_remark             String?
-  deleted_remark             String?
-  createdBy                  UserMaster                  @relation("LeadShutterMaterialMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  lead                       LeadMaster                  @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  shutterOuterFinish         ShutterOuterFinishMaster    @relation(fields: [shutter_outer_finish_id], references: [id], onDelete: Cascade)
-  shutterInnerFinish         ShutterInnerFinishMaster?   @relation(fields: [shutter_inner_finish_id], references: [id], onDelete: SetNull)
-  shutterMaterial            ShutterMaterialMaster       @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
-  shutterType                ShutterTypeMaster           @relation(fields: [shutter_type_id], references: [id], onDelete: Cascade)
-  LeadSpecificationsMaster   LeadSpecificationsMaster    @relation(fields: [specs_id], references: [id], onDelete: Cascade)
-  vendor                     VendorMaster                @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  id                       Int                       @id @default(autoincrement())
+  vendor_id                Int
+  lead_id                  Int
+  shutter_type_id          Int
+  shutter_material_id      Int
+  shutter_outer_finish_id  Int
+  shutter_inner_finish_id  Int?
+  created_at               DateTime                  @default(now())
+  created_by               Int
+  specs_id                 Int
+  amended_at               DateTime?
+  approved_at              DateTime?
+  deleted_item_at          DateTime?
+  is_amended               Boolean                   @default(false)
+  is_approved              Boolean                   @default(false)
+  is_deleted_item          Boolean                   @default(false)
+  amended_remark           String?
+  deleted_remark           String?
+  createdBy                UserMaster                @relation("LeadShutterMaterialMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  lead                     LeadMaster                @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  shutterOuterFinish       ShutterOuterFinishMaster  @relation(fields: [shutter_outer_finish_id], references: [id], onDelete: Cascade)
+  shutterInnerFinish       ShutterInnerFinishMaster? @relation(fields: [shutter_inner_finish_id], references: [id], onDelete: SetNull)
+  shutterMaterial          ShutterMaterialMaster     @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
+  shutterType              ShutterTypeMaster         @relation(fields: [shutter_type_id], references: [id], onDelete: Cascade)
+  LeadSpecificationsMaster LeadSpecificationsMaster  @relation(fields: [specs_id], references: [id], onDelete: Cascade)
+  vendor                   VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@index([vendor_id])
   @@index([lead_id])
@@ -1320,6 +1320,8 @@ model ProductTypeMaster {
   vendor_id                     Int
   tag                           String
   status                        String                          @default("active")
+  is_deleted                    Boolean                         @default(false)
+  deleted_at                    DateTime?
   LeadDetailedLogs              LeadDetailedLogs[]
   documents                     LeadDocuments[]                 @relation("LeadDocumentsToProductType")
   leads                         LeadProductMapping[]
@@ -1499,16 +1501,16 @@ model ShutterSubTypeMaster {
 }
 
 model ShutterMaterialMaster {
-  id           Int                           @id @default(autoincrement())
-  status       String                        @default("active")
-  name         String
-  vendor_id    Int
-  leadMappings LeadShutterMaterialMapping[]
+  id            Int                          @id @default(autoincrement())
+  status        String                       @default("active")
+  name          String
+  vendor_id     Int
+  leadMappings  LeadShutterMaterialMapping[]
   outerFinishes ShutterOuterFinishMaster[]
   innerFinishes ShutterInnerFinishMaster[]
-  vendor       VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  is_deleted   Boolean                       @default(false)
-  deleted_at   DateTime?
+  vendor        VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  is_deleted    Boolean                      @default(false)
+  deleted_at    DateTime?
 }
 
 model ShutterOuterFinishMaster {
@@ -1529,7 +1531,7 @@ model ShutterInnerFinishMaster {
   shutter_material_id Int
   leadMappings        LeadShutterMaterialMapping[]
   material            ShutterMaterialMaster        @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
-  is_deleted          Boolean @default(false)
+  is_deleted          Boolean                      @default(false)
   deleted_at          DateTime?
 }
 
@@ -1542,7 +1544,7 @@ model HardwareTypeMaster {
   leadMappings        LeadHardwareMapping[]
   hardwareItemOptions HardwareItemOptionMaster[]
   hardwareItems       HardwareItemMaster[]
-  is_deleted          Boolean @default(false)
+  is_deleted          Boolean                    @default(false)
   deleted_at          DateTime?
 }
 
@@ -1555,7 +1557,7 @@ model HardwareItemMaster {
   leadMappings        LeadHardwareMapping[]
   hardwareItemOptions HardwareItemOptionMaster[]
   hardwareType        HardwareTypeMaster         @relation(fields: [hardware_type_id], references: [id], onDelete: Cascade)
-  is_deleted          Boolean @default(false)
+  is_deleted          Boolean                    @default(false)
   deleted_at          DateTime?
 }
 
@@ -1568,36 +1570,36 @@ model HardwareItemOptionMaster {
   leadMappings     LeadHardwareMapping[]
   hardwareType     HardwareTypeMaster    @relation(fields: [hardware_type_id], references: [id], onDelete: Cascade)
   hardwareItem     HardwareItemMaster    @relation(fields: [hardware_item_id], references: [id], onDelete: Cascade)
-  is_deleted       Boolean @default(false)
+  is_deleted       Boolean               @default(false)
   deleted_at       DateTime?
 }
 
 model LeadHardwareMapping {
-  id                             Int                             @id @default(autoincrement())
-  vendor_id                      Int
-  lead_id                        Int
-  hardware_type_id               Int
-  hardware_item_id               Int
-  hardware_item_option_id        Int?
-  note                           String?
-  created_at                     DateTime                        @default(now())
-  created_by                     Int
-  specs_id                       Int
-  amended_at                     DateTime?
-  approved_at                    DateTime?
-  deleted_item_at                DateTime?
-  is_amended                     Boolean                         @default(false)
-  is_approved                    Boolean                         @default(false)
-  is_deleted_item                Boolean                         @default(false)
-  amended_remark                 String?
-  deleted_remark                 String?
-  hardwareType                   HardwareTypeMaster              @relation(fields: [hardware_type_id], references: [id], onDelete: Cascade)
-  createdBy                      UserMaster                      @relation("LeadHardwareMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  lead                           LeadMaster                      @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  hardwareItemOption             HardwareItemOptionMaster?       @relation(fields: [hardware_item_option_id], references: [id], onDelete: Cascade)
-  hardwareItem                   HardwareItemMaster              @relation(fields: [hardware_item_id], references: [id], onDelete: Cascade)
-  LeadSpecificationsMaster       LeadSpecificationsMaster        @relation(fields: [specs_id], references: [id], onDelete: Cascade)
-  vendor                         VendorMaster                    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  id                       Int                       @id @default(autoincrement())
+  vendor_id                Int
+  lead_id                  Int
+  hardware_type_id         Int
+  hardware_item_id         Int
+  hardware_item_option_id  Int?
+  note                     String?
+  created_at               DateTime                  @default(now())
+  created_by               Int
+  specs_id                 Int
+  amended_at               DateTime?
+  approved_at              DateTime?
+  deleted_item_at          DateTime?
+  is_amended               Boolean                   @default(false)
+  is_approved              Boolean                   @default(false)
+  is_deleted_item          Boolean                   @default(false)
+  amended_remark           String?
+  deleted_remark           String?
+  hardwareType             HardwareTypeMaster        @relation(fields: [hardware_type_id], references: [id], onDelete: Cascade)
+  createdBy                UserMaster                @relation("LeadHardwareMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  lead                     LeadMaster                @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  hardwareItemOption       HardwareItemOptionMaster? @relation(fields: [hardware_item_option_id], references: [id], onDelete: Cascade)
+  hardwareItem             HardwareItemMaster        @relation(fields: [hardware_item_id], references: [id], onDelete: Cascade)
+  LeadSpecificationsMaster LeadSpecificationsMaster  @relation(fields: [specs_id], references: [id], onDelete: Cascade)
+  vendor                   VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@index([vendor_id])
   @@index([lead_id])
@@ -1927,6 +1929,8 @@ model ProductStructure {
   vendor_id                   Int
   parent                      String?
   status                      String                         @default("active")
+  is_deleted                  Boolean                        @default(false)
+  deleted_at                  DateTime?
   product_type_id             Int?
   productStructureInstances   LeadProductStructureInstance[]
   leadProductStructureMapping LeadProductStructureMapping[]
@@ -1944,6 +1948,8 @@ model ProductSubStructure {
   vendor_id                     Int
   product_structure_id          Int
   status                        String                         @default("active")
+  is_deleted                    Boolean                        @default(false)
+  deleted_at                    DateTime?
   created_at                    DateTime                       @default(now())
   updated_at                    DateTime                       @updatedAt
   leadProductStructureInstances LeadProductStructureInstance[]
@@ -1964,6 +1970,8 @@ model ProductItemCode {
   description                   String?                        @db.VarChar(2000)
   specification                 String?                        @db.VarChar(2000)
   status                        String                         @default("active")
+  is_deleted                    Boolean                        @default(false)
+  deleted_at                    DateTime?
   created_at                    DateTime                       @default(now())
   updated_at                    DateTime                       @updatedAt
   leadProductStructureInstances LeadProductStructureInstance[]
@@ -2920,19 +2928,19 @@ model InstallerUserMaster {
 }
 
 model InstallerUserMapping {
-  id            Int                 @id @default(autoincrement())
+  id            Int                           @id @default(autoincrement())
   vendor_id     Int
   account_id    Int
   lead_id       Int
   installer_id  Int
   instance_id   Int?
   assigned_by   Int
-  assigned_date DateTime            @default(now())
-  account       AccountMaster       @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  assigner      UserMaster          @relation("InstallerAssignedBy", fields: [assigned_by], references: [id], onDelete: Cascade)
-  installer     InstallerUserMaster @relation(fields: [installer_id], references: [id], onDelete: Cascade)
-  lead          LeadMaster          @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  vendor        VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  assigned_date DateTime                      @default(now())
+  account       AccountMaster                 @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  assigner      UserMaster                    @relation("InstallerAssignedBy", fields: [assigned_by], references: [id], onDelete: Cascade)
+  installer     InstallerUserMaster           @relation(fields: [installer_id], references: [id], onDelete: Cascade)
+  lead          LeadMaster                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  vendor        VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   instance      LeadProductStructureInstance? @relation(fields: [instance_id], references: [id], onDelete: Cascade)
 
   @@index([lead_id, instance_id])

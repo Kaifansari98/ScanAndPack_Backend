@@ -44,6 +44,8 @@ export type ProductSubStructureMinAggregateOutputType = {
   vendor_id: number | null
   product_structure_id: number | null
   status: string | null
+  is_deleted: boolean | null
+  deleted_at: Date | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -54,6 +56,8 @@ export type ProductSubStructureMaxAggregateOutputType = {
   vendor_id: number | null
   product_structure_id: number | null
   status: string | null
+  is_deleted: boolean | null
+  deleted_at: Date | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -64,6 +68,8 @@ export type ProductSubStructureCountAggregateOutputType = {
   vendor_id: number
   product_structure_id: number
   status: number
+  is_deleted: number
+  deleted_at: number
   created_at: number
   updated_at: number
   _all: number
@@ -88,6 +94,8 @@ export type ProductSubStructureMinAggregateInputType = {
   vendor_id?: true
   product_structure_id?: true
   status?: true
+  is_deleted?: true
+  deleted_at?: true
   created_at?: true
   updated_at?: true
 }
@@ -98,6 +106,8 @@ export type ProductSubStructureMaxAggregateInputType = {
   vendor_id?: true
   product_structure_id?: true
   status?: true
+  is_deleted?: true
+  deleted_at?: true
   created_at?: true
   updated_at?: true
 }
@@ -108,6 +118,8 @@ export type ProductSubStructureCountAggregateInputType = {
   vendor_id?: true
   product_structure_id?: true
   status?: true
+  is_deleted?: true
+  deleted_at?: true
   created_at?: true
   updated_at?: true
   _all?: true
@@ -205,6 +217,8 @@ export type ProductSubStructureGroupByOutputType = {
   vendor_id: number
   product_structure_id: number
   status: string
+  is_deleted: boolean
+  deleted_at: Date | null
   created_at: Date
   updated_at: Date
   _count: ProductSubStructureCountAggregateOutputType | null
@@ -238,6 +252,8 @@ export type ProductSubStructureWhereInput = {
   vendor_id?: Prisma.IntFilter<"ProductSubStructure"> | number
   product_structure_id?: Prisma.IntFilter<"ProductSubStructure"> | number
   status?: Prisma.StringFilter<"ProductSubStructure"> | string
+  is_deleted?: Prisma.BoolFilter<"ProductSubStructure"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"ProductSubStructure"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"ProductSubStructure"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProductSubStructure"> | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
@@ -252,6 +268,8 @@ export type ProductSubStructureOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceOrderByRelationAggregateInput
@@ -269,6 +287,8 @@ export type ProductSubStructureWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"ProductSubStructure"> | number
   product_structure_id?: Prisma.IntFilter<"ProductSubStructure"> | number
   status?: Prisma.StringFilter<"ProductSubStructure"> | string
+  is_deleted?: Prisma.BoolFilter<"ProductSubStructure"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"ProductSubStructure"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"ProductSubStructure"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProductSubStructure"> | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
@@ -283,6 +303,8 @@ export type ProductSubStructureOrderByWithAggregationInput = {
   vendor_id?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   _count?: Prisma.ProductSubStructureCountOrderByAggregateInput
@@ -301,6 +323,8 @@ export type ProductSubStructureScalarWhereWithAggregatesInput = {
   vendor_id?: Prisma.IntWithAggregatesFilter<"ProductSubStructure"> | number
   product_structure_id?: Prisma.IntWithAggregatesFilter<"ProductSubStructure"> | number
   status?: Prisma.StringWithAggregatesFilter<"ProductSubStructure"> | string
+  is_deleted?: Prisma.BoolWithAggregatesFilter<"ProductSubStructure"> | boolean
+  deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ProductSubStructure"> | Date | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"ProductSubStructure"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"ProductSubStructure"> | Date | string
 }
@@ -308,6 +332,8 @@ export type ProductSubStructureScalarWhereWithAggregatesInput = {
 export type ProductSubStructureCreateInput = {
   type: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutSubProductStructureInput
@@ -322,6 +348,8 @@ export type ProductSubStructureUncheckedCreateInput = {
   vendor_id: number
   product_structure_id: number
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutSubProductStructureInput
@@ -331,6 +359,8 @@ export type ProductSubStructureUncheckedCreateInput = {
 export type ProductSubStructureUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutSubProductStructureNestedInput
@@ -345,6 +375,8 @@ export type ProductSubStructureUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutSubProductStructureNestedInput
@@ -357,6 +389,8 @@ export type ProductSubStructureCreateManyInput = {
   vendor_id: number
   product_structure_id: number
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -364,6 +398,8 @@ export type ProductSubStructureCreateManyInput = {
 export type ProductSubStructureUpdateManyMutationInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -374,6 +410,8 @@ export type ProductSubStructureUncheckedUpdateManyInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -394,6 +432,8 @@ export type ProductSubStructureCountOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -410,6 +450,8 @@ export type ProductSubStructureMaxOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -420,6 +462,8 @@ export type ProductSubStructureMinOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -554,6 +598,8 @@ export type ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNest
 export type ProductSubStructureCreateWithoutVendorInput = {
   type: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutSubProductStructureInput
@@ -566,6 +612,8 @@ export type ProductSubStructureUncheckedCreateWithoutVendorInput = {
   type: string
   product_structure_id: number
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutSubProductStructureInput
@@ -607,6 +655,8 @@ export type ProductSubStructureScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"ProductSubStructure"> | number
   product_structure_id?: Prisma.IntFilter<"ProductSubStructure"> | number
   status?: Prisma.StringFilter<"ProductSubStructure"> | string
+  is_deleted?: Prisma.BoolFilter<"ProductSubStructure"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"ProductSubStructure"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"ProductSubStructure"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProductSubStructure"> | Date | string
 }
@@ -614,6 +664,8 @@ export type ProductSubStructureScalarWhereInput = {
 export type ProductSubStructureCreateWithoutProductStructureInput = {
   type: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutSubProductStructureInput
@@ -626,6 +678,8 @@ export type ProductSubStructureUncheckedCreateWithoutProductStructureInput = {
   type: string
   vendor_id: number
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutSubProductStructureInput
@@ -661,6 +715,8 @@ export type ProductSubStructureUpdateManyWithWhereWithoutProductStructureInput =
 export type ProductSubStructureCreateWithoutProductItemCodesInput = {
   type: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutSubProductStructureInput
@@ -674,6 +730,8 @@ export type ProductSubStructureUncheckedCreateWithoutProductItemCodesInput = {
   vendor_id: number
   product_structure_id: number
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutSubProductStructureInput
@@ -698,6 +756,8 @@ export type ProductSubStructureUpdateToOneWithWhereWithoutProductItemCodesInput 
 export type ProductSubStructureUpdateWithoutProductItemCodesInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutSubProductStructureNestedInput
@@ -711,6 +771,8 @@ export type ProductSubStructureUncheckedUpdateWithoutProductItemCodesInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutSubProductStructureNestedInput
@@ -719,6 +781,8 @@ export type ProductSubStructureUncheckedUpdateWithoutProductItemCodesInput = {
 export type ProductSubStructureCreateWithoutLeadProductStructureInstancesInput = {
   type: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
   productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutSubProductStructureInput
@@ -732,6 +796,8 @@ export type ProductSubStructureUncheckedCreateWithoutLeadProductStructureInstanc
   vendor_id: number
   product_structure_id: number
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
   productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutSubProductStructureInput
@@ -756,6 +822,8 @@ export type ProductSubStructureUpdateToOneWithWhereWithoutLeadProductStructureIn
 export type ProductSubStructureUpdateWithoutLeadProductStructureInstancesInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutSubProductStructureNestedInput
@@ -769,6 +837,8 @@ export type ProductSubStructureUncheckedUpdateWithoutLeadProductStructureInstanc
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutSubProductStructureNestedInput
@@ -779,6 +849,8 @@ export type ProductSubStructureCreateManyVendorInput = {
   type: string
   product_structure_id: number
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -786,6 +858,8 @@ export type ProductSubStructureCreateManyVendorInput = {
 export type ProductSubStructureUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutSubProductStructureNestedInput
@@ -798,6 +872,8 @@ export type ProductSubStructureUncheckedUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutSubProductStructureNestedInput
@@ -809,6 +885,8 @@ export type ProductSubStructureUncheckedUpdateManyWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -818,6 +896,8 @@ export type ProductSubStructureCreateManyProductStructureInput = {
   type: string
   vendor_id: number
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -825,6 +905,8 @@ export type ProductSubStructureCreateManyProductStructureInput = {
 export type ProductSubStructureUpdateWithoutProductStructureInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutSubProductStructureNestedInput
@@ -837,6 +919,8 @@ export type ProductSubStructureUncheckedUpdateWithoutProductStructureInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProductStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutSubProductStructureNestedInput
@@ -848,6 +932,8 @@ export type ProductSubStructureUncheckedUpdateManyWithoutProductStructureInput =
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -898,6 +984,8 @@ export type ProductSubStructureSelect<ExtArgs extends runtime.Types.Extensions.I
   vendor_id?: boolean
   product_structure_id?: boolean
   status?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   created_at?: boolean
   updated_at?: boolean
   leadProductStructureInstances?: boolean | Prisma.ProductSubStructure$leadProductStructureInstancesArgs<ExtArgs>
@@ -913,6 +1001,8 @@ export type ProductSubStructureSelectCreateManyAndReturn<ExtArgs extends runtime
   vendor_id?: boolean
   product_structure_id?: boolean
   status?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   created_at?: boolean
   updated_at?: boolean
   productStructure?: boolean | Prisma.ProductStructureDefaultArgs<ExtArgs>
@@ -925,6 +1015,8 @@ export type ProductSubStructureSelectUpdateManyAndReturn<ExtArgs extends runtime
   vendor_id?: boolean
   product_structure_id?: boolean
   status?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   created_at?: boolean
   updated_at?: boolean
   productStructure?: boolean | Prisma.ProductStructureDefaultArgs<ExtArgs>
@@ -937,11 +1029,13 @@ export type ProductSubStructureSelectScalar = {
   vendor_id?: boolean
   product_structure_id?: boolean
   status?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type ProductSubStructureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "product_structure_id" | "status" | "created_at" | "updated_at", ExtArgs["result"]["productSubStructure"]>
+export type ProductSubStructureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "product_structure_id" | "status" | "is_deleted" | "deleted_at" | "created_at" | "updated_at", ExtArgs["result"]["productSubStructure"]>
 export type ProductSubStructureInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   leadProductStructureInstances?: boolean | Prisma.ProductSubStructure$leadProductStructureInstancesArgs<ExtArgs>
   productItemCodes?: boolean | Prisma.ProductSubStructure$productItemCodesArgs<ExtArgs>
@@ -972,6 +1066,8 @@ export type $ProductSubStructurePayload<ExtArgs extends runtime.Types.Extensions
     vendor_id: number
     product_structure_id: number
     status: string
+    is_deleted: boolean
+    deleted_at: Date | null
     created_at: Date
     updated_at: Date
   }, ExtArgs["result"]["productSubStructure"]>
@@ -1406,6 +1502,8 @@ export interface ProductSubStructureFieldRefs {
   readonly vendor_id: Prisma.FieldRef<"ProductSubStructure", 'Int'>
   readonly product_structure_id: Prisma.FieldRef<"ProductSubStructure", 'Int'>
   readonly status: Prisma.FieldRef<"ProductSubStructure", 'String'>
+  readonly is_deleted: Prisma.FieldRef<"ProductSubStructure", 'Boolean'>
+  readonly deleted_at: Prisma.FieldRef<"ProductSubStructure", 'DateTime'>
   readonly created_at: Prisma.FieldRef<"ProductSubStructure", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"ProductSubStructure", 'DateTime'>
 }

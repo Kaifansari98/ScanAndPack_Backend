@@ -42,6 +42,8 @@ export type ProductTypeMasterMinAggregateOutputType = {
   vendor_id: number | null
   tag: string | null
   status: string | null
+  is_deleted: boolean | null
+  deleted_at: Date | null
 }
 
 export type ProductTypeMasterMaxAggregateOutputType = {
@@ -50,6 +52,8 @@ export type ProductTypeMasterMaxAggregateOutputType = {
   vendor_id: number | null
   tag: string | null
   status: string | null
+  is_deleted: boolean | null
+  deleted_at: Date | null
 }
 
 export type ProductTypeMasterCountAggregateOutputType = {
@@ -58,6 +62,8 @@ export type ProductTypeMasterCountAggregateOutputType = {
   vendor_id: number
   tag: number
   status: number
+  is_deleted: number
+  deleted_at: number
   _all: number
 }
 
@@ -78,6 +84,8 @@ export type ProductTypeMasterMinAggregateInputType = {
   vendor_id?: true
   tag?: true
   status?: true
+  is_deleted?: true
+  deleted_at?: true
 }
 
 export type ProductTypeMasterMaxAggregateInputType = {
@@ -86,6 +94,8 @@ export type ProductTypeMasterMaxAggregateInputType = {
   vendor_id?: true
   tag?: true
   status?: true
+  is_deleted?: true
+  deleted_at?: true
 }
 
 export type ProductTypeMasterCountAggregateInputType = {
@@ -94,6 +104,8 @@ export type ProductTypeMasterCountAggregateInputType = {
   vendor_id?: true
   tag?: true
   status?: true
+  is_deleted?: true
+  deleted_at?: true
   _all?: true
 }
 
@@ -189,6 +201,8 @@ export type ProductTypeMasterGroupByOutputType = {
   vendor_id: number
   tag: string
   status: string
+  is_deleted: boolean
+  deleted_at: Date | null
   _count: ProductTypeMasterCountAggregateOutputType | null
   _avg: ProductTypeMasterAvgAggregateOutputType | null
   _sum: ProductTypeMasterSumAggregateOutputType | null
@@ -220,6 +234,8 @@ export type ProductTypeMasterWhereInput = {
   vendor_id?: Prisma.IntFilter<"ProductTypeMaster"> | number
   tag?: Prisma.StringFilter<"ProductTypeMaster"> | string
   status?: Prisma.StringFilter<"ProductTypeMaster"> | string
+  is_deleted?: Prisma.BoolFilter<"ProductTypeMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"ProductTypeMaster"> | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
   LeadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
   documents?: Prisma.LeadDocumentsListRelationFilter
@@ -240,6 +256,8 @@ export type ProductTypeMasterOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionOrderByRelationAggregateInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsOrderByRelationAggregateInput
   documents?: Prisma.LeadDocumentsOrderByRelationAggregateInput
@@ -263,6 +281,8 @@ export type ProductTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"ProductTypeMaster"> | number
   tag?: Prisma.StringFilter<"ProductTypeMaster"> | string
   status?: Prisma.StringFilter<"ProductTypeMaster"> | string
+  is_deleted?: Prisma.BoolFilter<"ProductTypeMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"ProductTypeMaster"> | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
   LeadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
   documents?: Prisma.LeadDocumentsListRelationFilter
@@ -283,6 +303,8 @@ export type ProductTypeMasterOrderByWithAggregationInput = {
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProductTypeMasterCountOrderByAggregateInput
   _avg?: Prisma.ProductTypeMasterAvgOrderByAggregateInput
   _max?: Prisma.ProductTypeMasterMaxOrderByAggregateInput
@@ -299,12 +321,16 @@ export type ProductTypeMasterScalarWhereWithAggregatesInput = {
   vendor_id?: Prisma.IntWithAggregatesFilter<"ProductTypeMaster"> | number
   tag?: Prisma.StringWithAggregatesFilter<"ProductTypeMaster"> | string
   status?: Prisma.StringWithAggregatesFilter<"ProductTypeMaster"> | string
+  is_deleted?: Prisma.BoolWithAggregatesFilter<"ProductTypeMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ProductTypeMaster"> | Date | string | null
 }
 
 export type ProductTypeMasterCreateInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
@@ -325,6 +351,8 @@ export type ProductTypeMasterUncheckedCreateInput = {
   vendor_id: number
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
@@ -342,6 +370,8 @@ export type ProductTypeMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
@@ -362,6 +392,8 @@ export type ProductTypeMasterUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -381,12 +413,16 @@ export type ProductTypeMasterCreateManyInput = {
   vendor_id: number
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
 }
 
 export type ProductTypeMasterUpdateManyMutationInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ProductTypeMasterUncheckedUpdateManyInput = {
@@ -395,6 +431,8 @@ export type ProductTypeMasterUncheckedUpdateManyInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ProductTypeMasterListRelationFilter = {
@@ -418,6 +456,8 @@ export type ProductTypeMasterCountOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
 }
 
 export type ProductTypeMasterAvgOrderByAggregateInput = {
@@ -431,6 +471,8 @@ export type ProductTypeMasterMaxOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
 }
 
 export type ProductTypeMasterMinOrderByAggregateInput = {
@@ -439,6 +481,8 @@ export type ProductTypeMasterMinOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
 }
 
 export type ProductTypeMasterSumOrderByAggregateInput = {
@@ -665,6 +709,8 @@ export type ProductTypeMasterCreateWithoutVendorInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
@@ -683,6 +729,8 @@ export type ProductTypeMasterUncheckedCreateWithoutVendorInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
@@ -731,12 +779,16 @@ export type ProductTypeMasterScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"ProductTypeMaster"> | number
   tag?: Prisma.StringFilter<"ProductTypeMaster"> | string
   status?: Prisma.StringFilter<"ProductTypeMaster"> | string
+  is_deleted?: Prisma.BoolFilter<"ProductTypeMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"ProductTypeMaster"> | Date | string | null
 }
 
 export type ProductTypeMasterCreateWithoutLeadsInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
@@ -756,6 +808,8 @@ export type ProductTypeMasterUncheckedCreateWithoutLeadsInput = {
   vendor_id: number
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
@@ -788,6 +842,8 @@ export type ProductTypeMasterUpdateWithoutLeadsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
@@ -807,6 +863,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutLeadsInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -823,6 +881,8 @@ export type ProductTypeMasterCreateWithoutDocumentsInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
   leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
@@ -842,6 +902,8 @@ export type ProductTypeMasterUncheckedCreateWithoutDocumentsInput = {
   vendor_id: number
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
   leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
@@ -874,6 +936,8 @@ export type ProductTypeMasterUpdateWithoutDocumentsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
   leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
@@ -893,6 +957,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutDocumentsInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -909,6 +975,8 @@ export type ProductTypeMasterCreateWithoutProductStructuresInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
@@ -928,6 +996,8 @@ export type ProductTypeMasterUncheckedCreateWithoutProductStructuresInput = {
   vendor_id: number
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
@@ -960,6 +1030,8 @@ export type ProductTypeMasterUpdateWithoutProductStructuresInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
@@ -979,6 +1051,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutProductStructuresInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -995,6 +1069,8 @@ export type ProductTypeMasterCreateWithoutProductStructureInstancesInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
@@ -1014,6 +1090,8 @@ export type ProductTypeMasterUncheckedCreateWithoutProductStructureInstancesInpu
   vendor_id: number
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
@@ -1046,6 +1124,8 @@ export type ProductTypeMasterUpdateWithoutProductStructureInstancesInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
@@ -1065,6 +1145,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutProductStructureInstancesInpu
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -1081,6 +1163,8 @@ export type ProductTypeMasterCreateWithoutPaymentInfoInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
@@ -1100,6 +1184,8 @@ export type ProductTypeMasterUncheckedCreateWithoutPaymentInfoInput = {
   vendor_id: number
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
@@ -1132,6 +1218,8 @@ export type ProductTypeMasterUpdateWithoutPaymentInfoInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
@@ -1151,6 +1239,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutPaymentInfoInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -1167,6 +1257,8 @@ export type ProductTypeMasterCreateWithoutLedgerInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
@@ -1186,6 +1278,8 @@ export type ProductTypeMasterUncheckedCreateWithoutLedgerInput = {
   vendor_id: number
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
@@ -1218,6 +1312,8 @@ export type ProductTypeMasterUpdateWithoutLedgerInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
@@ -1237,6 +1333,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutLedgerInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -1253,6 +1351,8 @@ export type ProductTypeMasterCreateWithoutLeadDetailedLogsInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
   leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
@@ -1272,6 +1372,8 @@ export type ProductTypeMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   vendor_id: number
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
   leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
@@ -1304,6 +1406,8 @@ export type ProductTypeMasterUpdateWithoutLeadDetailedLogsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
   leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
@@ -1323,6 +1427,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
   leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -1339,6 +1445,8 @@ export type ProductTypeMasterCreateWithoutLeadBillingAddressesInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
@@ -1358,6 +1466,8 @@ export type ProductTypeMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   vendor_id: number
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
@@ -1390,6 +1500,8 @@ export type ProductTypeMasterUpdateWithoutLeadBillingAddressesInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
@@ -1409,6 +1521,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -1425,6 +1539,8 @@ export type ProductTypeMasterCreateWithoutProductsRequiredForProductionInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
   leads?: Prisma.LeadProductMappingCreateNestedManyWithoutProductTypeInput
@@ -1444,6 +1560,8 @@ export type ProductTypeMasterUncheckedCreateWithoutProductsRequiredForProduction
   vendor_id: number
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
   leads?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutProductTypeInput
@@ -1476,6 +1594,8 @@ export type ProductTypeMasterUpdateWithoutProductsRequiredForProductionInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
   leads?: Prisma.LeadProductMappingUpdateManyWithoutProductTypeNestedInput
@@ -1495,6 +1615,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutProductsRequiredForProduction
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
   leads?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -1511,6 +1633,8 @@ export type ProductTypeMasterCreateWithoutWalkinQuestionnairesInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
@@ -1530,6 +1654,8 @@ export type ProductTypeMasterUncheckedCreateWithoutWalkinQuestionnairesInput = {
   vendor_id: number
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
@@ -1562,6 +1688,8 @@ export type ProductTypeMasterUpdateWithoutWalkinQuestionnairesInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
@@ -1581,6 +1709,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutWalkinQuestionnairesInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -1597,6 +1727,8 @@ export type ProductTypeMasterCreateWithoutWalkinResponsesInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductTypeInput
@@ -1616,6 +1748,8 @@ export type ProductTypeMasterUncheckedCreateWithoutWalkinResponsesInput = {
   vendor_id: number
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutProductTypeInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutProductTypeMasterInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductTypeInput
@@ -1648,6 +1782,8 @@ export type ProductTypeMasterUpdateWithoutWalkinResponsesInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
@@ -1667,6 +1803,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutWalkinResponsesInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -1684,12 +1822,16 @@ export type ProductTypeMasterCreateManyVendorInput = {
   type: string
   tag: string
   status?: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
 }
 
 export type ProductTypeMasterUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutProductTypeNestedInput
@@ -1708,6 +1850,8 @@ export type ProductTypeMasterUncheckedUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeNestedInput
   LeadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutProductTypeMasterNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductTypeNestedInput
@@ -1726,6 +1870,8 @@ export type ProductTypeMasterUncheckedUpdateManyWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -1855,6 +2001,8 @@ export type ProductTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Int
   vendor_id?: boolean
   tag?: boolean
   status?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   productsRequiredForProduction?: boolean | Prisma.ProductTypeMaster$productsRequiredForProductionArgs<ExtArgs>
   LeadDetailedLogs?: boolean | Prisma.ProductTypeMaster$LeadDetailedLogsArgs<ExtArgs>
   documents?: boolean | Prisma.ProductTypeMaster$documentsArgs<ExtArgs>
@@ -1876,6 +2024,8 @@ export type ProductTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.T
   vendor_id?: boolean
   tag?: boolean
   status?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productTypeMaster"]>
 
@@ -1885,6 +2035,8 @@ export type ProductTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   vendor_id?: boolean
   tag?: boolean
   status?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productTypeMaster"]>
 
@@ -1894,9 +2046,11 @@ export type ProductTypeMasterSelectScalar = {
   vendor_id?: boolean
   tag?: boolean
   status?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
 }
 
-export type ProductTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "tag" | "status", ExtArgs["result"]["productTypeMaster"]>
+export type ProductTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "tag" | "status" | "is_deleted" | "deleted_at", ExtArgs["result"]["productTypeMaster"]>
 export type ProductTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productsRequiredForProduction?: boolean | Prisma.ProductTypeMaster$productsRequiredForProductionArgs<ExtArgs>
   LeadDetailedLogs?: boolean | Prisma.ProductTypeMaster$LeadDetailedLogsArgs<ExtArgs>
@@ -1941,6 +2095,8 @@ export type $ProductTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.I
     vendor_id: number
     tag: string
     status: string
+    is_deleted: boolean
+    deleted_at: Date | null
   }, ExtArgs["result"]["productTypeMaster"]>
   composites: {}
 }
@@ -2381,6 +2537,8 @@ export interface ProductTypeMasterFieldRefs {
   readonly vendor_id: Prisma.FieldRef<"ProductTypeMaster", 'Int'>
   readonly tag: Prisma.FieldRef<"ProductTypeMaster", 'String'>
   readonly status: Prisma.FieldRef<"ProductTypeMaster", 'String'>
+  readonly is_deleted: Prisma.FieldRef<"ProductTypeMaster", 'Boolean'>
+  readonly deleted_at: Prisma.FieldRef<"ProductTypeMaster", 'DateTime'>
 }
     
 

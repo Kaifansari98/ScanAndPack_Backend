@@ -1020,7 +1020,9 @@ export const ProductTypeMasterScalarFieldEnum = {
   type: 'type',
   vendor_id: 'vendor_id',
   tag: 'tag',
-  status: 'status'
+  status: 'status',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type ProductTypeMasterScalarFieldEnum = (typeof ProductTypeMasterScalarFieldEnum)[keyof typeof ProductTypeMasterScalarFieldEnum]
@@ -1493,6 +1495,8 @@ export const ProductStructureScalarFieldEnum = {
   vendor_id: 'vendor_id',
   parent: 'parent',
   status: 'status',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at',
   product_type_id: 'product_type_id'
 } as const
 
@@ -1505,6 +1509,8 @@ export const ProductSubStructureScalarFieldEnum = {
   vendor_id: 'vendor_id',
   product_structure_id: 'product_structure_id',
   status: 'status',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -1521,6 +1527,8 @@ export const ProductItemCodeScalarFieldEnum = {
   description: 'description',
   specification: 'specification',
   status: 'status',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const

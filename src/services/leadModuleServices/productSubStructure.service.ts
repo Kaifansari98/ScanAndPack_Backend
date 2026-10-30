@@ -23,6 +23,7 @@ export const addProductSubStructure = async (
             id: payload.product_structure_id,
             vendor_id: payload.vendor_id,
             status: "active",
+            is_deleted: false,
         },
     });
 
@@ -71,6 +72,7 @@ export const getAllProductSubStructures = async (
     const subStructures = await prisma.productSubStructure.findMany({
         where: {
             vendor_id,
+            is_deleted: false,
         },
         include: {
             productStructure: {

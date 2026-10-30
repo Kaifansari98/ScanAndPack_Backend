@@ -23,6 +23,7 @@ export const addProductItemCode = async (
             id: payload.sub_product_structure_id,
             vendor_id: payload.vendor_id,
             status: "active",
+            is_deleted: false,
         },
         include: {
             productStructure: {
@@ -122,6 +123,29 @@ export const getAllProductItemCodes = async (
     const itemCodes = await prisma.productItemCode.findMany({
         where: {
             vendor_id,
+            is_deleted: false,
+            productStructure: {
+                is_deleted: false,
+                OR: [
+                    { product_type_id: null },
+                    { productType: { is_deleted: false } },
+                ],
+            },
+            OR: [
+                { sub_product_structure_id: null },
+                {
+                    subProductStructure: {
+                        is_deleted: false,
+                        productStructure: {
+                            is_deleted: false,
+                            OR: [
+                                { product_type_id: null },
+                                { productType: { is_deleted: false } },
+                            ],
+                        },
+                    },
+                },
+            ],
         },
         include: {
             productStructure: {
@@ -129,12 +153,14 @@ export const getAllProductItemCodes = async (
                     id: true,
                     type: true,
                     status: true,
+                    is_deleted: true,
                     product_type_id: true,
                     productType: {
                         select: {
                             id: true,
                             type: true,
                             status: true,
+                            is_deleted: true,
                         },
                     },
                 },
@@ -144,18 +170,21 @@ export const getAllProductItemCodes = async (
                     id: true,
                     type: true,
                     status: true,
+                    is_deleted: true,
                     product_structure_id: true,
                     productStructure: {
                         select: {
                             id: true,
                             type: true,
                             status: true,
+                            is_deleted: true,
                             product_type_id: true,
                             productType: {
                                 select: {
                                     id: true,
                                     type: true,
                                     status: true,
+                                    is_deleted: true,
                                 },
                             },
                         },

@@ -24,6 +24,7 @@ export const addProductStructureType = async (payload: ProductStructureTypeInput
                 id: resolvedProductTypeId,
                 vendor_id: payload.vendor_id,
                 status: "active",
+                is_deleted: false,
             },
         });
 
@@ -67,7 +68,7 @@ export const getAllProductStructureTypes = async (vendor_id: number): Promise<Pr
     }
 
     const types = await prisma.productStructure.findMany({
-        where: { vendor_id: vendor_id },
+        where: { vendor_id: vendor_id, is_deleted: false },
         include: {
             productType: {
                 select: {

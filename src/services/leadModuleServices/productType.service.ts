@@ -67,7 +67,7 @@ export const getAllProductTypes = async (vendor_id: number): Promise<ProductType
     }
 
     const types = await prisma.productTypeMaster.findMany({
-        where: { vendor_id: vendor_id },
+        where: { vendor_id: vendor_id, is_deleted: false },
     })
 
     console.log("[SERVICE] Found product types", { count: types.length });

@@ -1,5 +1,5 @@
 import { updateSpecsMasterController, updateSpecsMasterStatusController, deleteSpecsMasterController } from "../../controllers/specsMaster.controller";
-import { updateBoqMasterController } from "../../controllers/boqMaster.controller";
+import { updateBoqMasterController, deleteBoqMasterController } from "../../controllers/boqMaster.controller";
 import { Router } from "express";
 import { verifyToken } from "../../middlewares/auth.middleware";
 import multer from "multer";
@@ -243,6 +243,7 @@ leadsRouter.put("/specs-masters/:kind/:id", verifyToken, updateSpecsMasterContro
 leadsRouter.patch("/specs-masters/:kind/status", verifyToken, updateSpecsMasterStatusController);
 leadsRouter.delete("/specs-masters/:kind/:id", verifyToken, deleteSpecsMasterController);
 leadsRouter.put("/boq-masters/:kind/:id", verifyToken, updateBoqMasterController);
+leadsRouter.delete("/boq-masters/:kind/:id", verifyToken, deleteBoqMasterController);
 leadsRouter.get(
   "/get-all-carcas-materials/:vendor_id",
   fetchAllCarcasMaterials,
