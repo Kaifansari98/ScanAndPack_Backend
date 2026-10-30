@@ -312,7 +312,12 @@ export const uploadClientDocumentation = multer({
       .slice(file.originalname.lastIndexOf("."))
       .toLowerCase();
 
+    // Files picked from the lead's design/quotation documents; the controller
+    // checks them against those documents, so their type isn't filtered here.
+    const isSelectedLeadDocument = req.body?.keep_original_name === "true";
+
     if (
+      isSelectedLeadDocument ||
       allowedMimeTypes.includes(file.mimetype) ||
       allowedExtensions.includes(ext)
     ) {
