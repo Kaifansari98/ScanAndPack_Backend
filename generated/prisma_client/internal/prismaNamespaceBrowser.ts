@@ -1099,7 +1099,9 @@ export const CarcassTypeMasterScalarFieldEnum = {
   status: 'status',
   name: 'name',
   vendor_id: 'vendor_id',
-  can_do_fast_production: 'can_do_fast_production'
+  can_do_fast_production: 'can_do_fast_production',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type CarcassTypeMasterScalarFieldEnum = (typeof CarcassTypeMasterScalarFieldEnum)[keyof typeof CarcassTypeMasterScalarFieldEnum]
@@ -1109,7 +1111,9 @@ export const CarcasMaterialMasterScalarFieldEnum = {
   id: 'id',
   status: 'status',
   name: 'name',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type CarcasMaterialMasterScalarFieldEnum = (typeof CarcasMaterialMasterScalarFieldEnum)[keyof typeof CarcasMaterialMasterScalarFieldEnum]
@@ -1119,7 +1123,9 @@ export const CarcassMaterialFinishMasterScalarFieldEnum = {
   id: 'id',
   status: 'status',
   name: 'name',
-  carcas_material_id: 'carcas_material_id'
+  carcas_material_id: 'carcas_material_id',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type CarcassMaterialFinishMasterScalarFieldEnum = (typeof CarcassMaterialFinishMasterScalarFieldEnum)[keyof typeof CarcassMaterialFinishMasterScalarFieldEnum]
@@ -1129,7 +1135,9 @@ export const ShutterTypeMasterScalarFieldEnum = {
   id: 'id',
   status: 'status',
   name: 'name',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type ShutterTypeMasterScalarFieldEnum = (typeof ShutterTypeMasterScalarFieldEnum)[keyof typeof ShutterTypeMasterScalarFieldEnum]
@@ -1148,7 +1156,9 @@ export const ShutterMaterialMasterScalarFieldEnum = {
   id: 'id',
   status: 'status',
   name: 'name',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type ShutterMaterialMasterScalarFieldEnum = (typeof ShutterMaterialMasterScalarFieldEnum)[keyof typeof ShutterMaterialMasterScalarFieldEnum]
@@ -1158,7 +1168,9 @@ export const ShutterOuterFinishMasterScalarFieldEnum = {
   id: 'id',
   status: 'status',
   name: 'name',
-  shutter_material_id: 'shutter_material_id'
+  shutter_material_id: 'shutter_material_id',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type ShutterOuterFinishMasterScalarFieldEnum = (typeof ShutterOuterFinishMasterScalarFieldEnum)[keyof typeof ShutterOuterFinishMasterScalarFieldEnum]
@@ -1168,7 +1180,9 @@ export const ShutterInnerFinishMasterScalarFieldEnum = {
   id: 'id',
   status: 'status',
   name: 'name',
-  shutter_material_id: 'shutter_material_id'
+  shutter_material_id: 'shutter_material_id',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type ShutterInnerFinishMasterScalarFieldEnum = (typeof ShutterInnerFinishMasterScalarFieldEnum)[keyof typeof ShutterInnerFinishMasterScalarFieldEnum]
@@ -1178,7 +1192,9 @@ export const HardwareTypeMasterScalarFieldEnum = {
   id: 'id',
   status: 'status',
   name: 'name',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type HardwareTypeMasterScalarFieldEnum = (typeof HardwareTypeMasterScalarFieldEnum)[keyof typeof HardwareTypeMasterScalarFieldEnum]
@@ -1189,7 +1205,9 @@ export const HardwareItemMasterScalarFieldEnum = {
   status: 'status',
   name: 'name',
   hardware_type_id: 'hardware_type_id',
-  inScope: 'inScope'
+  inScope: 'inScope',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type HardwareItemMasterScalarFieldEnum = (typeof HardwareItemMasterScalarFieldEnum)[keyof typeof HardwareItemMasterScalarFieldEnum]
@@ -1200,7 +1218,9 @@ export const HardwareItemOptionMasterScalarFieldEnum = {
   status: 'status',
   hardware_type_id: 'hardware_type_id',
   hardware_item_id: 'hardware_item_id',
-  name: 'name'
+  name: 'name',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type HardwareItemOptionMasterScalarFieldEnum = (typeof HardwareItemOptionMasterScalarFieldEnum)[keyof typeof HardwareItemOptionMasterScalarFieldEnum]
@@ -1236,7 +1256,9 @@ export const LightCarcasTypeMasterScalarFieldEnum = {
   vendor_id: 'vendor_id',
   type: 'type',
   is_active: 'is_active',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type LightCarcasTypeMasterScalarFieldEnum = (typeof LightCarcasTypeMasterScalarFieldEnum)[keyof typeof LightCarcasTypeMasterScalarFieldEnum]
@@ -1249,7 +1271,9 @@ export const LightCarcasUnitMasterScalarFieldEnum = {
   type: 'type',
   light_carcas_type_id: 'light_carcas_type_id',
   is_active: 'is_active',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type LightCarcasUnitMasterScalarFieldEnum = (typeof LightCarcasUnitMasterScalarFieldEnum)[keyof typeof LightCarcasUnitMasterScalarFieldEnum]
@@ -1284,7 +1308,9 @@ export const OtherAppliancesMasterScalarFieldEnum = {
   article_number: 'article_number',
   description: 'description',
   created_at: 'created_at',
-  type: 'type'
+  type: 'type',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type OtherAppliancesMasterScalarFieldEnum = (typeof OtherAppliancesMasterScalarFieldEnum)[keyof typeof OtherAppliancesMasterScalarFieldEnum]

@@ -27,14 +27,14 @@ export async function updateSpecsMaster(vendorId: number, kind: string, id: numb
   return prisma.$transaction(async tx => {
     const model = (tx as any)[config.model];
     const scope = config.parent ? { [config.parent.relation]: { vendor_id: vendorId } } : { vendor_id: vendorId };
-    const existing = await model.findFirst({ where: { id, ...scope } });
+    const existing = await model.findFirst({ where: { id, ...scope, is_deleted: false } });
     if (!existing) return fail("Specification master not found", 404);
     const data: Record<string, unknown> = { [config.field]: value };
-    const duplicateScope: Record<string, unknown> = { ...scope };
+    const duplicateScope: Record<string, unknown> = { ...scope, is_deleted: false };
     if (config.parent) {
       const parentId = Number(input[config.parent.field]);
       if (!Number.isSafeInteger(parentId) || parentId <= 0) return fail("Select a valid parent");
-      const parent = await (tx as any)[config.parent.model].findFirst({ where: { id: parentId, vendor_id: vendorId } });
+      const parent = await (tx as any)[config.parent.model].findFirst({ where: { id: parentId, vendor_id: vendorId, is_deleted: false } });
       if (!parent) return fail("Parent does not belong to this vendor");
       data[config.parent.field] = parentId;
       duplicateScope[config.parent.field] = parentId;
@@ -46,7 +46,7 @@ export async function updateSpecsMaster(vendorId: number, kind: string, id: numb
     if (kind === "hardware-item-option") {
       const hardwareItemId = Number(input.hardware_item_id);
       if (!Number.isSafeInteger(hardwareItemId) || hardwareItemId <= 0) return fail("Select a valid hardware item");
-      const hardwareItem = await tx.hardwareItemMaster.findFirst({ where: { id: hardwareItemId, hardware_type_id: Number(data.hardware_type_id) } });
+      const hardwareItem = await tx.hardwareItemMaster.findFirst({ where: { id: hardwareItemId, hardware_type_id: Number(data.hardware_type_id), is_deleted: false } });
       if (!hardwareItem) return fail("Hardware item does not belong to the selected hardware type");
       data.hardware_item_id = hardwareItemId;
       duplicateScope.hardware_item_id = hardwareItemId;
@@ -78,7 +78,7 @@ export async function updateSpecsMasterStatus(vendorId: number, kind: string, id
 
   const model = (prisma as any)[config.model];
   const scope = config.parent ? { [config.parent.relation]: { vendor_id: vendorId } } : { vendor_id: vendorId };
-  const where = { id: { in: entryIds }, ...scope };
+  const where = { id: { in: entryIds }, ...scope, is_deleted: false };
   const found = await model.count({ where });
   if (found !== entryIds.length) return fail("Specification master not found", 404);
   await model.updateMany({ where, data: { status } });

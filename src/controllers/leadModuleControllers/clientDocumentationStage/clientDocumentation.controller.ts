@@ -206,6 +206,36 @@ export class ClientDocumentationController {
     ].join("-") + extension;
   }
 
+  // Selected files must be existing design/quotation documents of the lead.
+  // Rejected uploads have their temp files removed.
+  private static async areSelectedLeadDocuments(
+    leadId: number,
+    vendorId: number,
+    files: Express.Multer.File[],
+  ) {
+    const selectedNames = files.map((file) => file.originalname);
+    const matchingDocs = await prisma.leadDocuments.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        is_deleted: false,
+        doc_og_name: { in: selectedNames },
+        documentType: { tag: { in: ["Type 5", "Type 6"] } },
+      },
+      select: { doc_og_name: true },
+    });
+    const matchingNames = new Set(matchingDocs.map((doc) => doc.doc_og_name));
+
+    if (selectedNames.every((name) => matchingNames.has(name))) {
+      return true;
+    }
+
+    await Promise.all(
+      files.map((file) => fs.unlink(file.path).catch(() => {})),
+    );
+    return false;
+  }
+
   public static async create(req: Request, res: Response): Promise<void> {
     try {
       const {
@@ -248,6 +278,26 @@ export class ClientDocumentationController {
         res.status(400).json({
           success: false,
           message: "Invalid product_structure_instance_id",
+        });
+        return;
+      }
+
+      // Presentation files picked from the lead's design/quotation documents
+      // keep the name of the selected document, same as the booking stage.
+      const keepOriginalNames = req.body.keep_original_name === "true";
+
+      if (
+        keepOriginalNames &&
+        !(await ClientDocumentationController.areSelectedLeadDocuments(
+          parsedLeadId,
+          parsedVendorId,
+          [...pptFiles, ...pythaFiles],
+        ))
+      ) {
+        res.status(400).json({
+          success: false,
+          message:
+            "Selected files must be existing design or quotation documents of this lead",
         });
         return;
       }
@@ -295,13 +345,14 @@ export class ClientDocumentationController {
           );
 
         for (const doc of docs) {
-          const finalOriginalName =
-            ClientDocumentationController.buildClientDocumentationName(
-              uploadContext,
-              tag,
-              doc.originalname,
-              nextRevision,
-            );
+          const finalOriginalName = keepOriginalNames
+            ? doc.originalname
+            : ClientDocumentationController.buildClientDocumentationName(
+                uploadContext,
+                tag,
+                doc.originalname,
+                nextRevision,
+              );
           nextRevision += 1;
           const sysName = await uploadToWasabClientDocumentationFile(
             doc.path,
@@ -452,6 +503,26 @@ export class ClientDocumentationController {
         return;
       }
 
+      // Presentation files picked from the lead's design/quotation documents
+      // keep the name of the selected document, same as the booking stage.
+      const keepOriginalNames = req.body.keep_original_name === "true";
+
+      if (
+        keepOriginalNames &&
+        !(await ClientDocumentationController.areSelectedLeadDocuments(
+          parsedLeadId,
+          parsedVendorId,
+          [...pptFiles, ...pythaFiles],
+        ))
+      ) {
+        res.status(400).json({
+          success: false,
+          message:
+            "Selected files must be existing design or quotation documents of this lead",
+        });
+        return;
+      }
+
       let resolvedInstance: { id: number; title: string } | null = null;
       try {
         resolvedInstance = await ClientDocumentationController.resolveProductStructureInstance(
@@ -495,13 +566,14 @@ export class ClientDocumentationController {
           );
 
         for (const doc of docs) {
-          const finalOriginalName =
-            ClientDocumentationController.buildClientDocumentationName(
-              uploadContext,
-              tag,
-              doc.originalname,
-              nextRevision,
-            );
+          const finalOriginalName = keepOriginalNames
+            ? doc.originalname
+            : ClientDocumentationController.buildClientDocumentationName(
+                uploadContext,
+                tag,
+                doc.originalname,
+                nextRevision,
+              );
           nextRevision += 1;
           const sysName = await uploadToWasabClientDocumentationFile(
             doc.path,

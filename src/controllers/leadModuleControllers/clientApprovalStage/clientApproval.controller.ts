@@ -2,7 +2,9 @@ import { Request, Response } from "express";
 import { ClientApprovalService } from "../../../services/leadModuleServices/clientApprovalStage/clientApproval.service";
 import { ApiResponse } from "../../../utils/apiResponse";
 import { uploadToWasabClientApprovalDocumentationFile } from "../../../utils/wasabiClient";
+import { sanitizeFilename } from "../../../utils/fileUtils";
 import fs from "node:fs/promises";
+import path from "node:path";
 import { prisma } from "../../../prisma/client";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { getFranchiseAdminRecipients } from "../../../services/notification/adminRecipients.service";
@@ -38,6 +40,89 @@ const getParam = (param: string | string[] | undefined): string | undefined =>
 
 const clientApprovalService = new ClientApprovalService();
 
+/**
+ * Client approval file names. Custom-usertype vendors get
+ * <CAS|CPD>-<nn>-<ClientName>-<Structure>-<Date>.<ext>, numbered across the
+ * lead's files of that prefix; other vendors keep the original name.
+ */
+const buildClientApprovalDocNames = async (
+  vendorId: number,
+  leadId: number,
+  productTypeId: number | undefined,
+  prefix: "CAS" | "CPD",
+  files: Express.Multer.File[],
+): Promise<string[]> => {
+  const originalNames = files.map((file) => file.originalname);
+  if (files.length === 0) return originalNames;
+
+  const vendor = await prisma.vendorMaster.findUnique({
+    where: { id: vendorId },
+    select: { is_this_vendor_is_custom_usertype_only: true },
+  });
+  if (vendor?.is_this_vendor_is_custom_usertype_only !== true) return originalNames;
+
+  const lead = await prisma.leadMaster.findFirst({
+    where: { id: leadId, vendor_id: vendorId },
+    select: { firstname: true, lastname: true },
+  });
+  const clientNameSegment = sanitizeFilename(
+    `${lead?.firstname ?? ""}${lead?.lastname ?? ""}` || "Client",
+  )
+    .replace(/_+/g, "_")
+    .slice(0, 50);
+
+  const leadInstances = await prisma.leadProductStructureInstance.findMany({
+    where: {
+      lead_id: leadId,
+      vendor_id: vendorId,
+      ...(productTypeId ? { product_type_id: productTypeId } : {}),
+    },
+    select: { productType: { select: { type: true } } },
+  });
+  const uniqueStructureNames = [
+    ...new Set(
+      leadInstances
+        .map((instance) => instance.productType?.type)
+        .filter(Boolean),
+    ),
+  ];
+  const structureSegment = sanitizeFilename(
+    uniqueStructureNames.length > 0
+      ? uniqueStructureNames.join("_")
+      : "General",
+  )
+    .replace(/_+/g, "_")
+    .slice(0, 80);
+
+  const now = new Date();
+  const dateSegment = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0"),
+  ].join("-");
+
+  const existingDocs = await prisma.leadDocuments.findMany({
+    where: {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      doc_og_name: { startsWith: `${prefix}-` },
+      is_deleted: false,
+    },
+    select: { doc_og_name: true },
+  });
+  let nextRevision =
+    existingDocs.reduce((maxRevision, doc) => {
+      const match = doc.doc_og_name?.match(new RegExp(`^${prefix}-(\\d+)-`, "i"));
+      return match ? Math.max(maxRevision, Number(match[1])) : maxRevision;
+    }, -1) + 1;
+
+  return files.map((file) => {
+    const extension = path.extname(file.originalname || "");
+    const revision = String(nextRevision++).padStart(2, "0");
+    return `${prefix}-${revision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+  });
+};
+
 export class ClientApprovalController {
   public static async addApprovalDocuments(
     req: Request,
@@ -70,20 +155,27 @@ export class ClientApprovalController {
       }
 
       const uploadedDocs: { originalName: string; sysName: string }[] = [];
+      const documentNames = await buildClientApprovalDocNames(
+        Number(vendor_id),
+        Number(lead_id),
+        product_type_id ? Number(product_type_id) : undefined,
+        "CAS",
+        documents,
+      );
 
-      for (const doc of documents) {
+      for (const [index, doc] of documents.entries()) {
         const sysName = await uploadToWasabClientApprovalDocumentationFile(
           doc.path,
           Number(vendor_id),
           Number(lead_id),
-          doc.originalname,
+          documentNames[index],
           doc.mimetype,
         );
 
         await fs.unlink(doc.path);
 
         uploadedDocs.push({
-          originalName: doc.originalname,
+          originalName: documentNames[index],
           sysName,
         });
       }
@@ -153,19 +245,27 @@ export class ClientApprovalController {
         sysName: string;
       }[] = [];
 
-      for (const doc of approvalScreenshots) {
+      const screenshotNames = await buildClientApprovalDocNames(
+        Number(vendorId),
+        Number(leadId),
+        product_type_id ? Number(product_type_id) : undefined,
+        "CAS",
+        approvalScreenshots,
+      );
+
+      for (const [index, doc] of approvalScreenshots.entries()) {
         const sysName = await uploadToWasabClientApprovalDocumentationFile(
           doc.path,
           Number(vendorId),
           Number(leadId),
-          doc.originalname,
+          screenshotNames[index],
           doc.mimetype,
         );
 
         await fs.unlink(doc.path);
 
         uploadedApprovalScreenshots.push({
-          originalName: doc.originalname,
+          originalName: screenshotNames[index],
           sysName,
         });
       }
@@ -176,19 +276,27 @@ export class ClientApprovalController {
       }[] = [];
 
       if (payment_files && payment_files.length > 0) {
-        for (const doc of payment_files) {
+        const paymentFileNames = await buildClientApprovalDocNames(
+          Number(vendorId),
+          Number(leadId),
+          product_type_id ? Number(product_type_id) : undefined,
+          "CPD",
+          payment_files,
+        );
+
+        for (const [index, doc] of payment_files.entries()) {
           const sysName = await uploadToWasabClientApprovalDocumentationFile(
             doc.path,
             Number(vendorId),
             Number(leadId),
-            doc.originalname,
+            paymentFileNames[index],
             doc.mimetype,
           );
 
           await fs.unlink(doc.path);
 
           uploadedPaymentFiles.push({
-            originalName: doc.originalname,
+            originalName: paymentFileNames[index],
             sysName,
           });
         }

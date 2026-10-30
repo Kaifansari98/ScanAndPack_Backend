@@ -106,6 +106,66 @@ export class DesigingStageController {
     });
   }
 
+  /**
+   * Specification sheet export name. Custom-usertype vendors get
+   * SS<n>-<ClientName>-<Structure>-<Date>, numbered by the spec's position on
+   * the lead so re-exporting keeps its number; other vendors keep the spec name.
+   */
+  private static async buildSpecificationFileName(
+    vendorId: number,
+    leadId: number,
+    specsId: number,
+    lead: { firstname: string | null; lastname: string | null },
+    specProductType?: string | null,
+  ): Promise<string | null> {
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { is_this_vendor_is_custom_usertype_only: true },
+    });
+    if (vendor?.is_this_vendor_is_custom_usertype_only !== true) return null;
+
+    const leadSpecifications = await prisma.leadSpecificationsMaster.findMany({
+      where: { vendor_id: vendorId, lead_id: leadId },
+      select: { id: true },
+      orderBy: [{ created_at: "asc" }, { id: "asc" }],
+    });
+    const revision = leadSpecifications.findIndex((spec) => spec.id === specsId);
+
+    let structureNames = specProductType ? [specProductType] : [];
+    if (structureNames.length === 0) {
+      const leadInstances = await prisma.leadProductStructureInstance.findMany({
+        where: { lead_id: leadId, vendor_id: vendorId },
+        select: { productType: { select: { type: true } } },
+      });
+      structureNames = [
+        ...new Set(
+          leadInstances
+            .map((instance) => instance.productType?.type)
+            .filter((type): type is string => Boolean(type)),
+        ),
+      ];
+    }
+
+    const clientNameSegment = sanitizeFilename(
+      `${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client",
+    )
+      .replace(/_+/g, "_")
+      .slice(0, 50);
+    const structureSegment = sanitizeFilename(
+      structureNames.length > 0 ? structureNames.join("_") : "General",
+    )
+      .replace(/_+/g, "_")
+      .slice(0, 80);
+    const now = new Date();
+    const dateSegment = [
+      now.getFullYear(),
+      String(now.getMonth() + 1).padStart(2, "0"),
+      String(now.getDate()).padStart(2, "0"),
+    ].join("-");
+
+    return `SS${revision}-${clientNameSegment}-${structureSegment}-${dateSegment}`;
+  }
+
   private static normalizeSpecItemCodeId(value: number | null | undefined) {
     return value ?? -1;
   }
@@ -4026,6 +4086,13 @@ export class DesigingStageController {
         productItemCode?.productStructure.productType?.type?.trim() ||
         productItemCode?.productStructure.type?.trim() ||
         "Specification";
+      const fileName = await DesigingStageController.buildSpecificationFileName(
+        vendorId,
+        leadId,
+        specsId,
+        lead,
+        productItemCode?.productStructure.productType?.type,
+      );
 
       return res.status(200).json({
         success: true,
@@ -4035,6 +4102,7 @@ export class DesigingStageController {
             sheet_title: `${sheetType} Detailed Specs Sheet`,
             created_at,
           },
+          file_name: fileName,
           carcassMaterialMappings: LeadCarcassMaterialMapping,
           shutterMaterialMappings: LeadShutterMaterialMapping,
           hardwareMappings: LeadHardwareMapping,
