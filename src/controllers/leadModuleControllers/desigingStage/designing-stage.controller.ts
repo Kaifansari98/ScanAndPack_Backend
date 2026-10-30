@@ -1,3 +1,4 @@
+import { nextDesignFileRevision } from "../../../utils/designFileRevision";
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import { ApiResponse } from "../../../utils/apiResponse";
@@ -1487,6 +1488,9 @@ export class DesigingStageController {
               String(now.getDate()).padStart(2, "0"),
             ].join("-");
 
+            // Serialize revision allocation for simultaneous uploads to the same lead.
+            await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${Number(leadId)} AND vendor_id = ${Number(vendorId)} FOR UPDATE`;
+
             const existingDesignDocs = await tx.leadDocuments.findMany({
               where: {
                 vendor_id: Number(vendorId),
@@ -1497,38 +1501,11 @@ export class DesigingStageController {
               select: { doc_og_name: true },
             });
 
-            nextRevision =
-              existingDesignDocs.reduce((maxRevision, doc) => {
-                const match = doc.doc_og_name?.match(
-                  /^D(\d+)_([^_]+)_(.+?)(?:\.[^.]+)?$/i,
-                );
-                if (!match) {
-                  return maxRevision;
-                }
-
-                const [, revisionText, existingDesignType = "", nameBody = ""] =
-                  match;
-                if (
-                  existingDesignType.trim().toLowerCase() !==
-                  designTypeSegment.toLowerCase()
-                ) {
-                  return maxRevision;
-                }
-
-                const isSameProductType =
-                  nameBody.includes(`_${structureSegment}_`) ||
-                  nameBody.endsWith(`_${structureSegment}`) ||
-                  nameBody.startsWith(`${structureSegment}_`);
-
-                if (!isSameProductType) {
-                  return maxRevision;
-                }
-
-                const revision = Number(revisionText);
-                return Number.isFinite(revision)
-                  ? Math.max(maxRevision, revision)
-                  : maxRevision;
-              }, -1) + 1;
+            nextRevision = nextDesignFileRevision(
+              existingDesignDocs,
+              designTypeSegment,
+              structureSegment,
+            );
 
             if (selectedInstances.length === 1) {
               instanceIdToPersist = selectedInstances[0].id;
