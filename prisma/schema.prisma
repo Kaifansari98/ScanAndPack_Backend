@@ -8,8 +8,8 @@ datasource db {
 }
 
 model VendorMaster {
-  instanceStageHistory InstanceStageHistory[]
-  site_readiness_questions Json?
+  instanceStageHistory                         InstanceStageHistory[]
+  site_readiness_questions                     Json?
   machineCostDescriptions                      MachineCostDescription[]
   productsRequiredForProduction                ProductsRequiredForProduction[]
   id                                           Int                                            @id @default(autoincrement())
@@ -36,7 +36,7 @@ model VendorMaster {
   state_id                                     Int?
   is_inventory_enabled                         Boolean                                        @default(false)
   is_tracktrace_enabled                        Boolean                                        @default(false)
-  cutlist_configuration                         String?                                        @default("default")
+  cutlist_configuration                        String?                                        @default("default")
   is_approval_task_enabled                     Boolean                                        @default(true)
   eligible_booking_days                        Int?
   is_self_assign_task_type_master_enabed       Boolean                                        @default(true)
@@ -229,8 +229,8 @@ model VendorMaster {
   cutlistHeadersMappings                       CutlistHeadersMapping[]
 
   walkinQuestionnaires WalkinLeadQuestionnaire[]
-  walkinResponses WalkinLeadResponse[]
-  walkinUploads WalkinLeadUpload[]
+  walkinResponses      WalkinLeadResponse[]
+  walkinUploads        WalkinLeadUpload[]
 
   @@index([state_id])
   @@index([time_zone_id])
@@ -288,8 +288,8 @@ model PrivilegeMaster {
 }
 
 model UserMaster {
-  instanceStageHistory InstanceStageHistory[]
-  onlineLeadAssignedFranchises FranchiseMaster[] @relation("OnlineLeadSalesExecutive")
+  instanceStageHistory                                                           InstanceStageHistory[]
+  onlineLeadAssignedFranchises                                                   FranchiseMaster[]                              @relation("OnlineLeadSalesExecutive")
   productsRequiredForProduction                                                  ProductsRequiredForProduction[]
   id                                                                             Int                                            @id @default(autoincrement())
   vendor_id                                                                      Int
@@ -895,7 +895,7 @@ model LeadMaster {
   draft_in_open_leads                          Boolean                                        @default(false)
   lead_code                                    String
   cadbid_customer_id                           Int?
-  is_client_approval_submitted                Boolean                                        @default(false)
+  is_client_approval_submitted                 Boolean                                        @default(false)
   client_required_order_login_complition_date  DateTime?
   expected_order_login_ready_date              DateTime?
   no_of_client_documents_initially_submitted   Int?
@@ -1326,9 +1326,8 @@ model ProductTypeMaster {
   productStructures             ProductStructure[]
   vendor                        VendorMaster                    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   leadBillingAddresses          LeadBillingAddress[]
-  walkinQuestionnaires WalkinLeadQuestionnaire[]
-  walkinResponses WalkinLeadResponse[]
-
+  walkinQuestionnaires          WalkinLeadQuestionnaire[]
+  walkinResponses               WalkinLeadResponse[]
 }
 
 model ProcessBriefMaster {
@@ -1446,6 +1445,8 @@ model CarcassTypeMaster {
   leadMappings           LeadCarcassMaterialMapping[]
   rules                  TimelineRule[]
   chsSelectionMappings   CHSSelectionTypeMapping[]
+  is_deleted             Boolean                      @default(false)
+  deleted_at             DateTime?
 }
 
 model CarcasMaterialMaster {
@@ -1455,6 +1456,8 @@ model CarcasMaterialMaster {
   vendor       VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   finishes     CarcassMaterialFinishMaster[]
   leadMappings LeadCarcassMaterialMapping[]
+  is_deleted   Boolean                       @default(false)
+  deleted_at   DateTime?
 }
 
 model CarcassMaterialFinishMaster {
@@ -1463,6 +1466,8 @@ model CarcassMaterialFinishMaster {
   carcas_material_id Int
   material           CarcasMaterialMaster         @relation(fields: [carcas_material_id], references: [id], onDelete: Cascade)
   leadMappings       LeadCarcassMaterialMapping[]
+  is_deleted         Boolean                      @default(false)
+  deleted_at         DateTime?
 }
 
 model ShutterTypeMaster {
@@ -1474,6 +1479,8 @@ model ShutterTypeMaster {
   vendor               VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   rules                TimelineRule[]
   chsSelectionMappings CHSSelectionTypeMapping[]
+  is_deleted           Boolean                      @default(false)
+  deleted_at           DateTime?
 }
 
 model ShutterSubTypeMaster {
@@ -1491,6 +1498,8 @@ model ShutterMaterialMaster {
   leadMappings LeadShutterMaterialMapping[]
   finishes     ShutterMaterialFinishMaster[]
   vendor       VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  is_deleted   Boolean                       @default(false)
+  deleted_at   DateTime?
 }
 
 model ShutterMaterialFinishMaster {
@@ -1499,6 +1508,8 @@ model ShutterMaterialFinishMaster {
   shutter_material_id Int
   leadMappings        LeadShutterMaterialMapping[]
   material            ShutterMaterialMaster        @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
+  is_deleted          Boolean                      @default(false)
+  deleted_at          DateTime?
 }
 
 model CarcassLegsMaster {
@@ -1509,6 +1520,8 @@ model CarcassLegsMaster {
   leadMappings LeadHardwareMapping[]
   colors       SkirtingCarcassLegsColorMaster[]
   skirtings    SkirtingCarcassLegsMaster[]
+  is_deleted   Boolean                          @default(false)
+  deleted_at   DateTime?
 }
 
 model SkirtingCarcassLegsMaster {
@@ -1519,6 +1532,8 @@ model SkirtingCarcassLegsMaster {
   leadMappings    LeadHardwareMapping[]
   colors          SkirtingCarcassLegsColorMaster[]
   carcassLegs     CarcassLegsMaster                @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
+  is_deleted      Boolean                          @default(false)
+  deleted_at      DateTime?
 }
 
 model SkirtingCarcassLegsColorMaster {
@@ -1529,6 +1544,8 @@ model SkirtingCarcassLegsColorMaster {
   leadMappings             LeadHardwareMapping[]
   carcassLegs              CarcassLegsMaster         @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
   skirtingCarcassLegs      SkirtingCarcassLegsMaster @relation(fields: [skirting_carcass_legs_id], references: [id], onDelete: Cascade)
+  is_deleted               Boolean                   @default(false)
+  deleted_at               DateTime?
 }
 
 model LeadHardwareMapping {
@@ -1575,6 +1592,8 @@ model LightCarcasTypeMaster {
   created_at DateTime                @default(now())
   vendor     VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   units      LightCarcasUnitMaster[]
+  is_deleted Boolean                 @default(false)
+  deleted_at DateTime?
 
   @@index([vendor_id])
 }
@@ -1589,6 +1608,8 @@ model LightCarcasUnitMaster {
   leadMappings         LeadLightCarcasUnitMapping[]
   lightCarcasType      LightCarcasTypeMaster        @relation(fields: [light_carcas_type_id], references: [id], onDelete: Cascade)
   vendor               VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  is_deleted           Boolean                      @default(false)
+  deleted_at           DateTime?
 
   @@index([vendor_id])
   @@index([light_carcas_type_id])
@@ -1633,6 +1654,8 @@ model OtherAppliancesMaster {
   type           OtherApplianceType
   leadMappings   LeadOtherAppliancesMapping[]
   vendor         VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  is_deleted     Boolean                      @default(false)
+  deleted_at     DateTime?
 
   @@index([vendor_id])
 }
@@ -1714,7 +1737,6 @@ model specificationDocumentMapping {
   @@index([specs_id])
   @@index([document_id])
   @@index([created_by])
-
 }
 
 model LeadDocuments {
@@ -1828,7 +1850,6 @@ model LeadChatMessage {
   repliedToMessage    LeadChatMessage?     @relation("LeadChatMessageReplies", fields: [reply_to_message_id], references: [id])
   replies             LeadChatMessage[]    @relation("LeadChatMessageReplies")
   sender              UserMaster           @relation("LeadChatMessageSender", fields: [sender_id], references: [id], onDelete: Cascade)
-
 }
 
 model LeadChatAttachment {
@@ -1928,7 +1949,6 @@ model ProductItemCode {
   @@index([vendor_id])
   @@index([product_structure_id])
   @@index([sub_product_structure_id])
-
 }
 
 model LeadProductStructureMapping {
@@ -1958,7 +1978,7 @@ model LeadProductStructureInstance {
   title                                      String
   status                                     ProductInstanceStatus           @default(open)
   stage_status_id                            Int?
-  stageStatus                                StatusTypeMaster? @relation("InstanceStage", fields: [stage_status_id], references: [id])
+  stageStatus                                StatusTypeMaster?               @relation("InstanceStage", fields: [stage_status_id], references: [id])
   stageHistory                               InstanceStageHistory[]
   description                                String?                         @db.VarChar(2000)
   created_by                                 Int
@@ -2022,9 +2042,8 @@ model LeadProductStructureInstance {
   siteReadinessAnswers                       SiteReadiness[]
   payments                                   PaymentInfo[]
 
-
-  @@index([vendor_id, stage_status_id, lead_id])
   @@unique([lead_id, vendor_id, product_structure_id, quantity_index], name: "uniq_structure_instance")
+  @@index([vendor_id, stage_status_id, lead_id])
   @@index([sub_product_structure_id])
   @@index([product_item_code_id])
 }
@@ -2043,35 +2062,35 @@ model SelfAssignTaskTypeMaster {
 }
 
 model PaymentInfo {
-  id                      Int                @id @default(autoincrement())
+  id                      Int                           @id @default(autoincrement())
   lead_id                 Int
   account_id              Int
   amount                  Float?
   payment_date            DateTime?
-  payment_text            String?            @db.VarChar(2000)
+  payment_text            String?                       @db.VarChar(2000)
   payment_file_id         Int?
-  created_at              DateTime           @default(now())
+  created_at              DateTime                      @default(now())
   created_by              Int
   vendor_id               Int
   payment_type_id         Int
   status_id               Int?
   product_type_id         Int?
-  is_archived             Boolean            @default(false)
+  is_archived             Boolean                       @default(false)
   basic_amount            Float?
   gst_amount              Float?
   gst_percentage          Float?
   total_amount            Float?
-  is_booking_received_amt Boolean            @default(false)
+  is_booking_received_amt Boolean                       @default(false)
   instance_id             Int?
-  account                 AccountMaster      @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  account                 AccountMaster                 @relation(fields: [account_id], references: [id], onDelete: Cascade)
   instance                LeadProductStructureInstance? @relation(fields: [instance_id], references: [id], onDelete: SetNull)
-  createdBy               UserMaster         @relation(fields: [created_by], references: [id], onDelete: Cascade)
-  lead                    LeadMaster         @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  document                LeadDocuments?     @relation(fields: [payment_file_id], references: [id])
-  paymentType             PaymentTypeMaster  @relation(fields: [payment_type_id], references: [id], onDelete: Cascade)
-  ProductTypeMaster       ProductTypeMaster? @relation(fields: [product_type_id], references: [id])
-  statusType              StatusTypeMaster?  @relation(fields: [status_id], references: [id], onDelete: Cascade)
-  vendor                  VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy               UserMaster                    @relation(fields: [created_by], references: [id], onDelete: Cascade)
+  lead                    LeadMaster                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  document                LeadDocuments?                @relation(fields: [payment_file_id], references: [id])
+  paymentType             PaymentTypeMaster             @relation(fields: [payment_type_id], references: [id], onDelete: Cascade)
+  ProductTypeMaster       ProductTypeMaster?            @relation(fields: [product_type_id], references: [id])
+  statusType              StatusTypeMaster?             @relation(fields: [status_id], references: [id], onDelete: Cascade)
+  vendor                  VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@index([product_type_id])
   @@index([lead_id, instance_id])
@@ -2253,33 +2272,33 @@ model LeadServiceSchedule {
 }
 
 model StatusTypeMaster {
-  stageInstances LeadProductStructureInstance[] @relation("InstanceStage")
-  instanceStagesFrom InstanceStageHistory[] @relation("InstanceStageFrom")
-  instanceStagesTo InstanceStageHistory[] @relation("InstanceStageTo")
-  id               Int                @id @default(autoincrement())
-  type             String
-  vendor_id        Int
-  tag              String
-  leadDetailedLogs LeadDetailedLogs[] @relation("LeadDetailedLogStage")
-  leads            LeadMaster[]
-  leadStatusLogs   LeadStatusLogs[]
-  payments         PaymentInfo[]
-  vendor           VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  stageInstances     LeadProductStructureInstance[] @relation("InstanceStage")
+  instanceStagesFrom InstanceStageHistory[]         @relation("InstanceStageFrom")
+  instanceStagesTo   InstanceStageHistory[]         @relation("InstanceStageTo")
+  id                 Int                            @id @default(autoincrement())
+  type               String
+  vendor_id          Int
+  tag                String
+  leadDetailedLogs   LeadDetailedLogs[]             @relation("LeadDetailedLogStage")
+  leads              LeadMaster[]
+  leadStatusLogs     LeadStatusLogs[]
+  payments           PaymentInfo[]
+  vendor             VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model InstanceStageHistory {
-  id             Int @id @default(autoincrement())
+  id             Int                          @id @default(autoincrement())
   instance_id    Int
   vendor_id      Int
   from_status_id Int?
   to_status_id   Int
   created_by     Int
-  created_at     DateTime @default(now())
+  created_at     DateTime                     @default(now())
   instance       LeadProductStructureInstance @relation(fields: [instance_id], references: [id], onDelete: Cascade)
-  vendor         VendorMaster @relation(fields: [vendor_id], references: [id])
-  fromStatus     StatusTypeMaster? @relation("InstanceStageFrom", fields: [from_status_id], references: [id])
-  toStatus       StatusTypeMaster @relation("InstanceStageTo", fields: [to_status_id], references: [id])
-  createdBy      UserMaster @relation(fields: [created_by], references: [id])
+  vendor         VendorMaster                 @relation(fields: [vendor_id], references: [id])
+  fromStatus     StatusTypeMaster?            @relation("InstanceStageFrom", fields: [from_status_id], references: [id])
+  toStatus       StatusTypeMaster             @relation("InstanceStageTo", fields: [to_status_id], references: [id])
+  createdBy      UserMaster                   @relation(fields: [created_by], references: [id])
 
   @@index([vendor_id, instance_id, created_at])
 }
@@ -2798,7 +2817,6 @@ model CompanyVendorsMaster {
   @@index([default_payment_term_id])
   @@index([state_id])
   @@index([primary_contact_id])
-
 }
 
 model OrderLoginDetails {
@@ -2830,25 +2848,25 @@ model OrderLoginDetails {
 }
 
 model SiteReadiness {
-  id                    Int             @id @default(autoincrement())
+  id                    Int                           @id @default(autoincrement())
   vendor_id             Int
   account_id            Int
   lead_id               Int
   instance_id           Int?
   type                  String
-  remark                String?         @db.VarChar(2000)
+  remark                String?                       @db.VarChar(2000)
   value                 Boolean?
   created_by            Int
   updated_by            Int?
-  created_at            DateTime        @default(now())
-  updated_at            DateTime        @updatedAt
-  account               AccountMaster   @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  createdBy             UserMaster      @relation("SiteReadinessCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  lead                  LeadMaster      @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  created_at            DateTime                      @default(now())
+  updated_at            DateTime                      @updatedAt
+  account               AccountMaster                 @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  createdBy             UserMaster                    @relation("SiteReadinessCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  lead                  LeadMaster                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   instance              LeadProductStructureInstance? @relation(fields: [instance_id], references: [id], onDelete: Cascade)
-  updatedBy             UserMaster?     @relation("SiteReadinessUpdatedBy", fields: [updated_by], references: [id])
-  vendor                VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  site_readiness_photos LeadDocuments[] @relation("LeadDocumentsToSiteReadiness")
+  updatedBy             UserMaster?                   @relation("SiteReadinessUpdatedBy", fields: [updated_by], references: [id])
+  vendor                VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  site_readiness_photos LeadDocuments[]               @relation("LeadDocumentsToSiteReadiness")
 
   @@index([lead_id, vendor_id, type])
   @@index([lead_id, instance_id])
@@ -3107,7 +3125,7 @@ model EmailNotificationMaster {
 }
 
 model Notification {
-  id           Int                        @id @default(autoincrement())
+  id           Int              @id @default(autoincrement())
   vendor_id    Int
   user_id      Int
   sender_id    Int?
@@ -3117,11 +3135,11 @@ model Notification {
   entity_type  String?
   entity_id    Int?
   redirect_url String?
-  is_read      Boolean                    @default(false)
+  is_read      Boolean          @default(false)
   read_at      DateTime?
-  created_at   DateTime                   @default(now())
-  sender       UserMaster?                @relation("NotificationSender", fields: [sender_id], references: [id])
-  user         UserMaster                 @relation("NotificationUser", fields: [user_id], references: [id])
+  created_at   DateTime         @default(now())
+  sender       UserMaster?      @relation("NotificationSender", fields: [sender_id], references: [id])
+  user         UserMaster       @relation("NotificationUser", fields: [user_id], references: [id])
 
   vendor       VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   deliveryLogs NotificationDeliveryLogs[]
@@ -3131,15 +3149,15 @@ model Notification {
 }
 
 model UserPushToken {
-  id           Int                        @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   user_id      Int
   vendor_id    Int
-  token        String                     @unique
+  token        String    @unique
   platform     String
   browser      String?
-  is_active    Boolean                    @default(true)
-  created_at   DateTime                   @default(now())
-  last_used_at DateTime?                  @map("last_used")
+  is_active    Boolean   @default(true)
+  created_at   DateTime  @default(now())
+  last_used_at DateTime? @map("last_used")
   device_id    String?
 
   deliveryLogs NotificationDeliveryLogs[]
@@ -3195,19 +3213,19 @@ model VendorModulesMapping {
 }
 
 model MachineCostDescription {
-  id            Int          @id @default(autoincrement())
-  vendor_id     Int
-  machine_id    Int
-  code          String
-  description   String
-  sequence_no   Int
-  amount        Decimal?     @db.Decimal(20, 6)
-  formula       String?
-  text_value    String?
-  value_format  String?
-  sheet         String       @default("MACHINE_COST")
-  vendor        VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  machine       MachineMaster @relation(fields: [machine_id, vendor_id], references: [id, vendor_id], onDelete: Cascade)
+  id           Int           @id @default(autoincrement())
+  vendor_id    Int
+  machine_id   Int
+  code         String
+  description  String
+  sequence_no  Int
+  amount       Decimal?      @db.Decimal(20, 6)
+  formula      String?
+  text_value   String?
+  value_format String?
+  sheet        String        @default("MACHINE_COST")
+  vendor       VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  machine      MachineMaster @relation(fields: [machine_id, vendor_id], references: [id, vendor_id], onDelete: Cascade)
 
   @@unique([vendor_id, machine_id, code])
   @@index([vendor_id, machine_id, sequence_no])
@@ -3507,10 +3525,8 @@ model DefectedItem {
 }
 
 model FranchiseMaster {
-  online_lead_sales_executive_id Int?
-  onlineLeadSalesExecutive UserMaster? @relation("OnlineLeadSalesExecutive", fields: [online_lead_sales_executive_id], references: [id], onDelete: SetNull)
-
-  @@index([online_lead_sales_executive_id])
+  online_lead_sales_executive_id                                             Int?
+  onlineLeadSalesExecutive                                                   UserMaster?                          @relation("OnlineLeadSalesExecutive", fields: [online_lead_sales_executive_id], references: [id], onDelete: SetNull)
   productsRequiredForProduction                                              ProductsRequiredForProduction[]
   id                                                                         Int                                  @id @default(autoincrement())
   vendor_id                                                                  Int
@@ -3549,6 +3565,7 @@ model FranchiseMaster {
   attendance_logs                                                            attendance_logs[]
 
   @@unique([vendor_id, franchise_code])
+  @@index([online_lead_sales_executive_id])
 }
 
 model HeadSiteSupervisorFranchiseMapping {
@@ -5776,9 +5793,7 @@ model BoxItemDeleteLog {
 model ProductsRequiredForProduction {
   order_login_id  Int?
   orderLogin      OrderLoginDetails? @relation(fields: [order_login_id], references: [id], onDelete: SetNull)
-
-  @@index([order_login_id])
-  id              Int      @id @default(autoincrement())
+  id              Int                @id @default(autoincrement())
   vendor_id       Int
   franchise_id    Int
   lead_id         Int
@@ -5788,15 +5803,15 @@ model ProductsRequiredForProduction {
   article_code    String
   type            String
   category        String
-  qty             Decimal  @db.Decimal(12, 2)
+  qty             Decimal            @db.Decimal(12, 2)
   unit            String
   name            String
   // Reserved via "Freeze" — already deducted from ProductMaster.current_stock at freeze time.
-  frozen_item_qty Decimal  @default(0) @db.Decimal(12, 2)
+  frozen_item_qty Decimal            @default(0) @db.Decimal(12, 2)
   // Handed off via "Issue" — the final, consumed state. Issuing an already-frozen unit does
   // not deduct stock again since freezing already deducted it.
-  issued_item_qty Decimal  @default(0) @db.Decimal(12, 2)
-  created_at      DateTime @default(now())
+  issued_item_qty Decimal            @default(0) @db.Decimal(12, 2)
+  created_at      DateTime           @default(now())
   created_by      Int
 
   vendor      VendorMaster                  @relation(fields: [vendor_id], references: [id])
@@ -5807,6 +5822,7 @@ model ProductsRequiredForProduction {
   product     ProductMaster                 @relation(fields: [product_id], references: [id])
   createdBy   UserMaster                    @relation(fields: [created_by], references: [id])
 
+  @@index([order_login_id])
   @@index([vendor_id, franchise_id, lead_id])
   @@index([franchise_id])
   @@index([lead_id])
@@ -5998,16 +6014,16 @@ model WixStudioDataCapture {
 
 // A vendor's complete override for one furniture type; absence uses bundled defaults.
 model WalkinLeadQuestionnaire {
-  id              Int @id @default(autoincrement())
+  id              Int               @id @default(autoincrement())
   vendor_id       Int
   product_type_id Int
   questions       Json
-  version         Int @default(1)
+  version         Int               @default(1)
   created_by      Int
   updated_by      Int
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
-  vendor          VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  created_at      DateTime          @default(now())
+  updated_at      DateTime          @updatedAt
+  vendor          VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   productType     ProductTypeMaster @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
 
   @@unique([vendor_id, product_type_id])
@@ -6015,22 +6031,22 @@ model WalkinLeadQuestionnaire {
 
 // Store the exact questions alongside answers so later master edits preserve history.
 model WalkinLeadResponse {
-  id                Int @id @default(autoincrement())
-  vendor_id         Int
-  lead_id           Int
-  product_type_id   Int
-  questionnaire_key String
+  id                    Int               @id @default(autoincrement())
+  vendor_id             Int
+  lead_id               Int
+  product_type_id       Int
+  questionnaire_key     String
   questionnaire_version Int
-  question_snapshot Json
-  answers           Json
-  is_complete       Boolean @default(false)
-  created_by        Int
-  updated_by        Int
-  created_at        DateTime @default(now())
-  updated_at        DateTime @updatedAt
-  vendor            VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  lead              LeadMaster @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  productType       ProductTypeMaster @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+  question_snapshot     Json
+  answers               Json
+  is_complete           Boolean           @default(false)
+  created_by            Int
+  updated_by            Int
+  created_at            DateTime          @default(now())
+  updated_at            DateTime          @updatedAt
+  vendor                VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                  LeadMaster        @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  productType           ProductTypeMaster @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
 
   @@unique([lead_id, product_type_id])
   @@index([vendor_id, lead_id])
@@ -6038,14 +6054,14 @@ model WalkinLeadResponse {
 
 // Upload before lead creation; answers refer to these IDs, never arbitrary storage keys.
 model WalkinLeadUpload {
-  id            String @id @default(uuid())
+  id            String       @id @default(uuid())
   vendor_id     Int
   created_by    Int
   original_name String
-  storage_key   String @unique
+  storage_key   String       @unique
   mime_type     String
   size_bytes    Int
-  created_at    DateTime @default(now())
+  created_at    DateTime     @default(now())
   vendor        VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@index([vendor_id, created_by])
@@ -6073,21 +6089,21 @@ model time_zone_master {
 }
 
 model attendance {
-  id              Int               @id @default(autoincrement())
+  id              Int              @id @default(autoincrement())
   vendor_id       Int
   franchise_id    Int?
   user_id         Int
-  attendance_date DateTime          @db.Date
+  attendance_date DateTime         @db.Date
   check_in        DateTime
   check_out       DateTime?
   source          AttendanceSource
-  created_at      DateTime          @default(now())
-  updated_at      DateTime          @updatedAt
+  created_at      DateTime         @default(now())
+  updated_at      DateTime         @updatedAt
 
-  vendor          VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
-  franchise       FranchiseMaster?  @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
-  user            UserMaster        @relation(fields: [user_id], references: [id], onDelete: Restrict)
-  logs            attendance_logs[]
+  vendor    VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  franchise FranchiseMaster?  @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
+  user      UserMaster        @relation(fields: [user_id], references: [id], onDelete: Restrict)
+  logs      attendance_logs[]
 
   @@unique([vendor_id, user_id, attendance_date])
   @@index([vendor_id])
@@ -6097,20 +6113,20 @@ model attendance {
 }
 
 model attendance_logs {
-  id             Int               @id @default(autoincrement())
-  vendor_id      Int
-  franchise_id   Int?
-  user_id        Int
-  attendance_id  Int
-  action         AttendanceAction
-  action_time    DateTime
-  source         AttendanceSource
-  created_at     DateTime          @default(now())
+  id            Int              @id @default(autoincrement())
+  vendor_id     Int
+  franchise_id  Int?
+  user_id       Int
+  attendance_id Int
+  action        AttendanceAction
+  action_time   DateTime
+  source        AttendanceSource
+  created_at    DateTime         @default(now())
 
-  attendance     attendance        @relation(fields: [attendance_id], references: [id], onDelete: Restrict)
-  vendor         VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
-  franchise      FranchiseMaster?  @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
-  user           UserMaster        @relation(fields: [user_id], references: [id], onDelete: Restrict)
+  attendance attendance       @relation(fields: [attendance_id], references: [id], onDelete: Restrict)
+  vendor     VendorMaster     @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  franchise  FranchiseMaster? @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
+  user       UserMaster       @relation(fields: [user_id], references: [id], onDelete: Restrict)
 
   @@index([attendance_id])
   @@index([vendor_id])

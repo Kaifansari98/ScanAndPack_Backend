@@ -38,6 +38,7 @@ export const getAllCarcassTypes = async (
   const types = await prisma.carcassTypeMaster.findMany({
     where: {
       vendor_id,
+      is_deleted: false,
       ...(onlyFastProduction ? { can_do_fast_production: true } : {}),
     },
     orderBy: { name: "asc" },
@@ -65,7 +66,7 @@ export const getAllShutterTypes = async (
   await ensureVendorExists(vendor_id);
 
   const types = await prisma.shutterTypeMaster.findMany({
-    where: { vendor_id },
+    where: { vendor_id, is_deleted: false },
     include: {
       subTypes: {
         orderBy: { name: "asc" },
@@ -117,7 +118,7 @@ export const getAllCarcasMaterials = async (
   await ensureVendorExists(vendor_id);
 
   const materials = await prisma.carcasMaterialMaster.findMany({
-    where: { vendor_id },
+    where: { vendor_id, is_deleted: false },
     orderBy: { name: "asc" },
   });
 
@@ -150,7 +151,7 @@ export const getCarcassMaterialFinishes = async (
   }
 
   const finishes = await prisma.carcassMaterialFinishMaster.findMany({
-    where: { carcas_material_id },
+    where: { carcas_material_id, is_deleted: false },
     orderBy: { name: "asc" },
   });
 
@@ -183,7 +184,7 @@ export const getAllCarcassMaterialFinishesForVendor = async (
   await ensureVendorExists(vendor_id);
 
   const finishes = await prisma.carcassMaterialFinishMaster.findMany({
-    where: { material: { vendor_id } },
+    where: { material: { vendor_id, is_deleted: false }, is_deleted: false },
     include: { material: { select: { id: true, name: true } } },
     orderBy: { name: "asc" },
   });
@@ -263,15 +264,15 @@ export const bulkUploadCarcassMaterialFinishes = async (
   const [existingTypes, existingMaterials, existingFinishes] =
     await Promise.all([
       prisma.carcassTypeMaster.findMany({
-        where: { vendor_id },
+        where: { vendor_id, is_deleted: false },
         select: { id: true, name: true },
       }),
       prisma.carcasMaterialMaster.findMany({
-        where: { vendor_id },
+        where: { vendor_id, is_deleted: false },
         select: { id: true, name: true },
       }),
       prisma.carcassMaterialFinishMaster.findMany({
-        where: { material: { vendor_id } },
+        where: { material: { vendor_id, is_deleted: false }, is_deleted: false },
         select: { id: true, name: true, carcas_material_id: true },
       }),
     ]);
@@ -366,7 +367,7 @@ export const getAllShutterMaterials = async (
   await ensureVendorExists(vendor_id);
 
   const materials = await prisma.shutterMaterialMaster.findMany({
-    where: { vendor_id },
+    where: { vendor_id, is_deleted: false },
     orderBy: { name: "asc" },
   });
 
@@ -399,7 +400,7 @@ export const getShutterMaterialFinishes = async (
   }
 
   const finishes = await prisma.shutterMaterialFinishMaster.findMany({
-    where: { shutter_material_id },
+    where: { shutter_material_id, is_deleted: false },
     orderBy: { name: "asc" },
   });
 
@@ -432,7 +433,7 @@ export const getAllShutterMaterialFinishesForVendor = async (
   await ensureVendorExists(vendor_id);
 
   const finishes = await prisma.shutterMaterialFinishMaster.findMany({
-    where: { material: { vendor_id } },
+    where: { material: { vendor_id, is_deleted: false }, is_deleted: false },
     include: { material: { select: { id: true, name: true } } },
     orderBy: { name: "asc" },
   });
@@ -499,15 +500,15 @@ export const bulkUploadShutterMaterialFinishes = async (
   const [existingTypes, existingMaterials, existingFinishes] =
     await Promise.all([
       prisma.shutterTypeMaster.findMany({
-        where: { vendor_id },
+        where: { vendor_id, is_deleted: false },
         select: { id: true, name: true },
       }),
       prisma.shutterMaterialMaster.findMany({
-        where: { vendor_id },
+        where: { vendor_id, is_deleted: false },
         select: { id: true, name: true },
       }),
       prisma.shutterMaterialFinishMaster.findMany({
-        where: { material: { vendor_id } },
+        where: { material: { vendor_id, is_deleted: false }, is_deleted: false },
         select: { id: true, name: true, shutter_material_id: true },
       }),
     ]);
@@ -602,7 +603,7 @@ export const getAllCarcassLegs = async (
   await ensureVendorExists(vendor_id);
 
   const legs = await prisma.carcassLegsMaster.findMany({
-    where: { vendor_id },
+    where: { vendor_id, is_deleted: false },
     orderBy: { name: "asc" },
   });
 
@@ -635,7 +636,7 @@ export const getSkirtingCarcassLegs = async (
   }
 
   const skirtings = await prisma.skirtingCarcassLegsMaster.findMany({
-    where: { carcass_legs_id },
+    where: { carcass_legs_id, is_deleted: false },
     orderBy: { name: "asc" },
   });
 
@@ -669,7 +670,7 @@ export const getAllSkirtingCarcassLegsForVendor = async (
   await ensureVendorExists(vendor_id);
 
   const skirtings = await prisma.skirtingCarcassLegsMaster.findMany({
-    where: { carcassLegs: { vendor_id } },
+    where: { carcassLegs: { vendor_id, is_deleted: false }, is_deleted: false },
     include: { carcassLegs: { select: { id: true, name: true } } },
     orderBy: { name: "asc" },
   });
@@ -690,7 +691,7 @@ export const getSkirtingCarcassLegsColors = async (
   }
 
   const colors = await prisma.skirtingCarcassLegsColorMaster.findMany({
-    where: { skirting_carcass_legs_id },
+    where: { skirting_carcass_legs_id, is_deleted: false },
     orderBy: { color: "asc" },
   });
 
@@ -724,7 +725,7 @@ export const getAllSkirtingCarcassLegsColorsForVendor = async (
   await ensureVendorExists(vendor_id);
 
   const colors = await prisma.skirtingCarcassLegsColorMaster.findMany({
-    where: { carcassLegs: { vendor_id } },
+    where: { carcassLegs: { vendor_id, is_deleted: false }, is_deleted: false },
     include: { skirtingCarcassLegs: { select: { id: true, name: true } } },
     orderBy: { color: "asc" },
   });
@@ -790,15 +791,15 @@ export const bulkUploadSkirtingCarcassLegsColors = async (
 
   const [existingLegs, existingSkirtings, existingColors] = await Promise.all([
     prisma.carcassLegsMaster.findMany({
-      where: { vendor_id },
+      where: { vendor_id, is_deleted: false },
       select: { id: true, name: true },
     }),
     prisma.skirtingCarcassLegsMaster.findMany({
-      where: { carcassLegs: { vendor_id } },
+      where: { carcassLegs: { vendor_id, is_deleted: false }, is_deleted: false },
       select: { id: true, name: true, carcass_legs_id: true },
     }),
     prisma.skirtingCarcassLegsColorMaster.findMany({
-      where: { carcassLegs: { vendor_id } },
+      where: { carcassLegs: { vendor_id, is_deleted: false }, is_deleted: false },
       select: { id: true, color: true, skirting_carcass_legs_id: true },
     }),
   ]);
@@ -904,7 +905,7 @@ export const getAllLightCarcasTypes = async (
   await ensureVendorExists(vendor_id);
 
   const types = await prisma.lightCarcasTypeMaster.findMany({
-    where: { vendor_id, is_active: true },
+    where: { vendor_id, is_active: true, is_deleted: false },
     orderBy: { type: "asc" },
   });
 
@@ -937,7 +938,7 @@ export const getLightCarcasUnits = async (
   }
 
   const units = await prisma.lightCarcasUnitMaster.findMany({
-    where: { light_carcas_type_id, is_active: true },
+    where: { light_carcas_type_id, is_active: true, is_deleted: false },
     orderBy: { type: "asc" },
   });
 
@@ -971,7 +972,7 @@ export const getAllLightCarcasUnitsForVendor = async (
   await ensureVendorExists(vendor_id);
 
   const units = await prisma.lightCarcasUnitMaster.findMany({
-    where: { vendor_id, is_active: true },
+    where: { vendor_id, is_active: true, is_deleted: false },
     include: { lightCarcasType: { select: { id: true, type: true } } },
     orderBy: { type: "asc" },
   });
@@ -1033,11 +1034,11 @@ export const bulkUploadLightCarcasUnits = async (
 
   const [existingTypes, existingUnits] = await Promise.all([
     prisma.lightCarcasTypeMaster.findMany({
-      where: { vendor_id },
+      where: { vendor_id, is_deleted: false },
       select: { id: true, type: true },
     }),
     prisma.lightCarcasUnitMaster.findMany({
-      where: { vendor_id },
+      where: { vendor_id, is_deleted: false },
       select: { id: true, type: true, light_carcas_type_id: true },
     }),
   ]);
@@ -1114,7 +1115,7 @@ export const getAllOtherAppliances = async (
   await ensureVendorExists(vendor_id);
 
   const appliances = await prisma.otherAppliancesMaster.findMany({
-    where: { vendor_id },
+    where: { vendor_id, is_deleted: false },
     orderBy: [{ type: "asc" }, { article_number: "asc" }],
   });
 
@@ -1134,6 +1135,7 @@ export const createOtherAppliances = async (
       vendor_id,
       type,
       article_number: { equals: article_number, mode: 'insensitive' },
+      is_deleted: false,
     },
   });
 
@@ -1385,7 +1387,7 @@ export const bulkUploadOtherAppliances = async (
 
   // Get existing records for this vendor and type to optimize checks
   const existingRecords = await prisma.otherAppliancesMaster.findMany({
-    where: { vendor_id, type },
+    where: { vendor_id, type, is_deleted: false },
     select: { id: true, article_number: true },
   });
   const existingMap = new Map<string, number>(
@@ -1462,7 +1464,7 @@ export const getOtherAppliancesReport = async (vendor_id: number) => {
     headerRow.font = { bold: true };
 
     const data = await prisma.otherAppliancesMaster.findMany({
-      where: { vendor_id, type },
+      where: { vendor_id, type, is_deleted: false },
       select: { article_number: true, description: true },
       orderBy: { article_number: "asc" },
     });

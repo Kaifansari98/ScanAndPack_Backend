@@ -18946,7 +18946,9 @@ export const CarcassTypeMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
   vendor_id: 'vendor_id',
-  can_do_fast_production: 'can_do_fast_production'
+  can_do_fast_production: 'can_do_fast_production',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type CarcassTypeMasterScalarFieldEnum = (typeof CarcassTypeMasterScalarFieldEnum)[keyof typeof CarcassTypeMasterScalarFieldEnum]
@@ -18955,7 +18957,9 @@ export type CarcassTypeMasterScalarFieldEnum = (typeof CarcassTypeMasterScalarFi
 export const CarcasMaterialMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type CarcasMaterialMasterScalarFieldEnum = (typeof CarcasMaterialMasterScalarFieldEnum)[keyof typeof CarcasMaterialMasterScalarFieldEnum]
@@ -18964,7 +18968,9 @@ export type CarcasMaterialMasterScalarFieldEnum = (typeof CarcasMaterialMasterSc
 export const CarcassMaterialFinishMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  carcas_material_id: 'carcas_material_id'
+  carcas_material_id: 'carcas_material_id',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type CarcassMaterialFinishMasterScalarFieldEnum = (typeof CarcassMaterialFinishMasterScalarFieldEnum)[keyof typeof CarcassMaterialFinishMasterScalarFieldEnum]
@@ -18973,7 +18979,9 @@ export type CarcassMaterialFinishMasterScalarFieldEnum = (typeof CarcassMaterial
 export const ShutterTypeMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type ShutterTypeMasterScalarFieldEnum = (typeof ShutterTypeMasterScalarFieldEnum)[keyof typeof ShutterTypeMasterScalarFieldEnum]
@@ -18991,7 +18999,9 @@ export type ShutterSubTypeMasterScalarFieldEnum = (typeof ShutterSubTypeMasterSc
 export const ShutterMaterialMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type ShutterMaterialMasterScalarFieldEnum = (typeof ShutterMaterialMasterScalarFieldEnum)[keyof typeof ShutterMaterialMasterScalarFieldEnum]
@@ -19000,7 +19010,9 @@ export type ShutterMaterialMasterScalarFieldEnum = (typeof ShutterMaterialMaster
 export const ShutterMaterialFinishMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  shutter_material_id: 'shutter_material_id'
+  shutter_material_id: 'shutter_material_id',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type ShutterMaterialFinishMasterScalarFieldEnum = (typeof ShutterMaterialFinishMasterScalarFieldEnum)[keyof typeof ShutterMaterialFinishMasterScalarFieldEnum]
@@ -19009,7 +19021,9 @@ export type ShutterMaterialFinishMasterScalarFieldEnum = (typeof ShutterMaterial
 export const CarcassLegsMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type CarcassLegsMasterScalarFieldEnum = (typeof CarcassLegsMasterScalarFieldEnum)[keyof typeof CarcassLegsMasterScalarFieldEnum]
@@ -19019,7 +19033,9 @@ export const SkirtingCarcassLegsMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
   carcass_legs_id: 'carcass_legs_id',
-  inScope: 'inScope'
+  inScope: 'inScope',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type SkirtingCarcassLegsMasterScalarFieldEnum = (typeof SkirtingCarcassLegsMasterScalarFieldEnum)[keyof typeof SkirtingCarcassLegsMasterScalarFieldEnum]
@@ -19029,7 +19045,9 @@ export const SkirtingCarcassLegsColorMasterScalarFieldEnum = {
   id: 'id',
   carcass_legs_id: 'carcass_legs_id',
   skirting_carcass_legs_id: 'skirting_carcass_legs_id',
-  color: 'color'
+  color: 'color',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type SkirtingCarcassLegsColorMasterScalarFieldEnum = (typeof SkirtingCarcassLegsColorMasterScalarFieldEnum)[keyof typeof SkirtingCarcassLegsColorMasterScalarFieldEnum]
@@ -19064,7 +19082,9 @@ export const LightCarcasTypeMasterScalarFieldEnum = {
   vendor_id: 'vendor_id',
   type: 'type',
   is_active: 'is_active',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type LightCarcasTypeMasterScalarFieldEnum = (typeof LightCarcasTypeMasterScalarFieldEnum)[keyof typeof LightCarcasTypeMasterScalarFieldEnum]
@@ -19076,7 +19096,9 @@ export const LightCarcasUnitMasterScalarFieldEnum = {
   type: 'type',
   light_carcas_type_id: 'light_carcas_type_id',
   is_active: 'is_active',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type LightCarcasUnitMasterScalarFieldEnum = (typeof LightCarcasUnitMasterScalarFieldEnum)[keyof typeof LightCarcasUnitMasterScalarFieldEnum]
@@ -19110,7 +19132,9 @@ export const OtherAppliancesMasterScalarFieldEnum = {
   article_number: 'article_number',
   description: 'description',
   created_at: 'created_at',
-  type: 'type'
+  type: 'type',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at'
 } as const
 
 export type OtherAppliancesMasterScalarFieldEnum = (typeof OtherAppliancesMasterScalarFieldEnum)[keyof typeof OtherAppliancesMasterScalarFieldEnum]

@@ -40,18 +40,24 @@ export type CarcassMaterialFinishMasterMinAggregateOutputType = {
   id: number | null
   name: string | null
   carcas_material_id: number | null
+  is_deleted: boolean | null
+  deleted_at: Date | null
 }
 
 export type CarcassMaterialFinishMasterMaxAggregateOutputType = {
   id: number | null
   name: string | null
   carcas_material_id: number | null
+  is_deleted: boolean | null
+  deleted_at: Date | null
 }
 
 export type CarcassMaterialFinishMasterCountAggregateOutputType = {
   id: number
   name: number
   carcas_material_id: number
+  is_deleted: number
+  deleted_at: number
   _all: number
 }
 
@@ -70,18 +76,24 @@ export type CarcassMaterialFinishMasterMinAggregateInputType = {
   id?: true
   name?: true
   carcas_material_id?: true
+  is_deleted?: true
+  deleted_at?: true
 }
 
 export type CarcassMaterialFinishMasterMaxAggregateInputType = {
   id?: true
   name?: true
   carcas_material_id?: true
+  is_deleted?: true
+  deleted_at?: true
 }
 
 export type CarcassMaterialFinishMasterCountAggregateInputType = {
   id?: true
   name?: true
   carcas_material_id?: true
+  is_deleted?: true
+  deleted_at?: true
   _all?: true
 }
 
@@ -175,6 +187,8 @@ export type CarcassMaterialFinishMasterGroupByOutputType = {
   id: number
   name: string
   carcas_material_id: number
+  is_deleted: boolean
+  deleted_at: Date | null
   _count: CarcassMaterialFinishMasterCountAggregateOutputType | null
   _avg: CarcassMaterialFinishMasterAvgAggregateOutputType | null
   _sum: CarcassMaterialFinishMasterSumAggregateOutputType | null
@@ -204,6 +218,8 @@ export type CarcassMaterialFinishMasterWhereInput = {
   id?: Prisma.IntFilter<"CarcassMaterialFinishMaster"> | number
   name?: Prisma.StringFilter<"CarcassMaterialFinishMaster"> | string
   carcas_material_id?: Prisma.IntFilter<"CarcassMaterialFinishMaster"> | number
+  is_deleted?: Prisma.BoolFilter<"CarcassMaterialFinishMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"CarcassMaterialFinishMaster"> | Date | string | null
   material?: Prisma.XOR<Prisma.CarcasMaterialMasterScalarRelationFilter, Prisma.CarcasMaterialMasterWhereInput>
   leadMappings?: Prisma.LeadCarcassMaterialMappingListRelationFilter
 }
@@ -212,6 +228,8 @@ export type CarcassMaterialFinishMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   carcas_material_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   material?: Prisma.CarcasMaterialMasterOrderByWithRelationInput
   leadMappings?: Prisma.LeadCarcassMaterialMappingOrderByRelationAggregateInput
 }
@@ -223,6 +241,8 @@ export type CarcassMaterialFinishMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CarcassMaterialFinishMasterWhereInput | Prisma.CarcassMaterialFinishMasterWhereInput[]
   name?: Prisma.StringFilter<"CarcassMaterialFinishMaster"> | string
   carcas_material_id?: Prisma.IntFilter<"CarcassMaterialFinishMaster"> | number
+  is_deleted?: Prisma.BoolFilter<"CarcassMaterialFinishMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"CarcassMaterialFinishMaster"> | Date | string | null
   material?: Prisma.XOR<Prisma.CarcasMaterialMasterScalarRelationFilter, Prisma.CarcasMaterialMasterWhereInput>
   leadMappings?: Prisma.LeadCarcassMaterialMappingListRelationFilter
 }, "id">
@@ -231,6 +251,8 @@ export type CarcassMaterialFinishMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   carcas_material_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CarcassMaterialFinishMasterCountOrderByAggregateInput
   _avg?: Prisma.CarcassMaterialFinishMasterAvgOrderByAggregateInput
   _max?: Prisma.CarcassMaterialFinishMasterMaxOrderByAggregateInput
@@ -245,10 +267,14 @@ export type CarcassMaterialFinishMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"CarcassMaterialFinishMaster"> | number
   name?: Prisma.StringWithAggregatesFilter<"CarcassMaterialFinishMaster"> | string
   carcas_material_id?: Prisma.IntWithAggregatesFilter<"CarcassMaterialFinishMaster"> | number
+  is_deleted?: Prisma.BoolWithAggregatesFilter<"CarcassMaterialFinishMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"CarcassMaterialFinishMaster"> | Date | string | null
 }
 
 export type CarcassMaterialFinishMasterCreateInput = {
   name: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   material: Prisma.CarcasMaterialMasterCreateNestedOneWithoutFinishesInput
   leadMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCarcassMaterialFinishInput
 }
@@ -257,11 +283,15 @@ export type CarcassMaterialFinishMasterUncheckedCreateInput = {
   id?: number
   name: string
   carcas_material_id: number
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   leadMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCarcassMaterialFinishInput
 }
 
 export type CarcassMaterialFinishMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   material?: Prisma.CarcasMaterialMasterUpdateOneRequiredWithoutFinishesNestedInput
   leadMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCarcassMaterialFinishNestedInput
 }
@@ -270,6 +300,8 @@ export type CarcassMaterialFinishMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leadMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCarcassMaterialFinishNestedInput
 }
 
@@ -277,16 +309,22 @@ export type CarcassMaterialFinishMasterCreateManyInput = {
   id?: number
   name: string
   carcas_material_id: number
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
 }
 
 export type CarcassMaterialFinishMasterUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CarcassMaterialFinishMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CarcassMaterialFinishMasterScalarRelationFilter = {
@@ -308,6 +346,8 @@ export type CarcassMaterialFinishMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   carcas_material_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
 }
 
 export type CarcassMaterialFinishMasterAvgOrderByAggregateInput = {
@@ -319,12 +359,16 @@ export type CarcassMaterialFinishMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   carcas_material_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
 }
 
 export type CarcassMaterialFinishMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   carcas_material_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
 }
 
 export type CarcassMaterialFinishMasterSumOrderByAggregateInput = {
@@ -390,6 +434,8 @@ export type CarcassMaterialFinishMasterUncheckedUpdateManyWithoutMaterialNestedI
 
 export type CarcassMaterialFinishMasterCreateWithoutLeadMappingsInput = {
   name: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   material: Prisma.CarcasMaterialMasterCreateNestedOneWithoutFinishesInput
 }
 
@@ -397,6 +443,8 @@ export type CarcassMaterialFinishMasterUncheckedCreateWithoutLeadMappingsInput =
   id?: number
   name: string
   carcas_material_id: number
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
 }
 
 export type CarcassMaterialFinishMasterCreateOrConnectWithoutLeadMappingsInput = {
@@ -417,6 +465,8 @@ export type CarcassMaterialFinishMasterUpdateToOneWithWhereWithoutLeadMappingsIn
 
 export type CarcassMaterialFinishMasterUpdateWithoutLeadMappingsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   material?: Prisma.CarcasMaterialMasterUpdateOneRequiredWithoutFinishesNestedInput
 }
 
@@ -424,16 +474,22 @@ export type CarcassMaterialFinishMasterUncheckedUpdateWithoutLeadMappingsInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   carcas_material_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CarcassMaterialFinishMasterCreateWithoutMaterialInput = {
   name: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   leadMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCarcassMaterialFinishInput
 }
 
 export type CarcassMaterialFinishMasterUncheckedCreateWithoutMaterialInput = {
   id?: number
   name: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   leadMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCarcassMaterialFinishInput
 }
 
@@ -470,27 +526,37 @@ export type CarcassMaterialFinishMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"CarcassMaterialFinishMaster"> | number
   name?: Prisma.StringFilter<"CarcassMaterialFinishMaster"> | string
   carcas_material_id?: Prisma.IntFilter<"CarcassMaterialFinishMaster"> | number
+  is_deleted?: Prisma.BoolFilter<"CarcassMaterialFinishMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"CarcassMaterialFinishMaster"> | Date | string | null
 }
 
 export type CarcassMaterialFinishMasterCreateManyMaterialInput = {
   id?: number
   name: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
 }
 
 export type CarcassMaterialFinishMasterUpdateWithoutMaterialInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leadMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCarcassMaterialFinishNestedInput
 }
 
 export type CarcassMaterialFinishMasterUncheckedUpdateWithoutMaterialInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leadMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCarcassMaterialFinishNestedInput
 }
 
 export type CarcassMaterialFinishMasterUncheckedUpdateManyWithoutMaterialInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -528,6 +594,8 @@ export type CarcassMaterialFinishMasterSelect<ExtArgs extends runtime.Types.Exte
   id?: boolean
   name?: boolean
   carcas_material_id?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   material?: boolean | Prisma.CarcasMaterialMasterDefaultArgs<ExtArgs>
   leadMappings?: boolean | Prisma.CarcassMaterialFinishMaster$leadMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.CarcassMaterialFinishMasterCountOutputTypeDefaultArgs<ExtArgs>
@@ -537,6 +605,8 @@ export type CarcassMaterialFinishMasterSelectCreateManyAndReturn<ExtArgs extends
   id?: boolean
   name?: boolean
   carcas_material_id?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   material?: boolean | Prisma.CarcasMaterialMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["carcassMaterialFinishMaster"]>
 
@@ -544,6 +614,8 @@ export type CarcassMaterialFinishMasterSelectUpdateManyAndReturn<ExtArgs extends
   id?: boolean
   name?: boolean
   carcas_material_id?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   material?: boolean | Prisma.CarcasMaterialMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["carcassMaterialFinishMaster"]>
 
@@ -551,9 +623,11 @@ export type CarcassMaterialFinishMasterSelectScalar = {
   id?: boolean
   name?: boolean
   carcas_material_id?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
 }
 
-export type CarcassMaterialFinishMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "carcas_material_id", ExtArgs["result"]["carcassMaterialFinishMaster"]>
+export type CarcassMaterialFinishMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "carcas_material_id" | "is_deleted" | "deleted_at", ExtArgs["result"]["carcassMaterialFinishMaster"]>
 export type CarcassMaterialFinishMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   material?: boolean | Prisma.CarcasMaterialMasterDefaultArgs<ExtArgs>
   leadMappings?: boolean | Prisma.CarcassMaterialFinishMaster$leadMappingsArgs<ExtArgs>
@@ -576,6 +650,8 @@ export type $CarcassMaterialFinishMasterPayload<ExtArgs extends runtime.Types.Ex
     id: number
     name: string
     carcas_material_id: number
+    is_deleted: boolean
+    deleted_at: Date | null
   }, ExtArgs["result"]["carcassMaterialFinishMaster"]>
   composites: {}
 }
@@ -1004,6 +1080,8 @@ export interface CarcassMaterialFinishMasterFieldRefs {
   readonly id: Prisma.FieldRef<"CarcassMaterialFinishMaster", 'Int'>
   readonly name: Prisma.FieldRef<"CarcassMaterialFinishMaster", 'String'>
   readonly carcas_material_id: Prisma.FieldRef<"CarcassMaterialFinishMaster", 'Int'>
+  readonly is_deleted: Prisma.FieldRef<"CarcassMaterialFinishMaster", 'Boolean'>
+  readonly deleted_at: Prisma.FieldRef<"CarcassMaterialFinishMaster", 'DateTime'>
 }
     
 

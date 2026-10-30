@@ -26,14 +26,14 @@ export async function updateSpecsMaster(vendorId: number, kind: string, id: numb
   return prisma.$transaction(async tx => {
     const model = (tx as any)[config.model];
     const scope = config.parent ? { [config.parent.relation]: { vendor_id: vendorId } } : { vendor_id: vendorId };
-    const existing = await model.findFirst({ where: { id, ...scope } });
+    const existing = await model.findFirst({ where: { id, ...scope, is_deleted: false } });
     if (!existing) return fail("Specification master not found", 404);
     const data: Record<string, unknown> = { [config.field]: value };
-    const duplicateScope: Record<string, unknown> = { ...scope };
+    const duplicateScope: Record<string, unknown> = { ...scope, is_deleted: false };
     if (config.parent) {
       const parentId = Number(input[config.parent.field]);
       if (!Number.isSafeInteger(parentId) || parentId <= 0) return fail("Select a valid parent");
-      const parent = await (tx as any)[config.parent.model].findFirst({ where: { id: parentId, vendor_id: vendorId } });
+      const parent = await (tx as any)[config.parent.model].findFirst({ where: { id: parentId, vendor_id: vendorId, is_deleted: false } });
       if (!parent) return fail("Parent does not belong to this vendor");
       data[config.parent.field] = parentId;
       duplicateScope[config.parent.field] = parentId;

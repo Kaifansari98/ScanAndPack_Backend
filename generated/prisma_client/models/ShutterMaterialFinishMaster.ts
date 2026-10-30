@@ -40,18 +40,24 @@ export type ShutterMaterialFinishMasterMinAggregateOutputType = {
   id: number | null
   name: string | null
   shutter_material_id: number | null
+  is_deleted: boolean | null
+  deleted_at: Date | null
 }
 
 export type ShutterMaterialFinishMasterMaxAggregateOutputType = {
   id: number | null
   name: string | null
   shutter_material_id: number | null
+  is_deleted: boolean | null
+  deleted_at: Date | null
 }
 
 export type ShutterMaterialFinishMasterCountAggregateOutputType = {
   id: number
   name: number
   shutter_material_id: number
+  is_deleted: number
+  deleted_at: number
   _all: number
 }
 
@@ -70,18 +76,24 @@ export type ShutterMaterialFinishMasterMinAggregateInputType = {
   id?: true
   name?: true
   shutter_material_id?: true
+  is_deleted?: true
+  deleted_at?: true
 }
 
 export type ShutterMaterialFinishMasterMaxAggregateInputType = {
   id?: true
   name?: true
   shutter_material_id?: true
+  is_deleted?: true
+  deleted_at?: true
 }
 
 export type ShutterMaterialFinishMasterCountAggregateInputType = {
   id?: true
   name?: true
   shutter_material_id?: true
+  is_deleted?: true
+  deleted_at?: true
   _all?: true
 }
 
@@ -175,6 +187,8 @@ export type ShutterMaterialFinishMasterGroupByOutputType = {
   id: number
   name: string
   shutter_material_id: number
+  is_deleted: boolean
+  deleted_at: Date | null
   _count: ShutterMaterialFinishMasterCountAggregateOutputType | null
   _avg: ShutterMaterialFinishMasterAvgAggregateOutputType | null
   _sum: ShutterMaterialFinishMasterSumAggregateOutputType | null
@@ -204,6 +218,8 @@ export type ShutterMaterialFinishMasterWhereInput = {
   id?: Prisma.IntFilter<"ShutterMaterialFinishMaster"> | number
   name?: Prisma.StringFilter<"ShutterMaterialFinishMaster"> | string
   shutter_material_id?: Prisma.IntFilter<"ShutterMaterialFinishMaster"> | number
+  is_deleted?: Prisma.BoolFilter<"ShutterMaterialFinishMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"ShutterMaterialFinishMaster"> | Date | string | null
   leadMappings?: Prisma.LeadShutterMaterialMappingListRelationFilter
   material?: Prisma.XOR<Prisma.ShutterMaterialMasterScalarRelationFilter, Prisma.ShutterMaterialMasterWhereInput>
 }
@@ -212,6 +228,8 @@ export type ShutterMaterialFinishMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   leadMappings?: Prisma.LeadShutterMaterialMappingOrderByRelationAggregateInput
   material?: Prisma.ShutterMaterialMasterOrderByWithRelationInput
 }
@@ -223,6 +241,8 @@ export type ShutterMaterialFinishMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ShutterMaterialFinishMasterWhereInput | Prisma.ShutterMaterialFinishMasterWhereInput[]
   name?: Prisma.StringFilter<"ShutterMaterialFinishMaster"> | string
   shutter_material_id?: Prisma.IntFilter<"ShutterMaterialFinishMaster"> | number
+  is_deleted?: Prisma.BoolFilter<"ShutterMaterialFinishMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"ShutterMaterialFinishMaster"> | Date | string | null
   leadMappings?: Prisma.LeadShutterMaterialMappingListRelationFilter
   material?: Prisma.XOR<Prisma.ShutterMaterialMasterScalarRelationFilter, Prisma.ShutterMaterialMasterWhereInput>
 }, "id">
@@ -231,6 +251,8 @@ export type ShutterMaterialFinishMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ShutterMaterialFinishMasterCountOrderByAggregateInput
   _avg?: Prisma.ShutterMaterialFinishMasterAvgOrderByAggregateInput
   _max?: Prisma.ShutterMaterialFinishMasterMaxOrderByAggregateInput
@@ -245,10 +267,14 @@ export type ShutterMaterialFinishMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"ShutterMaterialFinishMaster"> | number
   name?: Prisma.StringWithAggregatesFilter<"ShutterMaterialFinishMaster"> | string
   shutter_material_id?: Prisma.IntWithAggregatesFilter<"ShutterMaterialFinishMaster"> | number
+  is_deleted?: Prisma.BoolWithAggregatesFilter<"ShutterMaterialFinishMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ShutterMaterialFinishMaster"> | Date | string | null
 }
 
 export type ShutterMaterialFinishMasterCreateInput = {
   name: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   leadMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutShutterMaterialFinishInput
   material: Prisma.ShutterMaterialMasterCreateNestedOneWithoutFinishesInput
 }
@@ -257,11 +283,15 @@ export type ShutterMaterialFinishMasterUncheckedCreateInput = {
   id?: number
   name: string
   shutter_material_id: number
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutShutterMaterialFinishInput
 }
 
 export type ShutterMaterialFinishMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leadMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutShutterMaterialFinishNestedInput
   material?: Prisma.ShutterMaterialMasterUpdateOneRequiredWithoutFinishesNestedInput
 }
@@ -270,6 +300,8 @@ export type ShutterMaterialFinishMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterMaterialFinishNestedInput
 }
 
@@ -277,16 +309,22 @@ export type ShutterMaterialFinishMasterCreateManyInput = {
   id?: number
   name: string
   shutter_material_id: number
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
 }
 
 export type ShutterMaterialFinishMasterUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ShutterMaterialFinishMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ShutterMaterialFinishMasterScalarRelationFilter = {
@@ -308,6 +346,8 @@ export type ShutterMaterialFinishMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
 }
 
 export type ShutterMaterialFinishMasterAvgOrderByAggregateInput = {
@@ -319,12 +359,16 @@ export type ShutterMaterialFinishMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
 }
 
 export type ShutterMaterialFinishMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   shutter_material_id?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
 }
 
 export type ShutterMaterialFinishMasterSumOrderByAggregateInput = {
@@ -390,6 +434,8 @@ export type ShutterMaterialFinishMasterUncheckedUpdateManyWithoutMaterialNestedI
 
 export type ShutterMaterialFinishMasterCreateWithoutLeadMappingsInput = {
   name: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   material: Prisma.ShutterMaterialMasterCreateNestedOneWithoutFinishesInput
 }
 
@@ -397,6 +443,8 @@ export type ShutterMaterialFinishMasterUncheckedCreateWithoutLeadMappingsInput =
   id?: number
   name: string
   shutter_material_id: number
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
 }
 
 export type ShutterMaterialFinishMasterCreateOrConnectWithoutLeadMappingsInput = {
@@ -417,6 +465,8 @@ export type ShutterMaterialFinishMasterUpdateToOneWithWhereWithoutLeadMappingsIn
 
 export type ShutterMaterialFinishMasterUpdateWithoutLeadMappingsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   material?: Prisma.ShutterMaterialMasterUpdateOneRequiredWithoutFinishesNestedInput
 }
 
@@ -424,16 +474,22 @@ export type ShutterMaterialFinishMasterUncheckedUpdateWithoutLeadMappingsInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   shutter_material_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ShutterMaterialFinishMasterCreateWithoutMaterialInput = {
   name: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   leadMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutShutterMaterialFinishInput
 }
 
 export type ShutterMaterialFinishMasterUncheckedCreateWithoutMaterialInput = {
   id?: number
   name: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutShutterMaterialFinishInput
 }
 
@@ -470,27 +526,37 @@ export type ShutterMaterialFinishMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"ShutterMaterialFinishMaster"> | number
   name?: Prisma.StringFilter<"ShutterMaterialFinishMaster"> | string
   shutter_material_id?: Prisma.IntFilter<"ShutterMaterialFinishMaster"> | number
+  is_deleted?: Prisma.BoolFilter<"ShutterMaterialFinishMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"ShutterMaterialFinishMaster"> | Date | string | null
 }
 
 export type ShutterMaterialFinishMasterCreateManyMaterialInput = {
   id?: number
   name: string
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
 }
 
 export type ShutterMaterialFinishMasterUpdateWithoutMaterialInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leadMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutShutterMaterialFinishNestedInput
 }
 
 export type ShutterMaterialFinishMasterUncheckedUpdateWithoutMaterialInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterMaterialFinishNestedInput
 }
 
 export type ShutterMaterialFinishMasterUncheckedUpdateManyWithoutMaterialInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -528,6 +594,8 @@ export type ShutterMaterialFinishMasterSelect<ExtArgs extends runtime.Types.Exte
   id?: boolean
   name?: boolean
   shutter_material_id?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   leadMappings?: boolean | Prisma.ShutterMaterialFinishMaster$leadMappingsArgs<ExtArgs>
   material?: boolean | Prisma.ShutterMaterialMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ShutterMaterialFinishMasterCountOutputTypeDefaultArgs<ExtArgs>
@@ -537,6 +605,8 @@ export type ShutterMaterialFinishMasterSelectCreateManyAndReturn<ExtArgs extends
   id?: boolean
   name?: boolean
   shutter_material_id?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   material?: boolean | Prisma.ShutterMaterialMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shutterMaterialFinishMaster"]>
 
@@ -544,6 +614,8 @@ export type ShutterMaterialFinishMasterSelectUpdateManyAndReturn<ExtArgs extends
   id?: boolean
   name?: boolean
   shutter_material_id?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   material?: boolean | Prisma.ShutterMaterialMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shutterMaterialFinishMaster"]>
 
@@ -551,9 +623,11 @@ export type ShutterMaterialFinishMasterSelectScalar = {
   id?: boolean
   name?: boolean
   shutter_material_id?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
 }
 
-export type ShutterMaterialFinishMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "shutter_material_id", ExtArgs["result"]["shutterMaterialFinishMaster"]>
+export type ShutterMaterialFinishMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "shutter_material_id" | "is_deleted" | "deleted_at", ExtArgs["result"]["shutterMaterialFinishMaster"]>
 export type ShutterMaterialFinishMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   leadMappings?: boolean | Prisma.ShutterMaterialFinishMaster$leadMappingsArgs<ExtArgs>
   material?: boolean | Prisma.ShutterMaterialMasterDefaultArgs<ExtArgs>
@@ -576,6 +650,8 @@ export type $ShutterMaterialFinishMasterPayload<ExtArgs extends runtime.Types.Ex
     id: number
     name: string
     shutter_material_id: number
+    is_deleted: boolean
+    deleted_at: Date | null
   }, ExtArgs["result"]["shutterMaterialFinishMaster"]>
   composites: {}
 }
@@ -1004,6 +1080,8 @@ export interface ShutterMaterialFinishMasterFieldRefs {
   readonly id: Prisma.FieldRef<"ShutterMaterialFinishMaster", 'Int'>
   readonly name: Prisma.FieldRef<"ShutterMaterialFinishMaster", 'String'>
   readonly shutter_material_id: Prisma.FieldRef<"ShutterMaterialFinishMaster", 'Int'>
+  readonly is_deleted: Prisma.FieldRef<"ShutterMaterialFinishMaster", 'Boolean'>
+  readonly deleted_at: Prisma.FieldRef<"ShutterMaterialFinishMaster", 'DateTime'>
 }
     
 

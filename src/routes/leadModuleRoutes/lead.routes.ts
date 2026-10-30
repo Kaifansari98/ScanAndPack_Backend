@@ -1,4 +1,4 @@
-import { updateSpecsMasterController } from "../../controllers/specsMaster.controller";
+import { updateSpecsMasterController, deleteSpecsMasterController } from "../../controllers/specsMaster.controller";
 import { updateBoqMasterController } from "../../controllers/boqMaster.controller";
 import { Router } from "express";
 import { verifyToken } from "../../middlewares/auth.middleware";
@@ -236,6 +236,7 @@ leadsRouter.patch(
 leadsRouter.get("/get-all-carcass-types/:vendor_id", fetchAllCarcassTypes);
 leadsRouter.post("/create-carcass-type", addCarcassType);
 leadsRouter.put("/specs-masters/:kind/:id", verifyToken, updateSpecsMasterController);
+leadsRouter.delete("/specs-masters/:kind/:id", verifyToken, deleteSpecsMasterController);
 leadsRouter.put("/boq-masters/:kind/:id", verifyToken, updateBoqMasterController);
 leadsRouter.get(
   "/get-all-carcas-materials/:vendor_id",

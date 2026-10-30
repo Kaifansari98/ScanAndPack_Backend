@@ -41,6 +41,8 @@ export type SkirtingCarcassLegsMasterMinAggregateOutputType = {
   name: string | null
   carcass_legs_id: number | null
   inScope: boolean | null
+  is_deleted: boolean | null
+  deleted_at: Date | null
 }
 
 export type SkirtingCarcassLegsMasterMaxAggregateOutputType = {
@@ -48,6 +50,8 @@ export type SkirtingCarcassLegsMasterMaxAggregateOutputType = {
   name: string | null
   carcass_legs_id: number | null
   inScope: boolean | null
+  is_deleted: boolean | null
+  deleted_at: Date | null
 }
 
 export type SkirtingCarcassLegsMasterCountAggregateOutputType = {
@@ -55,6 +59,8 @@ export type SkirtingCarcassLegsMasterCountAggregateOutputType = {
   name: number
   carcass_legs_id: number
   inScope: number
+  is_deleted: number
+  deleted_at: number
   _all: number
 }
 
@@ -74,6 +80,8 @@ export type SkirtingCarcassLegsMasterMinAggregateInputType = {
   name?: true
   carcass_legs_id?: true
   inScope?: true
+  is_deleted?: true
+  deleted_at?: true
 }
 
 export type SkirtingCarcassLegsMasterMaxAggregateInputType = {
@@ -81,6 +89,8 @@ export type SkirtingCarcassLegsMasterMaxAggregateInputType = {
   name?: true
   carcass_legs_id?: true
   inScope?: true
+  is_deleted?: true
+  deleted_at?: true
 }
 
 export type SkirtingCarcassLegsMasterCountAggregateInputType = {
@@ -88,6 +98,8 @@ export type SkirtingCarcassLegsMasterCountAggregateInputType = {
   name?: true
   carcass_legs_id?: true
   inScope?: true
+  is_deleted?: true
+  deleted_at?: true
   _all?: true
 }
 
@@ -182,6 +194,8 @@ export type SkirtingCarcassLegsMasterGroupByOutputType = {
   name: string
   carcass_legs_id: number
   inScope: boolean
+  is_deleted: boolean
+  deleted_at: Date | null
   _count: SkirtingCarcassLegsMasterCountAggregateOutputType | null
   _avg: SkirtingCarcassLegsMasterAvgAggregateOutputType | null
   _sum: SkirtingCarcassLegsMasterSumAggregateOutputType | null
@@ -212,6 +226,8 @@ export type SkirtingCarcassLegsMasterWhereInput = {
   name?: Prisma.StringFilter<"SkirtingCarcassLegsMaster"> | string
   carcass_legs_id?: Prisma.IntFilter<"SkirtingCarcassLegsMaster"> | number
   inScope?: Prisma.BoolFilter<"SkirtingCarcassLegsMaster"> | boolean
+  is_deleted?: Prisma.BoolFilter<"SkirtingCarcassLegsMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"SkirtingCarcassLegsMaster"> | Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingListRelationFilter
   colors?: Prisma.SkirtingCarcassLegsColorMasterListRelationFilter
   carcassLegs?: Prisma.XOR<Prisma.CarcassLegsMasterScalarRelationFilter, Prisma.CarcassLegsMasterWhereInput>
@@ -222,6 +238,8 @@ export type SkirtingCarcassLegsMasterOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   carcass_legs_id?: Prisma.SortOrder
   inScope?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   leadMappings?: Prisma.LeadHardwareMappingOrderByRelationAggregateInput
   colors?: Prisma.SkirtingCarcassLegsColorMasterOrderByRelationAggregateInput
   carcassLegs?: Prisma.CarcassLegsMasterOrderByWithRelationInput
@@ -235,6 +253,8 @@ export type SkirtingCarcassLegsMasterWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"SkirtingCarcassLegsMaster"> | string
   carcass_legs_id?: Prisma.IntFilter<"SkirtingCarcassLegsMaster"> | number
   inScope?: Prisma.BoolFilter<"SkirtingCarcassLegsMaster"> | boolean
+  is_deleted?: Prisma.BoolFilter<"SkirtingCarcassLegsMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"SkirtingCarcassLegsMaster"> | Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingListRelationFilter
   colors?: Prisma.SkirtingCarcassLegsColorMasterListRelationFilter
   carcassLegs?: Prisma.XOR<Prisma.CarcassLegsMasterScalarRelationFilter, Prisma.CarcassLegsMasterWhereInput>
@@ -245,6 +265,8 @@ export type SkirtingCarcassLegsMasterOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   carcass_legs_id?: Prisma.SortOrder
   inScope?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SkirtingCarcassLegsMasterCountOrderByAggregateInput
   _avg?: Prisma.SkirtingCarcassLegsMasterAvgOrderByAggregateInput
   _max?: Prisma.SkirtingCarcassLegsMasterMaxOrderByAggregateInput
@@ -260,11 +282,15 @@ export type SkirtingCarcassLegsMasterScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"SkirtingCarcassLegsMaster"> | string
   carcass_legs_id?: Prisma.IntWithAggregatesFilter<"SkirtingCarcassLegsMaster"> | number
   inScope?: Prisma.BoolWithAggregatesFilter<"SkirtingCarcassLegsMaster"> | boolean
+  is_deleted?: Prisma.BoolWithAggregatesFilter<"SkirtingCarcassLegsMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"SkirtingCarcassLegsMaster"> | Date | string | null
 }
 
 export type SkirtingCarcassLegsMasterCreateInput = {
   name: string
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutSkirtingCarcassLegsInput
   colors?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedManyWithoutSkirtingCarcassLegsInput
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutSkirtingsInput
@@ -275,6 +301,8 @@ export type SkirtingCarcassLegsMasterUncheckedCreateInput = {
   name: string
   carcass_legs_id: number
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutSkirtingCarcassLegsInput
   colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedCreateNestedManyWithoutSkirtingCarcassLegsInput
 }
@@ -282,6 +310,8 @@ export type SkirtingCarcassLegsMasterUncheckedCreateInput = {
 export type SkirtingCarcassLegsMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutSkirtingCarcassLegsNestedInput
   colors?: Prisma.SkirtingCarcassLegsColorMasterUpdateManyWithoutSkirtingCarcassLegsNestedInput
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutSkirtingsNestedInput
@@ -292,6 +322,8 @@ export type SkirtingCarcassLegsMasterUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutSkirtingCarcassLegsNestedInput
   colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedUpdateManyWithoutSkirtingCarcassLegsNestedInput
 }
@@ -301,11 +333,15 @@ export type SkirtingCarcassLegsMasterCreateManyInput = {
   name: string
   carcass_legs_id: number
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
 }
 
 export type SkirtingCarcassLegsMasterUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SkirtingCarcassLegsMasterUncheckedUpdateManyInput = {
@@ -313,6 +349,8 @@ export type SkirtingCarcassLegsMasterUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SkirtingCarcassLegsMasterListRelationFilter = {
@@ -330,6 +368,8 @@ export type SkirtingCarcassLegsMasterCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   carcass_legs_id?: Prisma.SortOrder
   inScope?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
 }
 
 export type SkirtingCarcassLegsMasterAvgOrderByAggregateInput = {
@@ -342,6 +382,8 @@ export type SkirtingCarcassLegsMasterMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   carcass_legs_id?: Prisma.SortOrder
   inScope?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
 }
 
 export type SkirtingCarcassLegsMasterMinOrderByAggregateInput = {
@@ -349,6 +391,8 @@ export type SkirtingCarcassLegsMasterMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   carcass_legs_id?: Prisma.SortOrder
   inScope?: Prisma.SortOrder
+  is_deleted?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
 }
 
 export type SkirtingCarcassLegsMasterSumOrderByAggregateInput = {
@@ -434,6 +478,8 @@ export type SkirtingCarcassLegsMasterUpdateOneRequiredWithoutLeadMappingsNestedI
 export type SkirtingCarcassLegsMasterCreateWithoutCarcassLegsInput = {
   name: string
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutSkirtingCarcassLegsInput
   colors?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedManyWithoutSkirtingCarcassLegsInput
 }
@@ -442,6 +488,8 @@ export type SkirtingCarcassLegsMasterUncheckedCreateWithoutCarcassLegsInput = {
   id?: number
   name: string
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutSkirtingCarcassLegsInput
   colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedCreateNestedManyWithoutSkirtingCarcassLegsInput
 }
@@ -480,11 +528,15 @@ export type SkirtingCarcassLegsMasterScalarWhereInput = {
   name?: Prisma.StringFilter<"SkirtingCarcassLegsMaster"> | string
   carcass_legs_id?: Prisma.IntFilter<"SkirtingCarcassLegsMaster"> | number
   inScope?: Prisma.BoolFilter<"SkirtingCarcassLegsMaster"> | boolean
+  is_deleted?: Prisma.BoolFilter<"SkirtingCarcassLegsMaster"> | boolean
+  deleted_at?: Prisma.DateTimeNullableFilter<"SkirtingCarcassLegsMaster"> | Date | string | null
 }
 
 export type SkirtingCarcassLegsMasterCreateWithoutColorsInput = {
   name: string
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutSkirtingCarcassLegsInput
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutSkirtingsInput
 }
@@ -494,6 +546,8 @@ export type SkirtingCarcassLegsMasterUncheckedCreateWithoutColorsInput = {
   name: string
   carcass_legs_id: number
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutSkirtingCarcassLegsInput
 }
 
@@ -516,6 +570,8 @@ export type SkirtingCarcassLegsMasterUpdateToOneWithWhereWithoutColorsInput = {
 export type SkirtingCarcassLegsMasterUpdateWithoutColorsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutSkirtingCarcassLegsNestedInput
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutSkirtingsNestedInput
 }
@@ -525,12 +581,16 @@ export type SkirtingCarcassLegsMasterUncheckedUpdateWithoutColorsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutSkirtingCarcassLegsNestedInput
 }
 
 export type SkirtingCarcassLegsMasterCreateWithoutLeadMappingsInput = {
   name: string
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   colors?: Prisma.SkirtingCarcassLegsColorMasterCreateNestedManyWithoutSkirtingCarcassLegsInput
   carcassLegs: Prisma.CarcassLegsMasterCreateNestedOneWithoutSkirtingsInput
 }
@@ -540,6 +600,8 @@ export type SkirtingCarcassLegsMasterUncheckedCreateWithoutLeadMappingsInput = {
   name: string
   carcass_legs_id: number
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
   colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedCreateNestedManyWithoutSkirtingCarcassLegsInput
 }
 
@@ -562,6 +624,8 @@ export type SkirtingCarcassLegsMasterUpdateToOneWithWhereWithoutLeadMappingsInpu
 export type SkirtingCarcassLegsMasterUpdateWithoutLeadMappingsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   colors?: Prisma.SkirtingCarcassLegsColorMasterUpdateManyWithoutSkirtingCarcassLegsNestedInput
   carcassLegs?: Prisma.CarcassLegsMasterUpdateOneRequiredWithoutSkirtingsNestedInput
 }
@@ -571,6 +635,8 @@ export type SkirtingCarcassLegsMasterUncheckedUpdateWithoutLeadMappingsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   carcass_legs_id?: Prisma.IntFieldUpdateOperationsInput | number
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedUpdateManyWithoutSkirtingCarcassLegsNestedInput
 }
 
@@ -578,11 +644,15 @@ export type SkirtingCarcassLegsMasterCreateManyCarcassLegsInput = {
   id?: number
   name: string
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
 }
 
 export type SkirtingCarcassLegsMasterUpdateWithoutCarcassLegsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutSkirtingCarcassLegsNestedInput
   colors?: Prisma.SkirtingCarcassLegsColorMasterUpdateManyWithoutSkirtingCarcassLegsNestedInput
 }
@@ -591,6 +661,8 @@ export type SkirtingCarcassLegsMasterUncheckedUpdateWithoutCarcassLegsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leadMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutSkirtingCarcassLegsNestedInput
   colors?: Prisma.SkirtingCarcassLegsColorMasterUncheckedUpdateManyWithoutSkirtingCarcassLegsNestedInput
 }
@@ -599,6 +671,8 @@ export type SkirtingCarcassLegsMasterUncheckedUpdateManyWithoutCarcassLegsInput 
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   inScope?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -646,6 +720,8 @@ export type SkirtingCarcassLegsMasterSelect<ExtArgs extends runtime.Types.Extens
   name?: boolean
   carcass_legs_id?: boolean
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   leadMappings?: boolean | Prisma.SkirtingCarcassLegsMaster$leadMappingsArgs<ExtArgs>
   colors?: boolean | Prisma.SkirtingCarcassLegsMaster$colorsArgs<ExtArgs>
   carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
@@ -657,6 +733,8 @@ export type SkirtingCarcassLegsMasterSelectCreateManyAndReturn<ExtArgs extends r
   name?: boolean
   carcass_legs_id?: boolean
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["skirtingCarcassLegsMaster"]>
 
@@ -665,6 +743,8 @@ export type SkirtingCarcassLegsMasterSelectUpdateManyAndReturn<ExtArgs extends r
   name?: boolean
   carcass_legs_id?: boolean
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
   carcassLegs?: boolean | Prisma.CarcassLegsMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["skirtingCarcassLegsMaster"]>
 
@@ -673,9 +753,11 @@ export type SkirtingCarcassLegsMasterSelectScalar = {
   name?: boolean
   carcass_legs_id?: boolean
   inScope?: boolean
+  is_deleted?: boolean
+  deleted_at?: boolean
 }
 
-export type SkirtingCarcassLegsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "carcass_legs_id" | "inScope", ExtArgs["result"]["skirtingCarcassLegsMaster"]>
+export type SkirtingCarcassLegsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "carcass_legs_id" | "inScope" | "is_deleted" | "deleted_at", ExtArgs["result"]["skirtingCarcassLegsMaster"]>
 export type SkirtingCarcassLegsMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   leadMappings?: boolean | Prisma.SkirtingCarcassLegsMaster$leadMappingsArgs<ExtArgs>
   colors?: boolean | Prisma.SkirtingCarcassLegsMaster$colorsArgs<ExtArgs>
@@ -701,6 +783,8 @@ export type $SkirtingCarcassLegsMasterPayload<ExtArgs extends runtime.Types.Exte
     name: string
     carcass_legs_id: number
     inScope: boolean
+    is_deleted: boolean
+    deleted_at: Date | null
   }, ExtArgs["result"]["skirtingCarcassLegsMaster"]>
   composites: {}
 }
@@ -1131,6 +1215,8 @@ export interface SkirtingCarcassLegsMasterFieldRefs {
   readonly name: Prisma.FieldRef<"SkirtingCarcassLegsMaster", 'String'>
   readonly carcass_legs_id: Prisma.FieldRef<"SkirtingCarcassLegsMaster", 'Int'>
   readonly inScope: Prisma.FieldRef<"SkirtingCarcassLegsMaster", 'Boolean'>
+  readonly is_deleted: Prisma.FieldRef<"SkirtingCarcassLegsMaster", 'Boolean'>
+  readonly deleted_at: Prisma.FieldRef<"SkirtingCarcassLegsMaster", 'DateTime'>
 }
     
 
