@@ -182,3 +182,20 @@ export const getPrivilegeMastersByVendorController = async (
     });
   }
 };
+
+export const getUserByIdController = async (req: Request, res: Response) => {
+  try {
+    const userId = Number(req.params.userId);
+    const vendorId = req.query.vendorId ? Number(req.query.vendorId) : undefined;
+    const user = await userService.getUserByIdService(userId, vendorId);
+    return res.status(200).json({
+      success: true,
+      data: user,
+    });
+  } catch (error: any) {
+    return res.status(error.statusCode || 500).json({
+      success: false,
+      message: error.message || "Failed to fetch user",
+    });
+  }
+};

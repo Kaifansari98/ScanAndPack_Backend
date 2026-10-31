@@ -9,6 +9,7 @@ router.patch(
   '/update-user/:userId/privileges',
   userController.updateUserPrivilegeMappingsController,
 );
+router.get("/detail/:userId", userController.getUserByIdController);
 router.get("/vendor/:vendorId", userController.getUsersByVendorController);
 router.get(
   "/vendor/:vendorId/privilege-masters",

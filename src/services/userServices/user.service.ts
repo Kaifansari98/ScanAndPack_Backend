@@ -523,6 +523,69 @@ export const getUsersByVendorService = async ({
   };
 };
 
+export const getUserByIdService = async (userId: number, vendorId?: number) => {
+  if (!userId) {
+    const error = new Error("userId is required");
+    (error as any).statusCode = 400;
+    throw error;
+  }
+
+  const user = await prisma.userMaster.findFirst({
+    where: {
+      id: userId,
+      ...(vendorId ? { vendor_id: vendorId } : {}),
+    },
+    select: {
+      id: true,
+      vendor_id: true,
+      franchise_id: true,
+      siteSupervisorFranchiseMappings: {
+        orderBy: { id: "asc" },
+        select: { franchise: { select: { id: true, franchise_name: true } } },
+      },
+      user_name: true,
+      designation: true,
+      user_contact: true,
+      user_email: true,
+      user_timezone: true,
+      status: true,
+      created_at: true,
+      user_type: {
+        select: {
+          id: true,
+          user_type: true,
+        },
+      },
+      franchise: {
+        select: {
+          id: true,
+          franchise_name: true,
+        },
+      },
+    },
+  });
+
+  if (!user) {
+    const error = new Error("User not found");
+    (error as any).statusCode = 404;
+    throw error;
+  }
+
+  const { siteSupervisorFranchiseMappings, ...userData } = user;
+  const mapped = siteSupervisorFranchiseMappings
+    .map((mapping: any) => mapping.franchise)
+    .filter(Boolean);
+  const franchises = userData.franchise
+    ? [userData.franchise, ...mapped.filter((fr: any) => fr?.id !== userData.franchise?.id)]
+    : mapped;
+
+  return {
+    ...userData,
+    franchises,
+    franchise_ids: franchises.map((fr: any) => fr.id),
+  };
+};
+
 export const getPrivilegeMastersByVendorService = async (
   vendorId: number,
   search = "",
