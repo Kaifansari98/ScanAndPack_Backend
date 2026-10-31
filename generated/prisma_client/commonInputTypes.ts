@@ -439,6 +439,23 @@ export type EnumFastProductionRequestStatusNullableWithAggregatesFilter<$PrismaM
   _max?: Prisma.NestedEnumFastProductionRequestStatusNullableFilter<$PrismaModel>
 }
 
+export type EnumTechCheckStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.TechCheckStatus | Prisma.EnumTechCheckStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel> | $Enums.TechCheckStatus | null
+}
+
+export type EnumTechCheckStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TechCheckStatus | Prisma.EnumTechCheckStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTechCheckStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.TechCheckStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel>
+}
+
 export type EnumSuperAdminApprovalTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.SuperAdminApprovalType | Prisma.EnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
   in?: $Enums.SuperAdminApprovalType[] | Prisma.ListEnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
@@ -593,23 +610,6 @@ export type EnumOtherApplianceTypeNullableWithAggregatesFilter<$PrismaModel = ne
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumOtherApplianceTypeNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumOtherApplianceTypeNullableFilter<$PrismaModel>
-}
-
-export type EnumTechCheckStatusNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.TechCheckStatus | Prisma.EnumTechCheckStatusFieldRefInput<$PrismaModel> | null
-  in?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel> | $Enums.TechCheckStatus | null
-}
-
-export type EnumTechCheckStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.TechCheckStatus | Prisma.EnumTechCheckStatusFieldRefInput<$PrismaModel> | null
-  in?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumTechCheckStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.TechCheckStatus | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel>
 }
 
 export type EnumLeadChatMessageTypeFilter<$PrismaModel = never> = {
@@ -2320,6 +2320,23 @@ export type NestedEnumFastProductionRequestStatusNullableWithAggregatesFilter<$P
   _max?: Prisma.NestedEnumFastProductionRequestStatusNullableFilter<$PrismaModel>
 }
 
+export type NestedEnumTechCheckStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.TechCheckStatus | Prisma.EnumTechCheckStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel> | $Enums.TechCheckStatus | null
+}
+
+export type NestedEnumTechCheckStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TechCheckStatus | Prisma.EnumTechCheckStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTechCheckStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.TechCheckStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel>
+}
+
 export type NestedEnumSuperAdminApprovalTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.SuperAdminApprovalType | Prisma.EnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
   in?: $Enums.SuperAdminApprovalType[] | Prisma.ListEnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel>
@@ -2474,23 +2491,6 @@ export type NestedEnumOtherApplianceTypeNullableWithAggregatesFilter<$PrismaMode
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumOtherApplianceTypeNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumOtherApplianceTypeNullableFilter<$PrismaModel>
-}
-
-export type NestedEnumTechCheckStatusNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.TechCheckStatus | Prisma.EnumTechCheckStatusFieldRefInput<$PrismaModel> | null
-  in?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel> | $Enums.TechCheckStatus | null
-}
-
-export type NestedEnumTechCheckStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.TechCheckStatus | Prisma.EnumTechCheckStatusFieldRefInput<$PrismaModel> | null
-  in?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.TechCheckStatus[] | Prisma.ListEnumTechCheckStatusFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumTechCheckStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.TechCheckStatus | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumTechCheckStatusNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumLeadChatMessageTypeFilter<$PrismaModel = never> = {

@@ -1059,10 +1059,6 @@ export type LeadDocumentsUpdateOneRequiredWithoutSpecificationDocumentMappingsNe
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadDocumentsUpdateToOneWithWhereWithoutSpecificationDocumentMappingsInput, Prisma.LeadDocumentsUpdateWithoutSpecificationDocumentMappingsInput>, Prisma.LeadDocumentsUncheckedUpdateWithoutSpecificationDocumentMappingsInput>
 }
 
-export type NullableEnumTechCheckStatusFieldUpdateOperationsInput = {
-  set?: $Enums.TechCheckStatus | null
-}
-
 export type LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput = {
   create?: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutProductStructureInstanceInput, Prisma.LeadDocumentsUncheckedCreateWithoutProductStructureInstanceInput> | Prisma.LeadDocumentsCreateWithoutProductStructureInstanceInput[] | Prisma.LeadDocumentsUncheckedCreateWithoutProductStructureInstanceInput[]
   connectOrCreate?: Prisma.LeadDocumentsCreateOrConnectWithoutProductStructureInstanceInput | Prisma.LeadDocumentsCreateOrConnectWithoutProductStructureInstanceInput[]

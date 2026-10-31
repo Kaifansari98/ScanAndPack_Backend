@@ -103,6 +103,15 @@ export class TechCheckService {
           throw new Error("Lead not found");
         }
 
+        if (handlesLargeScaleProjects) {
+          await this.assertLatestSpecificationsApproved(
+            tx,
+            vendorId,
+            leadId,
+            productStructureInstanceId,
+          );
+        }
+
         const shouldRequireClientDate = lead.is_fast_production !== true;
         const today = this.getTodayAtMidnight();
         const currentLeadRequiredDate =
@@ -787,6 +796,124 @@ export class TechCheckService {
     }
 
     return result;
+  }
+
+  // Item groups without a specification are not blocked
+  private async assertLatestSpecificationsApproved(
+    tx: Prisma.TransactionClient,
+    vendorId: number,
+    leadId: number,
+    instanceId?: number,
+  ) {
+    const instance = instanceId
+      ? await tx.leadProductStructureInstance.findFirst({
+          where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+          select: { product_item_code_id: true },
+        })
+      : null;
+
+    const specifications = await tx.leadSpecificationsMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        item_code_id: instance?.product_item_code_id ?? { not: null },
+      },
+      orderBy: [{ created_at: "desc" }, { id: "desc" }],
+      select: { item_code_id: true, name: true, tech_check_status: true },
+    });
+
+    const seenItemCodes = new Set<number | null>();
+    for (const specification of specifications) {
+      if (seenItemCodes.has(specification.item_code_id)) continue;
+      seenItemCodes.add(specification.item_code_id);
+      if (specification.tech_check_status !== "APPROVED") {
+        throw new Error(
+          `Specification "${specification.name}" must be approved before moving to Order Login`,
+        );
+      }
+    }
+  }
+
+  public async reviewSpecifications(
+    vendorId: number,
+    leadId: number,
+    userId: number,
+    specificationIds: number[],
+    status: "APPROVED" | "REJECTED",
+    remark?: string,
+  ) {
+    return prisma.$transaction(async (tx) => {
+      const lead = await tx.leadMaster.findFirst({
+        where: { id: leadId, vendor_id: vendorId },
+        select: { account_id: true },
+      });
+      if (!lead?.account_id) {
+        throw new Error("Lead account not found");
+      }
+
+      const specifications = await tx.leadSpecificationsMaster.findMany({
+        where: { vendor_id: vendorId, lead_id: leadId },
+        orderBy: [{ created_at: "desc" }, { id: "desc" }],
+        select: {
+          id: true,
+          name: true,
+          item_code_id: true,
+          is_completed: true,
+        },
+      });
+
+      const latestIds = new Set<number>();
+      const seenItemCodes = new Set<number | null>();
+      for (const specification of specifications) {
+        if (seenItemCodes.has(specification.item_code_id)) continue;
+        seenItemCodes.add(specification.item_code_id);
+        latestIds.add(specification.id);
+      }
+
+      const selected = specifications.filter((specification) =>
+        specificationIds.includes(specification.id),
+      );
+      if (selected.length !== new Set(specificationIds).size) {
+        throw new Error("Specification not found for this lead");
+      }
+      for (const specification of selected) {
+        if (!latestIds.has(specification.id)) {
+          throw new Error(
+            `"${specification.name}" is not the latest specification and cannot be reviewed`,
+          );
+        }
+        if (!specification.is_completed) {
+          throw new Error(
+            `"${specification.name}" must be completed before it can be reviewed`,
+          );
+        }
+      }
+
+      const updateRes = await tx.leadSpecificationsMaster.updateMany({
+        where: { id: { in: selected.map((specification) => specification.id) } },
+        data: {
+          tech_check_status: status,
+          tech_check_remark: status === "REJECTED" ? remark : null,
+          tech_check_reviewed_by: userId,
+          tech_check_reviewed_at: new Date(),
+        },
+      });
+
+      const names = selected.map((specification) => specification.name).join(", ");
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account_id,
+        action:
+          status === "REJECTED"
+            ? `Tech check rejected specification ${names} — Remark: ${remark}`
+            : `Tech check approved specification ${names}`,
+        action_type: "UPDATE",
+        created_by: userId,
+      });
+
+      return { updated: updateRes.count };
+    });
   }
 
   public async rejectTechCheck(

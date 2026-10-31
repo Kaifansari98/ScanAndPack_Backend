@@ -32,6 +32,7 @@ export type LeadSpecificationsMasterAvgAggregateOutputType = {
   lead_id: number | null
   created_by: number | null
   item_code_id: number | null
+  tech_check_reviewed_by: number | null
 }
 
 export type LeadSpecificationsMasterSumAggregateOutputType = {
@@ -40,6 +41,7 @@ export type LeadSpecificationsMasterSumAggregateOutputType = {
   lead_id: number | null
   created_by: number | null
   item_code_id: number | null
+  tech_check_reviewed_by: number | null
 }
 
 export type LeadSpecificationsMasterMinAggregateOutputType = {
@@ -53,6 +55,10 @@ export type LeadSpecificationsMasterMinAggregateOutputType = {
   item_code_id: number | null
   is_completed: boolean | null
   completed_marked_at: Date | null
+  tech_check_status: $Enums.TechCheckStatus | null
+  tech_check_remark: string | null
+  tech_check_reviewed_by: number | null
+  tech_check_reviewed_at: Date | null
 }
 
 export type LeadSpecificationsMasterMaxAggregateOutputType = {
@@ -66,6 +72,10 @@ export type LeadSpecificationsMasterMaxAggregateOutputType = {
   item_code_id: number | null
   is_completed: boolean | null
   completed_marked_at: Date | null
+  tech_check_status: $Enums.TechCheckStatus | null
+  tech_check_remark: string | null
+  tech_check_reviewed_by: number | null
+  tech_check_reviewed_at: Date | null
 }
 
 export type LeadSpecificationsMasterCountAggregateOutputType = {
@@ -79,6 +89,10 @@ export type LeadSpecificationsMasterCountAggregateOutputType = {
   item_code_id: number
   is_completed: number
   completed_marked_at: number
+  tech_check_status: number
+  tech_check_remark: number
+  tech_check_reviewed_by: number
+  tech_check_reviewed_at: number
   _all: number
 }
 
@@ -89,6 +103,7 @@ export type LeadSpecificationsMasterAvgAggregateInputType = {
   lead_id?: true
   created_by?: true
   item_code_id?: true
+  tech_check_reviewed_by?: true
 }
 
 export type LeadSpecificationsMasterSumAggregateInputType = {
@@ -97,6 +112,7 @@ export type LeadSpecificationsMasterSumAggregateInputType = {
   lead_id?: true
   created_by?: true
   item_code_id?: true
+  tech_check_reviewed_by?: true
 }
 
 export type LeadSpecificationsMasterMinAggregateInputType = {
@@ -110,6 +126,10 @@ export type LeadSpecificationsMasterMinAggregateInputType = {
   item_code_id?: true
   is_completed?: true
   completed_marked_at?: true
+  tech_check_status?: true
+  tech_check_remark?: true
+  tech_check_reviewed_by?: true
+  tech_check_reviewed_at?: true
 }
 
 export type LeadSpecificationsMasterMaxAggregateInputType = {
@@ -123,6 +143,10 @@ export type LeadSpecificationsMasterMaxAggregateInputType = {
   item_code_id?: true
   is_completed?: true
   completed_marked_at?: true
+  tech_check_status?: true
+  tech_check_remark?: true
+  tech_check_reviewed_by?: true
+  tech_check_reviewed_at?: true
 }
 
 export type LeadSpecificationsMasterCountAggregateInputType = {
@@ -136,6 +160,10 @@ export type LeadSpecificationsMasterCountAggregateInputType = {
   item_code_id?: true
   is_completed?: true
   completed_marked_at?: true
+  tech_check_status?: true
+  tech_check_remark?: true
+  tech_check_reviewed_by?: true
+  tech_check_reviewed_at?: true
   _all?: true
 }
 
@@ -236,6 +264,10 @@ export type LeadSpecificationsMasterGroupByOutputType = {
   item_code_id: number | null
   is_completed: boolean
   completed_marked_at: Date | null
+  tech_check_status: $Enums.TechCheckStatus | null
+  tech_check_remark: string | null
+  tech_check_reviewed_by: number | null
+  tech_check_reviewed_at: Date | null
   _count: LeadSpecificationsMasterCountAggregateOutputType | null
   _avg: LeadSpecificationsMasterAvgAggregateOutputType | null
   _sum: LeadSpecificationsMasterSumAggregateOutputType | null
@@ -272,6 +304,10 @@ export type LeadSpecificationsMasterWhereInput = {
   item_code_id?: Prisma.IntNullableFilter<"LeadSpecificationsMaster"> | number | null
   is_completed?: Prisma.BoolFilter<"LeadSpecificationsMaster"> | boolean
   completed_marked_at?: Prisma.DateTimeNullableFilter<"LeadSpecificationsMaster"> | Date | string | null
+  tech_check_status?: Prisma.EnumTechCheckStatusNullableFilter<"LeadSpecificationsMaster"> | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.StringNullableFilter<"LeadSpecificationsMaster"> | string | null
+  tech_check_reviewed_by?: Prisma.IntNullableFilter<"LeadSpecificationsMaster"> | number | null
+  tech_check_reviewed_at?: Prisma.DateTimeNullableFilter<"LeadSpecificationsMaster"> | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingListRelationFilter
   LeadHardwareMapping?: Prisma.LeadHardwareMappingListRelationFilter
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingListRelationFilter
@@ -296,6 +332,10 @@ export type LeadSpecificationsMasterOrderByWithRelationInput = {
   item_code_id?: Prisma.SortOrderInput | Prisma.SortOrder
   is_completed?: Prisma.SortOrder
   completed_marked_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  tech_check_status?: Prisma.SortOrderInput | Prisma.SortOrder
+  tech_check_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  tech_check_reviewed_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  tech_check_reviewed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingOrderByRelationAggregateInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingOrderByRelationAggregateInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingOrderByRelationAggregateInput
@@ -323,6 +363,10 @@ export type LeadSpecificationsMasterWhereUniqueInput = Prisma.AtLeast<{
   item_code_id?: Prisma.IntNullableFilter<"LeadSpecificationsMaster"> | number | null
   is_completed?: Prisma.BoolFilter<"LeadSpecificationsMaster"> | boolean
   completed_marked_at?: Prisma.DateTimeNullableFilter<"LeadSpecificationsMaster"> | Date | string | null
+  tech_check_status?: Prisma.EnumTechCheckStatusNullableFilter<"LeadSpecificationsMaster"> | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.StringNullableFilter<"LeadSpecificationsMaster"> | string | null
+  tech_check_reviewed_by?: Prisma.IntNullableFilter<"LeadSpecificationsMaster"> | number | null
+  tech_check_reviewed_at?: Prisma.DateTimeNullableFilter<"LeadSpecificationsMaster"> | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingListRelationFilter
   LeadHardwareMapping?: Prisma.LeadHardwareMappingListRelationFilter
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingListRelationFilter
@@ -347,6 +391,10 @@ export type LeadSpecificationsMasterOrderByWithAggregationInput = {
   item_code_id?: Prisma.SortOrderInput | Prisma.SortOrder
   is_completed?: Prisma.SortOrder
   completed_marked_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  tech_check_status?: Prisma.SortOrderInput | Prisma.SortOrder
+  tech_check_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  tech_check_reviewed_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  tech_check_reviewed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadSpecificationsMasterCountOrderByAggregateInput
   _avg?: Prisma.LeadSpecificationsMasterAvgOrderByAggregateInput
   _max?: Prisma.LeadSpecificationsMasterMaxOrderByAggregateInput
@@ -368,6 +416,10 @@ export type LeadSpecificationsMasterScalarWhereWithAggregatesInput = {
   item_code_id?: Prisma.IntNullableWithAggregatesFilter<"LeadSpecificationsMaster"> | number | null
   is_completed?: Prisma.BoolWithAggregatesFilter<"LeadSpecificationsMaster"> | boolean
   completed_marked_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadSpecificationsMaster"> | Date | string | null
+  tech_check_status?: Prisma.EnumTechCheckStatusNullableWithAggregatesFilter<"LeadSpecificationsMaster"> | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadSpecificationsMaster"> | string | null
+  tech_check_reviewed_by?: Prisma.IntNullableWithAggregatesFilter<"LeadSpecificationsMaster"> | number | null
+  tech_check_reviewed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadSpecificationsMaster"> | Date | string | null
 }
 
 export type LeadSpecificationsMasterCreateInput = {
@@ -376,6 +428,10 @@ export type LeadSpecificationsMasterCreateInput = {
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
@@ -400,6 +456,10 @@ export type LeadSpecificationsMasterUncheckedCreateInput = {
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
@@ -415,6 +475,10 @@ export type LeadSpecificationsMasterUpdateInput = {
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
@@ -439,6 +503,10 @@ export type LeadSpecificationsMasterUncheckedUpdateInput = {
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
@@ -459,6 +527,10 @@ export type LeadSpecificationsMasterCreateManyInput = {
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
 }
 
 export type LeadSpecificationsMasterUpdateManyMutationInput = {
@@ -467,6 +539,10 @@ export type LeadSpecificationsMasterUpdateManyMutationInput = {
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadSpecificationsMasterUncheckedUpdateManyInput = {
@@ -480,6 +556,10 @@ export type LeadSpecificationsMasterUncheckedUpdateManyInput = {
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadSpecificationsMasterListRelationFilter = {
@@ -503,6 +583,10 @@ export type LeadSpecificationsMasterCountOrderByAggregateInput = {
   item_code_id?: Prisma.SortOrder
   is_completed?: Prisma.SortOrder
   completed_marked_at?: Prisma.SortOrder
+  tech_check_status?: Prisma.SortOrder
+  tech_check_remark?: Prisma.SortOrder
+  tech_check_reviewed_by?: Prisma.SortOrder
+  tech_check_reviewed_at?: Prisma.SortOrder
 }
 
 export type LeadSpecificationsMasterAvgOrderByAggregateInput = {
@@ -511,6 +595,7 @@ export type LeadSpecificationsMasterAvgOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   item_code_id?: Prisma.SortOrder
+  tech_check_reviewed_by?: Prisma.SortOrder
 }
 
 export type LeadSpecificationsMasterMaxOrderByAggregateInput = {
@@ -524,6 +609,10 @@ export type LeadSpecificationsMasterMaxOrderByAggregateInput = {
   item_code_id?: Prisma.SortOrder
   is_completed?: Prisma.SortOrder
   completed_marked_at?: Prisma.SortOrder
+  tech_check_status?: Prisma.SortOrder
+  tech_check_remark?: Prisma.SortOrder
+  tech_check_reviewed_by?: Prisma.SortOrder
+  tech_check_reviewed_at?: Prisma.SortOrder
 }
 
 export type LeadSpecificationsMasterMinOrderByAggregateInput = {
@@ -537,6 +626,10 @@ export type LeadSpecificationsMasterMinOrderByAggregateInput = {
   item_code_id?: Prisma.SortOrder
   is_completed?: Prisma.SortOrder
   completed_marked_at?: Prisma.SortOrder
+  tech_check_status?: Prisma.SortOrder
+  tech_check_remark?: Prisma.SortOrder
+  tech_check_reviewed_by?: Prisma.SortOrder
+  tech_check_reviewed_at?: Prisma.SortOrder
 }
 
 export type LeadSpecificationsMasterSumOrderByAggregateInput = {
@@ -545,6 +638,7 @@ export type LeadSpecificationsMasterSumOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   item_code_id?: Prisma.SortOrder
+  tech_check_reviewed_by?: Prisma.SortOrder
 }
 
 export type LeadSpecificationsMasterScalarRelationFilter = {
@@ -676,6 +770,10 @@ export type LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput = 
   update?: Prisma.LeadSpecificationsMasterUpdateWithWhereUniqueWithoutLeadInput | Prisma.LeadSpecificationsMasterUpdateWithWhereUniqueWithoutLeadInput[]
   updateMany?: Prisma.LeadSpecificationsMasterUpdateManyWithWhereWithoutLeadInput | Prisma.LeadSpecificationsMasterUpdateManyWithWhereWithoutLeadInput[]
   deleteMany?: Prisma.LeadSpecificationsMasterScalarWhereInput | Prisma.LeadSpecificationsMasterScalarWhereInput[]
+}
+
+export type NullableEnumTechCheckStatusFieldUpdateOperationsInput = {
+  set?: $Enums.TechCheckStatus | null
 }
 
 export type LeadSpecificationsMasterCreateNestedOneWithoutLeadCarcassMaterialMappingInput = {
@@ -824,6 +922,10 @@ export type LeadSpecificationsMasterCreateWithoutVendorInput = {
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
@@ -846,6 +948,10 @@ export type LeadSpecificationsMasterUncheckedCreateWithoutVendorInput = {
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
@@ -895,6 +1001,10 @@ export type LeadSpecificationsMasterScalarWhereInput = {
   item_code_id?: Prisma.IntNullableFilter<"LeadSpecificationsMaster"> | number | null
   is_completed?: Prisma.BoolFilter<"LeadSpecificationsMaster"> | boolean
   completed_marked_at?: Prisma.DateTimeNullableFilter<"LeadSpecificationsMaster"> | Date | string | null
+  tech_check_status?: Prisma.EnumTechCheckStatusNullableFilter<"LeadSpecificationsMaster"> | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.StringNullableFilter<"LeadSpecificationsMaster"> | string | null
+  tech_check_reviewed_by?: Prisma.IntNullableFilter<"LeadSpecificationsMaster"> | number | null
+  tech_check_reviewed_at?: Prisma.DateTimeNullableFilter<"LeadSpecificationsMaster"> | Date | string | null
 }
 
 export type LeadSpecificationsMasterCreateWithoutCreatedByInput = {
@@ -903,6 +1013,10 @@ export type LeadSpecificationsMasterCreateWithoutCreatedByInput = {
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
@@ -925,6 +1039,10 @@ export type LeadSpecificationsMasterUncheckedCreateWithoutCreatedByInput = {
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
@@ -966,6 +1084,10 @@ export type LeadSpecificationsMasterCreateWithoutLeadInput = {
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
@@ -988,6 +1110,10 @@ export type LeadSpecificationsMasterUncheckedCreateWithoutLeadInput = {
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
@@ -1029,6 +1155,10 @@ export type LeadSpecificationsMasterCreateWithoutLeadCarcassMaterialMappingInput
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadHardwareMapping?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutSpecificationInput
@@ -1052,6 +1182,10 @@ export type LeadSpecificationsMasterUncheckedCreateWithoutLeadCarcassMaterialMap
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutSpecificationInput
@@ -1082,6 +1216,10 @@ export type LeadSpecificationsMasterUpdateWithoutLeadCarcassMaterialMappingInput
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutSpecificationNestedInput
@@ -1105,6 +1243,10 @@ export type LeadSpecificationsMasterUncheckedUpdateWithoutLeadCarcassMaterialMap
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutSpecificationNestedInput
@@ -1119,6 +1261,10 @@ export type LeadSpecificationsMasterCreateWithoutLeadShutterMaterialMappingInput
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
@@ -1142,6 +1288,10 @@ export type LeadSpecificationsMasterUncheckedCreateWithoutLeadShutterMaterialMap
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
@@ -1172,6 +1322,10 @@ export type LeadSpecificationsMasterUpdateWithoutLeadShutterMaterialMappingInput
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
@@ -1195,6 +1349,10 @@ export type LeadSpecificationsMasterUncheckedUpdateWithoutLeadShutterMaterialMap
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
@@ -1209,6 +1367,10 @@ export type LeadSpecificationsMasterCreateWithoutLeadHardwareMappingInput = {
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutSpecificationInput
@@ -1232,6 +1394,10 @@ export type LeadSpecificationsMasterUncheckedCreateWithoutLeadHardwareMappingInp
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutSpecificationInput
@@ -1262,6 +1428,10 @@ export type LeadSpecificationsMasterUpdateWithoutLeadHardwareMappingInput = {
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutSpecificationNestedInput
@@ -1285,6 +1455,10 @@ export type LeadSpecificationsMasterUncheckedUpdateWithoutLeadHardwareMappingInp
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutSpecificationNestedInput
@@ -1299,6 +1473,10 @@ export type LeadSpecificationsMasterCreateWithoutLightCarcasUnitMappingsInput = 
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutSpecificationInput
@@ -1322,6 +1500,10 @@ export type LeadSpecificationsMasterUncheckedCreateWithoutLightCarcasUnitMapping
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutSpecificationInput
@@ -1352,6 +1534,10 @@ export type LeadSpecificationsMasterUpdateWithoutLightCarcasUnitMappingsInput = 
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutSpecificationNestedInput
@@ -1375,6 +1561,10 @@ export type LeadSpecificationsMasterUncheckedUpdateWithoutLightCarcasUnitMapping
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutSpecificationNestedInput
@@ -1389,6 +1579,10 @@ export type LeadSpecificationsMasterCreateWithoutOtherAppliancesMappingsInput = 
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
@@ -1412,6 +1606,10 @@ export type LeadSpecificationsMasterUncheckedCreateWithoutOtherAppliancesMapping
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
@@ -1442,6 +1640,10 @@ export type LeadSpecificationsMasterUpdateWithoutOtherAppliancesMappingsInput = 
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
@@ -1465,6 +1667,10 @@ export type LeadSpecificationsMasterUncheckedUpdateWithoutOtherAppliancesMapping
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
@@ -1479,6 +1685,10 @@ export type LeadSpecificationsMasterCreateWithoutSpecificationDocumentMappingsIn
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
@@ -1502,6 +1712,10 @@ export type LeadSpecificationsMasterUncheckedCreateWithoutSpecificationDocumentM
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
@@ -1532,6 +1746,10 @@ export type LeadSpecificationsMasterUpdateWithoutSpecificationDocumentMappingsIn
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
@@ -1555,6 +1773,10 @@ export type LeadSpecificationsMasterUncheckedUpdateWithoutSpecificationDocumentM
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
@@ -1569,6 +1791,10 @@ export type LeadSpecificationsMasterCreateWithoutProductItemCodeInput = {
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
@@ -1591,6 +1817,10 @@ export type LeadSpecificationsMasterUncheckedCreateWithoutProductItemCodeInput =
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
@@ -1632,6 +1862,10 @@ export type LeadSpecificationsMasterCreateWithoutLeadOtherAppliancesRemarkMappin
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
@@ -1655,6 +1889,10 @@ export type LeadSpecificationsMasterUncheckedCreateWithoutLeadOtherAppliancesRem
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadSpecificationsMasterInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
@@ -1685,6 +1923,10 @@ export type LeadSpecificationsMasterUpdateWithoutLeadOtherAppliancesRemarkMappin
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
@@ -1708,6 +1950,10 @@ export type LeadSpecificationsMasterUncheckedUpdateWithoutLeadOtherAppliancesRem
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
@@ -1726,6 +1972,10 @@ export type LeadSpecificationsMasterCreateManyVendorInput = {
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
 }
 
 export type LeadSpecificationsMasterUpdateWithoutVendorInput = {
@@ -1734,6 +1984,10 @@ export type LeadSpecificationsMasterUpdateWithoutVendorInput = {
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
@@ -1756,6 +2010,10 @@ export type LeadSpecificationsMasterUncheckedUpdateWithoutVendorInput = {
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
@@ -1775,6 +2033,10 @@ export type LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorInput = {
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadSpecificationsMasterCreateManyCreatedByInput = {
@@ -1787,6 +2049,10 @@ export type LeadSpecificationsMasterCreateManyCreatedByInput = {
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
 }
 
 export type LeadSpecificationsMasterUpdateWithoutCreatedByInput = {
@@ -1795,6 +2061,10 @@ export type LeadSpecificationsMasterUpdateWithoutCreatedByInput = {
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
@@ -1817,6 +2087,10 @@ export type LeadSpecificationsMasterUncheckedUpdateWithoutCreatedByInput = {
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
@@ -1836,6 +2110,10 @@ export type LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByInput = {
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadSpecificationsMasterCreateManyLeadInput = {
@@ -1848,6 +2126,10 @@ export type LeadSpecificationsMasterCreateManyLeadInput = {
   item_code_id?: number | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
 }
 
 export type LeadSpecificationsMasterUpdateWithoutLeadInput = {
@@ -1856,6 +2138,10 @@ export type LeadSpecificationsMasterUpdateWithoutLeadInput = {
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
@@ -1878,6 +2164,10 @@ export type LeadSpecificationsMasterUncheckedUpdateWithoutLeadInput = {
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
@@ -1897,6 +2187,10 @@ export type LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadInput = {
   item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type LeadSpecificationsMasterCreateManyProductItemCodeInput = {
@@ -1909,6 +2203,10 @@ export type LeadSpecificationsMasterCreateManyProductItemCodeInput = {
   lights_remark?: string | null
   is_completed?: boolean
   completed_marked_at?: Date | string | null
+  tech_check_status?: $Enums.TechCheckStatus | null
+  tech_check_remark?: string | null
+  tech_check_reviewed_by?: number | null
+  tech_check_reviewed_at?: Date | string | null
 }
 
 export type LeadSpecificationsMasterUpdateWithoutProductItemCodeInput = {
@@ -1917,6 +2215,10 @@ export type LeadSpecificationsMasterUpdateWithoutProductItemCodeInput = {
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
@@ -1939,6 +2241,10 @@ export type LeadSpecificationsMasterUncheckedUpdateWithoutProductItemCodeInput =
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   LeadCarcassMaterialMapping?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   LeadHardwareMapping?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadSpecificationsMasterNestedInput
   lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
@@ -1958,6 +2264,10 @@ export type LeadSpecificationsMasterUncheckedUpdateManyWithoutProductItemCodeInp
   lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completed_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  tech_check_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reviewed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  tech_check_reviewed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -2056,6 +2366,10 @@ export type LeadSpecificationsMasterSelect<ExtArgs extends runtime.Types.Extensi
   item_code_id?: boolean
   is_completed?: boolean
   completed_marked_at?: boolean
+  tech_check_status?: boolean
+  tech_check_remark?: boolean
+  tech_check_reviewed_by?: boolean
+  tech_check_reviewed_at?: boolean
   LeadCarcassMaterialMapping?: boolean | Prisma.LeadSpecificationsMaster$LeadCarcassMaterialMappingArgs<ExtArgs>
   LeadHardwareMapping?: boolean | Prisma.LeadSpecificationsMaster$LeadHardwareMappingArgs<ExtArgs>
   lightCarcasUnitMappings?: boolean | Prisma.LeadSpecificationsMaster$lightCarcasUnitMappingsArgs<ExtArgs>
@@ -2081,6 +2395,10 @@ export type LeadSpecificationsMasterSelectCreateManyAndReturn<ExtArgs extends ru
   item_code_id?: boolean
   is_completed?: boolean
   completed_marked_at?: boolean
+  tech_check_status?: boolean
+  tech_check_remark?: boolean
+  tech_check_reviewed_by?: boolean
+  tech_check_reviewed_at?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   productItemCode?: boolean | Prisma.LeadSpecificationsMaster$productItemCodeArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -2098,6 +2416,10 @@ export type LeadSpecificationsMasterSelectUpdateManyAndReturn<ExtArgs extends ru
   item_code_id?: boolean
   is_completed?: boolean
   completed_marked_at?: boolean
+  tech_check_status?: boolean
+  tech_check_remark?: boolean
+  tech_check_reviewed_by?: boolean
+  tech_check_reviewed_at?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   productItemCode?: boolean | Prisma.LeadSpecificationsMaster$productItemCodeArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -2115,9 +2437,13 @@ export type LeadSpecificationsMasterSelectScalar = {
   item_code_id?: boolean
   is_completed?: boolean
   completed_marked_at?: boolean
+  tech_check_status?: boolean
+  tech_check_remark?: boolean
+  tech_check_reviewed_by?: boolean
+  tech_check_reviewed_at?: boolean
 }
 
-export type LeadSpecificationsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "created_at" | "created_by" | "name" | "lights_remark" | "item_code_id" | "is_completed" | "completed_marked_at", ExtArgs["result"]["leadSpecificationsMaster"]>
+export type LeadSpecificationsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "created_at" | "created_by" | "name" | "lights_remark" | "item_code_id" | "is_completed" | "completed_marked_at" | "tech_check_status" | "tech_check_remark" | "tech_check_reviewed_by" | "tech_check_reviewed_at", ExtArgs["result"]["leadSpecificationsMaster"]>
 export type LeadSpecificationsMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   LeadCarcassMaterialMapping?: boolean | Prisma.LeadSpecificationsMaster$LeadCarcassMaterialMappingArgs<ExtArgs>
   LeadHardwareMapping?: boolean | Prisma.LeadSpecificationsMaster$LeadHardwareMappingArgs<ExtArgs>
@@ -2171,6 +2497,10 @@ export type $LeadSpecificationsMasterPayload<ExtArgs extends runtime.Types.Exten
     item_code_id: number | null
     is_completed: boolean
     completed_marked_at: Date | null
+    tech_check_status: $Enums.TechCheckStatus | null
+    tech_check_remark: string | null
+    tech_check_reviewed_by: number | null
+    tech_check_reviewed_at: Date | null
   }, ExtArgs["result"]["leadSpecificationsMaster"]>
   composites: {}
 }
@@ -2615,6 +2945,10 @@ export interface LeadSpecificationsMasterFieldRefs {
   readonly item_code_id: Prisma.FieldRef<"LeadSpecificationsMaster", 'Int'>
   readonly is_completed: Prisma.FieldRef<"LeadSpecificationsMaster", 'Boolean'>
   readonly completed_marked_at: Prisma.FieldRef<"LeadSpecificationsMaster", 'DateTime'>
+  readonly tech_check_status: Prisma.FieldRef<"LeadSpecificationsMaster", 'TechCheckStatus'>
+  readonly tech_check_remark: Prisma.FieldRef<"LeadSpecificationsMaster", 'String'>
+  readonly tech_check_reviewed_by: Prisma.FieldRef<"LeadSpecificationsMaster", 'Int'>
+  readonly tech_check_reviewed_at: Prisma.FieldRef<"LeadSpecificationsMaster", 'DateTime'>
 }
     
 
