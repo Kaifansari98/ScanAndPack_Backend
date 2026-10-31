@@ -1558,7 +1558,7 @@ export const generateBoxPdfService = async (
         prisma.machineMaster.findFirst({
           where: {
             vendor_id,
-            machine_type_id: 18,
+            machine_type_id: 18, is_deleted: false
           },
 
           select: {
@@ -3497,7 +3497,7 @@ export const generateProjectBoxPdfService = async (
 
     // ── 3. Fetch boxes + item counts from CutListMachineMapping ─────────────
     const packagingMachine = await prisma.machineMaster.findFirst({
-      where: { vendor_id, machine_type_id: 18 },
+      where: { vendor_id, machine_type_id: 18, is_deleted: false },
       select: { id: true },
       orderBy: { id: "asc" },
     });
@@ -3771,7 +3771,7 @@ export const generateAllBoxesPdfService = async (
           where: {
             vendor_id,
 
-            machine_type_id: 18,
+            machine_type_id: 18, is_deleted: false
           },
 
           select: {
@@ -5872,7 +5872,7 @@ export const generateProjectFullReportService = async (
       prisma.machineMaster.findFirst({
         where: {
           vendor_id,
-          machine_type_id: 18,
+          machine_type_id: 18, is_deleted: false
         },
 
         select: {
@@ -7875,7 +7875,7 @@ export const markItemSiteInService_old = async (
 
     // ── 3. Find the packaging machine ────────────────────────────────────────
     const packagingMachine = await prisma.machineMaster.findFirst({
-      where: { vendor_id, machine_type_id: 18 },
+      where: { vendor_id, machine_type_id: 18, is_deleted: false },
       select: { id: true },
       orderBy: { id: "asc" },
     });
@@ -8001,7 +8001,7 @@ export const getBoxSiteInStatusService_old = async (
     if (!box) return validationResponse(0, "Box not found");
 
     const packagingMachine = await prisma.machineMaster.findFirst({
-      where: { vendor_id, machine_type_id: 18 },
+      where: { vendor_id, machine_type_id: 18, is_deleted: false },
       select: { id: true },
       orderBy: { id: "asc" },
     });
@@ -8559,7 +8559,7 @@ export const markItemSiteInService = async (
     const packagingMachine = await prisma.machineMaster.findFirst({
       where: {
         vendor_id,
-        machine_type_id: 18,
+        machine_type_id: 18, is_deleted: false
       },
 
       select: {
@@ -8833,7 +8833,7 @@ export const getManualBoxSiteInItemsService = async (
     const packagingMachine = await prisma.machineMaster.findFirst({
       where: {
         vendor_id,
-        machine_type_id: 18,
+        machine_type_id: 18, is_deleted: false
       },
 
       select: {
@@ -9172,7 +9172,7 @@ export const verifyManualBoxSiteInItemService = async (
     const packagingMachine = await prisma.machineMaster.findFirst({
       where: {
         vendor_id,
-        machine_type_id: 18,
+        machine_type_id: 18, is_deleted: false
       },
 
       select: {
@@ -9437,7 +9437,7 @@ export const getBoxSiteInStatusService = async (
     const packagingMachine = await prisma.machineMaster.findFirst({
       where: {
         vendor_id,
-        machine_type_id: 18,
+        machine_type_id: 18, is_deleted: false
       },
 
       select: {

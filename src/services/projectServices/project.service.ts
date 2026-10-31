@@ -625,6 +625,7 @@ export const getProjectById_old = async (id: number) => {
     where: {
       vendor_id: project.vendor_id,
       machine_type_id: 18,
+      is_deleted: false,
     },
     select: {
       id: true,
@@ -681,6 +682,7 @@ export const getProjectById = async (id: number) => {
       where: {
         vendor_id: project.vendor_id,
         machine_type_id: 18,
+        is_deleted: false,
       },
 
       select: {
@@ -1543,7 +1545,7 @@ export const getProjectsByVendorIdService_old = async (vendorId: number) => {
 
   // ── 1. Fetch packaging machine ───────────────────────────────────────────
   const packagingMachine = await prisma.machineMaster.findFirst({
-    where: { vendor_id: vendorId, machine_type_id: 18 },
+    where: { vendor_id: vendorId, machine_type_id: 18, is_deleted: false },
     select: { id: true, sequence_no: true },
   });
 
@@ -1874,6 +1876,7 @@ export const getProjectsByVendorIdService = async (
       where: {
         vendor_id: vendorId,
         machine_type_id: 18,
+        is_deleted: false,
       },
       select: {
         id: true,
@@ -3952,6 +3955,7 @@ export const handelItems_13_aug_2026 = async (
     const machines = await prisma.machineMaster.findMany({
       where: {
         vendor_id: vendor.id,
+        is_deleted: false,
         machine_type_id: {
           in: enabledMachineTypeIds,
         },
@@ -4716,6 +4720,7 @@ export const handelItems = async (
         fabrication: "WOODWORK",
         vendor_id: vendor.id,
         status: "ACTIVE",
+        is_deleted: false,
         machine_type_id: {
           in: enabledMachineTypeIds,
         },

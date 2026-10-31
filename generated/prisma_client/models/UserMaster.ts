@@ -329,6 +329,7 @@ export type UserMasterWhereInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterListRelationFilter
   operator?: Prisma.CutListMachineMappingListRelationFilter
   mappingSiteIns?: Prisma.CutListMachineMappingListRelationFilter
+  machinesDeleted?: Prisma.MachineMasterListRelationFilter
   cutListRulesCreated?: Prisma.CutListRuleMasterListRelationFilter
   cutListRulesUpdated?: Prisma.CutListRuleMasterListRelationFilter
   dcnsCreated?: Prisma.DebitCreditNoteListRelationFilter
@@ -538,6 +539,7 @@ export type UserMasterOrderByWithRelationInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterOrderByRelationAggregateInput
   operator?: Prisma.CutListMachineMappingOrderByRelationAggregateInput
   mappingSiteIns?: Prisma.CutListMachineMappingOrderByRelationAggregateInput
+  machinesDeleted?: Prisma.MachineMasterOrderByRelationAggregateInput
   cutListRulesCreated?: Prisma.CutListRuleMasterOrderByRelationAggregateInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterOrderByRelationAggregateInput
   dcnsCreated?: Prisma.DebitCreditNoteOrderByRelationAggregateInput
@@ -750,6 +752,7 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterListRelationFilter
   operator?: Prisma.CutListMachineMappingListRelationFilter
   mappingSiteIns?: Prisma.CutListMachineMappingListRelationFilter
+  machinesDeleted?: Prisma.MachineMasterListRelationFilter
   cutListRulesCreated?: Prisma.CutListRuleMasterListRelationFilter
   cutListRulesUpdated?: Prisma.CutListRuleMasterListRelationFilter
   dcnsCreated?: Prisma.DebitCreditNoteListRelationFilter
@@ -997,6 +1000,7 @@ export type UserMasterCreateInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -1206,6 +1210,7 @@ export type UserMasterUncheckedCreateInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -1408,6 +1413,7 @@ export type UserMasterUpdateInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -1617,6 +1623,7 @@ export type UserMasterUncheckedUpdateInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -3737,6 +3744,22 @@ export type UserMasterUpdateOneRequiredWithoutPushTokensNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutPushTokensInput, Prisma.UserMasterUpdateWithoutPushTokensInput>, Prisma.UserMasterUncheckedUpdateWithoutPushTokensInput>
 }
 
+export type UserMasterCreateNestedOneWithoutMachinesDeletedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutMachinesDeletedInput, Prisma.UserMasterUncheckedCreateWithoutMachinesDeletedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutMachinesDeletedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterUpdateOneWithoutMachinesDeletedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutMachinesDeletedInput, Prisma.UserMasterUncheckedCreateWithoutMachinesDeletedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutMachinesDeletedInput
+  upsert?: Prisma.UserMasterUpsertWithoutMachinesDeletedInput
+  disconnect?: Prisma.UserMasterWhereInput | boolean
+  delete?: Prisma.UserMasterWhereInput | boolean
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutMachinesDeletedInput, Prisma.UserMasterUpdateWithoutMachinesDeletedInput>, Prisma.UserMasterUncheckedUpdateWithoutMachinesDeletedInput>
+}
+
 export type UserMasterCreateNestedOneWithoutOperatorInput = {
   create?: Prisma.XOR<Prisma.UserMasterCreateWithoutOperatorInput, Prisma.UserMasterUncheckedCreateWithoutOperatorInput>
   connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutOperatorInput
@@ -4879,6 +4902,7 @@ export type UserMasterCreateWithoutVendorInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -5086,6 +5110,7 @@ export type UserMasterUncheckedCreateWithoutVendorInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5334,6 +5359,7 @@ export type UserMasterCreateWithoutUser_typeInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -5541,6 +5567,7 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5769,6 +5796,7 @@ export type UserMasterCreateWithoutDocumentsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -5977,6 +6005,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6194,6 +6223,7 @@ export type UserMasterUpdateWithoutDocumentsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -6402,6 +6432,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -6603,6 +6634,7 @@ export type UserMasterCreateWithoutRevokedSessionsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -6811,6 +6843,7 @@ export type UserMasterUncheckedCreateWithoutRevokedSessionsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -7017,6 +7050,7 @@ export type UserMasterCreateWithoutSessionsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -7225,6 +7259,7 @@ export type UserMasterUncheckedCreateWithoutSessionsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -7442,6 +7477,7 @@ export type UserMasterUpdateWithoutRevokedSessionsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -7650,6 +7686,7 @@ export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7862,6 +7899,7 @@ export type UserMasterUpdateWithoutSessionsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -8070,6 +8108,7 @@ export type UserMasterUncheckedUpdateWithoutSessionsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -8271,6 +8310,7 @@ export type UserMasterCreateWithoutUserPrivilegeMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -8479,6 +8519,7 @@ export type UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -8696,6 +8737,7 @@ export type UserMasterUpdateWithoutUserPrivilegeMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -8904,6 +8946,7 @@ export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -9105,6 +9148,7 @@ export type UserMasterCreateWithoutCreatedProjectsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -9313,6 +9357,7 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -9519,6 +9564,7 @@ export type UserMasterCreateWithoutDeletedProjectsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -9727,6 +9773,7 @@ export type UserMasterUncheckedCreateWithoutDeletedProjectsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -9933,6 +9980,7 @@ export type UserMasterCreateWithoutProjectMastersInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -10141,6 +10189,7 @@ export type UserMasterUncheckedCreateWithoutProjectMastersInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -10358,6 +10407,7 @@ export type UserMasterUpdateWithoutCreatedProjectsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -10566,6 +10616,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -10778,6 +10829,7 @@ export type UserMasterUpdateWithoutDeletedProjectsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -10986,6 +11038,7 @@ export type UserMasterUncheckedUpdateWithoutDeletedProjectsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -11198,6 +11251,7 @@ export type UserMasterUpdateWithoutProjectMastersInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -11406,6 +11460,7 @@ export type UserMasterUncheckedUpdateWithoutProjectMastersInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -11606,6 +11661,7 @@ export type UserMasterCreateWithoutBoxesFactoryOutInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -11814,6 +11870,7 @@ export type UserMasterUncheckedCreateWithoutBoxesFactoryOutInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -12020,6 +12077,7 @@ export type UserMasterCreateWithoutBoxesPackedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -12228,6 +12286,7 @@ export type UserMasterUncheckedCreateWithoutBoxesPackedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -12434,6 +12493,7 @@ export type UserMasterCreateWithoutBoxesSiteInInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -12642,6 +12702,7 @@ export type UserMasterUncheckedCreateWithoutBoxesSiteInInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -12859,6 +12920,7 @@ export type UserMasterUpdateWithoutBoxesFactoryOutInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -13067,6 +13129,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesFactoryOutInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -13279,6 +13342,7 @@ export type UserMasterUpdateWithoutBoxesPackedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -13487,6 +13551,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesPackedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -13699,6 +13764,7 @@ export type UserMasterUpdateWithoutBoxesSiteInInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -13907,6 +13973,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -14108,6 +14175,7 @@ export type UserMasterCreateWithoutFactoryOutRevertsMadeInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -14316,6 +14384,7 @@ export type UserMasterUncheckedCreateWithoutFactoryOutRevertsMadeInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -14522,6 +14591,7 @@ export type UserMasterCreateWithoutFactoryOutRevertsOriginalInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -14730,6 +14800,7 @@ export type UserMasterUncheckedCreateWithoutFactoryOutRevertsOriginalInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -14947,6 +15018,7 @@ export type UserMasterUpdateWithoutFactoryOutRevertsMadeInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -15155,6 +15227,7 @@ export type UserMasterUncheckedUpdateWithoutFactoryOutRevertsMadeInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -15367,6 +15440,7 @@ export type UserMasterUpdateWithoutFactoryOutRevertsOriginalInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -15575,6 +15649,7 @@ export type UserMasterUncheckedUpdateWithoutFactoryOutRevertsOriginalInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -15776,6 +15851,7 @@ export type UserMasterCreateWithoutBoxUnpacksMadeInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -15984,6 +16060,7 @@ export type UserMasterUncheckedCreateWithoutBoxUnpacksMadeInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -16190,6 +16267,7 @@ export type UserMasterCreateWithoutBoxUnpacksPackedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -16398,6 +16476,7 @@ export type UserMasterUncheckedCreateWithoutBoxUnpacksPackedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -16604,6 +16683,7 @@ export type UserMasterCreateWithoutBoxUnpacksCreatedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -16812,6 +16892,7 @@ export type UserMasterUncheckedCreateWithoutBoxUnpacksCreatedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -17029,6 +17110,7 @@ export type UserMasterUpdateWithoutBoxUnpacksMadeInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -17237,6 +17319,7 @@ export type UserMasterUncheckedUpdateWithoutBoxUnpacksMadeInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -17449,6 +17532,7 @@ export type UserMasterUpdateWithoutBoxUnpacksPackedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -17657,6 +17741,7 @@ export type UserMasterUncheckedUpdateWithoutBoxUnpacksPackedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -17869,6 +17954,7 @@ export type UserMasterUpdateWithoutBoxUnpacksCreatedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -18077,6 +18163,7 @@ export type UserMasterUncheckedUpdateWithoutBoxUnpacksCreatedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -18279,6 +18366,7 @@ export type UserMasterCreateWithoutScanItemsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -18487,6 +18575,7 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -18704,6 +18793,7 @@ export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -18912,6 +19002,7 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -19113,6 +19204,7 @@ export type UserMasterCreateWithoutLeadsAssignedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -19321,6 +19413,7 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19527,6 +19620,7 @@ export type UserMasterCreateWithoutLeadsDelegatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -19735,6 +19829,7 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19941,6 +20036,7 @@ export type UserMasterCreateWithoutLeadsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -20149,6 +20245,7 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -20355,6 +20452,7 @@ export type UserMasterCreateWithoutLeadsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -20563,6 +20661,7 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -20780,6 +20879,7 @@ export type UserMasterUpdateWithoutLeadsAssignedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -20988,6 +21088,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -21200,6 +21301,7 @@ export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -21408,6 +21510,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -21620,6 +21723,7 @@ export type UserMasterUpdateWithoutLeadsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -21828,6 +21932,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -22040,6 +22145,7 @@ export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -22248,6 +22354,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -22449,6 +22556,7 @@ export type UserMasterCreateWithoutLeadSpecificationsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -22657,6 +22765,7 @@ export type UserMasterUncheckedCreateWithoutLeadSpecificationsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -22874,6 +22983,7 @@ export type UserMasterUpdateWithoutLeadSpecificationsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -23082,6 +23192,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSpecificationsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -23283,6 +23394,7 @@ export type UserMasterCreateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -23491,6 +23603,7 @@ export type UserMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsCreatedIn
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -23708,6 +23821,7 @@ export type UserMasterUpdateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -23916,6 +24030,7 @@ export type UserMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsCreatedIn
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -24117,6 +24232,7 @@ export type UserMasterCreateWithoutLeadShutterMaterialMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -24325,6 +24441,7 @@ export type UserMasterUncheckedCreateWithoutLeadShutterMaterialMappingsCreatedIn
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -24542,6 +24659,7 @@ export type UserMasterUpdateWithoutLeadShutterMaterialMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -24750,6 +24868,7 @@ export type UserMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsCreatedIn
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -24951,6 +25070,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -25159,6 +25279,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -25365,6 +25486,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -25573,6 +25695,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput 
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -25790,6 +25913,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -25998,6 +26122,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -26210,6 +26335,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -26418,6 +26544,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput 
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -26619,6 +26746,7 @@ export type UserMasterCreateWithoutLeadUserCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -26827,6 +26955,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -27033,6 +27162,7 @@ export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -27241,6 +27371,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -27447,6 +27578,7 @@ export type UserMasterCreateWithoutLeadUserAsUserInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -27655,6 +27787,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -27872,6 +28005,7 @@ export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -28080,6 +28214,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -28292,6 +28427,7 @@ export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -28500,6 +28636,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -28712,6 +28849,7 @@ export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -28920,6 +29058,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -29121,6 +29260,7 @@ export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -29329,6 +29469,7 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -29546,6 +29687,7 @@ export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -29754,6 +29896,7 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -29955,6 +30098,7 @@ export type UserMasterCreateWithoutLeadScopedActivityStatusLogsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -30163,6 +30307,7 @@ export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsCreatedI
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -30369,6 +30514,7 @@ export type UserMasterCreateWithoutLeadScopedActivityStatusLogsReleasedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -30577,6 +30723,7 @@ export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsReleased
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -30794,6 +30941,7 @@ export type UserMasterUpdateWithoutLeadScopedActivityStatusLogsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -31002,6 +31150,7 @@ export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsCreatedI
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -31214,6 +31363,7 @@ export type UserMasterUpdateWithoutLeadScopedActivityStatusLogsReleasedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -31422,6 +31572,7 @@ export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsReleased
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -31622,6 +31773,7 @@ export type UserMasterCreateWithoutAccountsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -31830,6 +31982,7 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -32036,6 +32189,7 @@ export type UserMasterCreateWithoutAccountsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -32244,6 +32398,7 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -32461,6 +32616,7 @@ export type UserMasterUpdateWithoutAccountsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -32669,6 +32825,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -32881,6 +33038,7 @@ export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -33089,6 +33247,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -33291,6 +33450,7 @@ export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -33499,6 +33659,7 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -33716,6 +33877,7 @@ export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -33924,6 +34086,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -34125,6 +34288,7 @@ export type UserMasterCreateWithoutProcessBriefsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -34333,6 +34497,7 @@ export type UserMasterUncheckedCreateWithoutProcessBriefsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -34539,6 +34704,7 @@ export type UserMasterCreateWithoutProcessBriefsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -34747,6 +34913,7 @@ export type UserMasterUncheckedCreateWithoutProcessBriefsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -34964,6 +35131,7 @@ export type UserMasterUpdateWithoutProcessBriefsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -35172,6 +35340,7 @@ export type UserMasterUncheckedUpdateWithoutProcessBriefsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -35384,6 +35553,7 @@ export type UserMasterUpdateWithoutProcessBriefsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -35592,6 +35762,7 @@ export type UserMasterUncheckedUpdateWithoutProcessBriefsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -35793,6 +35964,7 @@ export type UserMasterCreateWithoutLeadProcessBriefsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -36001,6 +36173,7 @@ export type UserMasterUncheckedCreateWithoutLeadProcessBriefsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -36207,6 +36380,7 @@ export type UserMasterCreateWithoutLeadProcessBriefsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -36415,6 +36589,7 @@ export type UserMasterUncheckedCreateWithoutLeadProcessBriefsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -36632,6 +36807,7 @@ export type UserMasterUpdateWithoutLeadProcessBriefsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -36840,6 +37016,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -37052,6 +37229,7 @@ export type UserMasterUpdateWithoutLeadProcessBriefsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -37260,6 +37438,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -37461,6 +37640,7 @@ export type UserMasterCreateWithoutPbmCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -37669,6 +37849,7 @@ export type UserMasterUncheckedCreateWithoutPbmCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -37875,6 +38056,7 @@ export type UserMasterCreateWithoutPbmUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -38083,6 +38265,7 @@ export type UserMasterUncheckedCreateWithoutPbmUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -38300,6 +38483,7 @@ export type UserMasterUpdateWithoutPbmCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -38508,6 +38692,7 @@ export type UserMasterUncheckedUpdateWithoutPbmCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -38720,6 +38905,7 @@ export type UserMasterUpdateWithoutPbmUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -38928,6 +39114,7 @@ export type UserMasterUncheckedUpdateWithoutPbmUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -39129,6 +39316,7 @@ export type UserMasterCreateWithoutLeadReqMaterialsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -39337,6 +39525,7 @@ export type UserMasterUncheckedCreateWithoutLeadReqMaterialsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -39543,6 +39732,7 @@ export type UserMasterCreateWithoutLeadReqMaterialsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -39751,6 +39941,7 @@ export type UserMasterUncheckedCreateWithoutLeadReqMaterialsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -39968,6 +40159,7 @@ export type UserMasterUpdateWithoutLeadReqMaterialsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -40176,6 +40368,7 @@ export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -40388,6 +40581,7 @@ export type UserMasterUpdateWithoutLeadReqMaterialsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -40596,6 +40790,7 @@ export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -40797,6 +40992,7 @@ export type UserMasterCreateWithoutLeadHardwareMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -41005,6 +41201,7 @@ export type UserMasterUncheckedCreateWithoutLeadHardwareMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -41222,6 +41419,7 @@ export type UserMasterUpdateWithoutLeadHardwareMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -41430,6 +41628,7 @@ export type UserMasterUncheckedUpdateWithoutLeadHardwareMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -41631,6 +41830,7 @@ export type UserMasterCreateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -41839,6 +42039,7 @@ export type UserMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsCreatedIn
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -42056,6 +42257,7 @@ export type UserMasterUpdateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -42264,6 +42466,7 @@ export type UserMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsCreatedIn
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -42465,6 +42668,7 @@ export type UserMasterCreateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -42673,6 +42877,7 @@ export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsCreatedIn
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -42890,6 +43095,7 @@ export type UserMasterUpdateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -43098,6 +43304,7 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsCreatedIn
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -43299,6 +43506,7 @@ export type UserMasterCreateWithoutSpecificationDocumentMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -43507,6 +43715,7 @@ export type UserMasterUncheckedCreateWithoutSpecificationDocumentMappingsCreated
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -43724,6 +43933,7 @@ export type UserMasterUpdateWithoutSpecificationDocumentMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -43932,6 +44142,7 @@ export type UserMasterUncheckedUpdateWithoutSpecificationDocumentMappingsCreated
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -44133,6 +44344,7 @@ export type UserMasterCreateWithoutDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -44341,6 +44553,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -44547,6 +44760,7 @@ export type UserMasterCreateWithoutDocumentsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -44755,6 +44969,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -44972,6 +45187,7 @@ export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -45180,6 +45396,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -45392,6 +45609,7 @@ export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -45600,6 +45818,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -45801,6 +46020,7 @@ export type UserMasterCreateWithoutB2bDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -46009,6 +46229,7 @@ export type UserMasterUncheckedCreateWithoutB2bDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -46226,6 +46447,7 @@ export type UserMasterUpdateWithoutB2bDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -46434,6 +46656,7 @@ export type UserMasterUncheckedUpdateWithoutB2bDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -46635,6 +46858,7 @@ export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -46843,6 +47067,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -47049,6 +47274,7 @@ export type UserMasterCreateWithoutLeadChatMembersInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -47257,6 +47483,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -47474,6 +47701,7 @@ export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -47682,6 +47910,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -47894,6 +48123,7 @@ export type UserMasterUpdateWithoutLeadChatMembersInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -48102,6 +48332,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -48303,6 +48534,7 @@ export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -48511,6 +48743,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -48728,6 +48961,7 @@ export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -48936,6 +49170,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -49137,6 +49372,7 @@ export type UserMasterCreateWithoutLeadChatMentionsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -49345,6 +49581,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -49562,6 +49799,7 @@ export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -49770,6 +50008,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -49971,6 +50210,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -50179,6 +50419,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -50385,6 +50626,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -50593,6 +50835,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -50810,6 +51053,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -51018,6 +51262,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -51230,6 +51475,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -51438,6 +51684,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -51639,6 +51886,7 @@ export type UserMasterCreateWithoutProductStructureInstancesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -51847,6 +52095,7 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -52064,6 +52313,7 @@ export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -52272,6 +52522,7 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -52473,6 +52724,7 @@ export type UserMasterCreateWithoutPaymentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -52681,6 +52933,7 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -52898,6 +53151,7 @@ export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -53106,6 +53360,7 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -53307,6 +53562,7 @@ export type UserMasterCreateWithoutLedgersCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -53515,6 +53771,7 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -53732,6 +53989,7 @@ export type UserMasterUpdateWithoutLedgersCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -53940,6 +54198,7 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -54141,6 +54400,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -54349,6 +54609,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -54555,6 +54816,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -54763,6 +55025,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -54980,6 +55243,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -55188,6 +55452,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -55400,6 +55665,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -55608,6 +55874,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -55809,6 +56076,7 @@ export type UserMasterCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -56017,6 +56285,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestDocumentsCreatedInp
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -56234,6 +56503,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -56442,6 +56712,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsCreatedInp
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -56643,6 +56914,7 @@ export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -56851,6 +57123,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -57057,6 +57330,7 @@ export type UserMasterCreateWithoutLeadAmcContractsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -57265,6 +57539,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -57482,6 +57757,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -57690,6 +57966,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -57902,6 +58179,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -58110,6 +58388,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -58311,6 +58590,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -58519,6 +58799,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -58725,6 +59006,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -58933,6 +59215,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -59139,6 +59422,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesRejectedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -59347,6 +59631,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = 
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -59553,6 +59838,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -59761,6 +60047,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -59978,6 +60265,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCompletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -60186,6 +60474,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -60398,6 +60687,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -60606,6 +60896,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -60818,6 +61109,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesRejectedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -61026,6 +61318,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = 
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -61238,6 +61531,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -61446,6 +61740,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -61646,6 +61941,7 @@ export type UserMasterCreateWithoutInstanceStageHistoryInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -61854,6 +62150,7 @@ export type UserMasterUncheckedCreateWithoutInstanceStageHistoryInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -62071,6 +62368,7 @@ export type UserMasterUpdateWithoutInstanceStageHistoryInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -62279,6 +62577,7 @@ export type UserMasterUncheckedUpdateWithoutInstanceStageHistoryInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -62481,6 +62780,7 @@ export type UserMasterCreateWithoutLeadStatusLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -62689,6 +62989,7 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -62906,6 +63207,7 @@ export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -63114,6 +63416,7 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -63315,6 +63618,7 @@ export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -63523,6 +63827,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -63729,6 +64034,7 @@ export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -63937,6 +64243,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -64154,6 +64461,7 @@ export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -64362,6 +64670,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -64574,6 +64883,7 @@ export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -64782,6 +65092,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -64983,6 +65294,7 @@ export type UserMasterCreateWithoutClientVisitsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -65191,6 +65503,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -65397,6 +65710,7 @@ export type UserMasterCreateWithoutClientVisitsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -65605,6 +65919,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -65822,6 +66137,7 @@ export type UserMasterUpdateWithoutClientVisitsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -66030,6 +66346,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -66242,6 +66559,7 @@ export type UserMasterUpdateWithoutClientVisitsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -66450,6 +66768,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -66651,6 +66970,7 @@ export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -66859,6 +67179,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -67076,6 +67397,7 @@ export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -67284,6 +67606,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -67485,6 +67808,7 @@ export type UserMasterCreateWithoutClientVisitDocumentMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -67693,6 +68017,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitDocumentMappingsCreatedIn
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -67910,6 +68235,7 @@ export type UserMasterUpdateWithoutClientVisitDocumentMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -68118,6 +68444,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitDocumentMappingsCreatedIn
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -68319,6 +68646,7 @@ export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -68527,6 +68855,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -68733,6 +69062,7 @@ export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -68941,6 +69271,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -69158,6 +69489,7 @@ export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -69366,6 +69698,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -69578,6 +69911,7 @@ export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -69786,6 +70120,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -69987,6 +70322,7 @@ export type UserMasterCreateWithoutChsMappingCreatedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -70195,6 +70531,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingCreatedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -70401,6 +70738,7 @@ export type UserMasterCreateWithoutChsMappingUpdatedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -70609,6 +70947,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingUpdatedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -70826,6 +71165,7 @@ export type UserMasterUpdateWithoutChsMappingCreatedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -71034,6 +71374,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingCreatedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -71246,6 +71587,7 @@ export type UserMasterUpdateWithoutChsMappingUpdatedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -71454,6 +71796,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -71655,6 +71998,7 @@ export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -71863,6 +72207,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -72069,6 +72414,7 @@ export type UserMasterCreateWithoutSupervisorMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -72277,6 +72623,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -72494,6 +72841,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -72702,6 +73050,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -72914,6 +73263,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -73122,6 +73472,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -73323,6 +73674,7 @@ export type UserMasterCreateWithoutLeadTasksClosedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -73531,6 +73883,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -73737,6 +74090,7 @@ export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -73945,6 +74299,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -74151,6 +74506,7 @@ export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -74359,6 +74715,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -74576,6 +74933,7 @@ export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -74784,6 +75142,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -74996,6 +75355,7 @@ export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -75204,6 +75564,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -75416,6 +75777,7 @@ export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -75624,6 +75986,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -75825,6 +76188,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -76033,6 +76397,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesCreatedI
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -76239,6 +76604,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesAsRequesterInput 
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -76447,6 +76813,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesAsReques
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -76653,6 +77020,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesRevokedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -76861,6 +77229,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesRevokedI
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -77067,6 +77436,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -77275,6 +77645,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesUpdatedI
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -77492,6 +77863,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -77700,6 +78072,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesCreatedI
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -77912,6 +78285,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesAsRequesterInput 
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -78120,6 +78494,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesAsReques
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -78332,6 +78707,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesRevokedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -78540,6 +78916,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesRevokedI
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -78752,6 +79129,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -78960,6 +79338,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesUpdatedI
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -79161,6 +79540,7 @@ export type UserMasterCreateWithoutFastProductionRequestsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -79369,6 +79749,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsCreatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -79575,6 +79956,7 @@ export type UserMasterCreateWithoutFastProductionRequestsAsRequesterInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -79783,6 +80165,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsAsRequesterInp
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -79989,6 +80372,7 @@ export type UserMasterCreateWithoutFastProductionRequestsRevokedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -80197,6 +80581,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsRevokedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -80403,6 +80788,7 @@ export type UserMasterCreateWithoutFastProductionRequestsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -80611,6 +80997,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsUpdatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -80828,6 +81215,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -81036,6 +81424,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsCreatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -81248,6 +81637,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsAsRequesterInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -81456,6 +81846,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsAsRequesterInp
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -81668,6 +82059,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsRevokedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -81876,6 +82268,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsRevokedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -82088,6 +82481,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -82296,6 +82690,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsUpdatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -82497,6 +82892,7 @@ export type UserMasterCreateWithoutFastProductionApprovalsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -82705,6 +83101,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionApprovalsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -82922,6 +83319,7 @@ export type UserMasterUpdateWithoutFastProductionApprovalsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -83130,6 +83528,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionApprovalsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -83331,6 +83730,7 @@ export type UserMasterCreateWithoutFastProductionRequestDocumentsCreatedInput = 
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -83539,6 +83939,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestDocumentsCreate
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -83756,6 +84157,7 @@ export type UserMasterUpdateWithoutFastProductionRequestDocumentsCreatedInput = 
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -83964,6 +84366,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestDocumentsCreate
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -84165,6 +84568,7 @@ export type UserMasterCreateWithoutFastProductionStatusLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -84373,6 +84777,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionStatusLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -84590,6 +84995,7 @@ export type UserMasterUpdateWithoutFastProductionStatusLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -84798,6 +85204,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionStatusLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -84999,6 +85406,7 @@ export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -85207,6 +85615,7 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -85424,6 +85833,7 @@ export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -85632,6 +86042,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -85833,6 +86244,7 @@ export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -86041,6 +86453,7 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -86258,6 +86671,7 @@ export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -86466,6 +86880,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -86667,6 +87082,7 @@ export type UserMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -86875,6 +87291,7 @@ export type UserMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -87092,6 +87509,7 @@ export type UserMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -87300,6 +87718,7 @@ export type UserMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -87500,6 +87919,7 @@ export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -87708,6 +88128,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -87914,6 +88335,7 @@ export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -88122,6 +88544,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -88328,6 +88751,7 @@ export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -88536,6 +88960,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -88753,6 +89178,7 @@ export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -88961,6 +89387,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -89173,6 +89600,7 @@ export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -89381,6 +89809,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -89593,6 +90022,7 @@ export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -89801,6 +90231,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -90003,6 +90434,7 @@ export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -90211,6 +90643,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -90417,6 +90850,7 @@ export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -90625,6 +91059,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -90842,6 +91277,7 @@ export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -91050,6 +91486,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -91262,6 +91699,7 @@ export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -91470,6 +91908,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -91671,6 +92110,7 @@ export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -91879,6 +92319,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -92085,6 +92526,7 @@ export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -92293,6 +92735,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -92510,6 +92953,7 @@ export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -92718,6 +93162,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -92930,6 +93375,7 @@ export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -93138,6 +93584,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -93339,6 +93786,7 @@ export type UserMasterCreateWithoutInstallersCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -93547,6 +93995,7 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -93764,6 +94213,7 @@ export type UserMasterUpdateWithoutInstallersCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -93972,6 +94422,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -94173,6 +94624,7 @@ export type UserMasterCreateWithoutInstallersAssignedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -94381,6 +94833,7 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -94598,6 +95051,7 @@ export type UserMasterUpdateWithoutInstallersAssignedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -94806,6 +95260,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -95007,6 +95462,7 @@ export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -95215,6 +95671,7 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -95432,6 +95889,7 @@ export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -95640,6 +96098,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -95841,6 +96300,7 @@ export type UserMasterCreateWithoutMiscCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -96049,6 +96509,7 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -96255,6 +96716,7 @@ export type UserMasterCreateWithoutMiscUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -96463,6 +96925,7 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -96669,6 +97132,7 @@ export type UserMasterCreateWithoutMiscReturnedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -96877,6 +97341,7 @@ export type UserMasterUncheckedCreateWithoutMiscReturnedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -97094,6 +97559,7 @@ export type UserMasterUpdateWithoutMiscCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -97302,6 +97768,7 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -97514,6 +97981,7 @@ export type UserMasterUpdateWithoutMiscUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -97722,6 +98190,7 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -97934,6 +98403,7 @@ export type UserMasterUpdateWithoutMiscReturnedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -98142,6 +98612,7 @@ export type UserMasterUncheckedUpdateWithoutMiscReturnedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -98343,6 +98814,7 @@ export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -98551,6 +99023,7 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -98768,6 +99241,7 @@ export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -98976,6 +99450,7 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -99177,6 +99652,7 @@ export type UserMasterCreateWithoutMiscFollowupsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -99385,6 +99861,7 @@ export type UserMasterUncheckedCreateWithoutMiscFollowupsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -99602,6 +100079,7 @@ export type UserMasterUpdateWithoutMiscFollowupsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -99810,6 +100288,7 @@ export type UserMasterUncheckedUpdateWithoutMiscFollowupsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -100011,6 +100490,7 @@ export type UserMasterCreateWithoutMiscReorderInstanceMaterialMappingsCreatedInp
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -100219,6 +100699,7 @@ export type UserMasterUncheckedCreateWithoutMiscReorderInstanceMaterialMappingsC
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -100436,6 +100917,7 @@ export type UserMasterUpdateWithoutMiscReorderInstanceMaterialMappingsCreatedInp
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -100644,6 +101126,7 @@ export type UserMasterUncheckedUpdateWithoutMiscReorderInstanceMaterialMappingsC
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -100845,6 +101328,7 @@ export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -101053,6 +101537,7 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -101270,6 +101755,7 @@ export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -101478,6 +101964,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -101679,6 +102166,7 @@ export type UserMasterCreateWithoutNotificationsSentInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -101887,6 +102375,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -102093,6 +102582,7 @@ export type UserMasterCreateWithoutNotificationsReceivedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -102301,6 +102791,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -102518,6 +103009,7 @@ export type UserMasterUpdateWithoutNotificationsSentInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -102726,6 +103218,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -102938,6 +103431,7 @@ export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -103146,6 +103640,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -103347,6 +103842,7 @@ export type UserMasterCreateWithoutPushTokensInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -103555,6 +104051,7 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -103772,6 +104269,7 @@ export type UserMasterUpdateWithoutPushTokensInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -103980,6 +104478,7 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -104141,6 +104640,844 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   attendance_logs?: Prisma.attendance_logsUncheckedUpdateManyWithoutUserNestedInput
 }
 
+export type UserMasterCreateWithoutMachinesDeletedInput = {
+  user_name: string
+  designation?: string | null
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  cadbidToken?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  instanceStageHistory?: Prisma.InstanceStageHistoryCreateNestedManyWithoutCreatedByInput
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutUserInput
+  boxesFactoryOut?: Prisma.BoxMasterCreateNestedManyWithoutFactoryOutByUserInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
+  boxesSiteIn?: Prisma.BoxMasterCreateNestedManyWithoutSiteInByUserInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutRevertedByUserInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutFactoryOutByUserInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogCreateNestedManyWithoutUnpackedByUserInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogCreateNestedManyWithoutPackedByUserInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogCreateNestedManyWithoutBoxCreatedByUserInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
+  broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastReadsCreated?: Prisma.BroadcastReadCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadCreateNestedManyWithoutUserInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteCreateNestedManyWithoutSettledByInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCreatedByInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalCreateNestedManyWithoutApproverInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogCreateNestedManyWithoutActorInput
+  grnsConfirmed?: Prisma.GRNMasterCreateNestedManyWithoutConfirmedByInput
+  grnsCreated?: Prisma.GRNMasterCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterCreateNestedManyWithoutUpdatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractCreateNestedManyWithoutUpdatedByInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutUpdatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  clientVisitsCreated?: Prisma.LeadClientVisitCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutCreatedByInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutCreatedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutCreatedByInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutUserMasterInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutCreatedByInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutUpdatedByInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutCreatedByInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUpdatedByInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutReleasedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleCreateNestedManyWithoutRejectedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutUpdatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutCreatedByInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationQueuesCreated?: Prisma.NotificationQueueCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueCreateNestedManyWithoutUpdatedByInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterCreateNestedManyWithoutCreatedByInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterCreateNestedManyWithoutUpdatedByInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutUpdatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutDeletedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutChangedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutCreatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutUpdatedByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestCreateNestedManyWithoutCreatedByInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionCreateNestedManyWithoutRevokedByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutUpdatedByInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusCreateNestedManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusCreateNestedManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutUserMasterInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_assign_toToUserMasterInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_created_byToUserMasterInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_updated_byToUserMasterInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutCreatedByInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
+  projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
+  deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingCreateNestedManyWithoutUpdatedByInput
+  attendances?: Prisma.attendanceCreateNestedManyWithoutUserInput
+  attendance_logs?: Prisma.attendance_logsCreateNestedManyWithoutUserInput
+}
+
+export type UserMasterUncheckedCreateWithoutMachinesDeletedInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  designation?: string | null
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  cadbidToken?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  franchise_id?: number | null
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutOnlineLeadSalesExecutiveInput
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutUserInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutSiteInByUserInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutRevertedByUserInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutUnpackedByUserInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutPackedByUserInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutBoxCreatedByUserInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUserInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutSettledByInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCreatedByInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedCreateNestedManyWithoutApproverInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedCreateNestedManyWithoutActorInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutConfirmedByInput
+  grnsCreated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutUserMasterInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutReleasedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutRejectedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutChangedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutCreatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutRevokedByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutUserMasterInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_assign_toToUserMasterInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_created_byToUserMasterInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_updated_byToUserMasterInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
+  deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  attendances?: Prisma.attendanceUncheckedCreateNestedManyWithoutUserInput
+  attendance_logs?: Prisma.attendance_logsUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserMasterCreateOrConnectWithoutMachinesDeletedInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutMachinesDeletedInput, Prisma.UserMasterUncheckedCreateWithoutMachinesDeletedInput>
+}
+
+export type UserMasterUpsertWithoutMachinesDeletedInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutMachinesDeletedInput, Prisma.UserMasterUncheckedUpdateWithoutMachinesDeletedInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutMachinesDeletedInput, Prisma.UserMasterUncheckedCreateWithoutMachinesDeletedInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutMachinesDeletedInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutMachinesDeletedInput, Prisma.UserMasterUncheckedUpdateWithoutMachinesDeletedInput>
+}
+
+export type UserMasterUpdateWithoutMachinesDeletedInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  instanceStageHistory?: Prisma.InstanceStageHistoryUpdateManyWithoutCreatedByNestedInput
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutUserNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUpdateManyWithoutSiteInByUserNestedInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUpdateManyWithoutRevertedByUserNestedInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUpdateManyWithoutFactoryOutByUserNestedInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUpdateManyWithoutUnpackedByUserNestedInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUpdateManyWithoutPackedByUserNestedInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUpdateManyWithoutBoxCreatedByUserNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUpdateManyWithoutUpdatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUpdateManyWithoutUserNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUpdateManyWithoutSettledByNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCreatedByNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUpdateManyWithoutApproverNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUpdateManyWithoutActorNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUpdateManyWithoutConfirmedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUpdateManyWithoutUpdatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUpdateManyWithoutUpdatedByNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutCreatedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutCreatedByNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutUserMasterNestedInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUpdateManyWithoutCreatedByNestedInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUpdateManyWithoutUpdatedByNestedInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutCreatedByNestedInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUpdatedByNestedInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutReleasedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUpdateManyWithoutRejectedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUpdateManyWithoutUpdatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUpdateManyWithoutCreatedByNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUpdateManyWithoutUpdatedByNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUpdateManyWithoutCreatedByNestedInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUpdateManyWithoutUpdatedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutUpdatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutChangedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUpdateManyWithoutCreatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUpdateManyWithoutUpdatedByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUpdateManyWithoutCreatedByNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUpdateManyWithoutRevokedByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUpdateManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUpdateManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUpdateManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUpdateManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterNestedInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_assign_toToUserMasterNestedInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_created_byToUserMasterNestedInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_updated_byToUserMasterNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
+  deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUpdateManyWithoutUpdatedByNestedInput
+  attendances?: Prisma.attendanceUpdateManyWithoutUserNestedInput
+  attendance_logs?: Prisma.attendance_logsUpdateManyWithoutUserNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutMachinesDeletedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  cadbidToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  instanceStageHistory?: Prisma.InstanceStageHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  onlineLeadAssignedFranchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutOnlineLeadSalesExecutiveNestedInput
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutUserNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  factoryOutRevertsMade?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutRevertedByUserNestedInput
+  factoryOutRevertsOriginal?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxUnpacksMade?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutUnpackedByUserNestedInput
+  boxUnpacksPackedBy?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutPackedByUserNestedInput
+  boxUnpacksCreatedBy?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutBoxCreatedByUserNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUserNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutSettledByNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedUpdateManyWithoutApproverNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedUpdateManyWithoutActorNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedUpdateManyWithoutConfirmedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutUserMasterNestedInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutReleasedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutChangedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutRevokedByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterNestedInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_assign_toToUserMasterNestedInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_created_byToUserMasterNestedInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_updated_byToUserMasterNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
+  deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+  siteSupervisorFranchiseMappings?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  siteSupervisorFranchiseMappingsCreated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteSupervisorFranchiseMappingsUpdated?: Prisma.SiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  attendances?: Prisma.attendanceUncheckedUpdateManyWithoutUserNestedInput
+  attendance_logs?: Prisma.attendance_logsUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserMasterCreateWithoutOperatorInput = {
   user_name: string
   designation?: string | null
@@ -104180,6 +105517,7 @@ export type UserMasterCreateWithoutOperatorInput = {
   companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -104388,6 +105726,7 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -104594,6 +105933,7 @@ export type UserMasterCreateWithoutMappingSiteInsInput = {
   companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -104802,6 +106142,7 @@ export type UserMasterUncheckedCreateWithoutMappingSiteInsInput = {
   companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -105019,6 +106360,7 @@ export type UserMasterUpdateWithoutOperatorInput = {
   companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -105227,6 +106569,7 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -105439,6 +106782,7 @@ export type UserMasterUpdateWithoutMappingSiteInsInput = {
   companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -105647,6 +106991,7 @@ export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
   companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -105849,6 +107194,7 @@ export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -106057,6 +107403,7 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -106263,6 +107610,7 @@ export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -106471,6 +107819,7 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -106677,6 +108026,7 @@ export type UserMasterCreateWithoutUserMachineMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -106885,6 +108235,7 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -107102,6 +108453,7 @@ export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -107310,6 +108662,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -107522,6 +108875,7 @@ export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -107730,6 +109084,7 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -107942,6 +109297,7 @@ export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -108150,6 +109506,7 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -108351,6 +109708,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -108559,6 +109917,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -108765,6 +110124,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -108973,6 +110333,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -109190,6 +110551,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -109398,6 +110760,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -109610,6 +110973,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -109818,6 +111182,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -110019,6 +111384,7 @@ export type UserMasterCreateWithoutCreatedDefectsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -110227,6 +111593,7 @@ export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -110444,6 +111811,7 @@ export type UserMasterUpdateWithoutCreatedDefectsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -110652,6 +112020,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -110852,6 +112221,7 @@ export type UserMasterCreateWithoutOnlineLeadAssignedFranchisesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -111060,6 +112430,7 @@ export type UserMasterUncheckedCreateWithoutOnlineLeadAssignedFranchisesInput = 
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -111267,6 +112638,7 @@ export type UserMasterCreateWithoutFranchiseInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -111474,6 +112846,7 @@ export type UserMasterUncheckedCreateWithoutFranchiseInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -111696,6 +113069,7 @@ export type UserMasterUpdateWithoutOnlineLeadAssignedFranchisesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -111904,6 +113278,7 @@ export type UserMasterUncheckedUpdateWithoutOnlineLeadAssignedFranchisesInput = 
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -112122,6 +113497,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -112330,6 +113706,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsC
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -112536,6 +113913,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -112744,6 +114122,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsI
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -112961,6 +114340,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -113169,6 +114549,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsC
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -113381,6 +114762,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -113589,6 +114971,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsI
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -113790,6 +115173,7 @@ export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -113998,6 +115382,7 @@ export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -114215,6 +115600,7 @@ export type UserMasterUpdateWithoutUserGeographicalMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -114423,6 +115809,7 @@ export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -114624,6 +116011,7 @@ export type UserMasterCreateWithoutActivityLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -114832,6 +116220,7 @@ export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -115049,6 +116438,7 @@ export type UserMasterUpdateWithoutActivityLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -115257,6 +116647,7 @@ export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -115458,6 +116849,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -115666,6 +117058,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -115872,6 +117265,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -116080,6 +117474,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -116297,6 +117692,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -116505,6 +117901,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -116717,6 +118114,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -116925,6 +118323,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -117126,6 +118525,7 @@ export type UserMasterCreateWithoutCompletionPhotosInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -117334,6 +118734,7 @@ export type UserMasterUncheckedCreateWithoutCompletionPhotosInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -117551,6 +118952,7 @@ export type UserMasterUpdateWithoutCompletionPhotosInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -117759,6 +119161,7 @@ export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -117960,6 +119363,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsCreatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -118168,6 +119572,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsCreat
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -118374,6 +119779,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -118582,6 +119988,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsUpdat
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -118799,6 +120206,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsCreatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -119007,6 +120415,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsCreat
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -119219,6 +120628,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -119427,6 +120837,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdat
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -119628,6 +121039,7 @@ export type UserMasterCreateWithoutPurchaseIntentsApprovedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -119836,6 +121248,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsApprovedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -120042,6 +121455,7 @@ export type UserMasterCreateWithoutPurchaseIntentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -120250,6 +121664,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -120456,6 +121871,7 @@ export type UserMasterCreateWithoutPurchaseIntentsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -120664,6 +122080,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -120870,6 +122287,7 @@ export type UserMasterCreateWithoutPurchaseIntentsRejectedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -121078,6 +122496,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsRejectedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -121284,6 +122703,7 @@ export type UserMasterCreateWithoutPurchaseIntentsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -121492,6 +122912,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -121709,6 +123130,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsApprovedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -121917,6 +123339,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsApprovedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -122129,6 +123552,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -122337,6 +123761,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -122549,6 +123974,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -122757,6 +124183,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -122969,6 +124396,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsRejectedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -123177,6 +124605,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsRejectedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -123389,6 +124818,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -123597,6 +125027,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -123798,6 +125229,7 @@ export type UserMasterCreateWithoutPurchaseIntentStatusLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -124006,6 +125438,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentStatusLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -124223,6 +125656,7 @@ export type UserMasterUpdateWithoutPurchaseIntentStatusLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -124431,6 +125865,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentStatusLogsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -124632,6 +126067,7 @@ export type UserMasterCreateWithoutPurchaseOrdersCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -124840,6 +126276,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -125046,6 +126483,7 @@ export type UserMasterCreateWithoutPurchaseOrdersUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -125254,6 +126692,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -125471,6 +126910,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -125679,6 +127119,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -125891,6 +127332,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -126099,6 +127541,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -126300,6 +127743,7 @@ export type UserMasterCreateWithoutPoItemsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -126508,6 +127952,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -126714,6 +128159,7 @@ export type UserMasterCreateWithoutPoItemsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -126922,6 +128368,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -127128,6 +128575,7 @@ export type UserMasterCreateWithoutPoItemsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -127336,6 +128784,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -127553,6 +129002,7 @@ export type UserMasterUpdateWithoutPoItemsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -127761,6 +129211,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -127973,6 +129424,7 @@ export type UserMasterUpdateWithoutPoItemsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -128181,6 +129633,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsDeletedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -128393,6 +129846,7 @@ export type UserMasterUpdateWithoutPoItemsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -128601,6 +130055,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -128802,6 +130257,7 @@ export type UserMasterCreateWithoutGrnsConfirmedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -129010,6 +130466,7 @@ export type UserMasterUncheckedCreateWithoutGrnsConfirmedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -129216,6 +130673,7 @@ export type UserMasterCreateWithoutGrnsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -129424,6 +130882,7 @@ export type UserMasterUncheckedCreateWithoutGrnsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -129630,6 +131089,7 @@ export type UserMasterCreateWithoutGrnsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -129838,6 +131298,7 @@ export type UserMasterUncheckedCreateWithoutGrnsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -130055,6 +131516,7 @@ export type UserMasterUpdateWithoutGrnsConfirmedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -130263,6 +131725,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsConfirmedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -130475,6 +131938,7 @@ export type UserMasterUpdateWithoutGrnsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -130683,6 +132147,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -130895,6 +132360,7 @@ export type UserMasterUpdateWithoutGrnsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -131103,6 +132569,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -131304,6 +132771,7 @@ export type UserMasterCreateWithoutDcnsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsSettled?: Prisma.DebitCreditNoteCreateNestedManyWithoutSettledByInput
@@ -131512,6 +132980,7 @@ export type UserMasterUncheckedCreateWithoutDcnsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsSettled?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutSettledByInput
@@ -131718,6 +133187,7 @@ export type UserMasterCreateWithoutDcnsSettledInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -131926,6 +133396,7 @@ export type UserMasterUncheckedCreateWithoutDcnsSettledInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -132143,6 +133614,7 @@ export type UserMasterUpdateWithoutDcnsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsSettled?: Prisma.DebitCreditNoteUpdateManyWithoutSettledByNestedInput
@@ -132351,6 +133823,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsSettled?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutSettledByNestedInput
@@ -132563,6 +134036,7 @@ export type UserMasterUpdateWithoutDcnsSettledInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -132771,6 +134245,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsSettledInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -132972,6 +134447,7 @@ export type UserMasterCreateWithoutRedeliveriesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -133180,6 +134656,7 @@ export type UserMasterUncheckedCreateWithoutRedeliveriesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -133397,6 +134874,7 @@ export type UserMasterUpdateWithoutRedeliveriesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -133605,6 +135083,7 @@ export type UserMasterUncheckedUpdateWithoutRedeliveriesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -133806,6 +135285,7 @@ export type UserMasterCreateWithoutStockHistoriesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -134014,6 +135494,7 @@ export type UserMasterUncheckedCreateWithoutStockHistoriesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -134231,6 +135712,7 @@ export type UserMasterUpdateWithoutStockHistoriesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -134439,6 +135921,7 @@ export type UserMasterUncheckedUpdateWithoutStockHistoriesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -134640,6 +136123,7 @@ export type UserMasterCreateWithoutPoPaymentScheduleHistoriesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -134848,6 +136332,7 @@ export type UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -135065,6 +136550,7 @@ export type UserMasterUpdateWithoutPoPaymentScheduleHistoriesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -135273,6 +136759,7 @@ export type UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -135473,6 +136960,7 @@ export type UserMasterCreateWithoutArchitechuremastersInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -135681,6 +137169,7 @@ export type UserMasterUncheckedCreateWithoutArchitechuremastersInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -135898,6 +137387,7 @@ export type UserMasterUpdateWithoutArchitechuremastersInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -136106,6 +137596,7 @@ export type UserMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -136307,6 +137798,7 @@ export type UserMasterCreateWithoutBroadcastsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -136515,6 +138007,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -136721,6 +138214,7 @@ export type UserMasterCreateWithoutBroadcastsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -136929,6 +138423,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -137146,6 +138641,7 @@ export type UserMasterUpdateWithoutBroadcastsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -137354,6 +138850,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -137566,6 +139063,7 @@ export type UserMasterUpdateWithoutBroadcastsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -137774,6 +139272,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -137975,6 +139474,7 @@ export type UserMasterCreateWithoutBroadcastCategoriesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -138183,6 +139683,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastCategoriesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -138400,6 +139901,7 @@ export type UserMasterUpdateWithoutBroadcastCategoriesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -138608,6 +140110,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastCategoriesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -138809,6 +140312,7 @@ export type UserMasterCreateWithoutBroadcastAudienceCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -139017,6 +140521,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -139223,6 +140728,7 @@ export type UserMasterCreateWithoutBroadcastAudienceUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -139431,6 +140937,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -139648,6 +141155,7 @@ export type UserMasterUpdateWithoutBroadcastAudienceCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -139856,6 +141364,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -140068,6 +141577,7 @@ export type UserMasterUpdateWithoutBroadcastAudienceUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -140276,6 +141786,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -140477,6 +141988,7 @@ export type UserMasterCreateWithoutBroadcastAttachmentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -140685,6 +142197,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -140891,6 +142404,7 @@ export type UserMasterCreateWithoutBroadcastAttachmentsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -141099,6 +142613,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -141316,6 +142831,7 @@ export type UserMasterUpdateWithoutBroadcastAttachmentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -141524,6 +143040,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -141736,6 +143253,7 @@ export type UserMasterUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -141944,6 +143462,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -142145,6 +143664,7 @@ export type UserMasterCreateWithoutBroadcastReadsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -142353,6 +143873,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -142559,6 +144080,7 @@ export type UserMasterCreateWithoutBroadcastReadsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -142767,6 +144289,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -142973,6 +144496,7 @@ export type UserMasterCreateWithoutBroadcastReadsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -143181,6 +144705,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -143398,6 +144923,7 @@ export type UserMasterUpdateWithoutBroadcastReadsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -143606,6 +145132,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -143818,6 +145345,7 @@ export type UserMasterUpdateWithoutBroadcastReadsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -144026,6 +145554,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -144238,6 +145767,7 @@ export type UserMasterUpdateWithoutBroadcastReadsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -144446,6 +145976,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -144648,6 +146179,7 @@ export type UserMasterCreateWithoutNotificationQueuesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -144856,6 +146388,7 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -145062,6 +146595,7 @@ export type UserMasterCreateWithoutNotificationQueuesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -145270,6 +146804,7 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -145487,6 +147022,7 @@ export type UserMasterUpdateWithoutNotificationQueuesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -145695,6 +147231,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -145907,6 +147444,7 @@ export type UserMasterUpdateWithoutNotificationQueuesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -146115,6 +147653,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -146316,6 +147855,7 @@ export type UserMasterCreateWithoutLeadB2BReqMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -146524,6 +148064,7 @@ export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -146730,6 +148271,7 @@ export type UserMasterCreateWithoutLeadB2BReqMappingsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -146938,6 +148480,7 @@ export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -147155,6 +148698,7 @@ export type UserMasterUpdateWithoutLeadB2BReqMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -147363,6 +148907,7 @@ export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -147575,6 +149120,7 @@ export type UserMasterUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -147783,6 +149329,7 @@ export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -147984,6 +149531,7 @@ export type UserMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -148192,6 +149740,7 @@ export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInpu
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -148409,6 +149958,7 @@ export type UserMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -148617,6 +150167,7 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInpu
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -148818,6 +150369,7 @@ export type UserMasterCreateWithoutOnline_lead_call_logInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -149026,6 +150578,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -149243,6 +150796,7 @@ export type UserMasterUpdateWithoutOnline_lead_call_logInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -149451,6 +151005,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -149652,6 +151207,7 @@ export type UserMasterCreateWithoutOnline_lead_followup_status_online_lead_follo
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -149860,6 +151416,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_l
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -150066,6 +151623,7 @@ export type UserMasterCreateWithoutOnline_lead_followup_status_online_lead_follo
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -150274,6 +151832,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_l
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -150491,6 +152050,7 @@ export type UserMasterUpdateWithoutOnline_lead_followup_status_online_lead_follo
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -150699,6 +152259,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_l
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -150911,6 +152472,7 @@ export type UserMasterUpdateWithoutOnline_lead_followup_status_online_lead_follo
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -151119,6 +152681,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_l
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -151320,6 +152883,7 @@ export type UserMasterCreateWithoutOnline_lead_historyInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -151528,6 +153092,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -151745,6 +153310,7 @@ export type UserMasterUpdateWithoutOnline_lead_historyInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -151953,6 +153519,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -152154,6 +153721,7 @@ export type UserMasterCreateWithoutOnline_lead_store_log_online_lead_store_log_a
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -152362,6 +153930,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_st
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -152568,6 +154137,7 @@ export type UserMasterCreateWithoutOnline_lead_store_log_online_lead_store_log_s
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -152776,6 +154346,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_st
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -152993,6 +154564,7 @@ export type UserMasterUpdateWithoutOnline_lead_store_log_online_lead_store_log_a
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -153201,6 +154773,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_st
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -153413,6 +154986,7 @@ export type UserMasterUpdateWithoutOnline_lead_store_log_online_lead_store_log_s
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -153621,6 +155195,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_st
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -153822,6 +155397,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_assign_toToUserMast
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -154030,6 +155606,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_assign_toT
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -154236,6 +155813,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_created_byToUserMas
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -154444,6 +156022,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_created_by
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -154650,6 +156229,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_final_assigned_lead
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -154858,6 +156438,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_final_assi
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -155064,6 +156645,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_updated_byToUserMas
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -155272,6 +156854,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_updated_by
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -155489,6 +157072,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_assign_toToUserMast
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -155697,6 +157281,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_assign_toT
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -155909,6 +157494,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_created_byToUserMas
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -156117,6 +157703,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_created_by
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -156329,6 +157916,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_final_assigned_lead
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -156537,6 +158125,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_final_assi
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -156749,6 +158338,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_updated_byToUserMas
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -156957,6 +158547,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_updated_by
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -157157,6 +158748,7 @@ export type UserMasterCreateWithoutProductsRequiredForProductionInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -157365,6 +158957,7 @@ export type UserMasterUncheckedCreateWithoutProductsRequiredForProductionInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -157582,6 +159175,7 @@ export type UserMasterUpdateWithoutProductsRequiredForProductionInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -157790,6 +159384,7 @@ export type UserMasterUncheckedUpdateWithoutProductsRequiredForProductionInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -157992,6 +159587,7 @@ export type UserMasterCreateWithoutCutListRulesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
   dcnsSettled?: Prisma.DebitCreditNoteCreateNestedManyWithoutSettledByInput
@@ -158200,6 +159796,7 @@ export type UserMasterUncheckedCreateWithoutCutListRulesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
   dcnsSettled?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutSettledByInput
@@ -158406,6 +160003,7 @@ export type UserMasterCreateWithoutCutListRulesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
   dcnsSettled?: Prisma.DebitCreditNoteCreateNestedManyWithoutSettledByInput
@@ -158614,6 +160212,7 @@ export type UserMasterUncheckedCreateWithoutCutListRulesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
   dcnsSettled?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutSettledByInput
@@ -158831,6 +160430,7 @@ export type UserMasterUpdateWithoutCutListRulesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
   dcnsSettled?: Prisma.DebitCreditNoteUpdateManyWithoutSettledByNestedInput
@@ -159039,6 +160639,7 @@ export type UserMasterUncheckedUpdateWithoutCutListRulesCreatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
   dcnsSettled?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutSettledByNestedInput
@@ -159251,6 +160852,7 @@ export type UserMasterUpdateWithoutCutListRulesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
   dcnsSettled?: Prisma.DebitCreditNoteUpdateManyWithoutSettledByNestedInput
@@ -159459,6 +161061,7 @@ export type UserMasterUncheckedUpdateWithoutCutListRulesUpdatedInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
   dcnsSettled?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutSettledByNestedInput
@@ -159660,6 +161263,7 @@ export type UserMasterCreateWithoutSiteSupervisorFranchiseMappingsCreatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -159868,6 +161472,7 @@ export type UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsCreat
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -160074,6 +161679,7 @@ export type UserMasterCreateWithoutSiteSupervisorFranchiseMappingsUpdatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -160282,6 +161888,7 @@ export type UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsUpdat
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -160488,6 +162095,7 @@ export type UserMasterCreateWithoutSiteSupervisorFranchiseMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -160696,6 +162304,7 @@ export type UserMasterUncheckedCreateWithoutSiteSupervisorFranchiseMappingsInput
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -160913,6 +162522,7 @@ export type UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsCreatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -161121,6 +162731,7 @@ export type UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsCreat
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -161333,6 +162944,7 @@ export type UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsUpdatedInput =
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -161541,6 +163153,7 @@ export type UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsUpdat
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -161753,6 +163366,7 @@ export type UserMasterUpdateWithoutSiteSupervisorFranchiseMappingsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -161961,6 +163575,7 @@ export type UserMasterUncheckedUpdateWithoutSiteSupervisorFranchiseMappingsInput
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -162162,6 +163777,7 @@ export type UserMasterCreateWithoutAttendancesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -162370,6 +163986,7 @@ export type UserMasterUncheckedCreateWithoutAttendancesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -162587,6 +164204,7 @@ export type UserMasterUpdateWithoutAttendancesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -162795,6 +164413,7 @@ export type UserMasterUncheckedUpdateWithoutAttendancesInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -162996,6 +164615,7 @@ export type UserMasterCreateWithoutAttendance_logsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
@@ -163204,6 +164824,7 @@ export type UserMasterUncheckedCreateWithoutAttendance_logsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutDeletedByInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
@@ -163421,6 +165042,7 @@ export type UserMasterUpdateWithoutAttendance_logsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -163629,6 +165251,7 @@ export type UserMasterUncheckedUpdateWithoutAttendance_logsInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -163846,6 +165469,7 @@ export type UserMasterUpdateWithoutVendorInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -164053,6 +165677,7 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -164287,6 +165912,7 @@ export type UserMasterUpdateWithoutUser_typeInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -164494,6 +166120,7 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -164728,6 +166355,7 @@ export type UserMasterUpdateWithoutFranchiseInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
@@ -164935,6 +166563,7 @@ export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
   companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  machinesDeleted?: Prisma.MachineMasterUncheckedUpdateManyWithoutDeletedByNestedInput
   cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -165148,6 +166777,7 @@ export type UserMasterCountOutputType = {
   companyVendorsUpdated: number
   operator: number
   mappingSiteIns: number
+  machinesDeleted: number
   cutListRulesCreated: number
   cutListRulesUpdated: number
   dcnsCreated: number
@@ -165340,6 +166970,7 @@ export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   companyVendorsUpdated?: boolean | UserMasterCountOutputTypeCountCompanyVendorsUpdatedArgs
   operator?: boolean | UserMasterCountOutputTypeCountOperatorArgs
   mappingSiteIns?: boolean | UserMasterCountOutputTypeCountMappingSiteInsArgs
+  machinesDeleted?: boolean | UserMasterCountOutputTypeCountMachinesDeletedArgs
   cutListRulesCreated?: boolean | UserMasterCountOutputTypeCountCutListRulesCreatedArgs
   cutListRulesUpdated?: boolean | UserMasterCountOutputTypeCountCutListRulesUpdatedArgs
   dcnsCreated?: boolean | UserMasterCountOutputTypeCountDcnsCreatedArgs
@@ -165713,6 +167344,13 @@ export type UserMasterCountOutputTypeCountOperatorArgs<ExtArgs extends runtime.T
  */
 export type UserMasterCountOutputTypeCountMappingSiteInsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CutListMachineMappingWhereInput
+}
+
+/**
+ * UserMasterCountOutputType without action
+ */
+export type UserMasterCountOutputTypeCountMachinesDeletedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MachineMasterWhereInput
 }
 
 /**
@@ -166880,6 +168518,7 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   companyVendorsUpdated?: boolean | Prisma.UserMaster$companyVendorsUpdatedArgs<ExtArgs>
   operator?: boolean | Prisma.UserMaster$operatorArgs<ExtArgs>
   mappingSiteIns?: boolean | Prisma.UserMaster$mappingSiteInsArgs<ExtArgs>
+  machinesDeleted?: boolean | Prisma.UserMaster$machinesDeletedArgs<ExtArgs>
   cutListRulesCreated?: boolean | Prisma.UserMaster$cutListRulesCreatedArgs<ExtArgs>
   cutListRulesUpdated?: boolean | Prisma.UserMaster$cutListRulesUpdatedArgs<ExtArgs>
   dcnsCreated?: boolean | Prisma.UserMaster$dcnsCreatedArgs<ExtArgs>
@@ -167134,6 +168773,7 @@ export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   companyVendorsUpdated?: boolean | Prisma.UserMaster$companyVendorsUpdatedArgs<ExtArgs>
   operator?: boolean | Prisma.UserMaster$operatorArgs<ExtArgs>
   mappingSiteIns?: boolean | Prisma.UserMaster$mappingSiteInsArgs<ExtArgs>
+  machinesDeleted?: boolean | Prisma.UserMaster$machinesDeletedArgs<ExtArgs>
   cutListRulesCreated?: boolean | Prisma.UserMaster$cutListRulesCreatedArgs<ExtArgs>
   cutListRulesUpdated?: boolean | Prisma.UserMaster$cutListRulesUpdatedArgs<ExtArgs>
   dcnsCreated?: boolean | Prisma.UserMaster$dcnsCreatedArgs<ExtArgs>
@@ -167342,6 +168982,7 @@ export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     companyVendorsUpdated: Prisma.$CompanyVendorsMasterPayload<ExtArgs>[]
     operator: Prisma.$CutListMachineMappingPayload<ExtArgs>[]
     mappingSiteIns: Prisma.$CutListMachineMappingPayload<ExtArgs>[]
+    machinesDeleted: Prisma.$MachineMasterPayload<ExtArgs>[]
     cutListRulesCreated: Prisma.$CutListRuleMasterPayload<ExtArgs>[]
     cutListRulesUpdated: Prisma.$CutListRuleMasterPayload<ExtArgs>[]
     dcnsCreated: Prisma.$DebitCreditNotePayload<ExtArgs>[]
@@ -167944,6 +169585,7 @@ export interface Prisma__UserMasterClient<T, Null = never, ExtArgs extends runti
   companyVendorsUpdated<T extends Prisma.UserMaster$companyVendorsUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$companyVendorsUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   operator<T extends Prisma.UserMaster$operatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$operatorArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mappingSiteIns<T extends Prisma.UserMaster$mappingSiteInsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$mappingSiteInsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  machinesDeleted<T extends Prisma.UserMaster$machinesDeletedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$machinesDeletedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MachineMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cutListRulesCreated<T extends Prisma.UserMaster$cutListRulesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$cutListRulesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListRuleMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cutListRulesUpdated<T extends Prisma.UserMaster$cutListRulesUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$cutListRulesUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListRuleMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   dcnsCreated<T extends Prisma.UserMaster$dcnsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$dcnsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DebitCreditNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -169244,6 +170886,30 @@ export type UserMaster$mappingSiteInsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.CutListMachineMappingScalarFieldEnum | Prisma.CutListMachineMappingScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.machinesDeleted
+ */
+export type UserMaster$machinesDeletedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MachineMaster
+   */
+  select?: Prisma.MachineMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MachineMaster
+   */
+  omit?: Prisma.MachineMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MachineMasterInclude<ExtArgs> | null
+  where?: Prisma.MachineMasterWhereInput
+  orderBy?: Prisma.MachineMasterOrderByWithRelationInput | Prisma.MachineMasterOrderByWithRelationInput[]
+  cursor?: Prisma.MachineMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MachineMasterScalarFieldEnum | Prisma.MachineMasterScalarFieldEnum[]
 }
 
 /**

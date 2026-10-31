@@ -331,6 +331,7 @@ model UserMaster {
   companyVendorsUpdated                                                          CompanyVendorsMaster[]                         @relation("CompanyVendorUpdatedBy")
   operator                                                                       CutListMachineMapping[]
   mappingSiteIns                                                                 CutListMachineMapping[]                        @relation("MappingSiteInBy")
+  machinesDeleted                                                                MachineMaster[]                                @relation("MachineDeletedBy")
   cutListRulesCreated                                                            CutListRuleMaster[]                            @relation("CutListRulesCreated")
   cutListRulesUpdated                                                            CutListRuleMaster[]                            @relation("CutListRulesUpdated")
   dcnsCreated                                                                    DebitCreditNote[]                              @relation("DCNCreatedBy")
@@ -3323,10 +3324,15 @@ model MachineMaster {
   processBriefMappings  ProcessBriefMachineMapping[]
   leadProcessBriefs     LeadProcessBriefMapping[]
   cutListRules          CutListRuleMaster[]          @relation("CutListRules")
+  deleted_at            DateTime?
+  deleted_by            Int?
+  is_deleted            Boolean                      @default(false)
+  deletedBy             UserMaster?                  @relation("MachineDeletedBy", fields: [deleted_by], references: [id])
 
   @@unique([vendor_id, machine_code, status], name: "machine_code_vendor_status_unique")
   @@unique([id, vendor_id])
   @@index([vendor_id, status])
+  @@index([vendor_id, is_deleted])
 }
 
 model CutlistHeadersMapping {

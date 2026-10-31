@@ -310,7 +310,7 @@ export const uploadCutListMachineExcel = async (
 
   // ── STEP 3: Fetch machines ───────────────────────────────
   const machines = await prisma.machineMaster.findMany({
-    where:  { vendor_id: vendorId },
+    where:  { vendor_id: vendorId, is_deleted: false },
     select: { id: true, machine_code: true },
   });
   if (machines.length === 0) throwError(ERR.MACHINES_NOT_CONFIGURED);

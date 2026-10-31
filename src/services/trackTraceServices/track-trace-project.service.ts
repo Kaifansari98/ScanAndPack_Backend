@@ -1518,6 +1518,7 @@ export const createProjectService_old = async (
           where: {
             vendor_id: vendor.id,
             status: "ACTIVE",
+            is_deleted: false,
             machine_type_id: {
               in: [3, 7, 11, 17, 18],
             },
@@ -2459,6 +2460,7 @@ export const createProjectService = async (
           fabrication: targetFabrication,
           vendor_id: vendor.id,
           status: "ACTIVE",
+          is_deleted: false,
           ...(targetFabrication === FabricationType.WOODWORK
             ? {
                 machine_type_id: {
@@ -3271,6 +3273,7 @@ export const getActiveMachinesByVendorService = async (vendorId: number) => {
     where: {
       vendor_id: vendorId,
       status: MachineStatus.ACTIVE,
+      is_deleted: false,
     },
     select: {
       id: true,
@@ -4228,6 +4231,7 @@ export const previewCutlistMachineMappingService = async (
         vendor_id: vendor.id,
         status: "ACTIVE",
         fabrication: targetFabrication,
+        is_deleted: false,
       },
       select: {
         id: true,
