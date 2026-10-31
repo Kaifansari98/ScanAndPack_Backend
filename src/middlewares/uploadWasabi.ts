@@ -657,7 +657,7 @@ export const uploadCSPBookingFiles = multer({
   }),
   limits: {
     fileSize: 200 * 1024 * 1024, // 200MB
-    files: 20, // up to 10 site photos + 10 required documents
+    files: 50, // up to 10 site photos + 40 required documents
   },
   fileFilter: (req, file, cb) => {
     const allowed = [
@@ -666,10 +666,15 @@ export const uploadCSPBookingFiles = multer({
       "image/png",
       "image/gif",
     ];
-    // Required Documents (Final Measurement assign task) also accept PDFs.
+    // Required Documents (Final Measurement assign task) also accept PDFs and
+    // the design formats selected at booking.
     if (file.fieldname === "required_documents") {
-      if ([...allowed, "image/webp", "application/pdf"].includes(file.mimetype)) cb(null, true);
-      else cb(new Error("Required documents must be PDF or image files"));
+      const ext = path.extname(file.originalname).toLowerCase();
+      if (
+        [...allowed, "image/webp", "application/pdf"].includes(file.mimetype) ||
+        [".pdf", ".jpg", ".jpeg", ".png", ".ppt", ".pptx", ".pyo"].includes(ext)
+      ) cb(null, true);
+      else cb(new Error("Required documents must be PDF, image, PPT or PYO files"));
       return;
     }
     if (allowed.includes(file.mimetype)) cb(null, true);

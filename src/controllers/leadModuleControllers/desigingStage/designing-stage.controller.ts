@@ -245,11 +245,21 @@ export class DesigingStageController {
         lead_id: true,
         item_code_id: true,
         created_at: true,
+        tech_check_status: true,
       },
     });
 
     if (!specification) {
       throw new Error("Specification not found");
+    }
+
+    if (
+      specification.tech_check_status === "APPROVED" ||
+      specification.tech_check_status === "REJECTED"
+    ) {
+      throw new Error(
+        "This specification has been reviewed in Tech Check and cannot be edited",
+      );
     }
 
     const actorRole = await DesigingStageController.getActorRole(
@@ -3927,7 +3937,10 @@ export class DesigingStageController {
           faucets_remark:
             remarkMap.get(specification.id)?.faucets_remark ?? null,
           is_latest_for_item_code: isLatestForItemCode,
-          is_editable: actorRole === "super-admin" ? true : isLatestForItemCode,
+          is_editable:
+            specification.tech_check_status !== "APPROVED" &&
+            specification.tech_check_status !== "REJECTED" &&
+            (actorRole === "super-admin" || isLatestForItemCode),
         };
       });
 

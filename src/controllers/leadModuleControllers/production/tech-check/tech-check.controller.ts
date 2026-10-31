@@ -243,6 +243,58 @@ export class TechCheckController {
   };
 
   // ✅ Reject Tech Check
+  public static reviewSpecifications = async (req: Request, res: Response) => {
+    try {
+      const actor = (req as any).user;
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+      const { specificationIds, status, remark } = req.body;
+      const trimmedRemark = typeof remark === "string" ? remark.trim() : "";
+
+      if (actor?.vendor_id !== vendorId) {
+        return res.status(403).json({ success: false, message: "Vendor access denied" });
+      }
+      if (!leadId || !Array.isArray(specificationIds) || specificationIds.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Lead ID and specificationIds are required",
+        });
+      }
+      if (status !== "APPROVED" && status !== "REJECTED") {
+        return res.status(400).json({
+          success: false,
+          message: "status must be APPROVED or REJECTED",
+        });
+      }
+      if (status === "REJECTED" && !trimmedRemark) {
+        return res.status(400).json({
+          success: false,
+          message: "A remark is required to reject a specification",
+        });
+      }
+
+      const result = await techCheckService.reviewSpecifications(
+        vendorId,
+        leadId,
+        Number(actor.id),
+        specificationIds.map(Number),
+        status,
+        trimmedRemark || undefined,
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Specification reviewed successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(400).json({
+        success: false,
+        message: error?.message || "Failed to review specification",
+      });
+    }
+  };
+
   public static rejectTechCheck = async (req: Request, res: Response) => {
     try {
       const vendorId = Number(getParam(req.params.vendorId));

@@ -123,3 +123,6 @@ dist
 /assets/track-trace/excel/
 
 ecosystem.backend.config.cjs
+
+# Prisma client (created by `prisma generate` during build)
+/generated/

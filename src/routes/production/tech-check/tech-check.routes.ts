@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { verifyToken } from "../../../middlewares/auth.middleware";
 import { TechCheckController } from "../../../controllers/leadModuleControllers/production/tech-check/tech-check.controller";
 
 const techCheckRouter = Router();
@@ -31,6 +32,13 @@ techCheckRouter.post(
 techCheckRouter.post(
   "/leadId/:leadId/vendorId/:vendorId/userId/:userId/instanceId/:instanceId/documents/approve",
   TechCheckController.approveMultipleDocuments,
+);
+
+// ✅ Approve / Reject latest Specifications
+techCheckRouter.post(
+  "/leadId/:leadId/vendorId/:vendorId/specifications/review",
+  verifyToken,
+  TechCheckController.reviewSpecifications,
 );
 
 export { techCheckRouter };

@@ -1041,6 +1041,10 @@ model LeadSpecificationsMaster {
   item_code_id                     Int?
   is_completed                     Boolean                            @default(false)
   completed_marked_at              DateTime?
+  tech_check_status                TechCheckStatus?
+  tech_check_remark                String?                            @db.VarChar(2000)
+  tech_check_reviewed_by           Int?
+  tech_check_reviewed_at           DateTime?
   LeadCarcassMaterialMapping       LeadCarcassMaterialMapping[]
   LeadHardwareMapping              LeadHardwareMapping[]
   lightCarcasUnitMappings          LeadLightCarcasUnitMapping[]
