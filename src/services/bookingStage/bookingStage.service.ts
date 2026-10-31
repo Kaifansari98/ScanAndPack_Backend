@@ -990,6 +990,7 @@ export class BookingStageService {
             lead_code: true,
             vendor_id: true,
             account_id: true,
+            franchise_id: true,
           },
         }),
 
@@ -1023,26 +1024,14 @@ export class BookingStageService {
         ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
         : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
 
-      // Fetch Active Admins
-      const admins = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: lead.vendor_id,
-          status: "active",
-          user_type: {
-            user_type: { in: ["admin"] },
-          },
-        },
-        select: {
-          id: true,
-          user_name: true,
-          user_email: true,
-        },
+      // Only the lead's franchise admins; nobody is notified if there are none
+      const { recipients: admins } = await getFranchiseAdminRecipients({
+        vendorId: lead.vendor_id,
+        franchiseId: lead.franchise_id,
+        excludeUserId: actorId,
       });
 
       for (const admin of admins) {
-        // ❌ Prevent self-trigger notification
-        if (admin.id === actorId) continue;
-
         // 🔔 In-App Notification
         await NotificationService.createAndSend({
           vendor_id: lead.vendor_id,
@@ -1064,7 +1053,7 @@ export class BookingStageService {
         await sendLeadMovedToBookingEmail({
           vendor_id: lead.vendor_id,
           toEmail: admin.user_email,
-          toName: admin.user_name,
+          toName: admin.user_name ?? undefined,
           leadCode,
           leadName,
           updatedBy: actor?.user_name ?? "System",
