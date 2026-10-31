@@ -130,4 +130,48 @@ export class CompanyVendorsController {
       });
     }
   }
+
+  async bulkUploadCompanyVendors(req: Request, res: Response) {
+    try {
+      const file = req.file;
+      if (!file) {
+        return res.status(400).json({
+          success: false,
+          message: "Please upload an Excel (.xlsx, .xls) or CSV (.csv) file",
+        });
+      }
+
+      const { vendorId } = req.params;
+      const parsedVendorId = Number(vendorId || (req as any).user?.vendor_id);
+      if (!parsedVendorId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id is required",
+        });
+      }
+
+      const userId = Number((req as any).user?.id || req.body?.userId || req.body?.created_by || 1);
+      const isCsv = file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
+
+      const result = await service.bulkUploadCompanyVendors(
+        parsedVendorId,
+        file.buffer,
+        isCsv,
+        userId
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: `Successfully uploaded ${result.successCount} company vendor(s)`,
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("Error bulk uploading company vendors:", error);
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Failed to bulk upload company vendors",
+      });
+    }
+  }
+
 }
