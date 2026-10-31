@@ -153,11 +153,18 @@ export class CompanyVendorsController {
       const userId = Number((req as any).user?.id || req.body?.userId || req.body?.created_by || 1);
       const isCsv = file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
 
+      const isInventory =
+        req.query.is_inventory === "true" ||
+        req.query.is_inventory_company_vendor === "true" ||
+        req.body?.is_inventory === "true" ||
+        req.body?.is_inventory === true;
+
       const result = await service.bulkUploadCompanyVendors(
         parsedVendorId,
         file.buffer,
         isCsv,
-        userId
+        userId,
+        isInventory
       );
 
       return res.status(200).json({
