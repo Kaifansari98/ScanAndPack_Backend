@@ -312,7 +312,9 @@ export class ClientApprovalService {
             ...(vendor?.is_this_vendor_is_custom_usertype_only !== true
               ? [
                   {
-                    user_type: { equals: "backend", mode: "insensitive" as const },
+                    user_type: {
+                      user_type: { equals: "backend", mode: "insensitive" as const },
+                    },
                   },
                 ]
               : []),
