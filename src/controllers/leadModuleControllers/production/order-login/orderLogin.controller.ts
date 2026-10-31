@@ -13,7 +13,8 @@ import {
 } from "../../../../utils/wasabiClient";
 import { ApiResponse } from "../../../../utils/apiResponse";
 import fs from "node:fs/promises";
-import { resolveClientBaseUrl } from "../../../../utils/fileUtils";
+import path from "node:path";
+import { resolveClientBaseUrl, sanitizeFilename } from "../../../../utils/fileUtils";
 
 const service = new OrderLoginService();
 
@@ -40,6 +41,84 @@ const hasRequiredMaterialsPrivilege = async (
       },
     }),
   );
+};
+
+// PF-{n}-{client}-{item group}-{date}, numbered per instance (custom-usertype vendors only)
+const buildProductionFileDocNames = async (
+  vendorId: number,
+  leadId: number,
+  instanceId: number | null,
+  files: Express.Multer.File[],
+): Promise<string[]> => {
+  const originalNames = files.map((file) => file.originalname);
+  if (files.length === 0) return originalNames;
+
+  const vendor = await prisma.vendorMaster.findUnique({
+    where: { id: vendorId },
+    select: { is_this_vendor_is_custom_usertype_only: true },
+  });
+  if (vendor?.is_this_vendor_is_custom_usertype_only !== true) return originalNames;
+
+  const lead = await prisma.leadMaster.findFirst({
+    where: { id: leadId, vendor_id: vendorId },
+    select: { firstname: true, lastname: true },
+  });
+  const clientNameSegment = sanitizeFilename(
+    `${lead?.firstname ?? ""}${lead?.lastname ?? ""}` || "Client",
+  )
+    .replace(/_+/g, "_")
+    .slice(0, 50);
+
+  const leadInstances = await prisma.leadProductStructureInstance.findMany({
+    where: {
+      lead_id: leadId,
+      vendor_id: vendorId,
+      ...(instanceId ? { id: instanceId } : {}),
+    },
+    select: { productType: { select: { type: true } } },
+  });
+  const uniqueStructureNames = [
+    ...new Set(
+      leadInstances
+        .map((instance) => instance.productType?.type)
+        .filter(Boolean),
+    ),
+  ];
+  const structureSegment = sanitizeFilename(
+    uniqueStructureNames.length > 0
+      ? uniqueStructureNames.join("_")
+      : "General",
+  )
+    .replace(/_+/g, "_")
+    .slice(0, 80);
+
+  const now = new Date();
+  const dateSegment = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0"),
+  ].join("-");
+
+  const existingDocs = await prisma.leadDocuments.findMany({
+    where: {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      product_structure_instance_id: instanceId,
+      doc_og_name: { startsWith: "PF-" },
+      is_deleted: false,
+    },
+    select: { doc_og_name: true },
+  });
+  let nextRevision =
+    existingDocs.reduce((maxRevision, doc) => {
+      const match = doc.doc_og_name?.match(/^PF-(\d+)-/i);
+      return match ? Math.max(maxRevision, Number(match[1])) : maxRevision;
+    }, -1) + 1;
+
+  return files.map((file) => {
+    const extension = path.extname(file.originalname || "");
+    return `PF-${nextRevision++}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+  });
 };
 
 export class OrderLoginController {
@@ -423,19 +502,27 @@ export class OrderLoginController {
         instanceFolder = instance.title?.trim() || `instance-${instance_id}`;
       }
 
-      for (const file of files) {
+      const docNames = await buildProductionFileDocNames(
+        Number(vendorId),
+        Number(leadId),
+        instanceIdValue,
+        files,
+      );
+
+      for (const [index, file] of files.entries()) {
+        const docName = docNames[index];
         const sysName = await uploadToWasabiProductionFilesFile(
           file.path,
           Number(vendorId),
           Number(leadId),
-          file.originalname,
+          docName,
           file.mimetype,
         );
 
         await fs.unlink(file.path);
 
         uploadedFiles.push({
-          originalName: file.originalname,
+          originalName: docName,
           sysName,
         });
       }
