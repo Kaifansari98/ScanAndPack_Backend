@@ -118,8 +118,7 @@ const mapOnlineLeadToFrontend = (lead: any) => {
                 cleanRem.startsWith("lead registered via") ||
                 cleanRem.startsWith("lead updated with new data via") ||
                 cleanRem.includes("lead automatically created") ||
-                cleanRem.startsWith("design remarks updated") ||
-                cleanRem.startsWith("bulk imported") ||
+                                cleanRem.startsWith("bulk imported") ||
                 cleanRem.startsWith("lead bulk imported") ||
                 cleanRem.startsWith("**•") ||
                 cleanRem.startsWith("•") ||
@@ -1006,9 +1005,7 @@ export class OnlineLeadController {
                 },
               },
             },
-            orderBy: {
-              created_at: "desc",
-            },
+            orderBy: [{ created_at: "desc" }, { id: "desc" }],
           },
           online_lead_store_log: {
             include: {
@@ -3520,6 +3517,8 @@ export class OnlineLeadController {
 
       const {
         leads_name,
+        firstname,
+        lastname,
         email,
         contact,
         alt_contact_no,
@@ -3540,12 +3539,49 @@ export class OnlineLeadController {
 
       const currentLead = await prisma.online_leads.findUnique({
         where: { id },
-        select: { status: true, vendor_id: true, remark: true },
+        include: {
+          SourceMaster: true,
+          SiteTypeMaster: true,
+          online_lead_followup_status: true,
+        },
       });
 
+      if (!currentLead) {
+        return res
+          .status(404)
+          .json({ success: false, error: "Lead not found" });
+      }
+
+      // Determine valid author ID for logging in UserMaster
+      const effectiveUserId = updated_by
+        ? Number(updated_by)
+        : currentLead.created_by || 1;
+      let authorId = effectiveUserId;
+      const userExists = await prisma.userMaster.findUnique({
+        where: { id: authorId },
+        select: { id: true },
+      });
+      if (!userExists) {
+        const fallbackUser = await prisma.userMaster.findFirst({
+          select: { id: true },
+        });
+        authorId = fallbackUser?.id || 1;
+      }
+
+      let historyStatusId = currentLead.status ? Number(currentLead.status) : null;
+      if (!historyStatusId) {
+        const defaultStatus = await prisma.online_lead_followup_status.findFirst({
+          where: { vendor_id: currentLead.vendor_id },
+          select: { id: true },
+        });
+        historyStatusId = defaultStatus?.id || 1;
+      }
+
+      const logEntries: string[] = [];
+
+      // 1. Status change
       if (
         status !== undefined &&
-        currentLead &&
         Number(currentLead.status) !== Number(status)
       ) {
         const targetStatus = await prisma.online_lead_followup_status.findFirst(
@@ -3559,31 +3595,275 @@ export class OnlineLeadController {
             vendor_id: currentLead.vendor_id,
             online_lead_id: id,
             remark: `Status marked as active (${statusName})`,
-            created_by: updated_by ? Number(updated_by) : 1,
+            created_by: authorId,
             online_lead_status_id: Number(status),
+            store_id: currentLead.store_id || null,
+          },
+        });
+        historyStatusId = Number(status);
+      }
+
+      // 2. Product structures change (Add / Edit / Remove)
+      if (Array.isArray(product_structures)) {
+        const oldStructures = Array.isArray(currentLead.product_structures)
+          ? currentLead.product_structures
+          : [];
+        const newStructures = product_structures;
+
+        if (newStructures.length > oldStructures.length) {
+          // Added structure(s)
+          const added = newStructures.filter(
+            (s, idx) => !oldStructures.includes(s) || idx >= oldStructures.length,
+          );
+          const itemsToLog =
+            added.length > 0 ? added : [newStructures[newStructures.length - 1]];
+          for (const item of itemsToLog) {
+            logEntries.push(`Product structure instance added : ${item}`);
+          }
+        } else if (newStructures.length < oldStructures.length) {
+          // Removed structure(s)
+          const removed = oldStructures.filter((s) => !newStructures.includes(s));
+          const itemsToLog = removed.length > 0 ? removed : ["Structure"];
+          for (const item of itemsToLog) {
+            logEntries.push(`Product structure instance removed : ${item}`);
+          }
+        } else {
+          // Updated structure(s)
+          for (let i = 0; i < newStructures.length; i++) {
+            if (newStructures[i] !== oldStructures[i]) {
+              logEntries.push(
+                `Product structure instance updated from "${oldStructures[i]}" to "${newStructures[i]}"`,
+              );
+            }
+          }
+        }
+      }
+
+      // 3. Product types change (when explicitly edited without structures)
+      if (Array.isArray(product_types) && !Array.isArray(product_structures)) {
+        const oldTypes = Array.isArray(currentLead.product_types)
+          ? currentLead.product_types.map((t) => String(t).trim()).filter(Boolean)
+          : [];
+        const newTypes = product_types
+          .map((t) => String(t).trim())
+          .filter(Boolean);
+
+        const typesChanged =
+          oldTypes.length !== newTypes.length ||
+          !oldTypes.every((t) => newTypes.includes(t)) ||
+          !newTypes.every((t) => oldTypes.includes(t));
+
+        if (typesChanged) {
+          const oldStr = oldTypes.length > 0 ? oldTypes.join(", ") : "None";
+          const newStr = newTypes.length > 0 ? newTypes.join(", ") : "None";
+          logEntries.push(`Product type updated from "${oldStr}" to "${newStr}"`);
+        }
+      }
+
+      // 4. Field-level change helper
+      const normalizeLogValue = (value: unknown): string | null => {
+        if (value === null || value === undefined) return null;
+        const str = String(value).trim();
+        return str.length > 0 ? str : null;
+      };
+
+      const pushChangeLog = (
+        label: string,
+        oldVal: unknown,
+        newVal: unknown,
+      ) => {
+        if (newVal === undefined) return;
+        const previousValue = normalizeLogValue(oldVal);
+        const nextValue = normalizeLogValue(newVal);
+
+        if (previousValue === nextValue) return;
+
+        if (!previousValue && nextValue) {
+          logEntries.push(`${label} has been added as "${nextValue}".`);
+          return;
+        }
+
+        if (previousValue && !nextValue) {
+          logEntries.push(`${label} has been cleared from "${previousValue}".`);
+          return;
+        }
+
+        logEntries.push(
+          `${label} has been updated from "${previousValue}" to "${nextValue}".`,
+        );
+      };
+
+      if (leads_name !== undefined) {
+        pushChangeLog("Full Name", currentLead.leads_name, leads_name);
+      }
+      if (firstname !== undefined) {
+        pushChangeLog("First Name", currentLead.firstname, firstname);
+      }
+      if (lastname !== undefined) {
+        pushChangeLog("Last Name", currentLead.lastname, lastname);
+      }
+      if (contact !== undefined) {
+        const cleanNew = String(contact).replace(/\D/g, "");
+        const cleanOld = String(currentLead.contact || "").replace(/\D/g, "");
+        pushChangeLog("Contact Number", cleanOld, cleanNew);
+      }
+      if (alt_contact_no !== undefined) {
+        pushChangeLog(
+          "Alternate Contact Number",
+          currentLead.alt_contact_no,
+          alt_contact_no,
+        );
+      }
+      if (email !== undefined) {
+        pushChangeLog("Email Address", currentLead.email, email);
+      }
+      if (site_address !== undefined) {
+        pushChangeLog("Site Address", currentLead.site_address, site_address);
+      }
+      if (city !== undefined) {
+        pushChangeLog("City", currentLead.city, city);
+      }
+      if (priority !== undefined) {
+        pushChangeLog("Priority", currentLead.priority, priority);
+      }
+
+      if (site_type_id !== undefined) {
+        const newTypeId = site_type_id ? Number(site_type_id) : null;
+        const oldTypeId = currentLead.site_type_id
+          ? Number(currentLead.site_type_id)
+          : null;
+        if (newTypeId !== oldTypeId) {
+          const oldTypeName =
+            currentLead.SiteTypeMaster?.type ??
+            (oldTypeId ? `Site Type #${oldTypeId}` : null);
+          let newTypeName: string | null = null;
+          if (newTypeId) {
+            const found = await prisma.siteTypeMaster.findUnique({
+              where: { id: newTypeId },
+              select: { type: true },
+            });
+            newTypeName = found?.type ?? `Site Type #${newTypeId}`;
+          }
+          pushChangeLog("Site Type", oldTypeName, newTypeName);
+        }
+      }
+
+      if (source_id !== undefined) {
+        const newSrcId = source_id ? Number(source_id) : null;
+        const oldSrcId = currentLead.source_id
+          ? Number(currentLead.source_id)
+          : null;
+        if (newSrcId !== oldSrcId) {
+          const oldSrcName =
+            currentLead.SourceMaster?.type ??
+            (oldSrcId ? `Source #${oldSrcId}` : null);
+          let newSrcName: string | null = null;
+          if (newSrcId) {
+            const found = await prisma.sourceMaster.findUnique({
+              where: { id: newSrcId },
+              select: { type: true },
+            });
+            newSrcName = found?.type ?? `Source #${newSrcId}`;
+          }
+          pushChangeLog("Source", oldSrcName, newSrcName);
+        }
+      }
+
+      if (archetech_name !== undefined) {
+        pushChangeLog(
+          "Architect Name",
+          currentLead.archetech_name,
+          archetech_name,
+        );
+      }
+      if (archetech_number !== undefined) {
+        pushChangeLog(
+          "Architect Number",
+          currentLead.archetech_number,
+          archetech_number,
+        );
+      }
+      if (refered_by !== undefined) {
+        pushChangeLog("Referred By", currentLead.refered_by, refered_by);
+      }
+
+      if (remark !== undefined) {
+        const cleanNewRem = normalizeLogValue(remark);
+        const cleanOldRem = normalizeLogValue(currentLead.remark);
+        if (cleanNewRem !== cleanOldRem) {
+          logEntries.push("Design remarks have been updated.");
+        }
+      }
+
+      // Record each change in online_lead_history
+      for (const entry of logEntries) {
+        await prisma.online_lead_history.create({
+          data: {
+            vendor_id: currentLead.vendor_id,
+            online_lead_id: id,
+            remark: entry,
+            created_by: authorId,
+            online_lead_status_id: historyStatusId,
+            store_id: currentLead.store_id || null,
           },
         });
       }
 
-      if (
-        remark !== undefined &&
-        currentLead &&
-        currentLead.remark !== remark
-      ) {
-        const vendorRec = await prisma.vendorMaster.findUnique({
-          where: { id: currentLead.vendor_id },
-          select: { is_online_lead_feature_enabled: true },
-        });
-        if (!vendorRec?.is_online_lead_feature_enabled) {
-          await prisma.online_lead_history.create({
-            data: {
-              vendor_id: currentLead.vendor_id,
-              online_lead_id: id,
-              remark: `Design remarks updated: ${remark || "N/A"}`,
-              created_by: updated_by ? Number(updated_by) : 1,
-              online_lead_status_id: currentLead.status || 1,
-            },
+      // If associated with a LeadMaster record, sync relevant fields & logs
+      if (currentLead.lead_master_id) {
+        try {
+          const masterUpdateData: any = {
+            updated_at: new Date(),
+            ...(updated_by !== undefined && { updated_by: Number(updated_by) }),
+          };
+          if (firstname !== undefined)
+            masterUpdateData.firstname = firstname || null;
+          if (lastname !== undefined)
+            masterUpdateData.lastname = lastname || null;
+          if (email !== undefined) masterUpdateData.email = email || null;
+          if (contact !== undefined)
+            masterUpdateData.contact_no = String(contact).replace(/\D/g, "");
+          if (alt_contact_no !== undefined)
+            masterUpdateData.alt_contact_no = alt_contact_no || null;
+          if (site_address !== undefined)
+            masterUpdateData.site_address = site_address || null;
+          if (priority !== undefined)
+            masterUpdateData.priority = priority || null;
+          if (source_id !== undefined)
+            masterUpdateData.source_id = source_id ? Number(source_id) : null;
+          if (site_type_id !== undefined)
+            masterUpdateData.site_type_id = site_type_id
+              ? Number(site_type_id)
+              : null;
+          if (archetech_name !== undefined)
+            masterUpdateData.archetech_name = archetech_name || null;
+          if (archetech_number !== undefined)
+            masterUpdateData.archetech_number = archetech_number || null;
+          if (refered_by !== undefined)
+            masterUpdateData.refered_by = refered_by || null;
+
+          const linkedMaster = await prisma.leadMaster.update({
+            where: { id: currentLead.lead_master_id },
+            data: masterUpdateData,
+            select: { id: true, account_id: true, vendor_id: true },
           });
+
+          for (const entry of logEntries) {
+            await createLeadLog(prisma, {
+              vendor_id: linkedMaster.vendor_id,
+              lead_id: linkedMaster.id,
+              account_id: linkedMaster.account_id || 0,
+              action: entry,
+              action_type: "UPDATE",
+              created_by: authorId,
+              created_at: new Date(),
+            });
+          }
+        } catch (mErr) {
+          console.warn(
+            "[ONLINE LEAD CONTROLLER] Failed to sync to LeadMaster:",
+            mErr,
+          );
         }
       }
 
@@ -3591,6 +3871,8 @@ export class OnlineLeadController {
         where: { id },
         data: {
           ...(leads_name !== undefined && { leads_name }),
+          ...(firstname !== undefined && { firstname: firstname || null }),
+          ...(lastname !== undefined && { lastname: lastname || null }),
           ...(email !== undefined && { email: email || null }),
           ...(contact !== undefined && {
             contact: String(contact).replace(/\D/g, ""),
@@ -3638,6 +3920,24 @@ export class OnlineLeadController {
           UserMaster_online_leads_final_assigned_leadsToUserMaster: {
             select: { id: true, user_name: true },
           },
+          online_lead_history: {
+            include: {
+              UserMaster: {
+                select: {
+                  id: true,
+                  user_name: true,
+                },
+              },
+              online_lead_followup_status: true,
+              FranchiseMaster: {
+                select: {
+                  id: true,
+                  franchise_name: true,
+                },
+              },
+            },
+            orderBy: [{ created_at: "desc" }, { id: "desc" }],
+          },
         },
       });
 
@@ -3653,7 +3953,8 @@ export class OnlineLeadController {
     }
   };
 
-  // 12. Bulk Upload Leads from Excel/CSV
+
+    // 12. Bulk Upload Leads from Excel/CSV
   bulkUploadLeads = async (req: Request, res: Response): Promise<Response> => {
     try {
       const file = req.file;
