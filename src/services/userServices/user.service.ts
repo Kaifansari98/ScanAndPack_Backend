@@ -198,6 +198,131 @@ const requireSupervisorConfirmation = async (
   }
 };
 
+const assignFranchiseLeadsToSupervisor = async (
+  tx: Prisma.TransactionClient, vendorId: number, userId: number,
+  franchiseIds: number[], actorId: number,
+) => {
+  const vendor = await tx.vendorMaster.findUnique({
+    where: { id: vendorId },
+    select: { handlesLargeScaleProjects: true },
+  });
+  if (vendor?.handlesLargeScaleProjects !== false) return;
+
+  // LeadUserMapping requires an account; drafts without one cannot be mapped yet.
+  // Process bounded batches to avoid oversized bulk inserts for large franchises.
+  let cursor = 0;
+  while (true) {
+    const leads = await tx.leadMaster.findMany({
+      where: {
+        vendor_id: vendorId, franchise_id: { in: franchiseIds },
+        is_deleted: false, account_id: { not: null }, id: { gt: cursor },
+      },
+      select: { id: true, account_id: true },
+      orderBy: { id: "asc" },
+      take: 500,
+    });
+    if (!leads.length) break;
+
+    const scope = {
+      vendor_id: vendorId, lead_id: { in: leads.map((lead) => lead.id) },
+      type: "site-supervisor",
+    };
+    const existing = await tx.leadUserMapping.findMany({
+      where: scope,
+      select: { id: true, lead_id: true, user_id: true },
+      orderBy: { id: "asc" },
+    });
+    // Retain one mapping per lead when the selected supervisor was assigned before.
+    const retained = new Map<number, number>();
+    const previousSupervisors = new Map<number, Set<number>>();
+    for (const mapping of existing) {
+      if (mapping.user_id === userId) {
+        if (!retained.has(mapping.lead_id)) retained.set(mapping.lead_id, mapping.id);
+      } else {
+        const supervisors = previousSupervisors.get(mapping.lead_id) ?? new Set<number>();
+        supervisors.add(mapping.user_id);
+        previousSupervisors.set(mapping.lead_id, supervisors);
+      }
+    }
+    await tx.leadUserMapping.updateMany({
+      where: { ...scope, status: "active" },
+      data: { status: "inactive", updated_by: actorId },
+    });
+    if (retained.size) {
+      await tx.leadUserMapping.updateMany({
+        where: { ...scope, user_id: userId, id: { in: [...retained.values()] } },
+        data: { status: "active", updated_by: actorId },
+      });
+    }
+    const unassigned = leads.filter((lead) => !retained.has(lead.id));
+    if (unassigned.length) {
+      await tx.leadUserMapping.createMany({
+        data: unassigned.map((lead) => ({
+          vendor_id: vendorId, lead_id: lead.id, account_id: lead.account_id!,
+          user_id: userId, type: "site-supervisor", status: "active",
+          created_by: actorId,
+        })),
+      });
+    }
+    const rooms = await tx.leadChatRoom.findMany({
+      where: { vendor_id: vendorId, lead_id: scope.lead_id },
+      select: { id: true, lead_id: true },
+    });
+    if (rooms.length) {
+      const removals = rooms.flatMap((room) => {
+        const supervisors = previousSupervisors.get(room.lead_id);
+        return supervisors?.size
+          ? [{ chat_room_id: room.id, user_id: { in: [...supervisors] } }]
+          : [];
+      });
+      if (removals.length) {
+        await tx.leadChatMember.deleteMany({ where: { OR: removals } });
+      }
+      await tx.leadChatMember.createMany({
+        data: rooms.map((room) => ({
+          chat_room_id: room.id, user_id: userId, added_by: actorId,
+        })),
+        skipDuplicates: true,
+      });
+    }
+    cursor = leads[leads.length - 1].id;
+  }
+};
+
+const getPhoneVariants = (identifier: string): string[] => {
+  const trimmed = identifier.trim();
+  const digitsOnly = trimmed.replace(/\D/g, "");
+  const variants = new Set<string>();
+
+  if (trimmed) variants.add(trimmed);
+  if (digitsOnly) {
+    variants.add(digitsOnly);
+    if (digitsOnly.length === 10) {
+      variants.add(`+91${digitsOnly}`);
+      variants.add(`91${digitsOnly}`);
+      variants.add(`0${digitsOnly}`);
+      variants.add(`+91 ${digitsOnly}`);
+      variants.add(`+91 ${digitsOnly.slice(0, 5)} ${digitsOnly.slice(5)}`);
+    } else if (digitsOnly.length === 12 && digitsOnly.startsWith("91")) {
+      const national = digitsOnly.slice(2);
+      variants.add(national);
+      variants.add(`+${digitsOnly}`);
+      variants.add(`+91${national}`);
+      variants.add(`0${national}`);
+      variants.add(`+91 ${national}`);
+      variants.add(`+91 ${national.slice(0, 5)} ${national.slice(5)}`);
+    } else if (digitsOnly.length === 11 && digitsOnly.startsWith("0")) {
+      const national = digitsOnly.slice(1);
+      variants.add(national);
+      variants.add(`+91${national}`);
+      variants.add(`91${national}`);
+      variants.add(`+91 ${national}`);
+      variants.add(`+91 ${national.slice(0, 5)} ${national.slice(5)}`);
+    }
+  }
+  return Array.from(variants);
+};
+
 export const createUserService = async (data: {
   vendor_id: number;
   franchise_id?: number;
@@ -215,6 +340,35 @@ export const createUserService = async (data: {
   const franchiseIds = await validateUserFranchises(Number(data.vendor_id),
     data.franchise_ids === undefined ? [data.franchise_id] : data.franchise_ids);
   const { franchise_ids: _franchiseIds, confirm_additional_supervisor, ...userData } = data;
+
+  if (data.user_contact) {
+    const contactVariants = getPhoneVariants(data.user_contact);
+    const existingContact = await prisma.userMaster.findFirst({
+      where: { user_contact: { in: contactVariants } },
+      select: { id: true, user_name: true },
+    });
+    if (existingContact) {
+      const error = new Error(
+        `Contact number "${data.user_contact}" is already registered to user "${existingContact.user_name}".`
+      );
+      (error as any).statusCode = 409;
+      throw error;
+    }
+  }
+
+  if (data.user_email) {
+    const existingEmail = await prisma.userMaster.findFirst({
+      where: { user_email: { equals: data.user_email.trim(), mode: "insensitive" } },
+      select: { id: true, user_name: true },
+    });
+    if (existingEmail) {
+      const error = new Error(
+        `Email "${data.user_email}" is already registered to user "${existingEmail.user_name}".`
+      );
+      (error as any).statusCode = 409;
+      throw error;
+    }
+  }
 
   const hashedPassword = await bcrypt.hash(data.password, 10);
   const userType = await prisma.userTypeMaster.findUnique({
@@ -236,6 +390,9 @@ export const createUserService = async (data: {
       data: { ...userData, franchise_id: franchiseIds[0], password: hashedPassword },
     });
     await syncUserFranchises(tx, user.vendor_id, user.id, franchiseIds, actorId);
+    if (userType.user_type.trim().toLowerCase().replace(/[ _]+/g, "-") === "site-supervisor") {
+      await assignFranchiseLeadsToSupervisor(tx, user.vendor_id, user.id, franchiseIds, actorId ?? user.id);
+    }
     return user;
   });
 
@@ -319,8 +476,41 @@ export const updateUserService = async (
 
   if (data.user_name !== undefined) updateData.user_name = data.user_name;
   if (data.designation !== undefined) updateData.designation = data.designation;
-  if (data.user_contact !== undefined) updateData.user_contact = data.user_contact;
-  if (data.user_email !== undefined) updateData.user_email = data.user_email;
+  if (data.user_contact !== undefined) {
+    const contactVariants = getPhoneVariants(data.user_contact);
+    const existingContact = await prisma.userMaster.findFirst({
+      where: {
+        user_contact: { in: contactVariants },
+        NOT: { id: userId },
+      },
+      select: { id: true, user_name: true, user_contact: true },
+    });
+    if (existingContact) {
+      const error = new Error(
+        `Contact number "${data.user_contact}" is already in use by another user`
+      );
+      (error as any).statusCode = 409;
+      throw error;
+    }
+    updateData.user_contact = data.user_contact;
+  }
+  if (data.user_email !== undefined) {
+    const existingEmail = await prisma.userMaster.findFirst({
+      where: {
+        user_email: { equals: data.user_email.trim(), mode: "insensitive" },
+        NOT: { id: userId },
+      },
+      select: { id: true, user_name: true, user_email: true },
+    });
+    if (existingEmail) {
+      const error = new Error(
+        `Email "${data.user_email}" is already in use by user "${existingEmail.user_name}".`
+      );
+      (error as any).statusCode = 409;
+      throw error;
+    }
+    updateData.user_email = data.user_email.trim();
+  }
   if (data.user_timezone !== undefined) updateData.user_timezone = data.user_timezone;
   if (data.user_type_id !== undefined) updateData.user_type_id = data.user_type_id;
   const franchiseIds = data.franchise_ids !== undefined || data.franchise_id !== undefined
@@ -355,6 +545,10 @@ export const updateUserService = async (
   const updatedUser = await prisma.$transaction(async (tx) => {
     const updated = await tx.userMaster.update({ where: { id: userId }, data: updateData });
     if (franchiseIds) await syncUserFranchises(tx, user.vendor_id, userId, franchiseIds, actorId);
+    if ((franchiseIds || (data.user_type_id !== undefined && data.user_type_id !== user.user_type_id)) &&
+        effectiveUserType.user_type.trim().toLowerCase().replace(/[ _]+/g, "-") === "site-supervisor") {
+      await assignFranchiseLeadsToSupervisor(tx, user.vendor_id, userId, selectedFranchiseIds, actorId ?? userId);
+    }
     return updated;
   });
 

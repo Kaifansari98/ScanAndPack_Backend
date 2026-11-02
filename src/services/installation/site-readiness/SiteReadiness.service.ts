@@ -471,6 +471,36 @@ export class SiteReadinessService {
       });
     }
 
+    const supervisorSelect = {
+      id: true,
+      user_name: true,
+      user_contact: true,
+      user_email: true,
+      user_timezone: true,
+      status: true,
+    } as const;
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { handlesLargeScaleProjects: true },
+    });
+    // Franchise-wide reassignment only applies to small-scale vendors.
+    if (vendor?.handlesLargeScaleProjects === false) {
+      const assigned = await prisma.leadUserMapping.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          type: "site-supervisor",
+          status: "active",
+        },
+        include: { user: { select: supervisorSelect } },
+        orderBy: [{ updated_at: "desc" }, { id: "desc" }],
+      });
+      if (assigned) {
+        const { user, ...mapping } = assigned;
+        return { ...mapping, supervisor: user };
+      }
+    }
+
     const mapping = await prisma.leadSiteSupervisorMapping.findFirst({
       where: {
         vendor_id: vendorId,
@@ -478,17 +508,9 @@ export class SiteReadinessService {
         status: "active",
       },
       include: {
-        supervisor: {
-          select: {
-            id: true,
-            user_name: true,
-            user_contact: true,
-            user_email: true,
-            user_timezone: true,
-            status: true,
-          },
-        },
+        supervisor: { select: supervisorSelect },
       },
+      orderBy: [{ created_at: "desc" }, { id: "desc" }],
     });
 
     return mapping;
