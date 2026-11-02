@@ -198,6 +198,91 @@ const requireSupervisorConfirmation = async (
   }
 };
 
+const assignFranchiseLeadsToSupervisor = async (
+  tx: Prisma.TransactionClient, vendorId: number, userId: number,
+  franchiseIds: number[], actorId: number,
+) => {
+  // LeadUserMapping requires an account; drafts without one cannot be mapped yet.
+  // Process bounded batches to avoid oversized bulk inserts for large franchises.
+  let cursor = 0;
+  while (true) {
+    const leads = await tx.leadMaster.findMany({
+      where: {
+        vendor_id: vendorId, franchise_id: { in: franchiseIds },
+        is_deleted: false, account_id: { not: null }, id: { gt: cursor },
+      },
+      select: { id: true, account_id: true },
+      orderBy: { id: "asc" },
+      take: 500,
+    });
+    if (!leads.length) break;
+
+    const scope = {
+      vendor_id: vendorId, lead_id: { in: leads.map((lead) => lead.id) },
+      type: "site-supervisor",
+    };
+    const existing = await tx.leadUserMapping.findMany({
+      where: scope,
+      select: { id: true, lead_id: true, user_id: true },
+      orderBy: { id: "asc" },
+    });
+    // Retain one mapping per lead when the selected supervisor was assigned before.
+    const retained = new Map<number, number>();
+    const previousSupervisors = new Map<number, Set<number>>();
+    for (const mapping of existing) {
+      if (mapping.user_id === userId) {
+        if (!retained.has(mapping.lead_id)) retained.set(mapping.lead_id, mapping.id);
+      } else {
+        const supervisors = previousSupervisors.get(mapping.lead_id) ?? new Set<number>();
+        supervisors.add(mapping.user_id);
+        previousSupervisors.set(mapping.lead_id, supervisors);
+      }
+    }
+    await tx.leadUserMapping.updateMany({
+      where: { ...scope, status: "active" },
+      data: { status: "inactive", updated_by: actorId },
+    });
+    if (retained.size) {
+      await tx.leadUserMapping.updateMany({
+        where: { ...scope, user_id: userId, id: { in: [...retained.values()] } },
+        data: { status: "active", updated_by: actorId },
+      });
+    }
+    const unassigned = leads.filter((lead) => !retained.has(lead.id));
+    if (unassigned.length) {
+      await tx.leadUserMapping.createMany({
+        data: unassigned.map((lead) => ({
+          vendor_id: vendorId, lead_id: lead.id, account_id: lead.account_id!,
+          user_id: userId, type: "site-supervisor", status: "active",
+          created_by: actorId,
+        })),
+      });
+    }
+    const rooms = await tx.leadChatRoom.findMany({
+      where: { vendor_id: vendorId, lead_id: scope.lead_id },
+      select: { id: true, lead_id: true },
+    });
+    if (rooms.length) {
+      const removals = rooms.flatMap((room) => {
+        const supervisors = previousSupervisors.get(room.lead_id);
+        return supervisors?.size
+          ? [{ chat_room_id: room.id, user_id: { in: [...supervisors] } }]
+          : [];
+      });
+      if (removals.length) {
+        await tx.leadChatMember.deleteMany({ where: { OR: removals } });
+      }
+      await tx.leadChatMember.createMany({
+        data: rooms.map((room) => ({
+          chat_room_id: room.id, user_id: userId, added_by: actorId,
+        })),
+        skipDuplicates: true,
+      });
+    }
+    cursor = leads[leads.length - 1].id;
+  }
+};
+
 export const createUserService = async (data: {
   vendor_id: number;
   franchise_id?: number;
@@ -236,6 +321,9 @@ export const createUserService = async (data: {
       data: { ...userData, franchise_id: franchiseIds[0], password: hashedPassword },
     });
     await syncUserFranchises(tx, user.vendor_id, user.id, franchiseIds, actorId);
+    if (userType.user_type.trim().toLowerCase().replace(/[ _]+/g, "-") === "site-supervisor") {
+      await assignFranchiseLeadsToSupervisor(tx, user.vendor_id, user.id, franchiseIds, actorId ?? user.id);
+    }
     return user;
   });
 
@@ -355,6 +443,10 @@ export const updateUserService = async (
   const updatedUser = await prisma.$transaction(async (tx) => {
     const updated = await tx.userMaster.update({ where: { id: userId }, data: updateData });
     if (franchiseIds) await syncUserFranchises(tx, user.vendor_id, userId, franchiseIds, actorId);
+    if ((franchiseIds || (data.user_type_id !== undefined && data.user_type_id !== user.user_type_id)) &&
+        effectiveUserType.user_type.trim().toLowerCase().replace(/[ _]+/g, "-") === "site-supervisor") {
+      await assignFranchiseLeadsToSupervisor(tx, user.vendor_id, userId, selectedFranchiseIds, actorId ?? userId);
+    }
     return updated;
   });
 
