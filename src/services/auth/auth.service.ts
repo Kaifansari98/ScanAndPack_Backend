@@ -422,6 +422,45 @@ export class AuthService {
     }
   }
 
+  private getPhoneVariants(identifier: string): string[] {
+    const trimmed = identifier.trim();
+    const digitsOnly = trimmed.replace(/\D/g, "");
+    const variants = new Set<string>();
+
+    if (trimmed) {
+      variants.add(trimmed);
+    }
+
+    if (digitsOnly) {
+      variants.add(digitsOnly);
+
+      if (digitsOnly.length === 10) {
+        variants.add(`+91${digitsOnly}`);
+        variants.add(`91${digitsOnly}`);
+        variants.add(`0${digitsOnly}`);
+        variants.add(`+91 ${digitsOnly}`);
+        variants.add(`+91 ${digitsOnly.slice(0, 5)} ${digitsOnly.slice(5)}`);
+      } else if (digitsOnly.length === 12 && digitsOnly.startsWith("91")) {
+        const national = digitsOnly.slice(2);
+        variants.add(national);
+        variants.add(`+${digitsOnly}`);
+        variants.add(`+91${national}`);
+        variants.add(`0${national}`);
+        variants.add(`+91 ${national}`);
+        variants.add(`+91 ${national.slice(0, 5)} ${national.slice(5)}`);
+      } else if (digitsOnly.length === 11 && digitsOnly.startsWith("0")) {
+        const national = digitsOnly.slice(1);
+        variants.add(national);
+        variants.add(`+91${national}`);
+        variants.add(`91${national}`);
+        variants.add(`+91 ${national}`);
+        variants.add(`+91 ${national.slice(0, 5)} ${national.slice(5)}`);
+      }
+    }
+
+    return Array.from(variants);
+  }
+
   async login(req: Request) {
     const { identifier, password } = req.body;
 
@@ -441,11 +480,23 @@ export class AuthService {
       };
     }
 
-    const isEmail = identifier.includes("@");
+    const trimmedIdentifier = identifier.trim();
+    const isEmail = trimmedIdentifier.includes("@");
+    const phoneVariants = isEmail ? [] : this.getPhoneVariants(trimmedIdentifier);
+
     const user = await prisma.userMaster.findFirst({
       where: isEmail
-        ? { user_email: identifier }
-        : { user_contact: identifier },
+        ? {
+            user_email: {
+              equals: trimmedIdentifier,
+              mode: "insensitive",
+            },
+          }
+        : {
+            user_contact: {
+              in: phoneVariants,
+            },
+          },
       include: {
         vendor: true,
         user_type: true,
@@ -460,7 +511,7 @@ export class AuthService {
         body: {
           message: `User not found with ${
             isEmail ? "email" : "phone number"
-          }: ${identifier}`,
+          }: ${trimmedIdentifier}`,
         },
       };
     }

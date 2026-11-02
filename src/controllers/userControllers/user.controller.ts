@@ -4,7 +4,7 @@ import * as userService from '../../services/userServices/user.service';
 export const createUserController = async (req: Request, res: Response) => {
   try {
     const newUser = await userService.createUserService(req.body, (req as any).user?.id);
-    res.status(201).json({ message: "User created", data: newUser });
+    res.status(201).json({ success: true, message: "User created", data: newUser });
   } catch (error: any) {
     if (error.code === "SUPERVISOR_CONFIRMATION_REQUIRED") {
       return res.status(409).json({
@@ -12,9 +12,25 @@ export const createUserController = async (req: Request, res: Response) => {
       });
     }
 
+    if (error.code === "P2002") {
+      const target = (error.meta?.target as string[] | string) || "";
+      const isContact = String(target).includes("user_contact");
+      const isEmail = String(target).includes("user_email");
+      const fieldMsg = isContact
+        ? "This contact number is already registered to another user."
+        : isEmail
+        ? "This email is already registered to another user."
+        : "A user with this unique information already exists.";
+
+      return res.status(409).json({
+        success: false,
+        message: fieldMsg,
+      });
+    }
+
     res
       .status(error.statusCode || 500)
-      .json({ message: "Failed to create user", error: error.message || error });
+      .json({ success: false, message: error.message || "Failed to create user", error: error.message || error });
   }
 };
 
@@ -62,6 +78,22 @@ export const updateUserController = async (req: Request, res: Response) => {
     if (error.code === "SUPERVISOR_CONFIRMATION_REQUIRED") {
       return res.status(409).json({
         code: error.code, message: error.message, franchises: error.franchises,
+      });
+    }
+
+    if (error.code === "P2002") {
+      const target = (error.meta?.target as string[] | string) || "";
+      const isContact = String(target).includes("user_contact");
+      const isEmail = String(target).includes("user_email");
+      const fieldMsg = isContact
+        ? "This contact number is already registered to another user."
+        : isEmail
+        ? "This email is already registered to another user."
+        : "A user with this unique information already exists.";
+
+      return res.status(409).json({
+        success: false,
+        message: fieldMsg,
       });
     }
 
