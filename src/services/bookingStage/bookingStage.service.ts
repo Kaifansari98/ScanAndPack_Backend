@@ -5558,13 +5558,16 @@ export class BookingStageService {
       select: { lead_id: true },
     });
 
-    const taskLeads = await prisma.userLeadTask.findMany({
-      where: {
-        vendor_id: vendorId,
-        OR: [{ created_by: userId }, { user_id: userId }],
-      },
-      select: { lead_id: true },
-    });
+    // A supervisor's task history must not retain access after reassignment.
+    const taskLeads = normalizedUserType === "site-supervisor"
+      ? []
+      : await prisma.userLeadTask.findMany({
+          where: {
+            vendor_id: vendorId,
+            OR: [{ created_by: userId }, { user_id: userId }],
+          },
+          select: { lead_id: true },
+        });
 
     let headSupervisorFranchiseLeadIds: number[] = [];
     if (normalizedUserType === "head-site-supervisor" && isInstallationStage) {
