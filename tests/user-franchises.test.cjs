@@ -10,6 +10,7 @@ function setup() {
   let mappings = [];
   let failMapping = false;
   let supervisors = [];
+  let otherUsers = [];
   let leads = [];
   let leadMappings = [];
   let failLeadMapping = false;
@@ -70,6 +71,11 @@ function setup() {
     },
     userTypeMaster: { findUnique: async ({ where }) => ({ user_type: where.id === 99 ? 'sales-executive' : 'site-supervisor' }) },
     userMaster: {
+      findFirst: async ({ where }) => [...otherUsers, ...(user ? [user] : [])].find(candidate =>
+        candidate.id !== where.NOT?.id &&
+        (!where.user_contact || where.user_contact.in.includes(candidate.user_contact)) &&
+        (!where.user_email || candidate.user_email?.toLowerCase() === where.user_email.equals.toLowerCase())
+      ) ?? null,
       findUnique: async () => user && ({ ...user, siteSupervisorFranchiseMappings: mappings }),
       create: async ({ data }) => (user = { id: 7, ...data }),
       update: async ({ data }) => (user = { ...user, ...data }),
@@ -102,6 +108,7 @@ function setup() {
     throw new Error(`Unexpected import ${name}`);
   } });
   return { ...exports, setSupervisors: value => { supervisors = value; },
+    setOtherUsers: value => { otherUsers = value; },
     setLeads: value => { leads = value; }, setLeadMappings: value => { leadMappings = value; },
     failLeads: () => { failLeadMapping = true; },
     setRooms: value => { rooms = value; }, setChatMembers: value => { chatMembers = value; },
@@ -109,6 +116,27 @@ function setup() {
     state: () => ({ user, mappings, leadMappings, chatMembers }), fail: () => { failMapping = true; } };
 }
 const payload = { vendor_id: 1, user_type_id: 2, user_name: 'Test', user_email: 'test@example.com', user_contact: '123', user_timezone: 'Asia/Kolkata', password: 'test' };
+
+test('merged phone validation rejects alternate formats of an existing contact before assigning leads', async () => {
+  for (const user_contact of ['9876543210', '+919876543210', '09876543210']) {
+    const s = setup();
+    s.setOtherUsers([{ id: 8, user_name: 'Existing', user_contact: '+91 98765 43210' }]);
+    await assert.rejects(s.createUserService({ ...payload, user_contact, franchise_ids: [10] }), { statusCode: 409 });
+    assert.equal(s.state().user, undefined);
+    assert.equal(s.state().leadMappings.length, 0);
+  }
+});
+
+test('merged duplicate checks exclude the edited user but reject another user contact or email', async () => {
+  const s = setup();
+  await s.createUserService({ ...payload, franchise_ids: [10] });
+  await s.updateUserService(7, { user_contact: payload.user_contact, user_email: payload.user_email });
+  s.setOtherUsers([{ id: 8, user_name: 'Existing', user_contact: '+91 98765 43210', user_email: 'other@example.com' }]);
+  await assert.rejects(s.updateUserService(7, { user_contact: '9876543210' }), { statusCode: 409 });
+  await assert.rejects(s.updateUserService(7, { user_email: 'OTHER@example.com' }), { statusCode: 409 });
+  assert.equal(s.state().user.user_contact, payload.user_contact);
+  assert.equal(s.state().user.user_email, payload.user_email);
+});
 
 test('single and legacy selections store the franchise on UserMaster without extra franchise mappings', async () => {
   for (const selection of [{ franchise_ids: [10] }, { franchise_id: 10 }]) {

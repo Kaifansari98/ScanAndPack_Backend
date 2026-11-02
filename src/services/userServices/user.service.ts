@@ -283,6 +283,40 @@ const assignFranchiseLeadsToSupervisor = async (
   }
 };
 
+const getPhoneVariants = (identifier: string): string[] => {
+  const trimmed = identifier.trim();
+  const digitsOnly = trimmed.replace(/\D/g, "");
+  const variants = new Set<string>();
+
+  if (trimmed) variants.add(trimmed);
+  if (digitsOnly) {
+    variants.add(digitsOnly);
+    if (digitsOnly.length === 10) {
+      variants.add(`+91${digitsOnly}`);
+      variants.add(`91${digitsOnly}`);
+      variants.add(`0${digitsOnly}`);
+      variants.add(`+91 ${digitsOnly}`);
+      variants.add(`+91 ${digitsOnly.slice(0, 5)} ${digitsOnly.slice(5)}`);
+    } else if (digitsOnly.length === 12 && digitsOnly.startsWith("91")) {
+      const national = digitsOnly.slice(2);
+      variants.add(national);
+      variants.add(`+${digitsOnly}`);
+      variants.add(`+91${national}`);
+      variants.add(`0${national}`);
+      variants.add(`+91 ${national}`);
+      variants.add(`+91 ${national.slice(0, 5)} ${national.slice(5)}`);
+    } else if (digitsOnly.length === 11 && digitsOnly.startsWith("0")) {
+      const national = digitsOnly.slice(1);
+      variants.add(national);
+      variants.add(`+91${national}`);
+      variants.add(`91${national}`);
+      variants.add(`+91 ${national}`);
+      variants.add(`+91 ${national.slice(0, 5)} ${national.slice(5)}`);
+    }
+  }
+  return Array.from(variants);
+};
+
 export const createUserService = async (data: {
   vendor_id: number;
   franchise_id?: number;
@@ -300,6 +334,35 @@ export const createUserService = async (data: {
   const franchiseIds = await validateUserFranchises(Number(data.vendor_id),
     data.franchise_ids === undefined ? [data.franchise_id] : data.franchise_ids);
   const { franchise_ids: _franchiseIds, confirm_additional_supervisor, ...userData } = data;
+
+  if (data.user_contact) {
+    const contactVariants = getPhoneVariants(data.user_contact);
+    const existingContact = await prisma.userMaster.findFirst({
+      where: { user_contact: { in: contactVariants } },
+      select: { id: true, user_name: true },
+    });
+    if (existingContact) {
+      const error = new Error(
+        `Contact number "${data.user_contact}" is already registered to user "${existingContact.user_name}".`
+      );
+      (error as any).statusCode = 409;
+      throw error;
+    }
+  }
+
+  if (data.user_email) {
+    const existingEmail = await prisma.userMaster.findFirst({
+      where: { user_email: { equals: data.user_email.trim(), mode: "insensitive" } },
+      select: { id: true, user_name: true },
+    });
+    if (existingEmail) {
+      const error = new Error(
+        `Email "${data.user_email}" is already registered to user "${existingEmail.user_name}".`
+      );
+      (error as any).statusCode = 409;
+      throw error;
+    }
+  }
 
   const hashedPassword = await bcrypt.hash(data.password, 10);
   const userType = await prisma.userTypeMaster.findUnique({
@@ -407,8 +470,41 @@ export const updateUserService = async (
 
   if (data.user_name !== undefined) updateData.user_name = data.user_name;
   if (data.designation !== undefined) updateData.designation = data.designation;
-  if (data.user_contact !== undefined) updateData.user_contact = data.user_contact;
-  if (data.user_email !== undefined) updateData.user_email = data.user_email;
+  if (data.user_contact !== undefined) {
+    const contactVariants = getPhoneVariants(data.user_contact);
+    const existingContact = await prisma.userMaster.findFirst({
+      where: {
+        user_contact: { in: contactVariants },
+        NOT: { id: userId },
+      },
+      select: { id: true, user_name: true, user_contact: true },
+    });
+    if (existingContact) {
+      const error = new Error(
+        `Contact number "${data.user_contact}" is already in use by another user`
+      );
+      (error as any).statusCode = 409;
+      throw error;
+    }
+    updateData.user_contact = data.user_contact;
+  }
+  if (data.user_email !== undefined) {
+    const existingEmail = await prisma.userMaster.findFirst({
+      where: {
+        user_email: { equals: data.user_email.trim(), mode: "insensitive" },
+        NOT: { id: userId },
+      },
+      select: { id: true, user_name: true, user_email: true },
+    });
+    if (existingEmail) {
+      const error = new Error(
+        `Email "${data.user_email}" is already in use by user "${existingEmail.user_name}".`
+      );
+      (error as any).statusCode = 409;
+      throw error;
+    }
+    updateData.user_email = data.user_email.trim();
+  }
   if (data.user_timezone !== undefined) updateData.user_timezone = data.user_timezone;
   if (data.user_type_id !== undefined) updateData.user_type_id = data.user_type_id;
   const franchiseIds = data.franchise_ids !== undefined || data.franchise_id !== undefined
