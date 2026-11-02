@@ -201,12 +201,38 @@ const requireSupervisorConfirmation = async (
 const assignFranchiseLeadsToSupervisor = async (
   tx: Prisma.TransactionClient, vendorId: number, userId: number,
   franchiseIds: number[], actorId: number,
+  removedFranchiseIds: number[] = [],
 ) => {
   const vendor = await tx.vendorMaster.findUnique({
     where: { id: vendorId },
     select: { handlesLargeScaleProjects: true },
   });
   if (vendor?.handlesLargeScaleProjects !== false) return;
+
+  if (removedFranchiseIds.length) {
+    const leadScope = {
+      vendor_id: vendorId,
+      franchise_id: { in: removedFranchiseIds },
+    };
+    await tx.leadUserMapping.updateMany({
+      where: {
+        vendor_id: vendorId, user_id: userId, type: "site-supervisor",
+        status: "active", lead: leadScope,
+      },
+      data: { status: "inactive", updated_by: actorId },
+    });
+    // Prevent the task forms' legacy fallback from restoring a removed assignment.
+    await tx.leadSiteSupervisorMapping.updateMany({
+      where: { vendor_id: vendorId, user_id: userId, status: "active", lead: leadScope },
+      data: { status: "inactive" },
+    });
+    await tx.leadChatMember.deleteMany({
+      where: {
+        user_id: userId,
+        chatRoom: { vendor_id: vendorId, lead: leadScope },
+      },
+    });
+  }
 
   // LeadUserMapping requires an account; drafts without one cannot be mapped yet.
   // Process bounded batches to avoid oversized bulk inserts for large franchises.
@@ -535,10 +561,14 @@ export const updateUserService = async (
   if (!effectiveUserType) {
     throw Object.assign(new Error("Invalid user_type_id."), { statusCode: 400 });
   }
-  const selectedFranchiseIds = franchiseIds ?? [...new Set([
+  const previousFranchiseIds = [...new Set([
     ...(user.franchise_id ? [user.franchise_id] : []),
     ...user.siteSupervisorFranchiseMappings.map((mapping) => mapping.franchise_id),
   ])];
+  const selectedFranchiseIds = franchiseIds ?? previousFranchiseIds;
+  const removedFranchiseIds = franchiseIds
+    ? previousFranchiseIds.filter((id) => !franchiseIds.includes(id))
+    : [];
   await requireSupervisorConfirmation(user.vendor_id, selectedFranchiseIds,
     effectiveUserType.user_type, data.confirm_additional_supervisor, userId);
 
@@ -547,7 +577,7 @@ export const updateUserService = async (
     if (franchiseIds) await syncUserFranchises(tx, user.vendor_id, userId, franchiseIds, actorId);
     if ((franchiseIds || (data.user_type_id !== undefined && data.user_type_id !== user.user_type_id)) &&
         effectiveUserType.user_type.trim().toLowerCase().replace(/[ _]+/g, "-") === "site-supervisor") {
-      await assignFranchiseLeadsToSupervisor(tx, user.vendor_id, userId, selectedFranchiseIds, actorId ?? userId);
+      await assignFranchiseLeadsToSupervisor(tx, user.vendor_id, userId, selectedFranchiseIds, actorId ?? userId, removedFranchiseIds);
     }
     return updated;
   });
