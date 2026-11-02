@@ -175,6 +175,7 @@ export const scan_machine_item = async (req: Request, res: Response) => {
         id: machine_id,
         vendor_id,
         status: "ACTIVE",
+        is_deleted: false,
       },
       select: {
         machine_type_id: true,

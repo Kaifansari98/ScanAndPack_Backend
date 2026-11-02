@@ -921,6 +921,7 @@ export const updateScannedItem = async (
         id: machine_id,
         vendor_id,
         status: "ACTIVE",
+        is_deleted: false,
       },
       select: {
         machine_type_id: true,
@@ -3087,13 +3088,15 @@ export const getKPIS = async (payload: TrackTraceDashboardPayload) => {
 
   const totalMachines = await prisma.machineMaster.count({
     where: {
-      vendor_id: payload.vendor_id, // or just vendor_id if variable name matches
+      vendor_id: payload.vendor_id,
+      is_deleted: false,
     },
   });
   const activeMachines = await prisma.machineMaster.count({
     where: {
       status: "ACTIVE",
       vendor_id: payload.vendor_id,
+      is_deleted: false,
     },
   });
 
@@ -3270,6 +3273,10 @@ export const getMachineStatus1 = async (
     const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
 
     const machines = await prisma.machineMaster.findMany({
+      where: {
+        vendor_id: payload.vendor_id,
+        is_deleted: false,
+      },
       include: {
         userMachineMappings: {
           where: {
@@ -3549,6 +3556,10 @@ export const getMachineUtilization1 = async (
 
     // Get all machines
     const machines = await prisma.machineMaster.findMany({
+      where: {
+        vendor_id: payload.vendor_id,
+        is_deleted: false,
+      },
       select: {
         id: true,
         machine_name: true,
@@ -3671,6 +3682,7 @@ export const getMachineUtilization = async (
 
     const baseWhere: any = {
       vendor_id: payload.vendor_id,
+      is_deleted: false,
     };
 
     // if (payload.project_id) {
@@ -3836,6 +3848,7 @@ export const getMachineStatus = async (payload: TrackTraceDashboardPayload) => {
     const baseWhereMachine: any = {
       vendor_id: payload.vendor_id,
       status: "ACTIVE",
+      is_deleted: false,
     };
 
     if (payload.machine_id) {
@@ -4156,6 +4169,7 @@ export const getBottleNeck = async (payload: TrackTraceDashboardPayload) => {
           in: ["ACTIVE"],
         },
         vendor_id: payload.vendor_id,
+        is_deleted: false,
       },
       include: {
         userMachineMappings: {
@@ -4298,6 +4312,7 @@ export const getAllMachinesByVendorId = (vendor_id: number) => {
   return prisma.machineMaster.findMany({
     where: {
       vendor_id: vendor_id,
+      is_deleted: false,
     },
     orderBy: {
       machine_name: "asc", // or 'desc'
@@ -4417,32 +4432,44 @@ export const getCutListMachine = async (
   unique_project_id: string,
   fabrication?: "WOODWORK" | "METALWORK",
 ) => {
-  // Run independent queries in parallel
-  const [projectMaster, allMachines] = await Promise.all([
-    prisma.projectMaster.findFirst({
-      where: { unique_project_id: unique_project_id },
-      select: {
-        id: true,
-        project_name: true,
-        project_status: true,
-        track_trace_status: true,
-        packing_type: true,
-      },
-    }),
-    // Step 1: Get all machines for this vendor (ordered for column display)
-    prisma.machineMaster.findMany({
-      where: { vendor_id: vendorId, ...(fabrication ? { fabrication } : {}) },
-      select: {
-        id: true,
-        machine_code: true,
-        machine_type_id: true,
-        fabrication: true,
-      },
-      orderBy: { sequence_no: "asc" },
-    }),
-  ]);
+  const projectMaster = await prisma.projectMaster.findFirst({
+    where: { unique_project_id: unique_project_id },
+    select: {
+      id: true,
+      project_name: true,
+      project_status: true,
+      track_trace_status: true,
+      packing_type: true,
+    },
+  });
 
   const projectId = projectMaster?.id;
+
+  const machineWhere: any = {
+    vendor_id: vendorId,
+    ...(fabrication ? { fabrication } : {}),
+  };
+
+  if (projectId) {
+    machineWhere.OR = [
+      { is_deleted: false },
+      { cutListMachineMapping: { some: { project_id: projectId } } },
+    ];
+  } else {
+    machineWhere.is_deleted = false;
+  }
+
+  // Step 1: Get machines for this vendor (active machines OR machines mapped to this project)
+  const allMachines = await prisma.machineMaster.findMany({
+    where: machineWhere,
+    select: {
+      id: true,
+      machine_code: true,
+      machine_type_id: true,
+      fabrication: true,
+    },
+    orderBy: { sequence_no: "asc" },
+  });
 
   const machineColumns = allMachines.map((m) => m.machine_code);
   // machine_code → WOODWORK/METALWORK, so the UI can show only the relevant machines
@@ -4727,8 +4754,13 @@ export const assignMachine = async (payload: CutListSavePayload) => {
       const machine = await tx.machineMaster.findFirst({
         where: {
           id: payload.machine_id,
+          is_deleted: false,
         },
       });
+
+      if (!machine) {
+        return validationResponse(0, "Machine not found or has been deleted");
+      }
 
       const sequence = machine?.sequence_no;
       if (sequence == null) {
@@ -5739,6 +5771,7 @@ export const getReworkMachines = async (
       vendor_id,
       sequence_no: { lte: currentMachine.sequence_no },
       status: "ACTIVE",
+      is_deleted: false,
     },
     select: {
       id: true,
@@ -5892,6 +5925,7 @@ export const getQualityCheckProjects = async (
         vendor_id,
         machine_type_id: 17,
         status: "ACTIVE",
+        is_deleted: false,
       },
       select: {
         id: true,
@@ -6261,6 +6295,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
         vendor_id,
         status: "ACTIVE",
         scan_type: { not: "PASS" },
+        is_deleted: false,
       },
       select: {
         id: true,
@@ -6556,6 +6591,7 @@ export const getTraceTraceDashboard = async (
           vendor_id,
           status: "ACTIVE",
           scan_type: { not: "PASS" },
+          is_deleted: false,
           ...(fabrication ? { fabrication } : {}),
         },
         select: {
@@ -14409,6 +14445,10 @@ export const getManualPackingItemsService = async (
     where: {
       vendor_id: vendorId,
       machine_type_id: 18,
+      OR: [
+        { is_deleted: false },
+        ...(projectId ? [{ cutListMachineMapping: { some: { project_id: projectId } } }] : []),
+      ],
     },
     select: {
       id: true,
@@ -14441,7 +14481,15 @@ export const getManualPackingItemsService = async (
 
   // Find QC Machines
   const qcMachines = await prisma.machineMaster.findMany({
-    where: { vendor_id: vendorId, machine_type_id: 17, status: "ACTIVE" },
+    where: {
+      vendor_id: vendorId,
+      machine_type_id: 17,
+      status: "ACTIVE",
+      OR: [
+        { is_deleted: false },
+        ...(projectId ? [{ cutListMachineMapping: { some: { project_id: projectId } } }] : []),
+      ],
+    },
     select: { id: true },
   });
   const qcMachineIds = qcMachines.map((m) => m.id);
@@ -14751,6 +14799,7 @@ export const addManualPackingItemService = async (
         vendor_id,
         machine_type_id: 18,
         status: "ACTIVE",
+        is_deleted: false,
       },
 
       select: {
@@ -14949,7 +14998,15 @@ export const addManualPackingItemService = async (
         |--------------------------------------------------------------------------
         */
         const qcMachines = await tx.machineMaster.findMany({
-          where: { vendor_id, machine_type_id: 17, status: "ACTIVE" },
+          where: {
+            vendor_id,
+            machine_type_id: 17,
+            status: "ACTIVE",
+            OR: [
+              { is_deleted: false },
+              ...(project_id ? [{ cutListMachineMapping: { some: { project_id } } }] : []),
+            ],
+          },
           select: { id: true },
         });
         const qcMachineIds = qcMachines.map((m) => m.id);
@@ -16183,7 +16240,7 @@ export const addManualQualityItemService = async (
     if (!cutList) return validationResponse(0, "Item not found");
 
     const machine = await prisma.machineMaster.findFirst({
-      where: { id: machine_id, vendor_id, status: "ACTIVE" },
+      where: { id: machine_id, vendor_id, status: "ACTIVE", is_deleted: false },
     });
 
     if (!machine) return validationResponse(0, "Machine not found");

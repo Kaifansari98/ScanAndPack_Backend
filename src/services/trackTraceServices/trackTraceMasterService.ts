@@ -174,6 +174,7 @@ export class TrackTraceMasterService {
           vendor_id: data.vendor_id,
           machine_code: machineCode,
           status: machineStatus,
+          is_deleted: false,
         },
 
         select: {
@@ -224,6 +225,7 @@ export class TrackTraceMasterService {
         where: {
           vendor_id,
           machineType: { isNot: null },
+          is_deleted: false,
         },
         orderBy: { sequence_no: "asc" },
         include: {
@@ -268,6 +270,7 @@ export class TrackTraceMasterService {
         where: {
           id,
           vendor_id,
+          is_deleted: false,
         },
 
         select: {
@@ -357,6 +360,63 @@ export class TrackTraceMasterService {
         "A machine with the same code, vendor and status already exists",
       );
 
+      throw error;
+    }
+  }
+  static async softDeleteMachine(
+    id: number,
+    vendor_id: number,
+    deleted_by?: number,
+  ) {
+    try {
+      logger.info("Soft deleting machine", {
+        id,
+        vendor_id,
+        deleted_by,
+      });
+
+      const existing = await prisma.machineMaster.findFirst({
+        where: {
+          id,
+          vendor_id,
+          is_deleted: false,
+        },
+      });
+
+      if (!existing) {
+        throw new Error("Machine not found for this vendor or already deleted");
+      }
+
+      let validDeletedBy: number | null = null;
+      if (deleted_by && Number.isInteger(deleted_by) && deleted_by > 0) {
+        const user = await prisma.userMaster.findUnique({
+          where: { id: deleted_by },
+          select: { id: true },
+        });
+        if (user) {
+          validDeletedBy = user.id;
+        }
+      }
+
+      const updated = await prisma.machineMaster.update({
+        where: {
+          id,
+        },
+        data: {
+          is_deleted: true,
+          deleted_by: validDeletedBy,
+          deleted_at: new Date(),
+        },
+      });
+
+      logger.info("Machine soft deleted successfully", {
+        id: updated.id,
+        vendor_id: updated.vendor_id,
+      });
+
+      return updated;
+    } catch (error) {
+      logger.error("Error soft deleting machine", error);
       throw error;
     }
   }

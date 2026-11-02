@@ -214,8 +214,57 @@ export class TrackTraceMasterController {
   }
 }
 
- 
+  static async deleteMachine(req: Request, res: Response) {
+    try {
+      const id = Number(req.params.id);
+      const rawVendorId =
+        req.params.vendor_id ||
+        req.body?.vendor_id ||
+        req.query?.vendor_id ||
+        (req as any).user?.vendor_id;
+      const vendor_id = Number(rawVendorId);
 
+      const userFromToken = (req as any).user;
+      const rawDeletedBy =
+        req.body?.deleted_by ||
+        req.query?.deleted_by ||
+        userFromToken?.id ||
+        userFromToken?.user_id;
+      const deleted_by = rawDeletedBy ? Number(rawDeletedBy) : undefined;
+
+      if (!id || isNaN(id)) {
+        return res.status(400).json({
+          success: false,
+          message: "Valid Machine ID is required",
+        });
+      }
+
+      if (!vendor_id || isNaN(vendor_id)) {
+        return res.status(400).json({
+          success: false,
+          message: "Valid Vendor ID is required",
+        });
+      }
+
+      const deletedMachine = await TrackTraceMasterService.softDeleteMachine(
+        id,
+        vendor_id,
+        deleted_by,
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Machine deleted successfully",
+        data: deletedMachine,
+      });
+    } catch (error: any) {
+      logger.error("Controller Error - Delete Machine", error);
+      return res.status(400).json({
+        success: false,
+        message: error.message || "Failed to delete machine",
+      });
+    }
+  }
 }
 
 export const getMachineType = async (req: Request, res: Response) => {

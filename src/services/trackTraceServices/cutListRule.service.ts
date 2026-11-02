@@ -668,7 +668,7 @@ export class CutListRuleService {
       throw new Error("SEND_TO_MACHINE action could not be found or created for this vendor");
     }
 
-    const machineWhere: any = { vendor_id: vendorId, status: "ACTIVE" };
+    const machineWhere: any = { vendor_id: vendorId, status: "ACTIVE", is_deleted: false };
     if (options.machine_id) {
       machineWhere.id = options.machine_id;
     }

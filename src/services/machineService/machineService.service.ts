@@ -44,6 +44,7 @@ export const getAllMachines = async (
     where: {
       status: 'ACTIVE',
       vendor_id: vendor_id,
+      is_deleted: false,
       machine_type_id: {
         notIn: [17, 18],
       },

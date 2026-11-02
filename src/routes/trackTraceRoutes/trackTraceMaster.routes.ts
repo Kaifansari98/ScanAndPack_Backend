@@ -35,6 +35,15 @@ router.put(
   TrackTraceMasterController.updateMachine
 );
 
+router.delete(
+  "/machines/:id/vendor/:vendor_id",
+  TrackTraceMasterController.deleteMachine
+);
+router.delete(
+  "/machines/:id",
+  TrackTraceMasterController.deleteMachine
+);
+
 router.post(
   "/machine-users-assign",
   TrackTraceMasterController.assignUsersToMachineController,
