@@ -85,7 +85,7 @@ export class LeadStatsService {
       ].includes(userType);
       // Site supervisors can be mapped to leads across multiple franchises
       // (see SiteSupervisorFranchiseMapping); leads individually assigned to
-      // them via LeadUserMapping/UserLeadTask (the `leadIds` gate below) must
+      // them via active LeadUserMapping (the `leadIds` gate below) must
       // count regardless of the lead's franchise, so franchise scoping is
       // skipped for this role here.
       const isSiteSupervisorLeadOwner = userType === "site-supervisor";
@@ -168,9 +168,9 @@ export class LeadStatsService {
       }
 
       if (shouldUseMapping) {
-        // Pre-prod and factory are mapping-only — taskLeads would pull leads they
+        // These roles are mapping-only — taskLeads would pull leads they
         // don't own (e.g. tasks they created) and inflate the sidebar count.
-        const mappingOnlyRoles = ["pre-prod", "factory"];
+        const mappingOnlyRoles = ["pre-prod", "factory", "site-supervisor"];
         const isMappingOnly = mappingOnlyRoles.includes(userType);
 
         let callerLeadIds: number[] = [];
