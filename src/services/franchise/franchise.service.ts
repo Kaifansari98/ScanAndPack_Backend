@@ -281,24 +281,37 @@ export const getSiteSupervisorFranchiseMapping = async (
     throw error;
   }
 
-  const mappings = await prisma.siteSupervisorFranchiseMapping.findMany({
+  const supervisors = await prisma.userMaster.findMany({
     where: {
       vendor_id: Number(vendorId),
-      franchise_id: Number(franchiseId),
-      supervisor: {
-        status: "active",
-      },
-    },
-    select: {
-      supervisor: {
-        select: {
-          id: true,
-          user_name: true,
-          user_contact: true,
+      user_type: {
+        user_type: {
+          in: ["site-supervisor", "site supervisor", "site_supervisor"],
+          mode: "insensitive",
         },
       },
+      status: "active",
+      OR: [
+        { franchise_id: Number(franchiseId) },
+        {
+          siteSupervisorFranchiseMappings: {
+            some: {
+              franchise_id: Number(franchiseId),
+            },
+          },
+        },
+      ],
+    },
+    select: {
+      id: true,
+      user_name: true,
+      user_contact: true,
+      user_email: true,
+    },
+    orderBy: {
+      user_name: "asc",
     },
   });
 
-  return mappings.map((mapping) => mapping.supervisor);
+  return supervisors;
 };

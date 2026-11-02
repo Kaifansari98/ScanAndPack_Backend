@@ -3904,45 +3904,63 @@ export const getSalesExecutivesByVendor = async (
 
 export const getSiteSupervisorByVendor = async (
   vendorId: number,
+  franchiseId?: number | null,
 ): Promise<SiteSupervisorData[]> => {
   try {
     console.log(
-      `[SERVICE] Fetching Site Supervisor for vendor ID: ${vendorId}`,
+      `[SERVICE] Fetching Site Supervisor for vendor ID: ${vendorId}${franchiseId ? `, franchise ID: ${franchiseId}` : ""}`,
     );
 
-    // First, find the user type ID for 'site-supervisor'
-    const SiteSupervisorType = await prisma.userTypeMaster.findFirst({
+    // Find the user type IDs for 'site-supervisor'
+    const siteSupervisorTypes = await prisma.userTypeMaster.findMany({
       where: {
         user_type: {
-          equals: "site-supervisor",
+          in: ["site-supervisor", "site supervisor", "site_supervisor"],
           mode: "insensitive", // Case insensitive search
         },
       },
+      select: { id: true },
     });
 
-    if (!SiteSupervisorType) {
+    if (siteSupervisorTypes.length === 0) {
       console.log("[SERVICE] Site Supervisor user type not found");
       return [];
     }
 
+    const typeIds = siteSupervisorTypes.map((t) => t.id);
+
     console.log(
-      `[SERVICE] Found Site Supervisor type ID: ${SiteSupervisorType.id}`,
+      `[SERVICE] Found Site Supervisor type IDs: ${typeIds.join(", ")}`,
     );
 
-    // Fetch all users with sales-executive role for the specified vendor
+    const whereClause: any = {
+      vendor_id: vendorId,
+      user_type_id: { in: typeIds },
+      status: "active",
+    };
+
+    if (franchiseId && !isNaN(franchiseId)) {
+      whereClause.OR = [
+        { franchise_id: franchiseId },
+        {
+          siteSupervisorFranchiseMappings: {
+            some: {
+              franchise_id: franchiseId,
+            },
+          },
+        },
+      ];
+    }
+
+    // Fetch all site supervisors for the specified vendor (and franchise if provided)
     const siteSupervisor = await prisma.userMaster.findMany({
-      where: {
-        vendor_id: vendorId,
-        user_type_id: SiteSupervisorType.id,
-        // Optionally filter only active users
-        status: "active",
-      },
+      where: whereClause,
       include: {
         user_type: true,
         documents: true,
       },
       orderBy: {
-        created_at: "desc",
+        user_name: "asc",
       },
     });
 
