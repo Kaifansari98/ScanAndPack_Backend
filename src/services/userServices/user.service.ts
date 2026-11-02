@@ -202,6 +202,12 @@ const assignFranchiseLeadsToSupervisor = async (
   tx: Prisma.TransactionClient, vendorId: number, userId: number,
   franchiseIds: number[], actorId: number,
 ) => {
+  const vendor = await tx.vendorMaster.findUnique({
+    where: { id: vendorId },
+    select: { handlesLargeScaleProjects: true },
+  });
+  if (vendor?.handlesLargeScaleProjects !== false) return;
+
   // LeadUserMapping requires an account; drafts without one cannot be mapped yet.
   // Process bounded batches to avoid oversized bulk inserts for large franchises.
   let cursor = 0;

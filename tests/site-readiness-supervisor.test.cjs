@@ -5,10 +5,14 @@ const path = require('node:path');
 const vm = require('node:vm');
 const ts = require('typescript');
 
-function setup(assignments, legacy) {
+function setup(assignments, legacy, handlesLargeScaleProjects = false) {
   let legacyReads = 0;
   const calls = [];
   const prisma = {
+    vendorMaster: { findUnique: async ({ where }) => {
+      assert.equal(where.id, 2);
+      return handlesLargeScaleProjects === null ? null : { handlesLargeScaleProjects };
+    } },
     leadUserMapping: { findFirst: async (query) => {
       calls.push(query);
       return assignments.filter(row => Object.entries(query.where).every(([key, value]) => row[key] === value))
@@ -70,4 +74,14 @@ test('returns null for unassigned leads and validates required identifiers', asy
   assert.equal(await s.service.getAssignedSiteSupervisor(2, 3), null);
   await assert.rejects(s.service.getAssignedSiteSupervisor(0, 3), { statusCode: 400 });
   await assert.rejects(s.service.getAssignedSiteSupervisor(2, 0), { statusCode: 400 });
+});
+
+test('large-scale and missing vendors retain installation-specific assignment even when lead assignment differs', async () => {
+  for (const flag of [true, null]) {
+    const legacy = { user_id: 8, supervisor: { id: 8 } };
+    const s = setup([assignment()], legacy, flag);
+    assert.equal(await s.service.getAssignedSiteSupervisor(2, 3), legacy);
+    assert.equal(s.legacyReads(), 1);
+    assert.equal(s.calls.length, 1);
+  }
 });

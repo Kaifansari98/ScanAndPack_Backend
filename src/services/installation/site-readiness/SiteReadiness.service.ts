@@ -479,21 +479,26 @@ export class SiteReadinessService {
       user_timezone: true,
       status: true,
     } as const;
-    // Franchise reassignment updates LeadUserMapping; it takes precedence over
-    // the older installation-specific mapping, which may still name the old user.
-    const assigned = await prisma.leadUserMapping.findFirst({
-      where: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        type: "site-supervisor",
-        status: "active",
-      },
-      include: { user: { select: supervisorSelect } },
-      orderBy: [{ updated_at: "desc" }, { id: "desc" }],
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { handlesLargeScaleProjects: true },
     });
-    if (assigned) {
-      const { user, ...mapping } = assigned;
-      return { ...mapping, supervisor: user };
+    // Franchise-wide reassignment only applies to small-scale vendors.
+    if (vendor?.handlesLargeScaleProjects === false) {
+      const assigned = await prisma.leadUserMapping.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          type: "site-supervisor",
+          status: "active",
+        },
+        include: { user: { select: supervisorSelect } },
+        orderBy: [{ updated_at: "desc" }, { id: "desc" }],
+      });
+      if (assigned) {
+        const { user, ...mapping } = assigned;
+        return { ...mapping, supervisor: user };
+      }
     }
 
     const mapping = await prisma.leadSiteSupervisorMapping.findFirst({

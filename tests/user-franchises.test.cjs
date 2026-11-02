@@ -5,7 +5,7 @@ const vm = require('node:vm');
 const ts = require('typescript');
 
 // Exercise the service without a database or Redis connection.
-function setup() {
+function setup(handlesLargeScaleProjects = false) {
   let user;
   let mappings = [];
   let failMapping = false;
@@ -27,6 +27,12 @@ function setup() {
     return row[key] === value;
   });
   const prisma = {
+    vendorMaster: {
+      findUnique: async ({ where }) => {
+        assert.equal(where.id, 1);
+        return handlesLargeScaleProjects === null ? null : { handlesLargeScaleProjects };
+      },
+    },
     leadChatRoom: {
       findMany: async ({ where }) => rooms.filter(room => matches(room, where)),
     },
@@ -409,4 +415,28 @@ test('confirmation and profile edits do not change chat membership', async () =>
   s.setChatMembers([chatMember(101, 8)]);
   await s.updateUserService(7, { user_name: 'Renamed', confirm_additional_supervisor: true });
   assert.deepEqual(s.state().chatMembers, [chatMember(101, 8)]);
+});
+
+test('large-scale or missing vendors never bulk-reassign leads or chat members on create or edit', async () => {
+  for (const flag of [true, null]) {
+    const s = setup(flag);
+    s.setLeads([lead(1, 10), lead(2, 20)]);
+    s.setLeadMappings([leadMapping(1, 1, 8), leadMapping(2, 2, 9)]);
+    s.setRooms([{ id: 101, lead_id: 1, vendor_id: 1 }, { id: 102, lead_id: 2, vendor_id: 1 }]);
+    s.setChatMembers([chatMember(101, 8), chatMember(102, 9)]);
+    const beforeLeads = JSON.stringify(s.state().leadMappings);
+    const beforeChats = JSON.stringify(s.state().chatMembers);
+    s.failLeads();
+    s.failChat();
+    await s.createUserService({ ...payload, franchise_ids: [10] });
+    await s.updateUserService(7, { franchise_ids: [10, 20] });
+    assert.equal(s.state().user.franchise_id, 10);
+    assert.deepEqual(s.state().mappings.map(m => m.franchise_id), [10, 20]);
+    assert.equal(JSON.stringify(s.state().leadMappings), beforeLeads);
+    assert.equal(JSON.stringify(s.state().chatMembers), beforeChats);
+    await s.updateUserService(7, { user_type_id: 99 });
+    await s.updateUserService(7, { user_type_id: 2 });
+    assert.equal(JSON.stringify(s.state().leadMappings), beforeLeads);
+    assert.equal(JSON.stringify(s.state().chatMembers), beforeChats);
+  }
 });
