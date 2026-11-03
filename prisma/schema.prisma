@@ -3584,6 +3584,12 @@ model DefectedItem {
   @@index([cut_list_id])
 }
 
+enum FranchiseDepartment {
+  BRANCH
+  FRANCHISE
+  FACTORY
+}
+
 model FranchiseMaster {
   online_lead_sales_executive_id                                             Int?
   onlineLeadSalesExecutive                                                   UserMaster?                          @relation("OnlineLeadSalesExecutive", fields: [online_lead_sales_executive_id], references: [id], onDelete: SetNull)
@@ -3592,6 +3598,7 @@ model FranchiseMaster {
   vendor_id                                                                  Int
   franchise_name                                                             String
   franchise_code                                                             String?
+  Department                                                                 FranchiseDepartment                  @default(FRANCHISE)
   contact_number                                                             String?
   contact_email                                                              String?
   contact_person                                                             String?
