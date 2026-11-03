@@ -23,6 +23,15 @@ export const createFranchiseController = async (
     });
   } catch (error: any) {
     console.error("Error creating franchise:", error);
+    // The unique constraint also protects simultaneous submissions.
+    if (error.code === "FRANCHISE_CODE_EXISTS" ||
+        (error.code === "P2002" && String(error.meta?.target ?? "").includes("franchise_code"))) {
+      return res.status(409).json({
+        success: false,
+        code: "FRANCHISE_CODE_EXISTS",
+        message: "This franchise code is already in use for this vendor. Enter a different code.",
+      });
+    }
     return res.status(error.statusCode || 500).json({
       success: false,
       message: error.message || "Internal server error while creating franchise",
