@@ -194,13 +194,16 @@ export const processProductBulkUploadService = async (
     // Fetch existing item codes (article_codes & item_codes) in DB for vendor to prevent duplicates
     const existingProducts = await prisma.productMaster.findMany({
       where: { vendor_id },
-      select: { article_code: true, item_code: true },
+      select: { article_code: true, item_code: true, product_name: true, category_id: true },
     });
     const existingItemCodes = new Set<string>();
+    const existingProductKeys = new Set<string>();
     existingProducts.forEach((p) => {
       if (p.article_code) existingItemCodes.add(p.article_code.toLowerCase().trim());
       if (p.item_code) existingItemCodes.add(p.item_code.toLowerCase().trim());
+      if (p.product_name?.trim()) existingProductKeys.add(`${p.category_id}:${p.product_name.trim().toLowerCase()}`);
     });
+    const batchProductKeys = new Set<string>();
 
     // Helper functions to get or create master entities for this vendor without duplication
     const getOrCreateCategory = async (name: string): Promise<number> => {
@@ -770,6 +773,17 @@ export const processProductBulkUploadService = async (
 
     const validPayloads: { rowNum: number; raw: any; payload: any }[] = [];
     const invalidRows: { rowNum: number; raw: any; reason: string }[] = [];
+    const categoryPrefixCache = new Map<number, string | null>();
+    const getConfiguredCategoryPrefix = async (categoryId: number): Promise<string | null> => {
+      if (categoryPrefixCache.has(categoryId)) return categoryPrefixCache.get(categoryId) ?? null;
+      const category = await prisma.projectCategoriesMaster.findUnique({
+        where: { id: categoryId },
+        select: { prefix: true },
+      });
+      const prefix = category?.prefix?.trim().replace(/[-_]+$/, "").toUpperCase() || null;
+      categoryPrefixCache.set(categoryId, prefix);
+      return prefix;
+    };
 
     // Helper getter for cell values
     const getVal = (raw: any, possibleKeys: string[]) => {
@@ -837,6 +851,17 @@ export const processProductBulkUploadService = async (
         }
       }
 
+      if (productName && categoryId) {
+        const productKey = `${categoryId}:${productName.trim().toLowerCase()}`;
+        if (existingProductKeys.has(productKey)) {
+          errors.push(`Product "${productName}" already exists in this category`);
+        } else if (batchProductKeys.has(productKey)) {
+          errors.push(`Product "${productName}" is duplicated in this Excel sheet for this category`);
+        } else {
+          batchProductKeys.add(productKey);
+        }
+      }
+
       // 3. Sub Category Resolution (get or create if missing)
       let subCategoryId: number | null = null;
       if (subCategoryName && categoryId) {
@@ -851,7 +876,20 @@ export const processProductBulkUploadService = async (
       let resolvedItemCode = itemCodeRaw;
       if (resolvedItemCode) {
         const lowerCode = resolvedItemCode.toLowerCase();
-        if (existingItemCodes.has(lowerCode)) {
+        let configuredPrefix: string | null = null;
+        if (categoryId) {
+          try {
+            configuredPrefix = await getConfiguredCategoryPrefix(categoryId);
+          } catch (err: any) {
+            errors.push(`Failed to verify Category prefix: ${err.message}`);
+          }
+        }
+        const normalizedCode = resolvedItemCode.trim().toUpperCase();
+        const matchesPrefix = !configuredPrefix || normalizedCode === configuredPrefix ||
+          normalizedCode.startsWith(`${configuredPrefix}-`) || normalizedCode.startsWith(`${configuredPrefix}_`);
+        if (!matchesPrefix) {
+          errors.push(`Item Code "${resolvedItemCode}" does not match Category prefix "${configuredPrefix}"`);
+        } else if (existingItemCodes.has(lowerCode)) {
           errors.push(`Item Code "${resolvedItemCode}" already exists in the system`);
         } else if (batchItemCodes.has(lowerCode)) {
           errors.push(`Item Code "${resolvedItemCode}" is duplicated in this Excel sheet`);
