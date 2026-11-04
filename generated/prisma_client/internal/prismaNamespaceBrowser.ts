@@ -287,7 +287,9 @@ export const ModelName = {
   WalkinLeadUpload: 'WalkinLeadUpload',
   time_zone_master: 'time_zone_master',
   attendance: 'attendance',
-  attendance_logs: 'attendance_logs'
+  attendance_logs: 'attendance_logs',
+  attendance_breaks: 'attendance_breaks',
+  attendance_corrections: 'attendance_corrections'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -4479,6 +4481,8 @@ export const AttendanceScalarFieldEnum = {
   check_in: 'check_in',
   check_out: 'check_out',
   source: 'source',
+  work_location: 'work_location',
+  time_zone: 'time_zone',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -4495,10 +4499,48 @@ export const Attendance_logsScalarFieldEnum = {
   action: 'action',
   action_time: 'action_time',
   source: 'source',
+  actor_id: 'actor_id',
+  correction_id: 'correction_id',
+  before_values: 'before_values',
+  after_values: 'after_values',
   created_at: 'created_at'
 } as const
 
 export type Attendance_logsScalarFieldEnum = (typeof Attendance_logsScalarFieldEnum)[keyof typeof Attendance_logsScalarFieldEnum]
+
+
+export const Attendance_breaksScalarFieldEnum = {
+  id: 'id',
+  attendance_id: 'attendance_id',
+  started_at: 'started_at',
+  ended_at: 'ended_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Attendance_breaksScalarFieldEnum = (typeof Attendance_breaksScalarFieldEnum)[keyof typeof Attendance_breaksScalarFieldEnum]
+
+
+export const Attendance_correctionsScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_id: 'user_id',
+  attendance_id: 'attendance_id',
+  attendance_date: 'attendance_date',
+  requested_check_in: 'requested_check_in',
+  requested_check_out: 'requested_check_out',
+  reason: 'reason',
+  status: 'status',
+  requested_by: 'requested_by',
+  reviewed_by: 'reviewed_by',
+  reviewed_at: 'reviewed_at',
+  review_note: 'review_note',
+  baseline_updated_at: 'baseline_updated_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Attendance_correctionsScalarFieldEnum = (typeof Attendance_correctionsScalarFieldEnum)[keyof typeof Attendance_correctionsScalarFieldEnum]
 
 
 export const SortOrder = {
