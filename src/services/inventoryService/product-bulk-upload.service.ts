@@ -1,6 +1,7 @@
 import ExcelJS from "exceljs";
 import { prisma, Prisma } from "../../prisma/client";
 import { validationResponse } from "../../utils/validationResponse";
+import { deriveCategoryPrefix } from "./product-code.service";
 
 const toDecimal = (v: any) =>
   v === undefined || v === null || v === "" ? null : new Prisma.Decimal(v);
@@ -18,7 +19,7 @@ const generateAutoBarcode = (vendorId: number, productId: number, customBarcode?
 export const TEMPLATE_COLUMNS = [
   { header: "Product Name*", key: "product_name", width: 25 },
   { header: "Category*", key: "category", width: 20 },
-  { header: "Item Code*", key: "item_code", width: 20 },
+  { header: "Item Code", key: "item_code", width: 20 },
   { header: "Primary Unit*", key: "primary_unit", width: 20 },
   { header: "Sub Category", key: "sub_category", width: 20 },
   { header: "Barcode", key: "barcode", width: 20 },
@@ -43,6 +44,7 @@ export const TEMPLATE_COLUMNS = [
   { header: "Grade", key: "grade", width: 15 },
   { header: "Type", key: "type", width: 15 },
   { header: "Finish", key: "finish", width: 15 },
+  { header: "Size", key: "size", width: 15 },
   { header: "Length", key: "length", width: 12 },
   { header: "Height", key: "height", width: 12 },
   { header: "Thickness", key: "thickness", width: 12 },
@@ -151,8 +153,16 @@ export const processProductBulkUploadService = async (
     ]);
 
     // Build lookup maps (case-insensitive string keys)
-    const catMap = new Map<string, { id: number; parent_id: number | null }>();
-    categories.forEach((c) => catMap.set(c.category_name.toLowerCase().trim(), { id: c.id, parent_id: c.parent_id }));
+    const mainCatMap = new Map<string, number>();
+    const subCatMap = new Map<string, number>();
+    categories.forEach((c) => {
+      const norm = c.category_name.toLowerCase().trim();
+      if (!c.parent_id) {
+        mainCatMap.set(norm, c.id);
+      } else {
+        subCatMap.set(`${c.parent_id}:${norm}`, c.id);
+      }
+    });
 
     const brandMap = new Map<string, number>();
     brands.forEach((b) => brandMap.set(b.brand_name.toLowerCase().trim(), b.id));
@@ -181,18 +191,584 @@ export const processProductBulkUploadService = async (
     const finishMap = new Map<string, number>();
     finishes.forEach((f) => finishMap.set(f.finish_name.toLowerCase().trim(), f.id));
 
-    // Fetch existing item codes (article_codes) in DB for vendor to prevent duplicates
+    // Fetch existing item codes (article_codes & item_codes) in DB for vendor to prevent duplicates
     const existingProducts = await prisma.productMaster.findMany({
       where: { vendor_id },
-      select: { article_code: true },
+      select: { article_code: true, item_code: true },
     });
-    const existingItemCodes = new Set(
-      existingProducts.map((p) => (p.article_code || "").toLowerCase().trim()).filter(Boolean)
-    );
+    const existingItemCodes = new Set<string>();
+    existingProducts.forEach((p) => {
+      if (p.article_code) existingItemCodes.add(p.article_code.toLowerCase().trim());
+      if (p.item_code) existingItemCodes.add(p.item_code.toLowerCase().trim());
+    });
+
+    // Helper functions to get or create master entities for this vendor without duplication
+    const getOrCreateCategory = async (name: string): Promise<number> => {
+      const trimmed = name.trim();
+      const key = trimmed.toLowerCase();
+      if (mainCatMap.has(key)) return mainCatMap.get(key)!;
+
+      const existing = await prisma.projectCategoriesMaster.findFirst({
+        where: {
+          vendor_id,
+          parent_id: null,
+          category_name: { equals: trimmed, mode: "insensitive" },
+        },
+        select: { id: true },
+      });
+      if (existing) {
+        mainCatMap.set(key, existing.id);
+        return existing.id;
+      }
+
+      try {
+        const derivedPrefix = deriveCategoryPrefix(trimmed) || "PROD";
+        const created = await prisma.projectCategoriesMaster.create({
+          data: {
+            vendor_id,
+            category_name: trimmed,
+            prefix: derivedPrefix,
+            status: "Yes",
+            parent_id: null,
+            created_by: user_id || null,
+            updated_by: user_id || null,
+          },
+          select: { id: true },
+        });
+        mainCatMap.set(key, created.id);
+        return created.id;
+      } catch (err) {
+        const fallback = await prisma.projectCategoriesMaster.findFirst({
+          where: {
+            vendor_id,
+            parent_id: null,
+            category_name: { equals: trimmed, mode: "insensitive" },
+          },
+          select: { id: true },
+        });
+        if (fallback) {
+          mainCatMap.set(key, fallback.id);
+          return fallback.id;
+        }
+        throw err;
+      }
+    };
+
+    const getOrCreateSubCategory = async (catId: number, name: string): Promise<number> => {
+      const trimmed = name.trim();
+      const subKey = `${catId}:${trimmed.toLowerCase()}`;
+      if (subCatMap.has(subKey)) return subCatMap.get(subKey)!;
+
+      const existing = await prisma.projectCategoriesMaster.findFirst({
+        where: {
+          vendor_id,
+          parent_id: catId,
+          category_name: { equals: trimmed, mode: "insensitive" },
+        },
+        select: { id: true },
+      });
+      if (existing) {
+        subCatMap.set(subKey, existing.id);
+        return existing.id;
+      }
+
+      try {
+        const created = await prisma.projectCategoriesMaster.create({
+          data: {
+            vendor_id,
+            parent_id: catId,
+            category_name: trimmed,
+            status: "Yes",
+            created_by: user_id || null,
+            updated_by: user_id || null,
+          },
+          select: { id: true },
+        });
+        subCatMap.set(subKey, created.id);
+        return created.id;
+      } catch (err) {
+        const fallback = await prisma.projectCategoriesMaster.findFirst({
+          where: {
+            vendor_id,
+            parent_id: catId,
+            category_name: { equals: trimmed, mode: "insensitive" },
+          },
+          select: { id: true },
+        });
+        if (fallback) {
+          subCatMap.set(subKey, fallback.id);
+          return fallback.id;
+        }
+        throw err;
+      }
+    };
+
+    const getOrCreateBrand = async (name: string): Promise<number> => {
+      const trimmed = name.trim();
+      const key = trimmed.toLowerCase();
+      if (brandMap.has(key)) return brandMap.get(key)!;
+
+      const existing = await prisma.brandMaster.findFirst({
+        where: {
+          vendor_id,
+          brand_name: { equals: trimmed, mode: "insensitive" },
+        },
+        select: { id: true },
+      });
+      if (existing) {
+        brandMap.set(key, existing.id);
+        return existing.id;
+      }
+
+      try {
+        const created = await prisma.brandMaster.create({
+          data: {
+            vendor_id,
+            brand_name: trimmed,
+            is_active: true,
+            created_by: user_id || null,
+            updated_by: user_id || null,
+          },
+          select: { id: true },
+        });
+        brandMap.set(key, created.id);
+        return created.id;
+      } catch (err) {
+        const fallback = await prisma.brandMaster.findFirst({
+          where: { vendor_id, brand_name: { equals: trimmed, mode: "insensitive" } },
+          select: { id: true },
+        });
+        if (fallback) {
+          brandMap.set(key, fallback.id);
+          return fallback.id;
+        }
+        throw err;
+      }
+    };
+
+    const getOrCreateCoreProduct = async (name: string): Promise<number> => {
+      const trimmed = name.trim();
+      const key = trimmed.toLowerCase();
+      if (coreMap.has(key)) return coreMap.get(key)!;
+
+      const existing = await prisma.coreProductMaster.findFirst({
+        where: {
+          vendor_id,
+          core_product_name: { equals: trimmed, mode: "insensitive" },
+        },
+        select: { id: true },
+      });
+      if (existing) {
+        coreMap.set(key, existing.id);
+        return existing.id;
+      }
+
+      try {
+        const created = await prisma.coreProductMaster.create({
+          data: {
+            vendor_id,
+            core_product_name: trimmed,
+            is_active: true,
+            created_by: user_id || null,
+            updated_by: user_id || null,
+          },
+          select: { id: true },
+        });
+        coreMap.set(key, created.id);
+        return created.id;
+      } catch (err) {
+        const fallback = await prisma.coreProductMaster.findFirst({
+          where: { vendor_id, core_product_name: { equals: trimmed, mode: "insensitive" } },
+          select: { id: true },
+        });
+        if (fallback) {
+          coreMap.set(key, fallback.id);
+          return fallback.id;
+        }
+        throw err;
+      }
+    };
+
+    const getOrCreateGrade = async (name: string): Promise<number> => {
+      const trimmed = name.trim();
+      const key = trimmed.toLowerCase();
+      if (gradeMap.has(key)) return gradeMap.get(key)!;
+
+      const existing = await prisma.gradeMaster.findFirst({
+        where: {
+          vendor_id,
+          grade_name: { equals: trimmed, mode: "insensitive" },
+        },
+        select: { id: true },
+      });
+      if (existing) {
+        gradeMap.set(key, existing.id);
+        return existing.id;
+      }
+
+      try {
+        const created = await prisma.gradeMaster.create({
+          data: {
+            vendor_id,
+            grade_name: trimmed,
+            is_active: true,
+            created_by: user_id || null,
+            updated_by: user_id || null,
+          },
+          select: { id: true },
+        });
+        gradeMap.set(key, created.id);
+        return created.id;
+      } catch (err) {
+        const fallback = await prisma.gradeMaster.findFirst({
+          where: { vendor_id, grade_name: { equals: trimmed, mode: "insensitive" } },
+          select: { id: true },
+        });
+        if (fallback) {
+          gradeMap.set(key, fallback.id);
+          return fallback.id;
+        }
+        throw err;
+      }
+    };
+
+    const getOrCreateFinish = async (name: string): Promise<number> => {
+      const trimmed = name.trim();
+      const key = trimmed.toLowerCase();
+      if (finishMap.has(key)) return finishMap.get(key)!;
+
+      const existing = await prisma.finishMaster.findFirst({
+        where: {
+          vendor_id,
+          finish_name: { equals: trimmed, mode: "insensitive" },
+        },
+        select: { id: true },
+      });
+      if (existing) {
+        finishMap.set(key, existing.id);
+        return existing.id;
+      }
+
+      try {
+        const created = await prisma.finishMaster.create({
+          data: {
+            vendor_id,
+            finish_name: trimmed,
+            is_active: true,
+            created_by: user_id || null,
+            updated_by: user_id || null,
+          },
+          select: { id: true },
+        });
+        finishMap.set(key, created.id);
+        return created.id;
+      } catch (err) {
+        const fallback = await prisma.finishMaster.findFirst({
+          where: { vendor_id, finish_name: { equals: trimmed, mode: "insensitive" } },
+          select: { id: true },
+        });
+        if (fallback) {
+          finishMap.set(key, fallback.id);
+          return fallback.id;
+        }
+        throw err;
+      }
+    };
+
+    const getOrCreateType = async (name: string): Promise<number> => {
+      const trimmed = name.trim();
+      const key = trimmed.toLowerCase();
+      if (typeMap.has(key)) return typeMap.get(key)!;
+
+      const existing = await prisma.typeMaster.findFirst({
+        where: {
+          vendor_id,
+          type_name: { equals: trimmed, mode: "insensitive" },
+        },
+        select: { id: true },
+      });
+      if (existing) {
+        typeMap.set(key, existing.id);
+        return existing.id;
+      }
+
+      try {
+        const created = await prisma.typeMaster.create({
+          data: {
+            vendor_id,
+            type_name: trimmed,
+            is_active: true,
+            created_by: user_id || null,
+            updated_by: user_id || null,
+          },
+          select: { id: true },
+        });
+        typeMap.set(key, created.id);
+        return created.id;
+      } catch (err) {
+        const fallback = await prisma.typeMaster.findFirst({
+          where: { vendor_id, type_name: { equals: trimmed, mode: "insensitive" } },
+          select: { id: true },
+        });
+        if (fallback) {
+          typeMap.set(key, fallback.id);
+          return fallback.id;
+        }
+        throw err;
+      }
+    };
+
+    const getOrCreateItemGroup = async (name: string): Promise<number> => {
+      const trimmed = name.trim();
+      const key = trimmed.toLowerCase();
+      if (groupMap.has(key)) return groupMap.get(key)!;
+
+      const existing = await prisma.itemGroupMaster.findFirst({
+        where: {
+          vendor_id,
+          group_name: { equals: trimmed, mode: "insensitive" },
+        },
+        select: { id: true },
+      });
+      if (existing) {
+        groupMap.set(key, existing.id);
+        return existing.id;
+      }
+
+      try {
+        const created = await prisma.itemGroupMaster.create({
+          data: {
+            vendor_id,
+            group_name: trimmed,
+            is_active: true,
+            created_by: user_id || null,
+            updated_by: user_id || null,
+          },
+          select: { id: true },
+        });
+        groupMap.set(key, created.id);
+        return created.id;
+      } catch (err) {
+        const fallback = await prisma.itemGroupMaster.findFirst({
+          where: { vendor_id, group_name: { equals: trimmed, mode: "insensitive" } },
+          select: { id: true },
+        });
+        if (fallback) {
+          groupMap.set(key, fallback.id);
+          return fallback.id;
+        }
+        throw err;
+      }
+    };
+
+    const getOrCreateUnit = async (name: string): Promise<number | null> => {
+      const trimmed = name.trim();
+      if (!trimmed) return null;
+      const key = trimmed.toLowerCase();
+      if (unitMap.has(key)) return unitMap.get(key)!;
+
+      const existing = await prisma.unitMaster.findFirst({
+        where: {
+          vendor_id,
+          OR: [
+            { unit_name: { equals: trimmed, mode: "insensitive" } },
+            { short_name: { equals: trimmed, mode: "insensitive" } },
+          ],
+        },
+        select: { id: true, unit_name: true, short_name: true },
+      });
+      if (existing) {
+        unitMap.set(key, existing.id);
+        if (existing.unit_name) unitMap.set(existing.unit_name.toLowerCase().trim(), existing.id);
+        if (existing.short_name) unitMap.set(existing.short_name.toLowerCase().trim(), existing.id);
+        return existing.id;
+      }
+
+      try {
+        const created = await prisma.unitMaster.create({
+          data: {
+            vendor_id,
+            unit_name: trimmed,
+            unit_class: trimmed,
+            short_name: trimmed,
+            decimal_allowed: true,
+            is_active: true,
+            created_by: user_id || null,
+            updated_by: user_id || null,
+          },
+          select: { id: true },
+        });
+        unitMap.set(key, created.id);
+        return created.id;
+      } catch (err) {
+        const fallback = await prisma.unitMaster.findFirst({
+          where: {
+            vendor_id,
+            OR: [
+              { unit_name: { equals: trimmed, mode: "insensitive" } },
+              { short_name: { equals: trimmed, mode: "insensitive" } },
+            ],
+          },
+          select: { id: true },
+        });
+        if (fallback) {
+          unitMap.set(key, fallback.id);
+          return fallback.id;
+        }
+        throw err;
+      }
+    };
+
+    const getOrCreateHSN = async (code: string): Promise<number | null> => {
+      const trimmed = code.trim();
+      if (!trimmed) return null;
+      const key = trimmed.toLowerCase();
+      if (hsnMap.has(key)) return hsnMap.get(key)!;
+
+      const existing = await prisma.hsnProductMapping.findFirst({
+        where: {
+          vendor_id,
+          hsn_code: { equals: trimmed, mode: "insensitive" },
+        },
+        select: { id: true },
+      });
+      if (existing) {
+        hsnMap.set(key, existing.id);
+        return existing.id;
+      }
+
+      try {
+        const created = await prisma.hsnProductMapping.create({
+          data: {
+            vendor_id,
+            hsn_code: trimmed,
+            description: trimmed,
+            cgst_rate: new Prisma.Decimal(0),
+            sgst_rate: new Prisma.Decimal(0),
+            igst_rate: new Prisma.Decimal(0),
+            cess_rate: new Prisma.Decimal(0),
+            is_active: true,
+          },
+          select: { id: true },
+        });
+        hsnMap.set(key, created.id);
+        return created.id;
+      } catch (err) {
+        const fallback = await prisma.hsnProductMapping.findFirst({
+          where: { vendor_id, hsn_code: { equals: trimmed, mode: "insensitive" } },
+          select: { id: true },
+        });
+        if (fallback) {
+          hsnMap.set(key, fallback.id);
+          return fallback.id;
+        }
+        throw err;
+      }
+    };
+
+    // In-memory tracker for auto-generating unique item codes by Category prefix
+    const prefixCounterMap = new Map<string, number>();
+
+    const generateNextItemCodeForCategory = async (catId: number): Promise<string> => {
+      const category = await prisma.projectCategoriesMaster.findUnique({
+        where: { id: catId },
+        select: { category_name: true, prefix: true },
+      });
+      if (!category) {
+        throw new Error("Category not found");
+      }
+
+      // Check recent products under this category to detect existing prefix & delimiter pattern
+      const recentProducts = await prisma.productMaster.findMany({
+        where: {
+          vendor_id,
+          category_id: catId,
+        },
+        select: { article_code: true, item_code: true },
+        orderBy: { id: "desc" },
+        take: 20,
+      });
+
+      let detectedPrefix: string | null = null;
+      let delimiter = "-";
+
+      for (const p of recentProducts) {
+        for (const code of [p.article_code, p.item_code]) {
+          if (!code) continue;
+          const match = code.trim().match(/^([A-Za-z0-9]+)([-_])(\d+)$/);
+          if (match) {
+            detectedPrefix = match[1].toUpperCase();
+            delimiter = match[2];
+            break;
+          }
+        }
+        if (detectedPrefix) break;
+      }
+
+      let prefix = category.prefix?.trim()
+        ? category.prefix.trim().toUpperCase().replace(/[-_]+$/, "")
+        : deriveCategoryPrefix(category.category_name);
+
+      if (!prefix || prefix.length < 2) {
+        prefix = "PROD";
+      }
+
+      // If category in DB had no prefix set, save the derived prefix so future lookups are consistent
+      if (!category.prefix?.trim()) {
+        await prisma.projectCategoriesMaster.update({
+          where: { id: catId },
+          data: { prefix },
+        }).catch(() => {});
+      }
+
+      const mapKey = `${prefix}${delimiter}`;
+      if (!prefixCounterMap.has(mapKey)) {
+        const existingProductsWithPrefix = await prisma.productMaster.findMany({
+          where: {
+            vendor_id,
+            OR: [
+              { article_code: { startsWith: prefix } },
+              { item_code: { startsWith: prefix } },
+            ],
+          },
+          select: { article_code: true, item_code: true },
+        });
+
+        let maxNum = 0;
+        const regex = new RegExp(`^${prefix}[-_]?(\\d+)$`, "i");
+
+        for (const p of existingProductsWithPrefix) {
+          for (const code of [p.article_code, p.item_code]) {
+            if (!code) continue;
+            const match = code.trim().match(regex);
+            if (match) {
+              const num = parseInt(match[1], 10);
+              if (!isNaN(num) && num > maxNum) {
+                maxNum = num;
+              }
+            }
+          }
+        }
+        prefixCounterMap.set(mapKey, maxNum);
+      }
+
+      let nextNum = (prefixCounterMap.get(mapKey) || 0) + 1;
+      let candidate = `${prefix}${delimiter}${String(nextNum).padStart(3, "0")}`;
+      while (
+        existingItemCodes.has(candidate.toLowerCase()) ||
+        batchItemCodes.has(candidate.toLowerCase())
+      ) {
+        nextNum++;
+        candidate = `${prefix}${delimiter}${String(nextNum).padStart(3, "0")}`;
+      }
+
+      prefixCounterMap.set(mapKey, nextNum);
+      return candidate;
+    };
 
     const batchItemCodes = new Set<string>();
 
-    const validPayloads: { rowNum: number; payload: any }[] = [];
+    const validPayloads: { rowNum: number; raw: any; payload: any }[] = [];
     const invalidRows: { rowNum: number; raw: any; reason: string }[] = [];
 
     // Helper getter for cell values
@@ -208,14 +784,14 @@ export const processProductBulkUploadService = async (
       return "";
     };
 
-    // Row-by-Row Validation
+    // Row-by-Row Processing
     for (const item of rows) {
       const { rowNum, raw } = item;
       const errors: string[] = [];
 
       const productName = getVal(raw, ["Product Name", "product_name"]);
       const categoryName = getVal(raw, ["Category", "category"]);
-      const itemCode = getVal(raw, ["Item Code", "item_code", "article_code"]);
+      const itemCodeRaw = getVal(raw, ["Item Code", "item_code", "article_code"]);
       const subCategoryName = getVal(raw, ["Sub Category", "sub_category"]);
       const barcode = getVal(raw, ["Barcode", "barcode"]);
       const brandName = getVal(raw, ["Brand", "brand"]);
@@ -241,6 +817,7 @@ export const processProductBulkUploadService = async (
       const gradeName = getVal(raw, ["Grade", "grade"]);
       const typeName = getVal(raw, ["Type", "type"]);
       const finishName = getVal(raw, ["Finish", "finish"]);
+      const sizeRaw = getVal(raw, ["Size", "size"]);
       const lengthRaw = getVal(raw, ["Length", "length"]);
       const heightRaw = getVal(raw, ["Height", "height"]);
       const thicknessRaw = getVal(raw, ["Thickness", "thickness"]);
@@ -248,84 +825,94 @@ export const processProductBulkUploadService = async (
       // 1. Mandatory Fields Validation
       if (!productName) errors.push("Product Name is required");
       if (!categoryName) errors.push("Category is required");
-      if (!itemCode) errors.push("Item Code is required");
       if (!primaryUnitName) errors.push("Primary Unit is required");
 
-      // 2. Item Code Uniqueness Validation
-      if (itemCode) {
-        const lowerCode = itemCode.toLowerCase();
-        if (existingItemCodes.has(lowerCode)) {
-          errors.push(`Item Code "${itemCode}" already exists in the system`);
-        } else if (batchItemCodes.has(lowerCode)) {
-          errors.push(`Item Code "${itemCode}" is duplicated in this Excel sheet`);
-        }
-      }
-
-      // 3. Category Validation & Resolution
+      // 2. Category Resolution (get or create if missing)
       let categoryId: number | null = null;
       if (categoryName) {
-        const cat = catMap.get(categoryName.toLowerCase());
-        if (!cat) {
-          errors.push(`Category "${categoryName}" not found in master`);
-        } else {
-          categoryId = cat.id;
+        try {
+          categoryId = await getOrCreateCategory(categoryName);
+        } catch (err: any) {
+          errors.push(`Failed to find or add Category "${categoryName}": ${err.message}`);
         }
       }
 
-      // 4. Sub Category Validation
+      // 3. Sub Category Resolution (get or create if missing)
       let subCategoryId: number | null = null;
       if (subCategoryName && categoryId) {
-        const subCat = catMap.get(subCategoryName.toLowerCase());
-        if (!subCat || subCat.parent_id !== categoryId) {
-          errors.push(`Sub Category "${subCategoryName}" is invalid for Category "${categoryName}"`);
-        } else {
-          subCategoryId = subCat.id;
+        try {
+          subCategoryId = await getOrCreateSubCategory(categoryId, subCategoryName);
+        } catch (err: any) {
+          errors.push(`Failed to find or add Sub Category "${subCategoryName}": ${err.message}`);
         }
-      } else if (subCategoryName && !categoryId) {
-        errors.push(`Sub Category "${subCategoryName}" provided but Category is invalid`);
       }
 
-      // 5. Brand Validation
+      // 4. Item Code Resolution (use provided or auto-generate)
+      let resolvedItemCode = itemCodeRaw;
+      if (resolvedItemCode) {
+        const lowerCode = resolvedItemCode.toLowerCase();
+        if (existingItemCodes.has(lowerCode)) {
+          errors.push(`Item Code "${resolvedItemCode}" already exists in the system`);
+        } else if (batchItemCodes.has(lowerCode)) {
+          errors.push(`Item Code "${resolvedItemCode}" is duplicated in this Excel sheet`);
+        } else {
+          batchItemCodes.add(lowerCode);
+        }
+      } else if (categoryId) {
+        try {
+          resolvedItemCode = await generateNextItemCodeForCategory(categoryId);
+          batchItemCodes.add(resolvedItemCode.toLowerCase());
+        } catch (err: any) {
+          errors.push(`Failed to auto-generate item code: ${err.message}`);
+        }
+      }
+
+      // 5. Brand Resolution (get or create if missing)
       let brandId: number | null = null;
       if (brandName) {
-        const bId = brandMap.get(brandName.toLowerCase());
-        if (!bId) {
-          errors.push(`Brand "${brandName}" not found in master`);
-        } else {
-          brandId = bId;
+        try {
+          brandId = await getOrCreateBrand(brandName);
+        } catch (err: any) {
+          errors.push(`Failed to find or add Brand "${brandName}": ${err.message}`);
         }
       }
 
-      // 6. Item Group Validation
+      // 6. Item Group Resolution (get or create if missing)
       let itemGroupId: number | null = null;
       if (itemGroupName) {
-        const gId = groupMap.get(itemGroupName.toLowerCase());
-        if (!gId) {
-          errors.push(`Item Group "${itemGroupName}" not found in master`);
-        } else {
-          itemGroupId = gId;
+        try {
+          itemGroupId = await getOrCreateItemGroup(itemGroupName);
+        } catch (err: any) {
+          errors.push(`Failed to find or add Item Group "${itemGroupName}": ${err.message}`);
         }
       }
 
-      // 7. Units Validation
-      const resolveUnit = (name: string, label: string): number | null => {
+      // 7. Units Resolution (get or create if missing)
+      let primaryUnitId: number | null = null;
+      if (primaryUnitName) {
+        try {
+          primaryUnitId = await getOrCreateUnit(primaryUnitName);
+        } catch (err: any) {
+          errors.push(`Failed to find or add Primary Unit "${primaryUnitName}": ${err.message}`);
+        }
+      }
+
+      const resolveUnit = async (name: string): Promise<number | null> => {
         if (!name) return null;
-        const uId = unitMap.get(name.toLowerCase());
-        if (!uId) {
-          errors.push(`${label} "${name}" not found in master`);
+        try {
+          return await getOrCreateUnit(name);
+        } catch {
           return null;
         }
-        return uId;
       };
 
-      const primaryUnitId = resolveUnit(primaryUnitName, "Primary Unit");
-      const purchaseUnitId = resolveUnit(purchaseUnitName, "Purchase Unit") ?? primaryUnitId;
-      const stockUnitId = resolveUnit(stockUnitName, "Stock Unit") ?? primaryUnitId;
-      const consumptionUnitId = resolveUnit(consumptionUnitName, "Consumption Unit") ?? primaryUnitId;
-      const minStockUnitId = resolveUnit(minStockUnitName, "Min Stock Unit");
-      const maxStockUnitId = resolveUnit(maxStockUnitName, "Max Stock Unit");
-      const reorderLevelUnitId = resolveUnit(reorderLevelUnitName, "Reorder Level Unit");
-      const reorderBatchUnitId = resolveUnit(reorderBatchUnitName, "Reorder Batch Unit");
+      const purchaseUnitId = (await resolveUnit(purchaseUnitName)) ?? primaryUnitId;
+      const stockUnitId = (await resolveUnit(stockUnitName)) ?? primaryUnitId;
+      const consumptionUnitId = (await resolveUnit(consumptionUnitName)) ?? primaryUnitId;
+      const minStockUnitId = await resolveUnit(minStockUnitName);
+      const maxStockUnitId = await resolveUnit(maxStockUnitName);
+      const reorderLevelUnitId = await resolveUnit(reorderLevelUnitName);
+      const reorderBatchUnitId = await resolveUnit(reorderBatchUnitName);
 
       // 8. Costing Method
       let costingMethod: "FIFO" | "MANUAL" = "FIFO";
@@ -349,58 +936,53 @@ export const processProductBulkUploadService = async (
         }
       }
 
-      // 10. HSN
+      // 10. HSN Resolution (get or create if missing)
       let hsnId: number | null = null;
       if (hsnCodeRaw) {
-        const hId = hsnMap.get(hsnCodeRaw.toLowerCase());
-        if (!hId) {
-          errors.push(`HSN Code "${hsnCodeRaw}" not found in master`);
-        } else {
-          hsnId = hId;
+        try {
+          hsnId = await getOrCreateHSN(hsnCodeRaw);
+        } catch (err: any) {
+          errors.push(`Failed to find or add HSN Code "${hsnCodeRaw}": ${err.message}`);
         }
       }
 
-      // 11. Core Product
+      // 11. Core Product Resolution (get or create if missing)
       let coreProductId: number | null = null;
       if (coreProductName) {
-        const cpId = coreMap.get(coreProductName.toLowerCase());
-        if (!cpId) {
-          errors.push(`Core Product "${coreProductName}" not found in master`);
-        } else {
-          coreProductId = cpId;
+        try {
+          coreProductId = await getOrCreateCoreProduct(coreProductName);
+        } catch (err: any) {
+          errors.push(`Failed to find or add Core Product "${coreProductName}": ${err.message}`);
         }
       }
 
-      // 12. Grade
+      // 12. Grade Resolution (get or create if missing)
       let gradeId: number | null = null;
       if (gradeName) {
-        const grId = gradeMap.get(gradeName.toLowerCase());
-        if (!grId) {
-          errors.push(`Grade "${gradeName}" not found in master`);
-        } else {
-          gradeId = grId;
+        try {
+          gradeId = await getOrCreateGrade(gradeName);
+        } catch (err: any) {
+          errors.push(`Failed to find or add Grade "${gradeName}": ${err.message}`);
         }
       }
 
-      // 13. Type
+      // 13. Type Resolution (get or create if missing)
       let typeId: number | null = null;
       if (typeName) {
-        const tId = typeMap.get(typeName.toLowerCase());
-        if (!tId) {
-          errors.push(`Type "${typeName}" not found in master`);
-        } else {
-          typeId = tId;
+        try {
+          typeId = await getOrCreateType(typeName);
+        } catch (err: any) {
+          errors.push(`Failed to find or add Type "${typeName}": ${err.message}`);
         }
       }
 
-      // 14. Finish
+      // 14. Finish Resolution (get or create if missing)
       let finishId: number | null = null;
       if (finishName) {
-        const fId = finishMap.get(finishName.toLowerCase());
-        if (!fId) {
-          errors.push(`Finish "${finishName}" not found in master`);
-        } else {
-          finishId = fId;
+        try {
+          finishId = await getOrCreateFinish(finishName);
+        } catch (err: any) {
+          errors.push(`Failed to find or add Finish "${finishName}": ${err.message}`);
         }
       }
 
@@ -433,17 +1015,17 @@ export const processProductBulkUploadService = async (
           reason: errors.join("; "),
         });
       } else {
-        batchItemCodes.add(itemCode.toLowerCase());
         validPayloads.push({
           rowNum,
+          raw,
           payload: {
             vendor_id: Number(vendor_id),
-            created_by: user_id,
+            created_by: user_id || null,
             category_id: categoryId!,
             sub_category_id: subCategoryId,
             product_name: productName,
-            article_code: itemCode,
-            item_code: itemCode,
+            article_code: resolvedItemCode,
+            item_code: resolvedItemCode,
             barcode: barcode || null,
             brand_id: brandId,
             item_group_id: itemGroupId,
@@ -463,14 +1045,24 @@ export const processProductBulkUploadService = async (
             reorder_batch_qty: toDecimal(reorderBatchQty),
             reorder_batch_unit_id: reorderBatchUnitId,
             hsn_id: hsnId,
+            hsn_code: hsnCodeRaw || null,
             item_type: itemType,
             core_product_id: coreProductId,
             grade_id: gradeId,
             type_id: typeId,
             finish_id: finishId,
+            finish: finishName || null,
+            group: itemGroupName || null,
+            core_material: coreProductName || null,
+            unit_of_measure: primaryUnitName || null,
+            size: sizeRaw || null,
             dimension_1: length ?? 0,
             dimension_2: height ?? 0,
             dimension_3: thickness ?? 0,
+            length: toDecimal(length),
+            height: toDecimal(height),
+            thickness: toDecimal(thickness),
+            active: "Yes",
           },
         });
       }
@@ -503,7 +1095,7 @@ export const processProductBulkUploadService = async (
         console.error(`Failed to insert row ${item.rowNum}:`, err);
         invalidRows.push({
           rowNum: item.rowNum,
-          raw: item.payload,
+          raw: item.raw,
           reason: `Database insertion error: ${err.message || "Unknown error"}`,
         });
       }
