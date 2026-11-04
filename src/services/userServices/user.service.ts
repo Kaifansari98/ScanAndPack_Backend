@@ -232,6 +232,26 @@ const assignFranchiseLeadsToSupervisor = async (
         chatRoom: { vendor_id: vendorId, lead: leadScope },
       },
     });
+    // Hand each removed franchise's leads and pending tasks to a remaining supervisor.
+    for (const franchiseId of removedFranchiseIds) {
+      const replacement = await tx.userMaster.findFirst({
+        where: {
+          vendor_id: vendorId, id: { not: userId }, status: "active",
+          user_type: { user_type: { in: ["site-supervisor", "site supervisor", "site_supervisor"], mode: "insensitive" } },
+          OR: [
+            { franchise_id: franchiseId },
+            { siteSupervisorFranchiseMappings: { some: { vendor_id: vendorId, franchise_id: franchiseId } } },
+          ],
+        },
+        select: { id: true },
+        orderBy: { id: "asc" },
+      });
+      if (!replacement) {
+        const franchise = await tx.franchiseMaster.findUnique({ where: { id: franchiseId }, select: { franchise_name: true } });
+        throw Object.assign(new Error(`Map another site supervisor to ${franchise?.franchise_name ?? "this franchise"} before removing it from this supervisor.`), { statusCode: 409 });
+      }
+      await assignFranchiseLeadsToSupervisor(tx, vendorId, replacement.id, [franchiseId], actorId);
+    }
   }
 
   // LeadUserMapping requires an account; drafts without one cannot be mapped yet.
@@ -313,6 +333,17 @@ const assignFranchiseLeadsToSupervisor = async (
     }
     cursor = leads[leads.length - 1].id;
   }
+
+  // Pending site-supervisor tasks follow the lead to its new supervisor.
+  await tx.userLeadTask.updateMany({
+    where: {
+      vendor_id: vendorId, user_id: { not: userId },
+      status: { in: ["open", "in_progress"] },
+      lead: { vendor_id: vendorId, franchise_id: { in: franchiseIds }, is_deleted: false },
+      user: { user_type: { user_type: { in: ["site-supervisor", "site supervisor", "site_supervisor"], mode: "insensitive" } } },
+    },
+    data: { user_id: userId, updated_by: actorId },
+  });
 };
 
 const getPhoneVariants = (identifier: string): string[] => {
