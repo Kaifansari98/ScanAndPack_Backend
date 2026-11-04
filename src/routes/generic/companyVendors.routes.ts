@@ -1,3 +1,4 @@
+import { verifyToken } from "../../middlewares/auth.middleware";
 import { Router } from "express";
 import multer from "multer";
 import { CompanyVendorsController } from "../../controllers/generic/CompanyVendorsController";
@@ -26,6 +27,14 @@ companyVendorsRoutes.put(
   "/vendorId/:vendorId/companyVendorId/:companyVendorId/update",
   upload.none(),
   controller.updateCompanyVendor
+);
+
+// ✅ Bulk upload company vendors (Super Admin only)
+companyVendorsRoutes.post(
+  "/vendorId/:vendorId/bulk-upload",
+  verifyToken,
+  upload.single("file"),
+  controller.bulkUploadCompanyVendors
 );
 
 // ✅ Toggle company vendor status

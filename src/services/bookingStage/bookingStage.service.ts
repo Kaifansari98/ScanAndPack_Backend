@@ -4845,6 +4845,12 @@ export class BookingStageService {
     ];
     const normalizedStageTag = String(tag || "").trim();
     const includeConfig = BookingStageService.leadIncludes(normalizedStageTag);
+    if (normalizedUserType === "site-supervisor") {
+      // Preserve designers, but expose only the logged-in supervisor in the column.
+      Object.assign(includeConfig.userMappings.where, {
+        OR: [{ type: "designer" }, { type: "site-supervisor", user_id: userId }],
+      });
+    }
     const shouldApplyStageSort =
       BookingStageService.statusLogSortedStageTags.has(normalizedStageTag) ||
       normalizedStageTag === "Type 9" ||
@@ -5596,17 +5602,21 @@ export class BookingStageService {
         vendor_id: vendorId,
         user_id: userId,
         status: "active",
+        ...(normalizedUserType === "site-supervisor" ? { type: "site-supervisor" } : {}),
       },
       select: { lead_id: true },
     });
 
-    const taskLeads = await prisma.userLeadTask.findMany({
-      where: {
-        vendor_id: vendorId,
-        OR: [{ created_by: userId }, { user_id: userId }],
-      },
-      select: { lead_id: true },
-    });
+    // A supervisor's task history must not retain access after reassignment.
+    const taskLeads = normalizedUserType === "site-supervisor"
+      ? []
+      : await prisma.userLeadTask.findMany({
+          where: {
+            vendor_id: vendorId,
+            OR: [{ created_by: userId }, { user_id: userId }],
+          },
+          select: { lead_id: true },
+        });
 
     let headSupervisorFranchiseLeadIds: number[] = [];
     if (normalizedUserType === "head-site-supervisor" && isInstallationStage) {

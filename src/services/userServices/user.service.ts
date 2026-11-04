@@ -200,12 +200,58 @@ const requireSupervisorConfirmation = async (
 const assignFranchiseLeadsToSupervisor = async (
   tx: Prisma.TransactionClient, vendorId: number, userId: number,
   franchiseIds: number[], actorId: number,
+  removedFranchiseIds: number[] = [],
 ) => {
   const vendor = await tx.vendorMaster.findUnique({
     where: { id: vendorId },
     select: { handlesLargeScaleProjects: true },
   });
   if (vendor?.handlesLargeScaleProjects !== false) return;
+
+  if (removedFranchiseIds.length) {
+    const leadScope = {
+      vendor_id: vendorId,
+      franchise_id: { in: removedFranchiseIds },
+    };
+    await tx.leadUserMapping.updateMany({
+      where: {
+        vendor_id: vendorId, user_id: userId, type: "site-supervisor",
+        status: "active", lead: leadScope,
+      },
+      data: { status: "inactive", updated_by: actorId },
+    });
+    // Prevent the task forms' legacy fallback from restoring a removed assignment.
+    await tx.leadSiteSupervisorMapping.updateMany({
+      where: { vendor_id: vendorId, user_id: userId, status: "active", lead: leadScope },
+      data: { status: "inactive" },
+    });
+    await tx.leadChatMember.deleteMany({
+      where: {
+        user_id: userId,
+        chatRoom: { vendor_id: vendorId, lead: leadScope },
+      },
+    });
+    // Hand each removed franchise's leads and pending tasks to a remaining supervisor.
+    for (const franchiseId of removedFranchiseIds) {
+      const replacement = await tx.userMaster.findFirst({
+        where: {
+          vendor_id: vendorId, id: { not: userId }, status: "active",
+          user_type: { user_type: { in: ["site-supervisor", "site supervisor", "site_supervisor"], mode: "insensitive" } },
+          OR: [
+            { franchise_id: franchiseId },
+            { siteSupervisorFranchiseMappings: { some: { vendor_id: vendorId, franchise_id: franchiseId } } },
+          ],
+        },
+        select: { id: true },
+        orderBy: { id: "asc" },
+      });
+      if (!replacement) {
+        const franchise = await tx.franchiseMaster.findUnique({ where: { id: franchiseId }, select: { franchise_name: true } });
+        throw Object.assign(new Error(`Map another site supervisor to ${franchise?.franchise_name ?? "this franchise"} before removing it from this supervisor.`), { statusCode: 409 });
+      }
+      await assignFranchiseLeadsToSupervisor(tx, vendorId, replacement.id, [franchiseId], actorId);
+    }
+  }
 
   // LeadUserMapping requires an account; drafts without one cannot be mapped yet.
   // Process bounded batches to avoid oversized bulk inserts for large franchises.
@@ -286,6 +332,17 @@ const assignFranchiseLeadsToSupervisor = async (
     }
     cursor = leads[leads.length - 1].id;
   }
+
+  // Pending site-supervisor tasks follow the lead to its new supervisor.
+  await tx.userLeadTask.updateMany({
+    where: {
+      vendor_id: vendorId, user_id: { not: userId },
+      status: { in: ["open", "in_progress"] },
+      lead: { vendor_id: vendorId, franchise_id: { in: franchiseIds }, is_deleted: false },
+      user: { user_type: { user_type: { in: ["site-supervisor", "site supervisor", "site_supervisor"], mode: "insensitive" } } },
+    },
+    data: { user_id: userId, updated_by: actorId },
+  });
 };
 
 const getPhoneVariants = (identifier: string): string[] => {
@@ -534,10 +591,14 @@ export const updateUserService = async (
   if (!effectiveUserType) {
     throw Object.assign(new Error("Invalid user_type_id."), { statusCode: 400 });
   }
-  const selectedFranchiseIds = franchiseIds ?? [...new Set([
+  const previousFranchiseIds = [...new Set([
     ...(user.franchise_id ? [user.franchise_id] : []),
     ...user.siteSupervisorFranchiseMappings.map((mapping: { franchise_id: number }) => mapping.franchise_id),
   ])];
+  const selectedFranchiseIds = franchiseIds ?? previousFranchiseIds;
+  const removedFranchiseIds = franchiseIds
+    ? previousFranchiseIds.filter((id) => !franchiseIds.includes(id))
+    : [];
   await requireSupervisorConfirmation(user.vendor_id, selectedFranchiseIds,
     effectiveUserType.user_type, data.confirm_additional_supervisor, userId);
 
@@ -546,7 +607,7 @@ export const updateUserService = async (
     if (franchiseIds) await syncUserFranchises(tx, user.vendor_id, userId, franchiseIds, actorId);
     if ((franchiseIds || (data.user_type_id !== undefined && data.user_type_id !== user.user_type_id)) &&
         effectiveUserType.user_type.trim().toLowerCase().replace(/[ _]+/g, "-") === "site-supervisor") {
-      await assignFranchiseLeadsToSupervisor(tx, user.vendor_id, userId, selectedFranchiseIds, actorId ?? userId);
+      await assignFranchiseLeadsToSupervisor(tx, user.vendor_id, userId, selectedFranchiseIds, actorId ?? userId, removedFranchiseIds);
     }
     return updated;
   });

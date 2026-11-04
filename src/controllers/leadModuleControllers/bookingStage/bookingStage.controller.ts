@@ -26,6 +26,12 @@ import { sendSiteSupervisorAssignedEmail } from "../../../services/email/brevoEm
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
 
+const resolveUniversalTableUserId = (req: Request, requestedUserId: unknown): number => {
+  const user = (req as any).user;
+  const role = String(user?.user_type ?? "").trim().toLowerCase().replace(/[ _]+/g, "-");
+  return Number(role === "site-supervisor" ? user.id : requestedUserId);
+};
+
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
   if (typeof origin === "string" && origin.trim().length > 0) {
@@ -884,7 +890,7 @@ export class BookingStageController {
   public getUniversalTableData2 = async (req: Request, res: Response) => {
     try {
       const vendorId = Number(getParam(req.params.vendorId));
-      const userId = Number(req.body.userId);
+      const userId = resolveUniversalTableUserId(req, req.body.userId);
       const franchiseIdRaw = req.body.franchise_id;
       const franchiseId =
         franchiseIdRaw !== undefined && franchiseIdRaw !== null && franchiseIdRaw !== ""
@@ -1201,7 +1207,7 @@ export class BookingStageController {
   public getUniversalTableData = async (req: Request, res: Response) => {
     try {
       const vendorId = Number(getParam(req.params.vendorId));
-      const userId = Number(req.query.userId);
+      const userId = resolveUniversalTableUserId(req, req.query.userId);
       const franchiseId = Number(req.query.franchise_id);
       const tag = req.query.tag as string;
       const page = parseInt((req.query.page as string) || "1");

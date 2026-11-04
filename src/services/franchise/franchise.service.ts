@@ -20,9 +20,11 @@ export type CreateFranchisePayload = {
 };
 
 export const createFranchise = async (payload: CreateFranchisePayload) => {
+  const franchiseName = payload.franchise_name?.trim();
+  const franchiseCode = payload.franchise_code?.trim().toUpperCase() || null;
   const missingFields: string[] = [];
   if (!payload.vendor_id) missingFields.push("vendor_id");
-  if (!payload.franchise_name) missingFields.push("franchise_name");
+  if (!franchiseName) missingFields.push("franchise_name");
 
   if (missingFields.length > 0) {
     const error = new Error(
@@ -32,20 +34,21 @@ export const createFranchise = async (payload: CreateFranchisePayload) => {
     throw error;
   }
 
-  if (payload.franchise_code) {
+  if (franchiseCode) {
     const existing = await prisma.franchiseMaster.findFirst({
       where: {
         vendor_id: Number(payload.vendor_id),
-        franchise_code: payload.franchise_code,
+        franchise_code: { equals: franchiseCode, mode: "insensitive" },
       },
       select: { id: true },
     });
 
     if (existing) {
       const error = new Error(
-        "Franchise with this franchise_code already exists for this vendor.",
+        "This franchise code is already in use for this vendor. Enter a different code.",
       );
       (error as any).statusCode = 409;
+      (error as any).code = "FRANCHISE_CODE_EXISTS";
       throw error;
     }
   }
@@ -70,8 +73,8 @@ export const createFranchise = async (payload: CreateFranchisePayload) => {
   return await prisma.franchiseMaster.create({
     data: {
       vendor_id: Number(payload.vendor_id),
-      franchise_name: payload.franchise_name,
-      franchise_code: payload.franchise_code ?? null,
+      franchise_name: franchiseName!,
+      franchise_code: franchiseCode,
       contact_number: payload.contact_number ?? null,
       contact_email: payload.contact_email ?? null,
       contact_person: payload.contact_person ?? null,

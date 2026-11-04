@@ -13,12 +13,22 @@ function setup(handlesLargeScaleProjects = false) {
   let otherUsers = [];
   let leads = [];
   let leadMappings = [];
+  let legacyMappings = [];
   let failLeadMapping = false;
   let rooms = [];
   let chatMembers = [];
   let failChatMapping = false;
+  let failChatRemoval = false;
   const matches = (row, where) => Object.entries(where).every(([key, value]) => {
     if (key === 'OR') return value.some(condition => matches(row, condition));
+    if (key === 'lead') {
+      const relatedLead = leads.find(lead => lead.id === row.lead_id);
+      return !!relatedLead && matches(relatedLead, value);
+    }
+    if (key === 'chatRoom') {
+      const room = rooms.find(room => room.id === row.chat_room_id);
+      return !!room && matches(room, value);
+    }
     if (value && typeof value === 'object') {
       if ('in' in value) return value.in.includes(row[key]);
       if ('gt' in value) return row[key] > value.gt;
@@ -37,7 +47,10 @@ function setup(handlesLargeScaleProjects = false) {
       findMany: async ({ where }) => rooms.filter(room => matches(room, where)),
     },
     leadChatMember: {
-      deleteMany: async ({ where }) => { chatMembers = chatMembers.filter(member => !matches(member, where)); },
+      deleteMany: async ({ where }) => {
+        if (failChatRemoval) throw new Error('chat removal failed');
+        chatMembers = chatMembers.filter(member => !matches(member, where));
+      },
       createMany: async ({ data, skipDuplicates }) => {
         if (failChatMapping) throw new Error('chat membership failed');
         assert.equal(skipDuplicates, true);
@@ -59,6 +72,11 @@ function setup(handlesLargeScaleProjects = false) {
       createMany: async ({ data }) => {
         if (failLeadMapping) throw new Error('lead mapping failed');
         for (const mapping of data) leadMappings.push({ id: Math.max(0, ...leadMappings.map(m => m.id)) + 1, ...mapping });
+      },
+    },
+    leadSiteSupervisorMapping: {
+      updateMany: async ({ where, data }) => {
+        legacyMappings.filter(mapping => matches(mapping, where)).forEach(mapping => Object.assign(mapping, data));
       },
     },
     franchiseMaster: {
@@ -100,8 +118,9 @@ function setup(handlesLargeScaleProjects = false) {
       const previousMappings = mappings.map(m => ({ ...m }));
       const previousLeadMappings = leadMappings.map(m => ({ ...m }));
       const previousChatMembers = chatMembers.map(m => ({ ...m }));
+      const previousLegacyMappings = legacyMappings.map(m => ({ ...m }));
       try { return await fn(prisma); }
-      catch (error) { user = previousUser; mappings = previousMappings; leadMappings = previousLeadMappings; chatMembers = previousChatMembers; throw error; }
+      catch (error) { user = previousUser; mappings = previousMappings; leadMappings = previousLeadMappings; chatMembers = previousChatMembers; legacyMappings = previousLegacyMappings; throw error; }
     },
   };
   const source = fs.readFileSync(require('node:path').join(__dirname, '../src/services/userServices/user.service.ts'), 'utf8');
@@ -119,7 +138,9 @@ function setup(handlesLargeScaleProjects = false) {
     failLeads: () => { failLeadMapping = true; },
     setRooms: value => { rooms = value; }, setChatMembers: value => { chatMembers = value; },
     failChat: () => { failChatMapping = true; },
-    state: () => ({ user, mappings, leadMappings, chatMembers }), fail: () => { failMapping = true; } };
+    failChatRemoval: () => { failChatRemoval = true; },
+    setLegacyMappings: value => { legacyMappings = value; },
+    state: () => ({ user, mappings, leadMappings, chatMembers, legacyMappings }), fail: () => { failMapping = true; } };
 }
 const payload = { vendor_id: 1, user_type_id: 2, user_name: 'Test', user_email: 'test@example.com', user_contact: '123', user_timezone: 'Asia/Kolkata', password: 'test' };
 
@@ -421,22 +442,86 @@ test('large-scale or missing vendors never bulk-reassign leads or chat members o
   for (const flag of [true, null]) {
     const s = setup(flag);
     s.setLeads([lead(1, 10), lead(2, 20)]);
-    s.setLeadMappings([leadMapping(1, 1, 8), leadMapping(2, 2, 9)]);
+    s.setLeadMappings([leadMapping(1, 1, 7), leadMapping(2, 2, 7)]);
+    s.setLegacyMappings([leadMapping(1, 1, 7)]);
     s.setRooms([{ id: 101, lead_id: 1, vendor_id: 1 }, { id: 102, lead_id: 2, vendor_id: 1 }]);
-    s.setChatMembers([chatMember(101, 8), chatMember(102, 9)]);
+    s.setChatMembers([chatMember(101, 7), chatMember(102, 7)]);
     const beforeLeads = JSON.stringify(s.state().leadMappings);
     const beforeChats = JSON.stringify(s.state().chatMembers);
+    const beforeLegacy = JSON.stringify(s.state().legacyMappings);
     s.failLeads();
     s.failChat();
     await s.createUserService({ ...payload, franchise_ids: [10] });
     await s.updateUserService(7, { franchise_ids: [10, 20] });
     assert.equal(s.state().user.franchise_id, 10);
     assert.deepEqual(s.state().mappings.map(m => m.franchise_id), [10, 20]);
+    await s.updateUserService(7, { franchise_ids: [20] });
     assert.equal(JSON.stringify(s.state().leadMappings), beforeLeads);
     assert.equal(JSON.stringify(s.state().chatMembers), beforeChats);
+    assert.equal(JSON.stringify(s.state().legacyMappings), beforeLegacy);
     await s.updateUserService(7, { user_type_id: 99 });
     await s.updateUserService(7, { user_type_id: 2 });
     assert.equal(JSON.stringify(s.state().leadMappings), beforeLeads);
     assert.equal(JSON.stringify(s.state().chatMembers), beforeChats);
   }
+});
+
+test('removing a franchise deactivates only that supervisor and removes their membership from its chats', async () => {
+  const s = setup();
+  await s.createUserService({ ...payload, franchise_ids: [20, 10] });
+  s.setLeads([lead(1, 20), lead(2, 10), lead(3, 30), lead(4, 20, { vendor_id: 2 }),
+    lead(5, 20, { is_deleted: true }), lead(6, 20, { account_id: null })]);
+  s.setLeadMappings([leadMapping(1, 1, 7), leadMapping(2, 1, 8),
+    leadMapping(3, 1, 7, { type: 'sales-executive' }), leadMapping(4, 2, 7), leadMapping(5, 3, 7),
+    leadMapping(6, 4, 7, { vendor_id: 2 }), leadMapping(7, 5, 7), leadMapping(8, 6, 7)]);
+  s.setLegacyMappings([leadMapping(1, 1, 7), leadMapping(2, 1, 8), leadMapping(3, 2, 7),
+    leadMapping(4, 4, 7, { vendor_id: 2 })]);
+  s.setRooms([1, 2, 3, 4, 5, 6].map(id => ({ id: id + 100, lead_id: id, vendor_id: id === 4 ? 2 : 1 })));
+  const preserved = [chatMember(101, 8), chatMember(102, 7), chatMember(103, 7), chatMember(104, 7)];
+  s.setChatMembers([chatMember(101, 7), chatMember(105, 7), chatMember(106, 7), ...preserved]);
+  await s.updateUserService(7, { franchise_ids: [10] }, 5);
+  assert.equal(s.state().user.franchise_id, 10);
+  assert.equal(s.state().mappings.length, 0);
+  for (const id of [1, 7, 8]) {
+    const mapping = s.state().leadMappings.find(m => m.id === id);
+    assert.equal(mapping.status, 'inactive');
+    assert.equal(mapping.updated_by, 5);
+  }
+  for (const id of [2, 3, 4, 5, 6]) assert.equal(s.state().leadMappings.find(m => m.id === id).status, 'active');
+  assert.equal(s.state().legacyMappings[0].status, 'inactive');
+  for (const mapping of s.state().legacyMappings.slice(1)) assert.equal(mapping.status, 'active');
+  assert.deepEqual(s.state().chatMembers, preserved);
+});
+
+test('legacy single-franchise edits clean up the old primary franchise and repeat saves are safe', async () => {
+  const s = setup();
+  await s.createUserService({ ...payload, franchise_id: 20 });
+  s.setLeads([lead(1, 20), lead(2, 10)]);
+  s.setLeadMappings([leadMapping(1, 1, 7)]);
+  s.setRooms([{ id: 101, lead_id: 1, vendor_id: 1 }]);
+  s.setChatMembers([chatMember(101, 7)]);
+  await s.updateUserService(7, { franchise_id: 10 }, 5);
+  assert.equal(s.state().leadMappings[0].status, 'inactive');
+  assert.equal(s.state().chatMembers.length, 0);
+  const beforeRemovedMapping = JSON.stringify(s.state().leadMappings[0]);
+  await s.updateUserService(7, { franchise_id: 10 }, 5);
+  assert.equal(JSON.stringify(s.state().leadMappings[0]), beforeRemovedMapping);
+  assert.equal(s.state().leadMappings.length, 2);
+  assert.equal(activeSupervisors(s).length, 1);
+  assert.equal(activeSupervisors(s)[0].lead_id, 2);
+  assert.equal(s.state().chatMembers.length, 0);
+});
+
+test('cleanup failure rolls back franchise removal, assignments, legacy mappings and chats', async () => {
+  const s = setup();
+  await s.createUserService({ ...payload, franchise_ids: [10, 20] });
+  s.setLeads([lead(1, 20)]);
+  s.setLeadMappings([leadMapping(1, 1, 7)]);
+  s.setLegacyMappings([leadMapping(1, 1, 7)]);
+  s.setRooms([{ id: 101, lead_id: 1, vendor_id: 1 }]);
+  s.setChatMembers([chatMember(101, 7)]);
+  const before = JSON.stringify(s.state());
+  s.failChatRemoval();
+  await assert.rejects(s.updateUserService(7, { franchise_ids: [10] }, 5), /chat removal failed/);
+  assert.equal(JSON.stringify(s.state()), before);
 });

@@ -5,6 +5,7 @@ import {
 } from "../../middlewares/uploadWasabi";
 import { BookingStageController } from "../../controllers/leadModuleControllers/bookingStage/bookingStage.controller";
 import { handleMulterUpload } from "../../middlewares/handleMulterUpload";
+import { verifyToken } from "../../middlewares/auth.middleware";
 
 const bookingStageController = new BookingStageController();
 const bookingStageRouter = Router();
@@ -52,6 +53,7 @@ bookingStageRouter.get(
 
 bookingStageRouter.get(
   "/universal-table-data/vendorId/:vendorId",
+  verifyToken,
   bookingStageController.getUniversalTableData,
 );
 
@@ -59,6 +61,7 @@ bookingStageRouter.get(
 
 bookingStageRouter.post(
   "/universal-table-data-2/vendorId/:vendorId",
+  verifyToken,
   bookingStageController.getUniversalTableData2,
 );
 

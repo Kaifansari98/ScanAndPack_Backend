@@ -127,3 +127,6 @@ ecosystem.backend.config.cjs
 # Prisma client (created by `prisma generate` during build)
 /generated/
 node_modules
+
+# Local supervisor access regression test
+/tests/universal-table-supervisor-access.test.cjs
