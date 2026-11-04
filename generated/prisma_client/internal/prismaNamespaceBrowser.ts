@@ -429,7 +429,24 @@ export const UserMasterScalarFieldEnum = {
   cadbidToken: 'cadbidToken',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  franchise_id: 'franchise_id'
+  franchise_id: 'franchise_id',
+  employee_code: 'employee_code',
+  department: 'department',
+  aadhar_no: 'aadhar_no',
+  pan_no: 'pan_no',
+  permanent_address: 'permanent_address',
+  current_address: 'current_address',
+  aadhar_card_file: 'aadhar_card_file',
+  pan_card_file: 'pan_card_file',
+  bank_account_holder_name: 'bank_account_holder_name',
+  bank_account_number: 'bank_account_number',
+  bank_ifsc_code: 'bank_ifsc_code',
+  joining_date: 'joining_date',
+  exit_date: 'exit_date',
+  salary_rate_type: 'salary_rate_type',
+  salary_amount: 'salary_amount',
+  statutory_compliance: 'statutory_compliance',
+  work_location: 'work_location'
 } as const
 
 export type UserMasterScalarFieldEnum = (typeof UserMasterScalarFieldEnum)[keyof typeof UserMasterScalarFieldEnum]

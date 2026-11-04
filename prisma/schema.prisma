@@ -305,6 +305,23 @@ model UserMaster {
   created_at                                                                     DateTime                                       @default(now())
   updated_at                                                                     DateTime                                       @updatedAt
   franchise_id                                                                   Int?
+  employee_code                                                                  String?
+  department                                                                     String?
+  aadhar_no                                                                      String?
+  pan_no                                                                         String?
+  permanent_address                                                              String?
+  current_address                                                                String?
+  aadhar_card_file                                                               String?
+  pan_card_file                                                                  String?
+  bank_account_holder_name                                                       String?
+  bank_account_number                                                            String?
+  bank_ifsc_code                                                                 String?
+  joining_date                                                                   DateTime?
+  exit_date                                                                      DateTime?
+  salary_rate_type                                                               String?
+  salary_amount                                                                  String?
+  statutory_compliance                                                           String?
+  work_location                                                                  String?
   accountsCreated                                                                AccountMaster[]                                @relation("AccountCreatedBy")
   accountsUpdated                                                                AccountMaster[]                                @relation("AccountUpdatedBy")
   architechuremasters                                                            Architechuremaster[]

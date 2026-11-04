@@ -355,7 +355,24 @@ export const createUserService = async (data: {
   franchise_ids?: number[];
   confirm_additional_supervisor?: boolean;
   user_name: string;
+  employee_code?: string | null;
   designation?: string | null;
+  department?: string | null;
+  aadhar_no?: string | null;
+  pan_no?: string | null;
+  permanent_address?: string | null;
+  current_address?: string | null;
+  aadhar_card_file?: string | null;
+  pan_card_file?: string | null;
+  bank_account_holder_name?: string | null;
+  bank_account_number?: string | null;
+  bank_ifsc_code?: string | null;
+  joining_date?: string | Date | null;
+  exit_date?: string | Date | null;
+  salary_rate_type?: string | null;
+  salary_amount?: string | null;
+  statutory_compliance?: string | null;
+  work_location?: string | null;
   user_contact: string;
   user_email: string;
   user_timezone: string;
@@ -366,6 +383,9 @@ export const createUserService = async (data: {
   const franchiseIds = await validateUserFranchises(Number(data.vendor_id),
     data.franchise_ids === undefined ? [data.franchise_id] : data.franchise_ids);
   const { franchise_ids: _franchiseIds, confirm_additional_supervisor, ...userData } = data;
+  if (userData.employee_code) {
+    userData.employee_code = typeof userData.employee_code === 'string' ? userData.employee_code.trim() : userData.employee_code;
+  }
 
   if (data.user_contact) {
     const contactVariants = getPhoneVariants(data.user_contact);
@@ -412,9 +432,75 @@ export const createUserService = async (data: {
     confirm_additional_supervisor);
 
   const createdUser = await prisma.$transaction(async (tx) => {
-    const user = await tx.userMaster.create({
-      data: { ...userData, franchise_id: franchiseIds[0], password: hashedPassword },
+    const vendor = await tx.vendorMaster.findUnique({
+      where: { id: Number(data.vendor_id) },
+      select: { is_hrms_master_enabled: true },
     });
+    const isHrmsEnabled = vendor?.is_hrms_master_enabled === true;
+
+    let employeeCode = userData.employee_code ? String(userData.employee_code).trim() : null;
+    if (isHrmsEnabled && !employeeCode) {
+      const usersWithCode = await tx.userMaster.findMany({
+        where: {
+          vendor_id: Number(data.vendor_id),
+          employee_code: { startsWith: 'EMP-' },
+        },
+        select: { employee_code: true },
+      });
+
+      let maxNum = 0;
+      for (const u of usersWithCode) {
+        if (u.employee_code) {
+          const match = u.employee_code.trim().match(/^EMP-(\d+)$/i);
+          if (match) {
+            const num = parseInt(match[1], 10);
+            if (!isNaN(num) && num > maxNum) {
+              maxNum = num;
+            }
+          }
+        }
+      }
+
+      employeeCode = 'EMP-' + String(maxNum + 1).padStart(3, '0');
+    }
+
+    const joiningDate = userData.joining_date ? new Date(userData.joining_date) : null;
+    const exitDate = userData.exit_date ? new Date(userData.exit_date) : null;
+
+    const user = await tx.userMaster.create({
+      data: {
+        ...userData,
+        joining_date: joiningDate,
+        exit_date: exitDate,
+        employee_code: employeeCode,
+        franchise_id: franchiseIds[0],
+        password: hashedPassword,
+      },
+    });
+
+    if (isHrmsEnabled) {
+      if (userData.aadhar_card_file || userData.aadhar_no) {
+        await tx.userDocument.create({
+          data: {
+            user_id: user.id,
+            document_name: "Aadhar Card",
+            document_number: userData.aadhar_no || "",
+            filename: userData.aadhar_card_file || "",
+          },
+        });
+      }
+
+      if (userData.pan_card_file || userData.pan_no) {
+        await tx.userDocument.create({
+          data: {
+            user_id: user.id,
+            document_name: "Pan Card",
+            document_number: userData.pan_no || "",
+            filename: userData.pan_card_file || "",
+          },
+        });
+      }
+    }
     await syncUserFranchises(tx, user.vendor_id, user.id, franchiseIds, actorId);
     if (userType.user_type.trim().toLowerCase().replace(/[ _]+/g, "-") === "site-supervisor") {
       await assignFranchiseLeadsToSupervisor(tx, user.vendor_id, user.id, franchiseIds, actorId ?? user.id);
@@ -471,7 +557,24 @@ export const updateUserService = async (
   userId: number,
   data: {
     user_name?: string;
+    employee_code?: string | null;
     designation?: string | null;
+    department?: string | null;
+    aadhar_no?: string | null;
+    pan_no?: string | null;
+    permanent_address?: string | null;
+    current_address?: string | null;
+    aadhar_card_file?: string | null;
+    pan_card_file?: string | null;
+    bank_account_holder_name?: string | null;
+      bank_account_number?: string | null;
+      bank_ifsc_code?: string | null;
+      joining_date?: string | Date | null;
+      exit_date?: string | Date | null;
+      salary_rate_type?: string | null;
+      salary_amount?: string | null;
+      statutory_compliance?: string | null;
+      work_location?: string | null;
     user_contact?: string;
     user_email?: string;
     user_timezone?: string;
@@ -501,6 +604,9 @@ export const updateUserService = async (
   const updateData: Record<string, any> = {};
 
   if (data.user_name !== undefined) updateData.user_name = data.user_name;
+  if (data.employee_code !== undefined) {
+    updateData.employee_code = data.employee_code ? data.employee_code.trim() : null;
+  }
   if (data.designation !== undefined) updateData.designation = data.designation;
   if (data.user_contact !== undefined) {
     const contactVariants = getPhoneVariants(data.user_contact);
@@ -545,6 +651,22 @@ export const updateUserService = async (
     : undefined;
   if (franchiseIds) updateData.franchise_id = franchiseIds[0];
   if (data.status !== undefined) updateData.status = data.status;
+  if (data.department !== undefined) updateData.department = data.department;
+  if (data.aadhar_no !== undefined) updateData.aadhar_no = data.aadhar_no;
+  if (data.pan_no !== undefined) updateData.pan_no = data.pan_no;
+  if (data.permanent_address !== undefined) updateData.permanent_address = data.permanent_address;
+  if (data.current_address !== undefined) updateData.current_address = data.current_address;
+  if (data.aadhar_card_file !== undefined) updateData.aadhar_card_file = data.aadhar_card_file;
+  if (data.pan_card_file !== undefined) updateData.pan_card_file = data.pan_card_file;
+  if (data.bank_account_holder_name !== undefined) updateData.bank_account_holder_name = data.bank_account_holder_name;
+  if (data.bank_account_number !== undefined) updateData.bank_account_number = data.bank_account_number;
+  if (data.bank_ifsc_code !== undefined) updateData.bank_ifsc_code = data.bank_ifsc_code;
+  if (data.joining_date !== undefined) updateData.joining_date = data.joining_date ? new Date(data.joining_date) : null;
+  if (data.exit_date !== undefined) updateData.exit_date = data.exit_date ? new Date(data.exit_date) : null;
+  if (data.salary_rate_type !== undefined) updateData.salary_rate_type = data.salary_rate_type;
+  if (data.salary_amount !== undefined) updateData.salary_amount = data.salary_amount;
+  if (data.statutory_compliance !== undefined) updateData.statutory_compliance = data.statutory_compliance;
+  if (data.work_location !== undefined) updateData.work_location = data.work_location;
 
   if (data.password) {
     updateData.password = await bcrypt.hash(data.password, 10);
@@ -574,6 +696,54 @@ export const updateUserService = async (
 
   const updatedUser = await prisma.$transaction(async (tx) => {
     const updated = await tx.userMaster.update({ where: { id: userId }, data: updateData });
+
+    if (data.aadhar_card_file !== undefined || data.aadhar_no !== undefined) {
+      const existingAadhar = await tx.userDocument.findFirst({
+        where: { user_id: userId, document_name: "Aadhar Card" },
+      });
+      if (existingAadhar) {
+        await tx.userDocument.update({
+          where: { id: existingAadhar.id },
+          data: {
+            document_number: data.aadhar_no !== undefined ? (data.aadhar_no || "") : existingAadhar.document_number,
+            filename: data.aadhar_card_file !== undefined ? (data.aadhar_card_file || "") : existingAadhar.filename,
+          },
+        });
+      } else if (data.aadhar_card_file || data.aadhar_no) {
+        await tx.userDocument.create({
+          data: {
+            user_id: userId,
+            document_name: "Aadhar Card",
+            document_number: data.aadhar_no || "",
+            filename: data.aadhar_card_file || "",
+          },
+        });
+      }
+    }
+
+    if (data.pan_card_file !== undefined || data.pan_no !== undefined) {
+      const existingPan = await tx.userDocument.findFirst({
+        where: { user_id: userId, document_name: "Pan Card" },
+      });
+      if (existingPan) {
+        await tx.userDocument.update({
+          where: { id: existingPan.id },
+          data: {
+            document_number: data.pan_no !== undefined ? (data.pan_no || "") : existingPan.document_number,
+            filename: data.pan_card_file !== undefined ? (data.pan_card_file || "") : existingPan.filename,
+          },
+        });
+      } else if (data.pan_card_file || data.pan_no) {
+        await tx.userDocument.create({
+          data: {
+            user_id: userId,
+            document_name: "Pan Card",
+            document_number: data.pan_no || "",
+            filename: data.pan_card_file || "",
+          },
+        });
+      }
+    }
     if (franchiseIds) await syncUserFranchises(tx, user.vendor_id, userId, franchiseIds, actorId);
     if ((franchiseIds || (data.user_type_id !== undefined && data.user_type_id !== user.user_type_id)) &&
         effectiveUserType.user_type.trim().toLowerCase().replace(/[ _]+/g, "-") === "site-supervisor") {
@@ -668,6 +838,7 @@ export const getUsersByVendorService = async ({
   if (normalizedSearch) {
     where.OR = [
       { user_name: { contains: normalizedSearch, mode: "insensitive" as const } },
+      { employee_code: { contains: normalizedSearch, mode: "insensitive" as const } },
       { designation: { contains: normalizedSearch, mode: "insensitive" as const } },
       { user_contact: { contains: normalizedSearch, mode: "insensitive" as const } },
       { user_email: { contains: normalizedSearch, mode: "insensitive" as const } },
@@ -702,6 +873,23 @@ export const getUsersByVendorService = async ({
         id: true,
         vendor_id: true,
         franchise_id: true,
+        employee_code: true,
+        department: true,
+        aadhar_no: true,
+        pan_no: true,
+        permanent_address: true,
+        current_address: true,
+        aadhar_card_file: true,
+        pan_card_file: true,
+        bank_account_holder_name: true,
+        bank_account_number: true,
+        bank_ifsc_code: true,
+        joining_date: true,
+        exit_date: true,
+        salary_rate_type: true,
+        salary_amount: true,
+        statutory_compliance: true,
+        work_location: true,
         siteSupervisorFranchiseMappings: {
           orderBy: { id: "asc" },
           select: { franchise: { select: { id: true, franchise_name: true } } },
@@ -763,6 +951,23 @@ export const getUserByIdService = async (userId: number, vendorId?: number) => {
       id: true,
       vendor_id: true,
       franchise_id: true,
+      employee_code: true,
+      department: true,
+      aadhar_no: true,
+      pan_no: true,
+      permanent_address: true,
+      current_address: true,
+      aadhar_card_file: true,
+      pan_card_file: true,
+        bank_account_holder_name: true,
+        bank_account_number: true,
+        bank_ifsc_code: true,
+        joining_date: true,
+        exit_date: true,
+        salary_rate_type: true,
+        salary_amount: true,
+        statutory_compliance: true,
+        work_location: true,
       siteSupervisorFranchiseMappings: {
         orderBy: { id: "asc" },
         select: { franchise: { select: { id: true, franchise_name: true } } },
