@@ -28,6 +28,7 @@ model VendorMaster {
   time_zone_master                             time_zone_master?                              @relation(fields: [time_zone_id], references: [id], onDelete: Restrict)
   attendances                                  attendance[]
   attendance_logs                              attendance_logs[]
+  attendanceCorrections                        attendance_corrections[]
   createdAt                                    DateTime                                       @default(now())
   updatedAt                                    DateTime                                       @updatedAt
   vendor_report_code                           String?                                        @map("vendor-report-code")
@@ -495,6 +496,10 @@ model UserMaster {
   siteSupervisorFranchiseMappingsUpdated                                         SiteSupervisorFranchiseMapping[]               @relation("SiteSupervisorFranchiseMappingUpdatedBy")
   attendances                                                                    attendance[]
   attendance_logs                                                                attendance_logs[]
+  attendanceActions                                                              attendance_logs[] @relation("AttendanceActor")
+  attendanceCorrectionOwner                                                      attendance_corrections[] @relation("AttendanceCorrectionOwner")
+  attendanceCorrectionRequester                                                  attendance_corrections[] @relation("AttendanceCorrectionRequester")
+  attendanceCorrectionReviewer                                                   attendance_corrections[] @relation("AttendanceCorrectionReviewer")
 }
 
 model UserDocument {
@@ -6137,6 +6142,23 @@ model WalkinLeadUpload {
 enum AttendanceAction {
   IN
   OUT
+  BREAK_START
+  BREAK_END
+  CORRECTED
+}
+
+enum AttendanceWorkLocation {
+  OFFICE
+  FACTORY
+  SITE
+  REMOTE
+}
+
+enum AttendanceCorrectionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
 }
 
 enum AttendanceSource {
@@ -6164,6 +6186,8 @@ model attendance {
   check_in        DateTime
   check_out       DateTime?
   source          AttendanceSource
+  work_location   AttendanceWorkLocation?
+  time_zone       String?
   created_at      DateTime         @default(now())
   updated_at      DateTime         @updatedAt
 
@@ -6171,6 +6195,8 @@ model attendance {
   franchise FranchiseMaster?  @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
   user      UserMaster        @relation(fields: [user_id], references: [id], onDelete: Restrict)
   logs      attendance_logs[]
+  breaks    attendance_breaks[]
+  corrections attendance_corrections[]
 
   @@unique([vendor_id, user_id, attendance_date])
   @@index([vendor_id])
@@ -6188,16 +6214,68 @@ model attendance_logs {
   action        AttendanceAction
   action_time   DateTime
   source        AttendanceSource
+  actor_id      Int?
+  correction_id Int?
+  before_values Json?
+  after_values  Json?
   created_at    DateTime         @default(now())
 
   attendance attendance       @relation(fields: [attendance_id], references: [id], onDelete: Restrict)
   vendor     VendorMaster     @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
   franchise  FranchiseMaster? @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
   user       UserMaster       @relation(fields: [user_id], references: [id], onDelete: Restrict)
+  actor      UserMaster?       @relation("AttendanceActor", fields: [actor_id], references: [id], onDelete: Restrict)
+  correction attendance_corrections? @relation(fields: [correction_id], references: [id], onDelete: Restrict)
 
   @@index([attendance_id])
   @@index([vendor_id])
   @@index([franchise_id])
   @@index([user_id])
   @@index([action_time])
+  @@index([actor_id])
+  @@index([correction_id])
+}
+
+model attendance_breaks {
+  id            Int @id @default(autoincrement())
+  attendance_id Int
+  started_at    DateTime
+  ended_at      DateTime?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  attendance    attendance @relation(fields: [attendance_id], references: [id], onDelete: Restrict)
+
+  @@index([attendance_id, started_at])
+}
+
+model attendance_corrections {
+  id                      Int @id @default(autoincrement())
+  vendor_id               Int
+  user_id                 Int
+  attendance_id           Int?
+  attendance_date         DateTime @db.Date
+  requested_check_in      DateTime?
+  requested_check_out     DateTime?
+  reason                  String
+  status                  AttendanceCorrectionStatus @default(PENDING)
+  requested_by            Int
+  reviewed_by             Int?
+  reviewed_at             DateTime?
+  review_note             String?
+  // Reject stale approvals if punches changed after the request was submitted.
+  baseline_updated_at     DateTime?
+  created_at              DateTime @default(now())
+  updated_at              DateTime @updatedAt
+  vendor                  VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  user                    UserMaster @relation("AttendanceCorrectionOwner", fields: [user_id], references: [id], onDelete: Restrict)
+  requestedBy             UserMaster @relation("AttendanceCorrectionRequester", fields: [requested_by], references: [id], onDelete: Restrict)
+  reviewedBy              UserMaster? @relation("AttendanceCorrectionReviewer", fields: [reviewed_by], references: [id], onDelete: Restrict)
+  attendance              attendance? @relation(fields: [attendance_id], references: [id], onDelete: Restrict)
+  logs                    attendance_logs[]
+
+  @@index([vendor_id, status, attendance_date])
+  @@index([user_id, attendance_date])
+  @@index([attendance_id])
+  @@index([requested_by])
+  @@index([reviewed_by])
 }
