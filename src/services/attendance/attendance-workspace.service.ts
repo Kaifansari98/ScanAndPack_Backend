@@ -8,7 +8,7 @@ type PunchInput = { user_id?: unknown; action?: unknown; source?: unknown; work_
 type CorrectionInput = { attendance_date?: unknown; reason?: unknown; requested_check_in?: unknown; requested_check_out?: unknown };
 const recordInclude = { breaks: { orderBy: { started_at: "asc" as const } }, logs: { orderBy: { action_time: "asc" as const } } };
 const reviewRoles = new Set(["super-admin", "hrms-admin", "hrmsadmin"]);
-const normalizeRole = (role: string) => role.trim().toLowerCase().replace(/[ _]+/g, "-");
+export const normalizeRole = (role: string) => role.trim().toLowerCase().replace(/[ _]+/g, "-");
 const snapshot = (record: any) => record ? JSON.parse(JSON.stringify({ check_in: record.check_in, check_out: record.check_out, work_location: record.work_location, time_zone: record.time_zone, breaks: record.breaks || [] })) as Prisma.InputJsonValue : {};
 
 export async function attendanceContext(actor?: AttendanceActor, requireFeature = true) {
