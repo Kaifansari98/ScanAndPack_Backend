@@ -194,14 +194,14 @@ export const processProductBulkUploadService = async (
     // Fetch existing item codes (article_codes & item_codes) in DB for vendor to prevent duplicates
     const existingProducts = await prisma.productMaster.findMany({
       where: { vendor_id },
-      select: { article_code: true, item_code: true, product_name: true, category_id: true },
+      select: { article_code: true, item_code: true, product_name: true, category_id: true, brand_id: true },
     });
     const existingItemCodes = new Set<string>();
     const existingProductKeys = new Set<string>();
     existingProducts.forEach((p) => {
       if (p.article_code) existingItemCodes.add(p.article_code.toLowerCase().trim());
       if (p.item_code) existingItemCodes.add(p.item_code.toLowerCase().trim());
-      if (p.product_name?.trim()) existingProductKeys.add(`${p.category_id}:${p.product_name.trim().toLowerCase()}`);
+      if (p.product_name?.trim()) { const bKey = p.brand_id ? String(p.brand_id) : "nobrand"; existingProductKeys.add(`${p.category_id}:${bKey}:${p.product_name.trim().toLowerCase()}`); }
     });
     const batchProductKeys = new Set<string>();
 
@@ -851,16 +851,7 @@ export const processProductBulkUploadService = async (
         }
       }
 
-      if (productName && categoryId) {
-        const productKey = `${categoryId}:${productName.trim().toLowerCase()}`;
-        if (existingProductKeys.has(productKey)) {
-          errors.push(`Product "${productName}" already exists in this category`);
-        } else if (batchProductKeys.has(productKey)) {
-          errors.push(`Product "${productName}" is duplicated in this Excel sheet for this category`);
-        } else {
-          batchProductKeys.add(productKey);
-        }
-      }
+
 
       // 3. Sub Category Resolution (get or create if missing)
       let subCategoryId: number | null = null;
@@ -912,6 +903,21 @@ export const processProductBulkUploadService = async (
           brandId = await getOrCreateBrand(brandName);
         } catch (err: any) {
           errors.push(`Failed to find or add Brand "${brandName}": ${err.message}`);
+        }
+      }
+
+      // Check product duplicate: Category + Brand + Product Name
+      if (productName && categoryId) {
+        const brandKey = brandId ? String(brandId) : "nobrand";
+        const productKey = `${categoryId}:${brandKey}:${productName.trim().toLowerCase()}`;
+        if (existingProductKeys.has(productKey)) {
+          const brandText = brandName ? ` with brand "${brandName}"` : "";
+          errors.push(`Product "${productName}" already exists in this category${brandText}`);
+        } else if (batchProductKeys.has(productKey)) {
+          const brandText = brandName ? ` with brand "${brandName}"` : "";
+          errors.push(`Product "${productName}" is duplicated in this Excel sheet for this category${brandText}`);
+        } else {
+          batchProductKeys.add(productKey);
         }
       }
 
