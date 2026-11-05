@@ -8,7 +8,7 @@ type Franchise = { id: number; franchise_name: string; Department: string };
 const statuses: LogStatus[] = ["WORKING", "ON_BREAK", "COMPLETED", "MISSING_PUNCH", "NO_RECORD"];
 const units = ["BRANCH", "FRANCHISE", "FACTORY"];
 const HEAD_OFFICE = "head-office";
-const MAX_RANGE_DAYS = 31;
+const MAX_RANGE_DAYS = 35;
 const EXPORT_LIMIT = 20000;
 // Open sessions older than this are flagged for review; shorter ones may be overnight shifts.
 const MISSING_PUNCH_AFTER_MS = 16 * 3600 * 1000;
