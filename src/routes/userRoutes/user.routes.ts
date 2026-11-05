@@ -1,8 +1,12 @@
 import { Router } from 'express';
+import multer from 'multer';
 import * as userController from '../../controllers/userControllers/user.controller';
 
 const router = Router();
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 20 * 1024 * 1024 } });
 
+router.post('/upload-document', upload.single('file'), userController.uploadUserDocumentController);
+router.get('/document-url', userController.getUserDocumentUrlController);
 router.post('/create-user', userController.createUserController);
 router.patch('/update-user/:userId', userController.updateUserController);
 router.patch(

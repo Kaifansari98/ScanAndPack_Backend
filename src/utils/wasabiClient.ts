@@ -179,6 +179,35 @@ export const uploadToWasabiCompanyVendorDocument = async (
   return sysName; // returns key
 };
 
+export const uploadToWasabiUserDocument = async (
+  buffer: Buffer,
+  vendorId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split('.').pop()?.toLowerCase() || '';
+  const sysName = `user_documents/${vendorId}/${uuidv4()}.${ext}`;
+
+  try {
+    await wasabi.send(
+      new PutObjectCommand({
+        Bucket: process.env.WASABI_BUCKET_NAME!,
+        Key: sysName,
+        Body: buffer,
+        ContentType: contentType || 'application/octet-stream',
+      }),
+    );
+    return sysName;
+  } catch (err) {
+    console.warn('Wasabi upload failed, falling back to local storage:', err);
+    const dir = path.join(process.cwd(), 'public', 'user_documents', String(vendorId));
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    const localName = `${Date.now()}-${uuidv4()}.${ext}`;
+    fs.writeFileSync(path.join(dir, localName), buffer);
+    return `/user_documents/${vendorId}/${localName}`;
+  }
+};
+
 export const uploadToWasabiClientBankDocument = async (
   buffer: Buffer,
   vendorId: number,

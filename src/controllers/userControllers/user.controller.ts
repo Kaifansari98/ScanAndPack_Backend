@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as userService from '../../services/userServices/user.service';
+import { uploadToWasabiUserDocument, generateSignedUrl } from '../../utils/wasabiClient';
 
 export const createUserController = async (req: Request, res: Response) => {
   try {
@@ -228,6 +229,53 @@ export const getUserByIdController = async (req: Request, res: Response) => {
     return res.status(error.statusCode || 500).json({
       success: false,
       message: error.message || "Failed to fetch user",
+    });
+  }
+};
+
+export const uploadUserDocumentController = async (req: Request, res: Response) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res.status(400).json({ success: false, message: "No file uploaded" });
+    }
+    const vendorId = Number(req.body.vendor_id || (req as any).user?.vendor_id || 1);
+    const key = await uploadToWasabiUserDocument(
+      file.buffer,
+      vendorId,
+      file.originalname,
+      file.mimetype,
+    );
+    const signedUrl = await generateSignedUrl(key);
+    return res.status(200).json({
+      success: true,
+      file_url: key,
+      filename: file.originalname,
+      signed_url: signedUrl,
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to upload document",
+    });
+  }
+};
+
+export const getUserDocumentUrlController = async (req: Request, res: Response) => {
+  try {
+    const key = String(req.query.key || "");
+    if (!key) {
+      return res.status(400).json({ success: false, message: "key is required" });
+    }
+    if (key.startsWith("/uploads/") || key.startsWith("http")) {
+      return res.status(200).json({ success: true, url: key });
+    }
+    const url = await generateSignedUrl(key);
+    return res.status(200).json({ success: true, url });
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to generate signed url",
     });
   }
 };
