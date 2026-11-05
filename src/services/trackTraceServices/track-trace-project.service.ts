@@ -1399,7 +1399,11 @@ export const createProjectService_old = async (
         status: "Yes",
       },
       select: {
+        id: true,
         category_name: true,
+        use_in_assembled_packing: true,
+        include_in_packing: true,
+        scan_pack_validate: true,
         projectCategoriesMasterVendorMapping: {
           select: {
             project_categories_type_master_id: true,
@@ -1408,14 +1412,29 @@ export const createProjectService_old = async (
       },
     });
 
+    type CategoryConfig = {
+      id: number;
+      use_in_assembled_packing: boolean;
+      include_in_packing: boolean;
+      scan_pack_validate: boolean;
+    };
+
     const categoryTypeMap = new Map<string, number[]>();
+    const categoryMasterMap = new Map<string, CategoryConfig>();
 
     for (const category of categoryMappings) {
+      const categoryKey = category.category_name.trim().toLowerCase();
       const typeIds = category.projectCategoriesMasterVendorMapping.map(
         (mapping) => mapping.project_categories_type_master_id
       );
 
-      categoryTypeMap.set(category.category_name.trim().toLowerCase(), typeIds);
+      categoryTypeMap.set(categoryKey, typeIds);
+      categoryMasterMap.set(categoryKey, {
+        id: category.id,
+        use_in_assembled_packing: category.use_in_assembled_packing === true,
+        include_in_packing: category.include_in_packing === true,
+        scan_pack_validate: category.scan_pack_validate === true,
+      });
     }
 
     /*
@@ -1640,6 +1659,11 @@ export const createProjectService_old = async (
           const hasEdgeBanding =
             !!item.el1 || !!item.el2 || !!item.sl1 || !!item.sl2;
 
+          const itemCategoryKey = (item.categoryName ?? "")
+            .trim()
+            .toLowerCase();
+          const categoryConfig = categoryMasterMap.get(itemCategoryKey);
+
           const row = await tx.cutList.create({
             data: {
               project_id: project.id,
@@ -1666,7 +1690,14 @@ export const createProjectService_old = async (
               group_name: item.groupName || null,
               custom_packing_group: item.customPackingGroup || null,
               no_of_qty_in_boxes: qtyPerCustomPackingBox[itemIndex] ?? 1,
+              category_id: categoryConfig?.id ?? null,
               category_name: item.categoryName || null,
+              use_in_assembled_packing:
+                categoryConfig?.use_in_assembled_packing ?? null,
+              include_in_packing:
+                categoryConfig?.include_in_packing ?? null,
+              scan_pack_validate:
+                categoryConfig?.scan_pack_validate ?? null,
               procurement: item.procurement || null,
               weight: excelRowWeight,
             },

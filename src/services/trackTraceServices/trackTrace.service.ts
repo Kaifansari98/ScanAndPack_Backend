@@ -1026,12 +1026,22 @@ export const updateScannedItem = async (
         },
         cut_list: {
           select: {
+            id: true,
             unique_code: true,
             description: true,
             item_name: true,
             group_name: true,
             custom_packing_group: true,
             no_of_qty_in_boxes: true,
+            category_id: true,
+            category_name: true,
+            use_in_assembled_packing: true,
+            category: {
+              select: {
+                id: true,
+                use_in_assembled_packing: true,
+              },
+            },
           },
         },
         project: {
@@ -1300,6 +1310,44 @@ export const updateScannedItem = async (
         0,
         "Invalid box_id: box does not belong to the scanned item's project",
       );
+    }
+
+    let isAssembledCategory =
+      eligibleMapping.machine.machine_type_id === 18 &&
+      (eligibleMapping.cut_list.use_in_assembled_packing === true ||
+        eligibleMapping.cut_list.category?.use_in_assembled_packing === true);
+
+    if (!isAssembledCategory && eligibleMapping.machine.machine_type_id === 18) {
+      if (
+        eligibleMapping.cut_list.category_id ||
+        eligibleMapping.cut_list.category_name
+      ) {
+        const catMatch = await prisma.projectCategoriesMaster.findFirst({
+          where: {
+            vendor_id,
+            OR: [
+              ...(eligibleMapping.cut_list.category_id
+                ? [{ id: eligibleMapping.cut_list.category_id }]
+                : []),
+              ...(eligibleMapping.cut_list.category_name
+                ? [
+                    {
+                      category_name: {
+                        equals: eligibleMapping.cut_list.category_name,
+                        mode: "insensitive" as Prisma.QueryMode,
+                      },
+                    },
+                  ]
+                : []),
+            ],
+            use_in_assembled_packing: true,
+          },
+          select: { id: true },
+        });
+        if (catMatch) {
+          isAssembledCategory = true;
+        }
+      }
     }
 
     // /scan/check-item validates the scan and either returns item details for the
@@ -1946,8 +1994,192 @@ export const updateScannedItem = async (
               productSetNo: null as number | null,
               boxPosition: null as number | null,
               boxesPerProduct: null as number | null,
+              assembledItemsPackedCount: 0,
             };
           }
+
+          let assembledItemsPackedCount = 1;
+
+          const packAssembledSiblings = async (targetBoxId: number | null) => {
+            if (
+              !isPackagingMachine ||
+              !isAssembledCategory ||
+              !eligibleMapping.cut_list.group_name?.trim()
+            ) {
+              return;
+            }
+
+            const assembledGroupName =
+              eligibleMapping.cut_list.group_name.trim();
+
+            const groupCutLists = await tx.cutList.findMany({
+              where: {
+                project_id: eligibleMapping.project_id,
+                vendor_id,
+                status: { equals: "active", mode: "insensitive" },
+                group_name: { equals: assembledGroupName, mode: "insensitive" },
+              },
+              select: {
+                id: true,
+                item_name: true,
+                qty: true,
+                category_id: true,
+                category_name: true,
+                use_in_assembled_packing: true,
+                scan_pack_validate: true,
+                category: {
+                  select: {
+                    id: true,
+                    category_name: true,
+                    use_in_assembled_packing: true,
+                    scan_pack_validate: true,
+                  },
+                },
+              },
+              orderBy: { id: "asc" },
+            });
+
+            // Fetch active assembled categories for this vendor to ensure accurate matching
+            const assembledCategories =
+              await tx.projectCategoriesMaster.findMany({
+                where: {
+                  vendor_id,
+                  use_in_assembled_packing: true,
+                  scan_pack_validate: true,
+                },
+                select: {
+                  id: true,
+                  category_name: true,
+                },
+              });
+
+            const assembledCategoryIds = new Set(
+              assembledCategories.map((cat) => cat.id),
+            );
+            const assembledCategoryNames = new Set(
+              assembledCategories.map((cat) =>
+                cat.category_name.trim().toLowerCase(),
+              ),
+            );
+
+            // Filter ONLY items that belong to an assembled category AND require scan validation
+            // Strict exclusion: hardware / manual items (scan_pack_validate = false) are never auto-packed
+            const targetCutLists = groupCutLists.filter((c) => {
+              if (
+                c.scan_pack_validate === false ||
+                c.category?.scan_pack_validate === false
+              ) {
+                return false;
+              }
+
+              const isAssembled =
+                c.use_in_assembled_packing === true ||
+                c.category?.use_in_assembled_packing === true ||
+                (c.category_id && assembledCategoryIds.has(c.category_id)) ||
+                (c.category_name &&
+                  assembledCategoryNames.has(
+                    c.category_name.trim().toLowerCase(),
+                  ));
+
+              return Boolean(isAssembled);
+            });
+
+            const positiveQtys = targetCutLists
+              .map((c) => Number(c.qty || 0))
+              .filter((q) => q > 0);
+            const groupTotalSets =
+              positiveQtys.length > 0 ? Math.min(...positiveQtys) : 1;
+            const totalSets = groupTotalSets > 0 ? groupTotalSets : 1;
+
+            const siblingMappingIdsToPack: number[] = [];
+            const siblingPassIdsToUpdate: number[] = [];
+
+            for (const c of targetCutLists) {
+              const componentTotalQty = Math.max(1, Number(c.qty || 1));
+              const piecesPerSet = Math.max(
+                1,
+                Math.round(componentTotalQty / totalSets),
+              );
+
+              const countNeeded =
+                c.id === eligibleMapping.cut_list_id
+                  ? piecesPerSet - 1
+                  : piecesPerSet;
+
+              if (countNeeded <= 0) continue;
+
+              const pendingRows = await tx.cutListMachineMapping.findMany({
+                where: {
+                  machine_id,
+                  vendor_id,
+                  project_id: eligibleMapping.project_id,
+                  cut_list_id: c.id,
+                  expected_in: true,
+                  actual_in_at: null,
+                  id: { not: id },
+                },
+                orderBy: [{ id: "asc" }],
+                take: countNeeded,
+                select: { id: true },
+              });
+
+              for (const pr of pendingRows) {
+                siblingMappingIdsToPack.push(pr.id);
+              }
+
+              const previousPassRows = await tx.cutListMachineMapping.findMany({
+                where: {
+                  cut_list_id: c.id,
+                  vendor_id,
+                  project_id: eligibleMapping.project_id,
+                  sequence_no: {
+                    lt: sequence_no,
+                  },
+                  actual_in_at: null,
+                  machine: {
+                    scan_type: "PASS",
+                  },
+                },
+                orderBy: [{ sequence_no: "asc" }, { id: "asc" }],
+                take: countNeeded,
+                select: { id: true },
+              });
+
+              for (const ppr of previousPassRows) {
+                siblingPassIdsToUpdate.push(ppr.id);
+              }
+            }
+
+            if (siblingMappingIdsToPack.length > 0) {
+              await tx.cutListMachineMapping.updateMany({
+                where: {
+                  id: { in: siblingMappingIdsToPack },
+                  actual_in_at: null,
+                },
+                data: {
+                  actual_in_at: scanTime,
+                  in_operator: created_by,
+                  ...(targetBoxId ? { box_id: targetBoxId } : {}),
+                  project_location_product_quantity_id:
+                    selectedLocationAllocation?.id ?? null,
+                },
+              });
+              assembledItemsPackedCount += siblingMappingIdsToPack.length;
+            }
+
+            if (siblingPassIdsToUpdate.length > 0) {
+              await tx.cutListMachineMapping.updateMany({
+                where: {
+                  id: { in: siblingPassIdsToUpdate },
+                  actual_in_at: null,
+                },
+                data: {
+                  actual_in_at: scanTime,
+                  in_operator: created_by,
+                },
+              });
+            }
+          };
 
           if (automaticPackingDefinition) {
             const incomingItemRequirement =
@@ -2422,6 +2654,8 @@ export const updateScannedItem = async (
               },
             });
 
+            await packAssembledSiblings(targetBox.id);
+
             const requiredCutListIds =
               automaticPackingDefinition.packingGroupItems.map(
                 (item) => item.cutListId,
@@ -2473,6 +2707,10 @@ export const updateScannedItem = async (
             }
           }
 
+          if (!automaticPackingDefinition) {
+            await packAssembledSiblings(assignedBoxId);
+          }
+
           if (passMappingIdsToUpdate.length > 0) {
             await tx.cutListMachineMapping.updateMany({
               where: {
@@ -2496,6 +2734,7 @@ export const updateScannedItem = async (
             productSetNo,
             boxPosition,
             boxesPerProduct,
+            assembledItemsPackedCount,
           };
         },
         automaticPackingDefinition || selectedLocationAllocation
@@ -2610,7 +2849,9 @@ export const updateScannedItem = async (
       1,
       scanUpdate.boxCompleted
         ? "Box completed and ready to print"
-        : "Scan done",
+        : isAssembledCategory
+          ? "Assembled product scanned successfully"
+          : "Scan done",
       {
         mapping_id: eligibleMapping.id,
         cut_list_id: eligibleMapping.cut_list_id,
@@ -2627,6 +2868,8 @@ export const updateScannedItem = async (
         box_name: scanUpdate.boxName,
         box_completed: scanUpdate.boxCompleted,
         auto_completed: is_check,
+        is_assembled: isAssembledCategory,
+        assembled_components_packed: (scanUpdate as any).assembledItemsPackedCount ?? 1,
         packing_group_name:
           automaticPackingDefinition?.packingGroupName ?? null,
         product_set_no: scanUpdate.productSetNo,
@@ -7137,7 +7380,8 @@ export const createProjectCategory = async (
   naming_structure?: { delimiter?: string; fields: string[] } | null,
 ) => {
   try {
-    const finalScanPackValidate = Boolean(scan_pack_validate);
+    const finalAssembledPacking = Boolean(use_in_assembled_packing);
+    const finalScanPackValidate = finalAssembledPacking || Boolean(scan_pack_validate);
     const finalIncludeInPacking = finalScanPackValidate
       ? true
       : Boolean(include_in_packing);
@@ -7154,7 +7398,7 @@ export const createProjectCategory = async (
           updated_by: created_by,
           include_in_packing: finalIncludeInPacking,
           scan_pack_validate: finalScanPackValidate,
-          use_in_assembled_packing: Boolean(use_in_assembled_packing),
+          use_in_assembled_packing: finalAssembledPacking,
         },
       });
 
@@ -7237,6 +7481,10 @@ export const updateProjectCategory = async (
       }
       if (use_in_assembled_packing !== undefined) {
         updateData.use_in_assembled_packing = Boolean(use_in_assembled_packing);
+        if (updateData.use_in_assembled_packing === true) {
+          updateData.include_in_packing = true;
+          updateData.scan_pack_validate = true;
+        }
       }
 
       await tx.projectCategoriesMaster.update({
@@ -14612,6 +14860,7 @@ interface AddManualPackingItemPayload {
   cut_list_id: number;
   qty: number;
   user_id: number;
+  location_name?: string;
 }
 
 export const addManualPackingItemService = async (
@@ -14624,6 +14873,7 @@ export const addManualPackingItemService = async (
     const cut_list_id = Number(payload.cut_list_id);
     const qty = Number(payload.qty);
     const user_id = Number(payload.user_id);
+    const location_name = String(payload.location_name ?? "").trim();
 
     /*
     |--------------------------------------------------------------------------
@@ -14671,6 +14921,7 @@ export const addManualPackingItemService = async (
         id: true,
         project_name: true,
         packing_type: true,
+        is_multi_location: true,
         isDeleted: true,
         project_status: true,
       },
@@ -14783,6 +15034,36 @@ export const addManualPackingItemService = async (
 
     if (!cutList) {
       return validationResponse(0, "Item is not available for manual packing");
+    }
+
+    let locationAllocationId: number | null = null;
+    if (project.is_multi_location && location_name) {
+      const groupName = cutList.group_name?.trim();
+      if (!groupName) {
+        return validationResponse(
+          0,
+          `Product Group is required to assign item "${cutList.item_name}" to a location`,
+        );
+      }
+
+      const locationAllocation =
+        await prisma.projectLocationProductQuantity.findFirst({
+          where: {
+            project_id,
+            vendor_id,
+            location_name: { equals: location_name, mode: "insensitive" },
+            group_name: { equals: groupName, mode: "insensitive" },
+          },
+          select: { id: true },
+        });
+
+      if (!locationAllocation) {
+        return validationResponse(
+          0,
+          `Location "${location_name}" is not configured for Product Group "${groupName}"`,
+        );
+      }
+      locationAllocationId = locationAllocation.id;
     }
 
     /*
@@ -15136,6 +15417,10 @@ export const addManualPackingItemService = async (
               box_id,
 
               expected_in: true,
+
+              ...(locationAllocationId
+                ? { project_location_product_quantity_id: locationAllocationId }
+                : {}),
             },
 
             select: {
@@ -15196,6 +15481,9 @@ export const addManualPackingItemService = async (
                   */
               weight: perItemWeight,
               row_created_source: "Manual",
+              ...(locationAllocationId
+                ? { project_location_product_quantity_id: locationAllocationId }
+                : {}),
             },
 
             select: {
