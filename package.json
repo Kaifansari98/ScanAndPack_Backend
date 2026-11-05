@@ -9,6 +9,7 @@
     "type-check": "tsc --noEmit",
     "start": "node dist/src/server.js",
     "prisma:generate": "prisma generate",
+    "prisma:backfill-leave-dates": "prisma db execute --file scripts/backfill-leave-end-dates.sql",
     "prisma:migrate": "prisma migrate dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
