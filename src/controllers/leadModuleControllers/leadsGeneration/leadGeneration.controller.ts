@@ -2165,11 +2165,26 @@ export class LeadController {
           .json(ApiResponse.error("Invalid vendor ID provided", 400));
       }
 
+      let franchiseId = req.query.franchise_id ? Number(req.query.franchise_id) : req.query.franchiseId ? Number(req.query.franchiseId) : null;
+
+      const leadId = req.query.lead_id ? Number(req.query.lead_id) : req.query.leadId ? Number(req.query.leadId) : null;
+
+      if (!franchiseId && leadId) {
+        const lead = await prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: { franchise_id: true },
+        });
+        franchiseId = lead?.franchise_id ?? null;
+      }
+
       console.log(
-        `[CONTROLLER] Fetching Site Supervisors for vendor ID: ${vendorId}`,
+        `[CONTROLLER] Fetching Site Supervisors for vendor ID: ${vendorId}${franchiseId ? `, franchise ID: ${franchiseId}` : ""}`,
       );
 
-      const siteSupervisors = await getSiteSupervisorByVendor(vendorId);
+      const siteSupervisors = await getSiteSupervisorByVendor(
+        vendorId,
+        franchiseId,
+      );
 
       // Check if any sales executives were found
       if (siteSupervisors.length === 0) {

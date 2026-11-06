@@ -299,25 +299,35 @@ export class AuthService {
       },
     });
 
-    const selectedCodes = mappings.map((mapping) => mapping.privilege.code);
+    type StagePrivilege = {
+      code: string;
+      parent_module: string;
+      child_module: string;
+      action: string;
+    };
+
+    const selectedCodes: string[] = mappings.map(
+      (mapping: { privilege: { code: string; action: string } }) =>
+        mapping.privilege.code,
+    );
 
     // A common action is an alias for every stage privilege whose action has
     // the same stable slug. This works with persisted General aliases and with
     // the UI fallback that exposes an existing stage privilege as the common action.
-    const stagePrivileges = await prisma.privilegeMaster.findMany({
+    const stagePrivileges: StagePrivilege[] = (await prisma.privilegeMaster.findMany({
       where: {
         vendor_id: vendorId,
         is_active: true,
         NOT: { parent_module: "General" },
       },
       select: { code: true, parent_module: true, child_module: true, action: true },
-    });
+    })) as StagePrivilege[];
 
     const slugify = (value: string) =>
       value.trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
 
     const commonActionGroups = new Map<string, { children: Set<string>; parents: Set<string> }>();
-    stagePrivileges.forEach((privilege) => {
+    stagePrivileges.forEach((privilege: StagePrivilege) => {
       const slug = slugify(privilege.action);
       const group = commonActionGroups.get(slug) ?? {
         children: new Set<string>(),
@@ -330,12 +340,12 @@ export class AuthService {
 
     const commonActionSlugs = new Set(
       selectedCodes
-        .filter((code) => code.startsWith("general.common_action."))
-        .map((code) => code.slice("general.common_action.".length)),
+        .filter((code: string) => code.startsWith("general.common_action."))
+        .map((code: string) => code.slice("general.common_action.".length)),
     );
     stagePrivileges
-      .filter((privilege) => selectedCodes.includes(privilege.code))
-      .forEach((privilege) => {
+      .filter((privilege: StagePrivilege) => selectedCodes.includes(privilege.code))
+      .forEach((privilege: StagePrivilege) => {
         const group = commonActionGroups.get(slugify(privilege.action));
         if (group && (group.children.size > 1 || group.parents.size > 1)) {
           commonActionSlugs.add(slugify(privilege.action));
@@ -343,8 +353,8 @@ export class AuthService {
       });
 
     const expandedCodes = stagePrivileges
-      .filter((privilege) => commonActionSlugs.has(slugify(privilege.action)))
-      .map((privilege) => privilege.code);
+      .filter((privilege: StagePrivilege) => commonActionSlugs.has(slugify(privilege.action)))
+      .map((privilege: StagePrivilege) => privilege.code);
 
     return [...new Set([...selectedCodes, ...expandedCodes])];
   }

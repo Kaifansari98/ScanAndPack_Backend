@@ -2808,6 +2808,7 @@ export type DefectedItemScalarFieldEnum = (typeof DefectedItemScalarFieldEnum)[k
 
 export const FranchiseMasterScalarFieldEnum = {
   online_lead_sales_executive_id: 'online_lead_sales_executive_id',
+  shift_minutes: 'shift_minutes',
   id: 'id',
   vendor_id: 'vendor_id',
   franchise_name: 'franchise_name',
@@ -4491,6 +4492,7 @@ export const AttendanceScalarFieldEnum = {
   check_out: 'check_out',
   source: 'source',
   work_location: 'work_location',
+  shift_minutes: 'shift_minutes',
   time_zone: 'time_zone',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -4594,6 +4596,7 @@ export const LeaveRequestScalarFieldEnum = {
   leave_date: 'leave_date',
   end_date: 'end_date',
   status: 'status',
+  is_backdated: 'is_backdated',
   rejection_reason: 'rejection_reason',
   reviewed_by: 'reviewed_by',
   reviewed_at: 'reviewed_at',

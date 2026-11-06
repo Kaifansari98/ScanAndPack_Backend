@@ -31,7 +31,7 @@ function employeeOf(user: { id: number; user_name: string; designation: string |
 function rowOf(record: any, timeZone: string, now: Date) {
   const decorated = decorateAttendance(record, timeZone, now)!;
   const status: LogStatus = decorated.check_out ? "COMPLETED"
-    : now.getTime() - new Date(record.check_in).getTime() > MISSING_PUNCH_AFTER_MS ? "MISSING_PUNCH"
+    : now.getTime() - new Date(record.check_in).getTime() > Math.max(MISSING_PUNCH_AFTER_MS, ((record.shift_minutes ?? 480) + 480) * 60000) ? "MISSING_PUNCH"
     : decorated.status === "ON_BREAK" ? "ON_BREAK" : "WORKING";
   return {
     attendance_id: record.id as number, status, check_in: record.check_in as Date, check_out: record.check_out as Date | null,

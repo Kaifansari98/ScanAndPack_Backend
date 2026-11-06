@@ -3633,6 +3633,7 @@ model FranchiseMaster {
   online_lead_sales_executive_id                                             Int?
   onlineLeadSalesExecutive                                                   UserMaster?                          @relation("OnlineLeadSalesExecutive", fields: [online_lead_sales_executive_id], references: [id], onDelete: SetNull)
   productsRequiredForProduction                                              ProductsRequiredForProduction[]
+  shift_minutes                                                              Int                                  @default(480)
   id                                                                         Int                                  @id @default(autoincrement())
   vendor_id                                                                  Int
   franchise_name                                                             String
@@ -6221,6 +6222,7 @@ model attendance {
   check_out       DateTime?
   source          AttendanceSource
   work_location   AttendanceWorkLocation?
+  shift_minutes   Int?
   time_zone       String?
   created_at      DateTime         @default(now())
   updated_at      DateTime         @updatedAt
@@ -6326,6 +6328,7 @@ enum LeaveRequestStatus {
   PENDING
   APPROVED
   REJECTED
+  RECORDED
 }
 
 model LeaveHoliday {
@@ -6380,6 +6383,8 @@ model LeaveRequest {
   leave_date DateTime @db.Date
   end_date DateTime @db.Date
   status LeaveRequestStatus @default(PENDING)
+  // Classification at submission, never inferred from the request aging.
+  is_backdated Boolean @default(false)
   rejection_reason String? @db.VarChar(1000)
   reviewed_by Int?
   reviewed_at DateTime?

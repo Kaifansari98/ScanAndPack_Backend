@@ -37,6 +37,7 @@ function requestView(row: any, timeZone: string) {
     franchise: row.franchise_id ? String(row.franchise_id) : "company", locationName: row.franchise?.franchise_name || "Head office",
     title: row.title, type: typeLabels[row.type], remark: row.remark, date: row.leave_date.toISOString().slice(0, 10),
     startDate: row.leave_date.toISOString().slice(0, 10), endDate: row.end_date.toISOString().slice(0, 10),
+    isBackdated: row.is_backdated === true, approvalRequired: row.is_backdated !== true,
     dayCount: Math.round((row.end_date.getTime() - row.leave_date.getTime()) / 86400000) + 1, status: row.status,
     submittedAt: row.created_at, submittedDate: deriveVendorLocalDate(row.created_at, timeZone).localDateString,
     reviewedDate: row.reviewed_at ? deriveVendorLocalDate(row.reviewed_at, timeZone).localDateString : null, rejectionReason: row.rejection_reason, reviewedBy: row.reviewer?.user_name || null, reviewedAt: row.reviewed_at,
@@ -54,7 +55,7 @@ export async function getLeaveWorkspace(actor: AttendanceActor | undefined, quer
     groupedRequestCounts(where),
     prisma.leaveRequest.aggregate({ where: base, _min: { leave_date: true }, _max: { end_date: true } }),
   ]);
-  const counts = { PENDING: 0, APPROVED: 0, REJECTED: 0 };
+  const counts = { PENDING: 0, APPROVED: 0, REJECTED: 0, RECORDED: 0 };
   grouped.forEach(item => { counts[item.status] = item._count._all; });
   const currentYear = Number(context.today.slice(0, 4));
   const min = Math.min(currentYear - 1, year, limits._min.leave_date?.getUTCFullYear() ?? currentYear);
@@ -64,7 +65,7 @@ export async function getLeaveWorkspace(actor: AttendanceActor | undefined, quer
     franchises: franchises.map(row => ({ id: String(row.id), name: row.franchise_name, unit: row.Department })),
     holidays: holidays.map(row => ({ id: String(row.id), date: row.holiday_date.toISOString().slice(0, 10), name: row.name, remark: row.remark, scope: row.scope_key })),
     policies: Object.fromEntries(policies.map(row => [row.scope_key, row.days])),
-    summary: { total: counts.PENDING + counts.APPROVED + counts.REJECTED, pending: counts.PENDING, approved: counts.APPROVED, rejected: counts.REJECTED },
+    summary: { total: counts.PENDING + counts.APPROVED + counts.REJECTED + counts.RECORDED, pending: counts.PENDING, approved: counts.APPROVED, rejected: counts.REJECTED, recorded: counts.RECORDED },
     available_years: Array.from({ length: max - min + 1 }, (_, index) => min + index),
   };
 }
@@ -122,30 +123,30 @@ export async function listLeaveRequests(actor: AttendanceActor | undefined, quer
     ...(search ? { OR: [{ title: { contains: search, mode: "insensitive" } }, { user: { user_name: { contains: search, mode: "insensitive" } } }, ...(/^\d+$/.test(search) && Number.isSafeInteger(Number(search)) && Number(search) < 2147483648 ? [{ id: Number(search) }] : [])] } : {}) };
   return prisma.$transaction(async tx => {
     const grouped = await tx.leaveRequest.groupBy({ by: ["status"], orderBy: { status: "asc" }, where, _count: { _all: true } });
-    const counts = { PENDING: 0, APPROVED: 0, REJECTED: 0 }; grouped.forEach(item => { counts[item.status] = item._count._all; });
-    const total = status ? counts[status as LeaveRequestStatus] : counts.PENDING + counts.APPROVED + counts.REJECTED;
+    const counts = { PENDING: 0, APPROVED: 0, REJECTED: 0, RECORDED: 0 }; grouped.forEach(item => { counts[item.status] = item._count._all; });
+    const total = status ? counts[status as LeaveRequestStatus] : counts.PENDING + counts.APPROVED + counts.REJECTED + counts.RECORDED;
     const totalPages = Math.max(1, Math.ceil(total / pageSize)), current = Math.min(page, totalPages);
     const items = await tx.leaveRequest.findMany({ where: { ...where, ...(status ? { status: status as LeaveRequestStatus } : {}) }, include: requestInclude, orderBy: [{ created_at: "desc" }, { id: "desc" }], skip: (current - 1) * pageSize, take: pageSize });
-    return { items: items.map(row => requestView(row, context.timeZone)), counts: { all: counts.PENDING + counts.APPROVED + counts.REJECTED, ...counts }, total, page: current, page_size: pageSize, total_pages: totalPages };
+    return { items: items.map(row => requestView(row, context.timeZone)), counts: { all: counts.PENDING + counts.APPROVED + counts.REJECTED + counts.RECORDED, ...counts }, total, page: current, page_size: pageSize, total_pages: totalPages };
   }, { isolationLevel: Prisma.TransactionIsolationLevel.RepeatableRead });
 }
 export async function createLeaveRequest(actor: AttendanceActor | undefined, input: Record<string, unknown>, file?: Express.Multer.File) {
   const context = await leaveContext(actor);
   const title = leaveText(input.title, "Leave title", 100), remark = leaveText(input.remark, "Leave remark", 1000);
-  const { start, end } = leaveDateRange(input, context.today);
+  const { start, end, isBackdated } = leaveDateRange(input, context.today);
   if (!leaveTypes.includes(input.type as any)) attendanceError("Choose a valid leave type.");
   for (const key of ["vendor_id", "user_id", "franchise_id"]) if (input[key] !== undefined) attendanceError("Employee, vendor and location are taken from your session.");
   validateLeaveAttachment(file);
-  const scope = { vendor_id: context.user.vendor_id, user_id: context.user.id, leave_date: { lte: end }, end_date: { gte: start }, status: { in: ["PENDING", "APPROVED"] as LeaveRequestStatus[] } };
-  if (await prisma.leaveRequest.findFirst({ where: scope, select: { id: true } })) attendanceError("These dates overlap a pending or approved leave request.", 409);
+  const scope = { vendor_id: context.user.vendor_id, user_id: context.user.id, leave_date: { lte: end }, end_date: { gte: start }, status: { in: ["PENDING", "APPROVED", "RECORDED"] as LeaveRequestStatus[] } };
+  if (await prisma.leaveRequest.findFirst({ where: scope, select: { id: true } })) attendanceError("These dates overlap a pending, approved or recorded leave request.", 409);
   let key: string | undefined;
   try {
     if (file) key = await storeLeaveAttachment(file, context.user.vendor_id, context.user.id);
     const result = await prisma.$transaction(async tx => {
       await tx.$queryRaw`SELECT id FROM "UserMaster" WHERE id = ${context.user.id} FOR UPDATE`;
-      if (await tx.leaveRequest.findFirst({ where: scope, select: { id: true } })) attendanceError("These dates overlap a pending or approved leave request.", 409);
+      if (await tx.leaveRequest.findFirst({ where: scope, select: { id: true } })) attendanceError("These dates overlap a pending, approved or recorded leave request.", 409);
       return tx.leaveRequest.create({ data: { vendor_id: context.user.vendor_id, user_id: context.user.id, franchise_id: context.user.franchise_id,
-        title, type: input.type as LeaveType, remark, leave_date: start, end_date: end,
+        title, type: input.type as LeaveType, remark, leave_date: start, end_date: end, is_backdated: isBackdated, status: isBackdated ? "RECORDED" : "PENDING",
         ...(file && key ? { attachment_key: key, attachment_name: file.originalname.replace(/[\r\n\\/]/g, "_").slice(0, 200), attachment_mime: file.mimetype, attachment_size: file.size } : {}) }, include: requestInclude });
     }, { isolationLevel: Prisma.TransactionIsolationLevel.ReadCommitted });
     return requestView(result, context.timeZone);
@@ -162,7 +163,7 @@ export async function decideLeaveRequest(actor: AttendanceActor | undefined, id:
     await tx.$queryRaw`SELECT id FROM "LeaveRequest" WHERE id = ${id} AND vendor_id = ${context.user.vendor_id} FOR UPDATE`;
     const row = await tx.leaveRequest.findFirst({ where: { id, vendor_id: context.user.vendor_id } });
     if (!row) attendanceError("Leave request not found.", 404);
-    if (row.user_id === context.user.id) attendanceError("Your own leave request must be reviewed by another super admin.", 403);
+    if (row.is_backdated) attendanceError("Backdated leave is already recorded and does not require approval.", 409);
     if (row.status !== "PENDING") attendanceError("This leave request has already been reviewed.", 409);
     const result = await tx.leaveRequest.update({ where: { id: row.id }, data: { status: input.status as LeaveRequestStatus, rejection_reason: rejectionReason, reviewed_by: context.user.id, reviewed_at: new Date() }, include: requestInclude });
     return requestView(result, context.timeZone);

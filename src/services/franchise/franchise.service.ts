@@ -1,6 +1,9 @@
 import { prisma } from "../../prisma/client";
 
+import { validateShiftMinutes } from "../attendance/attendance-calendar.utils";
+
 export type CreateFranchisePayload = {
+  shift_minutes?: number;
   vendor_id: number;
   franchise_name: string;
   franchise_code?: string | null;
@@ -20,6 +23,7 @@ export type CreateFranchisePayload = {
 };
 
 export const createFranchise = async (payload: CreateFranchisePayload) => {
+  const shiftMinutes = payload.shift_minutes === undefined ? 480 : validateShiftMinutes(payload.shift_minutes);
   const franchiseName = payload.franchise_name?.trim();
   const franchiseCode = payload.franchise_code?.trim().toUpperCase() || null;
   const missingFields: string[] = [];
@@ -74,6 +78,7 @@ export const createFranchise = async (payload: CreateFranchisePayload) => {
     data: {
       vendor_id: Number(payload.vendor_id),
       franchise_name: franchiseName!,
+      shift_minutes: shiftMinutes,
       franchise_code: franchiseCode,
       contact_number: payload.contact_number ?? null,
       contact_email: payload.contact_email ?? null,
@@ -112,6 +117,7 @@ export const getFranchisesByVendorId = async (vendorId: number) => {
       franchise_name: true,
       franchise_code: true,
       Department: true,
+      shift_minutes: true,
       contact_person: true,
       contact_email: true,
       contact_number: true,
@@ -285,24 +291,37 @@ export const getSiteSupervisorFranchiseMapping = async (
     throw error;
   }
 
-  const mappings = await prisma.siteSupervisorFranchiseMapping.findMany({
+  const supervisors = await prisma.userMaster.findMany({
     where: {
       vendor_id: Number(vendorId),
-      franchise_id: Number(franchiseId),
-      supervisor: {
-        status: "active",
-      },
-    },
-    select: {
-      supervisor: {
-        select: {
-          id: true,
-          user_name: true,
-          user_contact: true,
+      user_type: {
+        user_type: {
+          in: ["site-supervisor", "site supervisor", "site_supervisor"],
+          mode: "insensitive",
         },
       },
+      status: "active",
+      OR: [
+        { franchise_id: Number(franchiseId) },
+        {
+          siteSupervisorFranchiseMappings: {
+            some: {
+              franchise_id: Number(franchiseId),
+            },
+          },
+        },
+      ],
+    },
+    select: {
+      id: true,
+      user_name: true,
+      user_contact: true,
+      user_email: true,
+    },
+    orderBy: {
+      user_name: "asc",
     },
   });
 
-  return mappings.map((mapping) => mapping.supervisor);
+  return supervisors;
 };
