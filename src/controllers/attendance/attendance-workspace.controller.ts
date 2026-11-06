@@ -12,7 +12,7 @@ const endpoint = (handler: (req: Request) => Promise<unknown>, status = 200) => 
     return res.status(code).json({ success: false, message: conflict ? "Attendance was updated by another request. Refresh and retry." : code === 500 ? "Attendance request failed. Please try again." : error.message });
   }
 };
-export const attendanceWorkspaceController = endpoint(req => getAttendanceWorkspace((req as any).user, req.query.month));
+export const attendanceWorkspaceController = endpoint(req => getAttendanceWorkspace((req as any).user, req.query.month, req.query.user_id));
 export const attendancePunchController = endpoint(req => punchAttendance((req as any).user, { ...req.body, user_id: (req as any).user?.id ?? (req as any).user?.user_id }));
 export const attendanceCorrectionRequestController = endpoint(req => requestAttendanceCorrection((req as any).user, req.body ?? {}), 201);
 export const attendanceCorrectionsController = endpoint(req => listAttendanceCorrections((req as any).user, req.query));
