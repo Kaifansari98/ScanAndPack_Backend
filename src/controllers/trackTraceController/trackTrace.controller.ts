@@ -2359,8 +2359,15 @@ export const getManualPackingItemsController = async (
 
 export const addManualPackingItem = async (req: Request, res: Response) => {
   try {
-    const { project_id, vendor_id, box_id, cut_list_id, qty, user_id } =
-      req.body;
+    const {
+      project_id,
+      vendor_id,
+      box_id,
+      cut_list_id,
+      qty,
+      user_id,
+      location_name,
+    } = req.body;
 
     const serviceResponse = await trackTraceService.addManualPackingItemService(
       {
@@ -2375,6 +2382,9 @@ export const addManualPackingItem = async (req: Request, res: Response) => {
         qty: Number(qty),
 
         user_id: Number(user_id),
+
+        location_name:
+          typeof location_name === "string" ? location_name : undefined,
       },
     );
 

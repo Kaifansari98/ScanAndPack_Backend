@@ -757,18 +757,32 @@ export class BookingStageService {
             );
           }
 
-          const mappedSupervisors =
-            await tx.siteSupervisorFranchiseMapping.findMany({
-              where: {
-                vendor_id: data.vendor_id,
-                franchise_id: franchiseIdForLead,
-                supervisor: { status: "active" },
+          const mappedSupervisors = await tx.userMaster.findMany({
+            where: {
+              vendor_id: data.vendor_id,
+              user_type: {
+                user_type: {
+                  in: ["site-supervisor", "site supervisor", "site_supervisor"],
+                  mode: "insensitive",
+                },
               },
-              select: { supervisor_id: true },
-            });
+              status: "active",
+              OR: [
+                { franchise_id: franchiseIdForLead },
+                {
+                  siteSupervisorFranchiseMappings: {
+                    some: {
+                      franchise_id: franchiseIdForLead,
+                    },
+                  },
+                },
+              ],
+            },
+            select: { id: true },
+          });
 
           const mappedSupervisorIds = mappedSupervisors.map(
-            (mapping: { supervisor_id: number }) => mapping.supervisor_id,
+            (mapping: { id: number }) => mapping.id,
           );
 
           if (mappedSupervisorIds.length === 0) {
@@ -3578,6 +3592,7 @@ export class BookingStageService {
         select: {
           id: true,
           account_id: true,
+          franchise_id: true,
         },
       });
 
@@ -3613,6 +3628,33 @@ export class BookingStageService {
 
       if (!supervisor) {
         throw new Error("Invalid or inactive site supervisor");
+      }
+
+      if (lead.franchise_id) {
+        const isMapped = await tx.userMaster.findFirst({
+          where: {
+            id: data.siteSupervisorId,
+            vendor_id: data.vendor_id,
+            status: "active",
+            OR: [
+              { franchise_id: lead.franchise_id },
+              {
+                siteSupervisorFranchiseMappings: {
+                  some: {
+                    franchise_id: lead.franchise_id,
+                  },
+                },
+              },
+            ],
+          },
+          select: { id: true },
+        });
+
+        if (!isMapped) {
+          throw new Error(
+            "Selected site supervisor is not assigned to this lead's franchise",
+          );
+        }
       }
 
       // Check if there's already an active supervisor before deactivating

@@ -1106,12 +1106,11 @@ export const updateBoxStatus = async (
     }
   }
 
-  let locationAllocationId: number | null = null;
+  let locationAllocationByMappingId = new Map<number, number>();
   const normalizedLocationName = String(locationName ?? "").trim();
 
   if (
     newStatus === BoxStatus.packed &&
-    box.project.packing_type === PackingType.CUSTOM_GROUP &&
     box.project.is_multi_location &&
     normalizedLocationName
   ) {
@@ -1167,22 +1166,14 @@ export const updateBoxStatus = async (
       }
     }
 
-    const distinctAllocationIds = new Set(
+    locationAllocationByMappingId = new Map(
       mappings.map((mapping) => {
         const allocation = allocationByGroup.get(
           mapping.cut_list.group_name!.trim().toLocaleLowerCase(),
         );
-        return allocation?.id;
+        return [mapping.id, allocation!.id] as const;
       }),
     );
-
-    if (distinctAllocationIds.size !== 1) {
-      throw new Error(
-        "All items in a custom group box must use the same selected location",
-      );
-    }
-
-    locationAllocationId = allocations[0]?.id ?? null;
   }
 
   const updatedBoxResult = await prisma.$transaction(async (tx) => {
@@ -1191,16 +1182,15 @@ export const updateBoxStatus = async (
       data: { box_status: newStatus, packed_at: now, packed_by: user_id },
     });
 
-    if (locationAllocationId) {
-      await tx.cutListMachineMapping.updateMany({
-        where: {
-          box_id: box.id,
-          project_id: box.project_id,
-          vendor_id: box.vendor_id,
-          actual_in_at: { not: null },
-        },
-        data: { project_location_product_quantity_id: locationAllocationId },
-      });
+    if (locationAllocationByMappingId.size > 0) {
+      await Promise.all(
+        Array.from(locationAllocationByMappingId, ([mappingId, allocationId]) =>
+          tx.cutListMachineMapping.update({
+            where: { id: mappingId },
+            data: { project_location_product_quantity_id: allocationId },
+          }),
+        ),
+      );
     }
 
     return updatedBox;

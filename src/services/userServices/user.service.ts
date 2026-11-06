@@ -1,5 +1,4 @@
-import { prisma } from "../../prisma/client";
-import type { Prisma } from "../../../generated/prisma_client/client";
+import { prisma, Prisma } from "../../prisma/client";
 import bcrypt from "bcryptjs";
 import { redis } from "../../config/redis";
 
@@ -23,7 +22,7 @@ const ensureCustomUserPrivilegeMappings = async (
   if (activePrivileges.length === 0) return;
 
   await prisma.userPrivilegeMapping.createMany({
-    data: activePrivileges.map((privilege) => ({
+    data: activePrivileges.map((privilege: { id: number }) => ({
       vendor_id: vendorId,
       user_id: userId,
       privilege_id: privilege.id,
@@ -270,7 +269,7 @@ const assignFranchiseLeadsToSupervisor = async (
     if (!leads.length) break;
 
     const scope = {
-      vendor_id: vendorId, lead_id: { in: leads.map((lead) => lead.id) },
+      vendor_id: vendorId, lead_id: { in: leads.map((lead: { id: number }) => lead.id) },
       type: "site-supervisor",
     };
     const existing = await tx.leadUserMapping.findMany({
@@ -300,10 +299,10 @@ const assignFranchiseLeadsToSupervisor = async (
         data: { status: "active", updated_by: actorId },
       });
     }
-    const unassigned = leads.filter((lead) => !retained.has(lead.id));
+    const unassigned = leads.filter((lead: { id: number }) => !retained.has(lead.id));
     if (unassigned.length) {
       await tx.leadUserMapping.createMany({
-        data: unassigned.map((lead) => ({
+        data: unassigned.map((lead: { id: number; account_id: number | null }) => ({
           vendor_id: vendorId, lead_id: lead.id, account_id: lead.account_id!,
           user_id: userId, type: "site-supervisor", status: "active",
           created_by: actorId,
@@ -315,7 +314,7 @@ const assignFranchiseLeadsToSupervisor = async (
       select: { id: true, lead_id: true },
     });
     if (rooms.length) {
-      const removals = rooms.flatMap((room) => {
+      const removals = rooms.flatMap((room: { id: number; lead_id: number }) => {
         const supervisors = previousSupervisors.get(room.lead_id);
         return supervisors?.size
           ? [{ chat_room_id: room.id, user_id: { in: [...supervisors] } }]
@@ -325,7 +324,7 @@ const assignFranchiseLeadsToSupervisor = async (
         await tx.leadChatMember.deleteMany({ where: { OR: removals } });
       }
       await tx.leadChatMember.createMany({
-        data: rooms.map((room) => ({
+        data: rooms.map((room: { id: number }) => ({
           chat_room_id: room.id, user_id: userId, added_by: actorId,
         })),
         skipDuplicates: true,
@@ -462,7 +461,7 @@ export const createUserService = async (data: {
   await requireSupervisorConfirmation(Number(data.vendor_id), franchiseIds, userType.user_type,
     confirm_additional_supervisor);
 
-  const createdUser = await prisma.$transaction(async (tx) => {
+  const createdUser = await prisma.$transaction(async (tx: any) => {
     const vendor = await tx.vendorMaster.findUnique({
       where: { id: Number(data.vendor_id) },
       select: { is_hrms_master_enabled: true },
@@ -716,7 +715,7 @@ export const updateUserService = async (
   }
   const previousFranchiseIds = [...new Set([
     ...(user.franchise_id ? [user.franchise_id] : []),
-    ...user.siteSupervisorFranchiseMappings.map((mapping) => mapping.franchise_id),
+    ...user.siteSupervisorFranchiseMappings.map((mapping: { franchise_id: number }) => mapping.franchise_id),
   ])];
   const selectedFranchiseIds = franchiseIds ?? previousFranchiseIds;
   const removedFranchiseIds = franchiseIds
@@ -725,7 +724,7 @@ export const updateUserService = async (
   await requireSupervisorConfirmation(user.vendor_id, selectedFranchiseIds,
     effectiveUserType.user_type, data.confirm_additional_supervisor, userId);
 
-  const updatedUser = await prisma.$transaction(async (tx) => {
+  const updatedUser = await prisma.$transaction(async (tx: any) => {
     const updated = await tx.userMaster.update({ where: { id: userId }, data: updateData });
 
     if (data.aadhar_card_file !== undefined || data.aadhar_no !== undefined) {
@@ -949,12 +948,12 @@ export const getUsersByVendorService = async ({
 
   return {
     count,
-    data: users.map(({ siteSupervisorFranchiseMappings, ...user }) => {
-      const mapped = siteSupervisorFranchiseMappings.map((mapping) => mapping.franchise);
+    data: users.map(({ siteSupervisorFranchiseMappings, ...user }: any) => {
+      const mapped = siteSupervisorFranchiseMappings.map((mapping: any) => mapping.franchise);
       const franchises = user.franchise_id && user.franchise
-        ? [{ id: user.franchise_id, ...user.franchise }, ...mapped.filter((fr) => fr.id !== user.franchise_id)]
+        ? [{ id: user.franchise_id, ...user.franchise }, ...mapped.filter((fr: any) => fr.id !== user.franchise_id)]
         : mapped;
-      return { ...user, franchises, franchise_ids: franchises.map((fr) => fr.id) };
+      return { ...user, franchises, franchise_ids: franchises.map((fr: any) => fr.id) };
     }),
     pagination: {
       currentPage: pageNum,
@@ -1087,7 +1086,7 @@ export const getPrivilegeMastersByVendorService = async (
     });
 
     selectedPrivilegeIds = new Set(
-      mappings.map((mapping) => mapping.privilege_id),
+      mappings.map((mapping: { privilege_id: number }) => mapping.privilege_id),
     );
   }
 
@@ -1132,7 +1131,7 @@ export const getPrivilegeMastersByVendorService = async (
     },
   });
 
-  const mappedPrivileges = privileges.map((privilege) => ({
+  const mappedPrivileges = privileges.map((privilege: any) => ({
     ...privilege,
     is_selected: selectedPrivilegeIds.has(privilege.id),
   }));
@@ -1145,7 +1144,7 @@ export const getPrivilegeMastersByVendorService = async (
     const normalizedKeywords = childModuleIncludes.map((val) => val.toLowerCase());
     const normalizedCodePrefixes = codePrefixes.map((val) => val.toLowerCase());
 
-    return mappedPrivileges.filter((privilege) => {
+    return mappedPrivileges.filter((privilege: any) => {
       const parentModule = privilege.parent_module.toLowerCase();
       const childModule = privilege.child_module.toLowerCase();
       const privilegeCode = privilege.code.toLowerCase();
@@ -1169,7 +1168,7 @@ export const getPrivilegeMastersByVendorService = async (
   const getDynamicGroups = (parentModuleName: string, idPrefix: string) => {
     const groupsMap = new Map<string, { id: string; title: string; privileges: typeof mappedPrivileges }>();
 
-    mappedPrivileges.forEach((privilege) => {
+    mappedPrivileges.forEach((privilege: any) => {
       if (privilege.parent_module.toLowerCase() !== parentModuleName.toLowerCase()) return;
 
       const normalizedChildModule = privilege.child_module.trim();
@@ -1427,7 +1426,7 @@ export const updateUserPrivilegeMappingsService = async ({
     select: { id: true },
   });
 
-  const activePrivilegeIds = activePrivileges.map((privilege) => privilege.id);
+  const activePrivilegeIds = activePrivileges.map((privilege: { id: number }) => privilege.id);
 
   if (activePrivilegeIds.length === 0) {
     return { updated: 0 };
@@ -1459,24 +1458,24 @@ export const updateUserPrivilegeMappingsService = async ({
     },
   });
   const existingAllowedPrivilegeIds = existingAllowedMappings
-    .map((mapping) => mapping.privilege_id)
-    .sort((left, right) => left - right);
+    .map((mapping: { privilege_id: number }) => mapping.privilege_id)
+    .sort((left: number, right: number) => left - right);
   const normalizedRequestedPrivilegeIds = [...filteredRequestedPrivilegeIds].sort(
-    (left, right) => left - right,
+    (left: number, right: number) => left - right,
   );
   const hasChanged =
     existingAllowedPrivilegeIds.length !== normalizedRequestedPrivilegeIds.length ||
     existingAllowedPrivilegeIds.some(
-      (privilegeId, index) => privilegeId !== normalizedRequestedPrivilegeIds[index],
+      (privilegeId: number, index: number) => privilegeId !== normalizedRequestedPrivilegeIds[index],
     );
 
   if (!hasChanged) {
     return { updated: filteredRequestedPrivilegeIds.length, sessions_revoked: 0 };
   }
 
-  await prisma.$transaction(async (tx) => {
+  await prisma.$transaction(async (tx: any) => {
     await tx.userPrivilegeMapping.createMany({
-      data: activePrivilegeIds.map((privilegeId) => ({
+      data: activePrivilegeIds.map((privilegeId: number) => ({
         vendor_id: vendorId,
         user_id: userId,
         privilege_id: privilegeId,
