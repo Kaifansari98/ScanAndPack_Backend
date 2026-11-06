@@ -8,6 +8,9 @@ datasource db {
 }
 
 model VendorMaster {
+  leaveHolidays LeaveHoliday[]
+  leaveWeeklyOffs LeaveWeeklyOff[]
+  leaveRequests LeaveRequest[]
   instanceStageHistory                         InstanceStageHistory[]
   site_readiness_questions                     Json?
   machineCostDescriptions                      MachineCostDescription[]
@@ -289,6 +292,11 @@ model PrivilegeMaster {
 }
 
 model UserMaster {
+  leaveRequests LeaveRequest[] @relation("LeaveRequestOwner")
+  leaveRequestsReviewed LeaveRequest[] @relation("LeaveRequestReviewer")
+  leaveHolidaysCreated LeaveHoliday[] @relation("LeaveHolidayCreator")
+  leaveHolidaysUpdated LeaveHoliday[] @relation("LeaveHolidayUpdater")
+  leaveWeeklyOffsUpdated LeaveWeeklyOff[] @relation("LeaveWeeklyOffUpdater")
   instanceStageHistory                                                           InstanceStageHistory[]
   onlineLeadAssignedFranchises                                                   FranchiseMaster[]                              @relation("OnlineLeadSalesExecutive")
   productsRequiredForProduction                                                  ProductsRequiredForProduction[]
@@ -306,6 +314,23 @@ model UserMaster {
   created_at                                                                     DateTime                                       @default(now())
   updated_at                                                                     DateTime                                       @updatedAt
   franchise_id                                                                   Int?
+  employee_code                                                                  String?
+  department                                                                     String?
+  aadhar_no                                                                      String?
+  pan_no                                                                         String?
+  permanent_address                                                              String?
+  current_address                                                                String?
+  aadhar_card_file                                                               String?
+  pan_card_file                                                                  String?
+  bank_account_holder_name                                                       String?
+  bank_account_number                                                            String?
+  bank_ifsc_code                                                                 String?
+  joining_date                                                                   DateTime?
+  exit_date                                                                      DateTime?
+  salary_rate_type                                                               String?
+  salary_amount                                                                  String?
+  statutory_compliance                                                           String?
+  work_location                                                                  String?
   accountsCreated                                                                AccountMaster[]                                @relation("AccountCreatedBy")
   accountsUpdated                                                                AccountMaster[]                                @relation("AccountUpdatedBy")
   architechuremasters                                                            Architechuremaster[]
@@ -3596,6 +3621,9 @@ enum FranchiseDepartment {
 }
 
 model FranchiseMaster {
+  leaveHolidays LeaveHoliday[]
+  leaveWeeklyOffs LeaveWeeklyOff[]
+  leaveRequests LeaveRequest[]
   online_lead_sales_executive_id                                             Int?
   onlineLeadSalesExecutive                                                   UserMaster?                          @relation("OnlineLeadSalesExecutive", fields: [online_lead_sales_executive_id], references: [id], onDelete: SetNull)
   productsRequiredForProduction                                              ProductsRequiredForProduction[]
@@ -6277,5 +6305,91 @@ model attendance_corrections {
   @@index([user_id, attendance_date])
   @@index([attendance_id])
   @@index([requested_by])
+  @@index([reviewed_by])
+}
+
+
+enum LeaveType {
+  PAID
+  SICK
+  CASUAL
+  UNPAID
+}
+
+enum LeaveRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model LeaveHoliday {
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  franchise_id Int?
+  // Non-null scope makes company-wide uniqueness work without nullable unique keys.
+  scope_key String
+  holiday_date DateTime @db.Date
+  name String @db.VarChar(100)
+  remark String @default("") @db.VarChar(500)
+  created_by Int
+  updated_by Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  franchise FranchiseMaster? @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
+  creator UserMaster @relation("LeaveHolidayCreator", fields: [created_by], references: [id], onDelete: Restrict)
+  updater UserMaster @relation("LeaveHolidayUpdater", fields: [updated_by], references: [id], onDelete: Restrict)
+  @@unique([vendor_id, scope_key, holiday_date])
+  @@index([vendor_id, holiday_date])
+  @@index([franchise_id])
+}
+
+model LeaveWeeklyOff {
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  franchise_id Int?
+  scope_key String
+  // 0 = Sunday, 6 = Saturday. An explicit empty array means no weekly offs.
+  days Int[]
+  updated_by Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  franchise FranchiseMaster? @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
+  updater UserMaster @relation("LeaveWeeklyOffUpdater", fields: [updated_by], references: [id], onDelete: Restrict)
+  @@unique([vendor_id, scope_key])
+  @@index([franchise_id])
+}
+
+model LeaveRequest {
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  user_id Int
+  // Location at submission, retained when the employee later transfers.
+  franchise_id Int?
+  title String @db.VarChar(100)
+  type LeaveType
+  remark String @db.VarChar(1000)
+  // Inclusive start date; retained column name preserves existing data and clients.
+  leave_date DateTime @db.Date
+  end_date DateTime @db.Date
+  status LeaveRequestStatus @default(PENDING)
+  rejection_reason String? @db.VarChar(1000)
+  reviewed_by Int?
+  reviewed_at DateTime?
+  attachment_key String?
+  attachment_name String?
+  attachment_mime String?
+  attachment_size Int?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  user UserMaster @relation("LeaveRequestOwner", fields: [user_id], references: [id], onDelete: Restrict)
+  franchise FranchiseMaster? @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
+  reviewer UserMaster? @relation("LeaveRequestReviewer", fields: [reviewed_by], references: [id], onDelete: Restrict)
+  @@index([vendor_id, leave_date, status])
+  @@index([vendor_id, user_id, leave_date])
+  @@index([vendor_id, user_id, leave_date, end_date], map: "LeaveRequest_vendor_user_range_idx")
+  @@index([franchise_id])
   @@index([reviewed_by])
 }

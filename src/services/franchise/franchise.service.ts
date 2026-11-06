@@ -111,6 +111,7 @@ export const getFranchisesByVendorId = async (vendorId: number) => {
       vendor_id: true,
       franchise_name: true,
       franchise_code: true,
+      Department: true,
       contact_person: true,
       contact_email: true,
       contact_number: true,
