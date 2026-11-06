@@ -60,12 +60,13 @@ export async function punchAttendance(actor: AttendanceActor | undefined, input:
     const now = new Date();
     const { attendanceDate } = deriveVendorLocalDate(now, context.timeZone);
     const scope = { vendor_id: employee.vendor_id, user_id: employee.id };
-    let record = await tx.attendance.findFirst({ where: { ...scope, attendance_date: attendanceDate }, include: recordInclude });
+    let record = await tx.attendance.findFirst({ where: { ...scope, check_out: null }, include: recordInclude });
     if (action === "IN") {
-      if (record) attendanceError("Check-in is allowed only once per day.", 409);
+      if (record) attendanceError("Check out of your open attendance session before checking in again.", 409);
+      if (await tx.attendance.findFirst({ where: { ...scope, attendance_date: attendanceDate }, select: { id: true } })) attendanceError("Attendance has already been recorded for this date.", 409);
       record = await tx.attendance.create({ data: { ...scope, franchise_id: employee.franchise_id, attendance_date: attendanceDate, check_in: now, source: source as "MANUAL" | "PHONE" | "CARD", work_location: location as AttendanceWorkLocation | null, shift_minutes: franchise?.shift_minutes ?? 480, time_zone: context.timeZone }, include: recordInclude });
     } else {
-      if (!record) attendanceError("No attendance record found for today. Check in first.", 409);
+      if (!record) attendanceError("No open attendance session. Check in first.", 409);
       const lastEvent = record.logs[record.logs.length - 1];
       if (now < record.check_in || (lastEvent && now < lastEvent.action_time)) attendanceError("The server clock precedes the last recorded attendance event.", 409);
       const activeBreak = record.breaks.find(pause => !pause.ended_at);
@@ -79,16 +80,7 @@ export async function punchAttendance(actor: AttendanceActor | undefined, input:
         await tx.attendance_breaks.update({ where: { id: activeBreak.id }, data: { ended_at: now } });
         await tx.attendance_logs.create({ data: { ...scope, franchise_id: record.franchise_id, attendance_id: record.id, action: "BREAK_END", action_time: now, source: source as "MANUAL" | "PHONE" | "CARD", actor_id: context.user.id } });
       }
-      // If employee takes a break or resumes from break after having checked out, resume session (clear check_out until they check out again)
-      const shouldClearCheckOut = (action === "BREAK_START" || action === "BREAK_END") && record.check_out !== null;
-      record = await tx.attendance.update({
-        where: { id: record.id },
-        data: {
-          ...(action === "OUT" ? { check_out: now } : shouldClearCheckOut ? { check_out: null } : {}),
-          updated_at: now
-        },
-        include: recordInclude
-      });
+      record = await tx.attendance.update({ where: { id: record.id }, data: { ...(action === "OUT" ? { check_out: now } : {}), updated_at: now }, include: recordInclude });
     }
     const log = await tx.attendance_logs.create({ data: { ...scope, franchise_id: record.franchise_id, attendance_id: record.id, action: action as AttendanceAction, action_time: now, source: source as "MANUAL" | "PHONE" | "CARD", actor_id: context.user.id } });
     const fresh = await tx.attendance.findUniqueOrThrow({ where: { id: record.id }, include: recordInclude });
@@ -110,7 +102,7 @@ export async function getAttendanceWorkspace(actor: AttendanceActor | undefined,
   const { attendanceDate } = deriveVendorLocalDate(now, context.timeZone);
   const [entries, current, corrections] = await prisma.$transaction([
     prisma.attendance.findMany({ where: { ...scope, attendance_date: range }, include: recordInclude, orderBy: { attendance_date: "desc" } }),
-    prisma.attendance.findFirst({ where: { ...scope, attendance_date: attendanceDate }, include: recordInclude }),
+    prisma.attendance.findFirst({ where: { ...scope, OR: [{ check_out: null }, { attendance_date: attendanceDate }] }, include: recordInclude, orderBy: [{ check_out: { sort: "asc", nulls: "first" } }, { attendance_date: "desc" }] }),
     prisma.attendance_corrections.findMany({ where: { ...scope, attendance_date: range }, include: { reviewedBy: { select: { user_name: true } } }, orderBy: { created_at: "desc" } }),
   ]);
   const records = entries.map(record => decorateAttendance(record, context.timeZone, now));
