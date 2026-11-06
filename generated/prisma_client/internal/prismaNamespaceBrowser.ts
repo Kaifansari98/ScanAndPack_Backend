@@ -289,7 +289,10 @@ export const ModelName = {
   attendance: 'attendance',
   attendance_logs: 'attendance_logs',
   attendance_breaks: 'attendance_breaks',
-  attendance_corrections: 'attendance_corrections'
+  attendance_corrections: 'attendance_corrections',
+  LeaveHoliday: 'LeaveHoliday',
+  LeaveWeeklyOff: 'LeaveWeeklyOff',
+  LeaveRequest: 'LeaveRequest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -2799,6 +2802,7 @@ export type DefectedItemScalarFieldEnum = (typeof DefectedItemScalarFieldEnum)[k
 
 export const FranchiseMasterScalarFieldEnum = {
   online_lead_sales_executive_id: 'online_lead_sales_executive_id',
+  shift_minutes: 'shift_minutes',
   id: 'id',
   vendor_id: 'vendor_id',
   franchise_name: 'franchise_name',
@@ -4482,6 +4486,7 @@ export const AttendanceScalarFieldEnum = {
   check_out: 'check_out',
   source: 'source',
   work_location: 'work_location',
+  shift_minutes: 'shift_minutes',
   time_zone: 'time_zone',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -4541,6 +4546,63 @@ export const Attendance_correctionsScalarFieldEnum = {
 } as const
 
 export type Attendance_correctionsScalarFieldEnum = (typeof Attendance_correctionsScalarFieldEnum)[keyof typeof Attendance_correctionsScalarFieldEnum]
+
+
+export const LeaveHolidayScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
+  scope_key: 'scope_key',
+  holiday_date: 'holiday_date',
+  name: 'name',
+  remark: 'remark',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type LeaveHolidayScalarFieldEnum = (typeof LeaveHolidayScalarFieldEnum)[keyof typeof LeaveHolidayScalarFieldEnum]
+
+
+export const LeaveWeeklyOffScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
+  scope_key: 'scope_key',
+  days: 'days',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type LeaveWeeklyOffScalarFieldEnum = (typeof LeaveWeeklyOffScalarFieldEnum)[keyof typeof LeaveWeeklyOffScalarFieldEnum]
+
+
+export const LeaveRequestScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_id: 'user_id',
+  franchise_id: 'franchise_id',
+  title: 'title',
+  type: 'type',
+  remark: 'remark',
+  leave_date: 'leave_date',
+  end_date: 'end_date',
+  status: 'status',
+  is_backdated: 'is_backdated',
+  rejection_reason: 'rejection_reason',
+  reviewed_by: 'reviewed_by',
+  reviewed_at: 'reviewed_at',
+  attachment_key: 'attachment_key',
+  attachment_name: 'attachment_name',
+  attachment_mime: 'attachment_mime',
+  attachment_size: 'attachment_size',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type LeaveRequestScalarFieldEnum = (typeof LeaveRequestScalarFieldEnum)[keyof typeof LeaveRequestScalarFieldEnum]
 
 
 export const SortOrder = {

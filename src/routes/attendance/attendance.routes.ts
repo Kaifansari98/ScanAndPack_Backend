@@ -7,10 +7,12 @@ import {
   getEmployeeTodayAttendanceController,
 } from "../../controllers/attendance/attendance.controller";
 import { verifyToken } from "../../middlewares/auth.middleware";
-import { attendanceWorkspaceController, attendancePunchController, attendanceCorrectionRequestController, attendanceCorrectionsController, attendanceCorrectionDecisionController, attendanceLogsController, attendanceLogDetailController } from "../../controllers/attendance/attendance-workspace.controller";
+import { attendanceWorkspaceController, attendancePunchController, attendanceCorrectionRequestController, attendanceCorrectionsController, attendanceCorrectionDecisionController, attendanceLogsController, attendanceLogDetailController, attendanceCalendarController, attendanceCalendarDayController } from "../../controllers/attendance/attendance-workspace.controller";
 
 const attendanceRoutes = Router();
 
+attendanceRoutes.get("/calendar/day", verifyToken, attendanceCalendarDayController);
+attendanceRoutes.get("/calendar", verifyToken, attendanceCalendarController);
 attendanceRoutes.get("/workspace", verifyToken, attendanceWorkspaceController);
 attendanceRoutes.post("/punch", verifyToken, attendancePunchController);
 attendanceRoutes.post("/corrections", verifyToken, attendanceCorrectionRequestController);

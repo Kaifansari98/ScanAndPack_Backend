@@ -3,6 +3,9 @@ import { attendanceError } from "../../services/attendance/attendance.utils";
 import { getAttendanceWorkspace, punchAttendance, requestAttendanceCorrection, listAttendanceCorrections, decideAttendanceCorrection } from "../../services/attendance/attendance-workspace.service";
 import { listAttendanceLogs, getAttendanceLogDetail } from "../../services/attendance/attendance-logs.service";
 
+import { getAttendanceCalendar, getAttendanceCalendarDay, updateFranchiseShift } from "../../services/attendance/attendance-calendar.service";
+import { positiveId } from "../../services/leaves/leave.utils";
+
 const endpoint = (handler: (req: Request) => Promise<unknown>, status = 200) => async (req: Request, res: Response) => {
   try { return res.status(status).json({ success: true, data: await handler(req) }); }
   catch (error: any) {
@@ -27,3 +30,7 @@ export const attendanceCorrectionDecisionController = endpoint(req => {
   if (!Number.isSafeInteger(id) || id <= 0) attendanceError("Valid correction id is required.");
   return decideAttendanceCorrection((req as any).user, id, req.body ?? {});
 });
+
+export const attendanceCalendarController = endpoint(req => getAttendanceCalendar((req as any).user, req.query));
+export const attendanceCalendarDayController = endpoint(req => getAttendanceCalendarDay((req as any).user, req.query));
+export const franchiseShiftController = endpoint(req => updateFranchiseShift((req as any).user, positiveId(req.params.id, "location id"), req.body ?? {}));
