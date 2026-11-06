@@ -7035,8 +7035,15 @@ export const getTraceTraceDashboard = async (
               0,
             );
 
+            // Compute scanned normal items at this machine
+            const scannedNormal = normalRows.reduce((sum, row) => {
+              if (row.actual_in_at !== null || row.box_id !== null) {
+                return sum + Math.max(1, Number(row.qty ?? 1));
+              }
+              return sum;
+            }, 0);
+
             let eligibleNormal = 0;
-            let scannedNormal = 0;
 
             if (index === 0) {
               eligibleNormal = assignedNormal;
@@ -7052,9 +7059,6 @@ export const getTraceTraceDashboard = async (
                     : null;
                 if (!lastPriorRow || lastPriorRow.actual_in_at !== null) {
                   eligibleNormal += Math.max(1, Number(row.qty ?? 1));
-                }
-                if (row.actual_in_at !== null || row.box_id !== null) {
-                  scannedNormal += Math.max(1, Number(row.qty ?? 1));
                 }
               }
             }
