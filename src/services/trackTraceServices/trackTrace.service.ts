@@ -9370,6 +9370,8 @@ export const getProjectDetailService_old = async (
           }),
         ]);
 
+        const pending = Math.max(total - scanned, 0);
+
         return {
           machine_id: machineRow.machine_id,
 
@@ -9384,9 +9386,14 @@ export const getProjectDetailService_old = async (
 
           scanned,
 
-          pending: total - scanned,
+          pending,
 
-          pct: total > 0 ? Math.round((scanned / total) * 100) : 0,
+          pct:
+            total > 0
+              ? pending > 0
+                ? Math.min(99, Math.round((scanned / total) * 100))
+                : Math.min(100, Math.round((scanned / total) * 100))
+              : 0,
         };
       }),
     );
@@ -10576,7 +10583,12 @@ export const getProjectDetailService = async (
 
           pending,
 
-          pct: total > 0 ? Math.round((scanned / total) * 100) : 0,
+          pct:
+            total > 0
+              ? pending > 0
+                ? Math.min(99, Math.round((scanned / total) * 100))
+                : Math.min(100, Math.round((scanned / total) * 100))
+              : 0,
         };
       }),
     );
@@ -11237,7 +11249,9 @@ export const getProjectDetailService = async (
 
     const packingProgressPct =
       totalQty > 0
-        ? Math.min(100, Math.round((totalPackedQty / totalQty) * 100))
+        ? totalPendingQty > 0
+          ? Math.min(99, Math.round((totalPackedQty / totalQty) * 100))
+          : Math.min(100, Math.round((totalPackedQty / totalQty) * 100))
         : 0;
 
     /*
@@ -11559,12 +11573,22 @@ export const getProjectDetailService = async (
       0,
     );
 
+    const totalMachinePending = Math.max(
+      totalMachineQty - totalMachineScannedQty,
+      0,
+    );
+
     const machineCompletionPct =
       totalMachineQty > 0
-        ? Math.min(
-            100,
-            Math.round((totalMachineScannedQty / totalMachineQty) * 100),
-          )
+        ? totalMachinePending > 0
+          ? Math.min(
+              99,
+              Math.round((totalMachineScannedQty / totalMachineQty) * 100),
+            )
+          : Math.min(
+              100,
+              Math.round((totalMachineScannedQty / totalMachineQty) * 100),
+            )
         : 0;
 
     /*
