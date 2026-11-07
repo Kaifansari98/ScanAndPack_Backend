@@ -6234,7 +6234,7 @@ model attendance {
   breaks    attendance_breaks[]
   corrections attendance_corrections[]
 
-  @@unique([vendor_id, user_id, attendance_date])
+  @@index([vendor_id, user_id, attendance_date])
   @@index([vendor_id])
   @@index([franchise_id])
   @@index([user_id])
