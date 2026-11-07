@@ -362,7 +362,8 @@ export const VendorMasterScalarFieldEnum = {
   is_online_lead_feature_enabled: 'is_online_lead_feature_enabled',
   is_walkin_questions_feature_enabled: 'is_walkin_questions_feature_enabled',
   push_lead_to_cadbid: 'push_lead_to_cadbid',
-  is_available_unique_code: 'is_available_unique_code'
+  is_available_unique_code: 'is_available_unique_code',
+  is_furnixcrm_app_enabled: 'is_furnixcrm_app_enabled'
 } as const
 
 export type VendorMasterScalarFieldEnum = (typeof VendorMasterScalarFieldEnum)[keyof typeof VendorMasterScalarFieldEnum]

@@ -76,7 +76,8 @@ const getSessionTtlSeconds = (expiresAt: Date) =>
 const VENDOR_SESSION_INDEX_TTL_SECONDS = ACCESS_TOKEN_TTL_DAYS * 24 * 60 * 60;
 
 export class AuthService {
-  private async buildSuccessfulLoginResponse(
+  // Also used by the FurnixCRM mobile app login so both clients share sessions.
+  async buildSuccessfulLoginResponse(
     req: Request,
     user: any,
     loginType: "MASTER_LOGIN" | "USER_LOGIN",

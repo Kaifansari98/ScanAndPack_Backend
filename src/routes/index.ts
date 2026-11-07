@@ -1,5 +1,6 @@
 import cadbidRoutes from "./cadbid/cadbid.routes";
 import { Router } from "express";
+import { mobileAppRouter } from "../furnixcrm-mobile-app";
 import vendorRoutes from "./vendor.routes";
 import vendorAddressRoutes from "./vendorAddress.routes";
 import vendorTaxInfoRoutes from "./vendorTaxInfo.routes";
@@ -166,5 +167,6 @@ router.use("/attendance", attendanceRoutes);
 router.use("/leaves", leaveRoutes);
 
 router.use("/cadbid", cadbidRoutes);
+router.use("/furnixcrm-mobile-app", mobileAppRouter);
 
 export { router };
