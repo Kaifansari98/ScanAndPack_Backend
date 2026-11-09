@@ -1,0 +1,515 @@
+[
+  {
+    "key": "site_photos",
+    "label": "Site Photos",
+    "type": "upload",
+    "required": true,
+    "upload_kind": "media",
+    "purpose": "site_photos"
+  },
+  {
+    "key": "fm_document",
+    "label": "FM Document",
+    "type": "upload",
+    "required": true,
+    "upload_kind": "document",
+    "purpose": "measurement_document"
+  },
+  {
+    "key": "skirting",
+    "label": "Skirting",
+    "type": "choice",
+    "required": false,
+    "options": [
+      {
+        "key": "yes",
+        "label": "Yes",
+        "fields": [
+          {
+            "key": "skirting_position",
+            "label": "Position",
+            "type": "choice",
+            "required": false,
+            "options": [
+              {
+                "key": "wall_flush",
+                "label": "Wall Flush",
+                "fields": []
+              },
+              {
+                "key": "removal",
+                "label": "Removal",
+                "fields": []
+              }
+            ]
+          },
+          {
+            "key": "skirting_measurements",
+            "label": "Measurements (Height + Depth)",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "skirting_photo",
+            "label": "Photo",
+            "type": "upload",
+            "required": false,
+            "upload_kind": "media"
+          }
+        ]
+      },
+      {
+        "key": "no",
+        "label": "No",
+        "fields": [
+          {
+            "key": "skirting_no_remark",
+            "label": "Remarks",
+            "type": "text",
+            "required": false
+          }
+        ]
+      },
+      {
+        "key": "not_possible",
+        "label": "Not Possible on Site",
+        "fields": [
+          {
+            "key": "skirting_not_possible_remark",
+            "label": "Remarks",
+            "type": "text",
+            "required": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "wall_punning",
+    "label": "Wall Punning",
+    "type": "choice",
+    "required": false,
+    "options": [
+      {
+        "key": "yes",
+        "label": "Yes",
+        "fields": [
+          {
+            "key": "wall_punning_proper",
+            "label": "Wall Punning Proper?",
+            "type": "yes_no",
+            "required": false
+          },
+          {
+            "key": "wall_marking_done",
+            "label": "Marking Done on Site",
+            "type": "upload",
+            "required": false,
+            "upload_kind": "media"
+          },
+          {
+            "key": "wall_photo",
+            "label": "Photo of Wall",
+            "type": "upload",
+            "required": false,
+            "upload_kind": "media"
+          }
+        ]
+      },
+      {
+        "key": "not_possible",
+        "label": "Not Possible on Site",
+        "fields": [
+          {
+            "key": "wall_punning_remark",
+            "label": "Remarks",
+            "type": "text",
+            "required": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "ceiling_pop",
+    "label": "Ceiling POP",
+    "type": "choice",
+    "required": false,
+    "options": [
+      {
+        "key": "yes",
+        "label": "Yes",
+        "fields": [
+          {
+            "key": "ceiling_pop_height",
+            "label": "Height from Floor",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "ceiling_pop_depth",
+            "label": "Depth From Wall",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "ceiling_pop_photo",
+            "label": "Photo",
+            "type": "upload",
+            "required": false,
+            "upload_kind": "media"
+          }
+        ]
+      },
+      {
+        "key": "no",
+        "label": "No",
+        "fields": [
+          {
+            "key": "ceiling_pop_no_remark",
+            "label": "Remarks",
+            "type": "text",
+            "required": false
+          }
+        ]
+      },
+      {
+        "key": "not_possible",
+        "label": "Not Possible on Site",
+        "fields": [
+          {
+            "key": "ceiling_pop_not_possible_remark",
+            "label": "Remarks",
+            "type": "text",
+            "required": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "adjacent_walls",
+    "label": "Adjacent Walls",
+    "type": "choice",
+    "required": false,
+    "options": [
+      {
+        "key": "wall",
+        "label": "Wall",
+        "fields": [
+          {
+            "key": "adjacent_wall_depth",
+            "label": "Depth From Wall",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "adjacent_wall_photo",
+            "label": "Photo",
+            "type": "upload",
+            "required": false,
+            "upload_kind": "media"
+          }
+        ]
+      },
+      {
+        "key": "column",
+        "label": "Column",
+        "fields": [
+          {
+            "key": "adjacent_column_depth",
+            "label": "Depth From Wall",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "adjacent_column_photo",
+            "label": "Photo",
+            "type": "upload",
+            "required": false,
+            "upload_kind": "media"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "switch_board",
+    "label": "Switch Board",
+    "type": "choice",
+    "required": false,
+    "options": [
+      {
+        "key": "yes",
+        "label": "Yes",
+        "fields": [
+          {
+            "key": "switch_board_height",
+            "label": "Height from Floor",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "switch_board_depth",
+            "label": "Depth From Wall",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "switch_board_photo",
+            "label": "Photo",
+            "type": "upload",
+            "required": false,
+            "upload_kind": "media"
+          },
+          {
+            "key": "switch_board_position",
+            "label": "Position",
+            "type": "choice",
+            "required": false,
+            "options": [
+              {
+                "key": "on_wall",
+                "label": "On Wall",
+                "fields": []
+              },
+              {
+                "key": "on_side_panel",
+                "label": "On Side Panel",
+                "fields": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "no",
+        "label": "No",
+        "fields": [
+          {
+            "key": "switch_board_no_remark",
+            "label": "Remarks",
+            "type": "text",
+            "required": false
+          }
+        ]
+      },
+      {
+        "key": "not_possible",
+        "label": "Not Possible on Site",
+        "fields": [
+          {
+            "key": "switch_board_not_possible_remark",
+            "label": "Remarks",
+            "type": "text",
+            "required": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "fire_sprinkler",
+    "label": "Fire Sprinkler",
+    "type": "choice",
+    "required": false,
+    "options": [
+      {
+        "key": "yes",
+        "label": "Yes",
+        "fields": [
+          {
+            "key": "sprinkler_elevation",
+            "label": "Elevation Side",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "sprinkler_floor",
+            "label": "Position from Floor",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "sprinkler_wall",
+            "label": "Position from Wall",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "sprinkler_ceiling",
+            "label": "Position from Ceiling",
+            "type": "text",
+            "required": false
+          }
+        ]
+      },
+      {
+        "key": "no",
+        "label": "No",
+        "fields": [
+          {
+            "key": "fire_sprinkler_no_remark",
+            "label": "Remarks",
+            "type": "text",
+            "required": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "cabinet_markings",
+    "label": "Cabinet Markings",
+    "type": "group",
+    "required": false,
+    "fields": [
+      {
+        "key": "cabinet_wardrobe_wall",
+        "label": "Wardrobe Markings (On Wall)",
+        "type": "group",
+        "required": false,
+        "fields": [
+          {
+            "key": "cabinet_wardrobe_wall_files",
+            "label": "File Upload",
+            "type": "upload",
+            "required": false,
+            "upload_kind": "media"
+          }
+        ]
+      },
+      {
+        "key": "cabinet_wardrobe_floor",
+        "label": "Wardrobe Markings (On Floor)",
+        "type": "group",
+        "required": false,
+        "fields": [
+          {
+            "key": "cabinet_wardrobe_floor_files",
+            "label": "File Upload",
+            "type": "upload",
+            "required": false,
+            "upload_kind": "media"
+          }
+        ]
+      },
+      {
+        "key": "cabinet_loft",
+        "label": "Loft Cabinets (on Wall)",
+        "type": "group",
+        "required": false,
+        "fields": [
+          {
+            "key": "cabinet_loft_files",
+            "label": "File Upload",
+            "type": "upload",
+            "required": false,
+            "upload_kind": "media"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "civil_points",
+    "label": "Civil Points",
+    "type": "group",
+    "required": false,
+    "fields": [
+      {
+        "key": "civil_lintel",
+        "label": "Lintel",
+        "type": "group",
+        "required": false,
+        "fields": [
+          {
+            "key": "civil_lintel_files",
+            "label": "File Upload",
+            "type": "upload",
+            "required": false,
+            "upload_kind": "media"
+          },
+          {
+            "key": "civil_lintel_height",
+            "label": "Height Measurement",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "civil_lintel_depth",
+            "label": "Depth Measurement",
+            "type": "text",
+            "required": false
+          }
+        ]
+      },
+      {
+        "key": "civil_seal",
+        "label": "Seal",
+        "type": "group",
+        "required": false,
+        "fields": [
+          {
+            "key": "civil_seal_files",
+            "label": "File Upload",
+            "type": "upload",
+            "required": false,
+            "upload_kind": "media"
+          },
+          {
+            "key": "civil_seal_height",
+            "label": "Height Measurement",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "civil_seal_depth",
+            "label": "Depth Measurement",
+            "type": "text",
+            "required": false
+          }
+        ]
+      },
+      {
+        "key": "civil_entry",
+        "label": "Entry / Door",
+        "type": "group",
+        "required": false,
+        "fields": [
+          {
+            "key": "civil_entry_files",
+            "label": "File Upload",
+            "type": "upload",
+            "required": false,
+            "upload_kind": "media"
+          },
+          {
+            "key": "civil_entry_elevation",
+            "label": "Elevation Side",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "civil_entry_height",
+            "label": "Height Measurement",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "civil_entry_width",
+            "label": "Width Measurement",
+            "type": "text",
+            "required": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "other_observations",
+    "label": "Other Observations",
+    "type": "observations",
+    "required": false
+  }
+]

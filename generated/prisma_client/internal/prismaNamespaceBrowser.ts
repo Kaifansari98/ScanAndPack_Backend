@@ -292,7 +292,10 @@ export const ModelName = {
   attendance_corrections: 'attendance_corrections',
   LeaveHoliday: 'LeaveHoliday',
   LeaveWeeklyOff: 'LeaveWeeklyOff',
-  LeaveRequest: 'LeaveRequest'
+  LeaveRequest: 'LeaveRequest',
+  FMRequirementMaster: 'FMRequirementMaster',
+  FMRequirementResponse: 'FMRequirementResponse',
+  FMRequirementUpload: 'FMRequirementUpload'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -4604,6 +4607,54 @@ export const LeaveRequestScalarFieldEnum = {
 } as const
 
 export type LeaveRequestScalarFieldEnum = (typeof LeaveRequestScalarFieldEnum)[keyof typeof LeaveRequestScalarFieldEnum]
+
+
+export const FMRequirementMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  product_type_id: 'product_type_id',
+  fields: 'fields',
+  version: 'version',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type FMRequirementMasterScalarFieldEnum = (typeof FMRequirementMasterScalarFieldEnum)[keyof typeof FMRequirementMasterScalarFieldEnum]
+
+
+export const FMRequirementResponseScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  product_type_id: 'product_type_id',
+  revision: 'revision',
+  field_snapshot: 'field_snapshot',
+  answers: 'answers',
+  is_complete: 'is_complete',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type FMRequirementResponseScalarFieldEnum = (typeof FMRequirementResponseScalarFieldEnum)[keyof typeof FMRequirementResponseScalarFieldEnum]
+
+
+export const FMRequirementUploadScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  created_by: 'created_by',
+  original_name: 'original_name',
+  storage_key: 'storage_key',
+  mime_type: 'mime_type',
+  size_bytes: 'size_bytes',
+  created_at: 'created_at'
+} as const
+
+export type FMRequirementUploadScalarFieldEnum = (typeof FMRequirementUploadScalarFieldEnum)[keyof typeof FMRequirementUploadScalarFieldEnum]
 
 
 export const SortOrder = {
