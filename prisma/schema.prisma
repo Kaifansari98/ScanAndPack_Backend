@@ -8,6 +8,9 @@ datasource db {
 }
 
 model VendorMaster {
+  fmRequirements FMRequirementMaster[]
+  fmResponses FMRequirementResponse[]
+  fmUploads FMRequirementUpload[]
   employeeComplaints EmployeeComplaint[]
   leaveHolidays LeaveHoliday[]
   leaveWeeklyOffs LeaveWeeklyOff[]
@@ -898,6 +901,8 @@ model ClientTypeMaster {
 }
 
 model LeadMaster {
+  fmResponses FMRequirementResponse[]
+  fmUploads FMRequirementUpload[]
   productsRequiredForProduction                ProductsRequiredForProduction[]
   id                                           Int                                            @id @default(autoincrement())
   firstname                                    String
@@ -1359,6 +1364,8 @@ model LeadProductMapping {
 }
 
 model ProductTypeMaster {
+  fmRequirements FMRequirementMaster[]
+  fmResponses FMRequirementResponse[]
   productsRequiredForProduction ProductsRequiredForProduction[]
   id                            Int                             @id @default(autoincrement())
   type                          String
@@ -6408,6 +6415,57 @@ model LeaveRequest {
   @@index([vendor_id, user_id, leave_date, end_date], map: "LeaveRequest_vendor_user_range_idx")
   @@index([franchise_id])
   @@index([reviewed_by])
+}
+
+
+model FMRequirementMaster {
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  product_type_id Int
+  fields Json
+  version Int @default(1)
+  created_by Int
+  updated_by Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  productType ProductTypeMaster @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+  @@unique([vendor_id, product_type_id])
+}
+
+model FMRequirementResponse {
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  lead_id Int
+  product_type_id Int
+  revision String
+  field_snapshot Json
+  answers Json
+  is_complete Boolean @default(false)
+  created_by Int
+  updated_by Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead LeadMaster @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  productType ProductTypeMaster @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+  @@unique([lead_id, product_type_id])
+  @@index([vendor_id, lead_id])
+}
+
+model FMRequirementUpload {
+  id String @id @default(uuid())
+  vendor_id Int
+  lead_id Int
+  created_by Int
+  original_name String
+  storage_key String @unique
+  mime_type String
+  size_bytes Int
+  created_at DateTime @default(now())
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead LeadMaster @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  @@index([vendor_id, lead_id])
 }
 
 model EmployeeComplaint {
