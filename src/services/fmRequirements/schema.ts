@@ -1,6 +1,6 @@
 // Stable keys, conditional option children and repeatable observations form the FM field schema.
 export type FMFieldType =
-  "text" | "yes_no" | "choice" | "group" | "upload" | "observations";
+  "text" | "yes_no" | "choice" | "group" | "upload" | "observations" | "tab";
 export interface FMField {
   key: string;
   label: string;
@@ -74,7 +74,11 @@ export function allFields(fields: FMField[]): FMField[] {
 export function validateFields(input: unknown): FMField[] {
   const keys = new Set<string>();
   let count = 0;
-  const parse = (value: unknown, depth: number): FMField[] => {
+  const parse = (
+    value: unknown,
+    depth: number,
+    allowTabs = false,
+  ): FMField[] => {
     if (!Array.isArray(value) || depth > 5)
       throw new FMError(
         "Fields must be a list with no more than five nesting levels.",
@@ -101,6 +105,7 @@ export function validateFields(input: unknown): FMField[] {
           "group",
           "upload",
           "observations",
+          "tab",
         ].includes(String(raw.type)) ||
         typeof raw.required !== "boolean"
       )
@@ -113,6 +118,14 @@ export function validateFields(input: unknown): FMField[] {
         type: raw.type as FMFieldType,
         required: raw.required,
       };
+      if (field.type === "tab") {
+        if (!allowTabs || field.required)
+          throw new FMError(
+            "Tab sections can only be placed at the top level and cannot be required.",
+          );
+        // Presentation tabs do not add a question nesting level.
+        field.fields = parse(raw.fields ?? [], depth);
+      }
       if (field.type === "group")
         field.fields = parse(raw.fields ?? [], depth + 1);
       if (field.type === "choice") {
@@ -167,9 +180,16 @@ export function validateFields(input: unknown): FMField[] {
       return field;
     });
   };
-  const fields = parse(input, 0);
+  const fields = parse(input, 0, true);
+  const tabs = fields.filter((field) => field.type === "tab");
+  if (tabs.length > 20)
+    throw new FMError("Use up to 20 tab sections per product type.");
+  if (tabs.length && tabs.length !== fields.length)
+    throw new FMError("Place every top-level field inside a tab section.");
   for (const purpose of ["site_photos", "measurement_document"] as const) {
-    const matches = fields.filter((field) => field.purpose === purpose);
+    const matches = allFields(fields).filter(
+      (field) => field.purpose === purpose,
+    );
     if (matches.length > 1)
       throw new FMError("Each standard upload role can be used only once.");
     if (
@@ -211,7 +231,9 @@ export function validateAnswers(
     throw new FMError("Answers contain unknown fields.");
   const answers: FMAnswers = {};
   for (const field of visibleFields(fields, input as FMAnswers)) {
-    if (field.type === "group") continue;
+    if (field.type === "group" || field.type === "tab") continue;
+    const fieldError = (message: string) =>
+      Object.assign(new FMError(message), { fieldKey: field.key });
     const value = input[field.key];
     const empty =
       value === undefined ||
@@ -220,15 +242,15 @@ export function validateAnswers(
       (Array.isArray(value) && value.length === 0);
     if (empty) {
       if (field.required && !draft)
-        throw new FMError(`${field.label} is required.`);
+        throw fieldError(`${field.label} is required.`);
       continue;
     }
     if (field.type === "text") {
       if (typeof value !== "string" || value.length > 5000)
-        throw new FMError(`${field.label}: enter text up to 5,000 characters.`);
+        throw fieldError(`${field.label}: enter text up to 5,000 characters.`);
       if (!value.trim()) {
         if (field.required && !draft)
-          throw new FMError(`${field.label} is required.`);
+          throw fieldError(`${field.label} is required.`);
         continue;
       }
       answers[field.key] = value.trim();
@@ -238,7 +260,7 @@ export function validateAnswers(
           ? ["yes", "no"]
           : field.options!.map((o) => o.key);
       if (typeof value !== "string" || !options.includes(value))
-        throw new FMError(`${field.label}: select an available option.`);
+        throw fieldError(`${field.label}: select an available option.`);
       answers[field.key] = value;
     } else if (field.type === "upload") {
       if (
@@ -249,7 +271,7 @@ export function validateAnswers(
           (id) => typeof id !== "string" || !/^[0-9a-f-]{36}$/i.test(id),
         )
       )
-        throw new FMError(`${field.label}: select up to 20 uploaded files.`);
+        throw fieldError(`${field.label}: select up to 20 uploaded files.`);
       answers[field.key] = value as string[];
     } else if (field.type === "observations") {
       if (
@@ -260,7 +282,7 @@ export function validateAnswers(
             !isObject(row) || !text(row.title, 200) || !text(row.remark, 5000),
         )
       )
-        throw new FMError(
+        throw fieldError(
           `${field.label}: each observation needs a title and remark (up to 50 entries).`,
         );
       answers[field.key] = value.map((row) => ({
@@ -356,5 +378,12 @@ export function canEditFMValues(role: unknown): boolean {
     ["site-supervisor", "super-admin", "head-site-supervisor"].includes(
       role.trim().toLowerCase(),
     )
+  );
+}
+
+// Top-level content, without the optional presentation-only tab containers.
+export function fmContentFields(fields: FMField[]): FMField[] {
+  return fields.flatMap((field) =>
+    field.type === "tab" ? (field.fields ?? []) : [field],
   );
 }

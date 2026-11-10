@@ -650,3 +650,91 @@ test("uploads still referenced by another saved product checklist are retained",
   assert.equal(f.deletions.length, 0);
   assert.equal(f.creations.length, 1);
 });
+
+test("tab sections preserve primary uploads and conditional answers and are validated across all tabs", () => {
+  const before = fields();
+  const tabs = [
+    {
+      key: "files_tab",
+      label: "Files",
+      type: "tab",
+      required: false,
+      fields: before.slice(0, 2),
+    },
+    {
+      key: "site_tab",
+      label: "Site checks",
+      type: "tab",
+      required: false,
+      fields: before.slice(2),
+    },
+  ];
+  const parsed = schema.validateFields(tabs);
+  assert.deepEqual(
+    parsed.map((tab) => tab.key),
+    ["files_tab", "site_tab"],
+  );
+  assert.equal(schema.allFields(parsed).filter((f) => f.purpose).length, 2);
+  const answers = schema.validateAnswers(parsed, {
+    ...baseAnswers(),
+    thiya_marking: "no",
+    thiya_marking_no_remark: "No access",
+  });
+  assert.equal(answers.thiya_marking_no_remark, "No access");
+  assert.equal("files_tab" in answers, false);
+  assert.throws(
+    () => schema.validateAnswers(parsed, { fm_document: [fileId] }),
+    (error) => error.fieldKey === "site_photos",
+  );
+});
+test("tabs may not be nested or mixed with flat fields, and do not consume question nesting depth", () => {
+  const tab = {
+    key: "first_tab",
+    label: "First",
+    type: "tab",
+    required: false,
+    fields: [],
+  };
+  assert.throws(
+    () =>
+      schema.validateFields([{ ...tab, fields: [{ ...tab, key: "nested" }] }]),
+    /top level/,
+  );
+  assert.throws(
+    () =>
+      schema.validateFields([
+        tab,
+        { key: "plain", label: "Plain", type: "text", required: false },
+      ]),
+    /every top-level/,
+  );
+  let nested = { key: "leaf", label: "Leaf", type: "text", required: false };
+  for (let i = 0; i < 5; i++)
+    nested = {
+      key: `level_${i}`,
+      label: "Group",
+      type: "group",
+      required: false,
+      fields: [nested],
+    };
+  assert.doesNotThrow(() => schema.validateFields([nested]));
+  assert.doesNotThrow(() =>
+    schema.validateFields([{ ...tab, fields: [nested] }]),
+  );
+});
+test("saved tab layouts are captured in the response without changing the answer keys", async () => {
+  const f = serviceFixture();
+  const snapshot = [
+    {
+      key: "documents_tab",
+      label: "Documents",
+      type: "tab",
+      required: false,
+      fields: fields().slice(0, 2),
+    },
+  ];
+  f.setFields(snapshot);
+  await f.api.saveFMAnswers(f.db, f.input);
+  assert.deepEqual(f.saved[0].create.field_snapshot, snapshot);
+  assert.equal(f.saved[0].create.answers.site_photos[0], fileId);
+});

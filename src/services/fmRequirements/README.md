@@ -49,3 +49,18 @@ existing document workflow. Ordinary stage upload IDs can also be supplied via
 Uploads: 20 per field, 25 MB each, accepted MIME types and file signatures checked.
 Keys remain private; short-lived signed download URLs are generated when reading.
 Large-scale project workflows continue using their existing instance uploads.
+
+## Tab sections
+
+A template may use ordered, top-level `type: "tab"` containers with a stable
+`key`, editable `label`, `required: false`, and a `fields` array. All top-level
+fields must be inside tabs once a template uses tabs. Up to 20 tabs are supported;
+empty tabs can be configured but are omitted from capture navigation. Flat
+checklists remain supported. Tabs use the existing JSON fields and require no
+database migration. Tab containers do not consume a question nesting level.
+
+The modal displays tabs in the saved order and keeps answers keyed by the
+original field keys across tab changes. Validation covers all tabs and reports
+the first invalid field key so the UI can reveal its tab. The saved response
+snapshot includes the captured tab layout. Primary FM upload roles can be moved
+between tabs, and their vendor/lead ownership checks continue to apply.

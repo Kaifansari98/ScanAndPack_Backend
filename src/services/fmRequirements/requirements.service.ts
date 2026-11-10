@@ -14,6 +14,7 @@ import {
   validateFields,
   visibleFields,
   FM_MAX_FILE_SIZE,
+  fmContentFields,
 } from "./schema";
 
 type Db = Prisma.TransactionClient;
@@ -264,7 +265,7 @@ export async function saveFMAnswers(
     await Promise.all(
       selectedIds.map((id) => getFMQuestionnaire(input.vendorId, id, db)),
     )
-  ).filter((form) => form.fields.length > 0);
+  ).filter((form) => fmContentFields(form.fields).length > 0);
   const ids = configuredForms.map((form) => form.product_type_id);
   if (
     !ids.length ||
