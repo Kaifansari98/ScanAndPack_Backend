@@ -8,6 +8,7 @@ datasource db {
 }
 
 model VendorMaster {
+  employeeComplaints EmployeeComplaint[]
   leaveHolidays LeaveHoliday[]
   leaveWeeklyOffs LeaveWeeklyOff[]
   leaveRequests LeaveRequest[]
@@ -293,6 +294,8 @@ model PrivilegeMaster {
 }
 
 model UserMaster {
+  complaintsFiled EmployeeComplaint[] @relation("ComplaintOwner")
+  complaintsReviewed EmployeeComplaint[] @relation("ComplaintReviewer")
   leaveRequests LeaveRequest[] @relation("LeaveRequestOwner")
   leaveRequestsReviewed LeaveRequest[] @relation("LeaveRequestReviewer")
   leaveHolidaysCreated LeaveHoliday[] @relation("LeaveHolidayCreator")
@@ -3628,6 +3631,7 @@ enum FranchiseDepartment {
 }
 
 model FranchiseMaster {
+  employeeComplaints EmployeeComplaint[]
   leaveHolidays LeaveHoliday[]
   leaveWeeklyOffs LeaveWeeklyOff[]
   leaveRequests LeaveRequest[]
@@ -6404,4 +6408,33 @@ model LeaveRequest {
   @@index([vendor_id, user_id, leave_date, end_date], map: "LeaveRequest_vendor_user_range_idx")
   @@index([franchise_id])
   @@index([reviewed_by])
+}
+
+model EmployeeComplaint {
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  user_id Int
+  franchise_id Int?
+  subject String @db.VarChar(150)
+  category String @db.VarChar(100)
+  description String @db.VarChar(2000)
+  status String @default("PENDING") @db.VarChar(50)
+  admin_remarks String? @db.VarChar(1000)
+  reviewed_by Int?
+  reviewed_at DateTime?
+  attachment_key String?
+  attachment_name String?
+  attachment_mime String?
+  attachment_size Int?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  user UserMaster @relation("ComplaintOwner", fields: [user_id], references: [id], onDelete: Restrict)
+  franchise FranchiseMaster? @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
+  reviewer UserMaster? @relation("ComplaintReviewer", fields: [reviewed_by], references: [id], onDelete: Restrict)
+
+  @@index([vendor_id, status])
+  @@index([user_id])
+  @@index([created_at])
+  @@map("employee_complaint")
 }

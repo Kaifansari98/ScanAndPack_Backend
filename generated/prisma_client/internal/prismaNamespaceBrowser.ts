@@ -292,7 +292,8 @@ export const ModelName = {
   attendance_corrections: 'attendance_corrections',
   LeaveHoliday: 'LeaveHoliday',
   LeaveWeeklyOff: 'LeaveWeeklyOff',
-  LeaveRequest: 'LeaveRequest'
+  LeaveRequest: 'LeaveRequest',
+  EmployeeComplaint: 'EmployeeComplaint'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -4610,6 +4611,29 @@ export const LeaveRequestScalarFieldEnum = {
 } as const
 
 export type LeaveRequestScalarFieldEnum = (typeof LeaveRequestScalarFieldEnum)[keyof typeof LeaveRequestScalarFieldEnum]
+
+
+export const EmployeeComplaintScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_id: 'user_id',
+  franchise_id: 'franchise_id',
+  subject: 'subject',
+  category: 'category',
+  description: 'description',
+  status: 'status',
+  admin_remarks: 'admin_remarks',
+  reviewed_by: 'reviewed_by',
+  reviewed_at: 'reviewed_at',
+  attachment_key: 'attachment_key',
+  attachment_name: 'attachment_name',
+  attachment_mime: 'attachment_mime',
+  attachment_size: 'attachment_size',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type EmployeeComplaintScalarFieldEnum = (typeof EmployeeComplaintScalarFieldEnum)[keyof typeof EmployeeComplaintScalarFieldEnum]
 
 
 export const SortOrder = {
