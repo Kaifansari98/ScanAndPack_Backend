@@ -8,6 +8,7 @@ datasource db {
 }
 
 model VendorMaster {
+  attendanceLocations AttendanceLocation[]
   fmRequirements FMRequirementMaster[]
   fmResponses FMRequirementResponse[]
   fmUploads FMRequirementUpload[]
@@ -297,6 +298,7 @@ model PrivilegeMaster {
 }
 
 model UserMaster {
+  assignedAttendanceLocations UserAttendanceLocation[]
   complaintsFiled EmployeeComplaint[] @relation("ComplaintOwner")
   complaintsReviewed EmployeeComplaint[] @relation("ComplaintReviewer")
   leaveRequests LeaveRequest[] @relation("LeaveRequestOwner")
@@ -3638,6 +3640,7 @@ enum FranchiseDepartment {
 }
 
 model FranchiseMaster {
+  attendanceLocations AttendanceLocation[]
   employeeComplaints EmployeeComplaint[]
   leaveHolidays LeaveHoliday[]
   leaveWeeklyOffs LeaveWeeklyOff[]
@@ -6236,12 +6239,18 @@ model attendance {
   work_location   AttendanceWorkLocation?
   shift_minutes   Int?
   time_zone       String?
+  latitude        Float?
+  longitude       Float?
+  location_accuracy Float?
+  location_id     Int?
+  location_address String?        @db.VarChar(500)
   created_at      DateTime         @default(now())
   updated_at      DateTime         @updatedAt
 
   vendor    VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
   franchise FranchiseMaster?  @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
   user      UserMaster        @relation(fields: [user_id], references: [id], onDelete: Restrict)
+  attendanceLocation AttendanceLocation? @relation(fields: [location_id], references: [id], onDelete: SetNull)
   logs      attendance_logs[]
   breaks    attendance_breaks[]
   corrections attendance_corrections[]
@@ -6266,6 +6275,11 @@ model attendance_logs {
   correction_id Int?
   before_values Json?
   after_values  Json?
+  latitude      Float?
+  longitude     Float?
+  location_accuracy Float?
+  location_id   Int?
+  location_address String?        @db.VarChar(500)
   created_at    DateTime         @default(now())
 
   attendance attendance       @relation(fields: [attendance_id], references: [id], onDelete: Restrict)
@@ -6273,6 +6287,7 @@ model attendance_logs {
   franchise  FranchiseMaster? @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
   user       UserMaster       @relation(fields: [user_id], references: [id], onDelete: Restrict)
   actor      UserMaster?       @relation("AttendanceActor", fields: [actor_id], references: [id], onDelete: Restrict)
+  attendanceLocation AttendanceLocation? @relation(fields: [location_id], references: [id], onDelete: SetNull)
   correction attendance_corrections? @relation(fields: [correction_id], references: [id], onDelete: Restrict)
 
   @@index([attendance_id])
@@ -6495,4 +6510,44 @@ model EmployeeComplaint {
   @@index([user_id])
   @@index([created_at])
   @@map("employee_complaint")
+}
+
+model AttendanceLocation {
+  id            Int      @id @default(autoincrement())
+  vendor_id     Int
+  franchise_id  Int?
+  name          String   @db.VarChar(150)
+  location_type String   @default("OFFICE") @db.VarChar(50)
+  address       String   @db.VarChar(500)
+  latitude      Float
+  longitude     Float
+  radius_meters Int      @default(100)
+  is_active     Boolean  @default(true)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  vendor        VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  franchise     FranchiseMaster?  @relation(fields: [franchise_id], references: [id], onDelete: SetNull)
+  userAssignments UserAttendanceLocation[]
+  attendanceRecords attendance[]
+  attendanceLogs attendance_logs[]
+
+  @@index([vendor_id])
+  @@index([is_active])
+  @@map("attendance_location")
+}
+
+model UserAttendanceLocation {
+  id          Int      @id @default(autoincrement())
+  user_id     Int
+  location_id Int
+  created_at  DateTime @default(now())
+
+  user        UserMaster         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  location    AttendanceLocation @relation(fields: [location_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, location_id], map: "uq_user_attendance_location")
+  @@index([user_id])
+  @@index([location_id])
+  @@map("user_attendance_location")
 }

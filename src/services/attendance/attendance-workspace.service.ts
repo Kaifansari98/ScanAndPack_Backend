@@ -2,9 +2,22 @@ import { prisma } from "../../prisma/client";
 import { Prisma, AttendanceAction, AttendanceWorkLocation, AttendanceCorrectionStatus } from "../../../generated/prisma_client/client";
 import { isValidIANATimeZone } from "../timeZone/timeZone.service";
 import { attendanceError, correctionTime, decorateAttendance, deriveVendorLocalDate, validDate } from "./attendance.utils";
+import { verifyEmployeeGeoFence } from "./attendance-location.service";
 
 export type AttendanceActor = { id?: number; user_id?: number; vendor_id?: number };
-type PunchInput = { user_id?: unknown; action?: unknown; source?: unknown; work_location?: unknown; action_time?: unknown; vendor_id?: unknown; franchise_id?: unknown };
+type PunchInput = {
+  user_id?: unknown;
+  action?: unknown;
+  source?: unknown;
+  work_location?: unknown;
+  action_time?: unknown;
+  vendor_id?: unknown;
+  franchise_id?: unknown;
+  latitude?: unknown;
+  longitude?: unknown;
+  accuracy?: unknown;
+  address?: unknown;
+};
 type CorrectionInput = { attendance_date?: unknown; reason?: unknown; requested_check_in?: unknown; requested_check_out?: unknown };
 const recordInclude = { breaks: { orderBy: { started_at: "asc" as const } }, logs: { orderBy: { action_time: "asc" as const } } };
 const reviewRoles = new Set(["super-admin", "hrms-admin", "hrmsadmin"]);
@@ -55,6 +68,44 @@ export async function punchAttendance(actor: AttendanceActor | undefined, input:
   const location = input.work_location === undefined && !requireFeature ? null : String(input.work_location || "").toUpperCase();
   if (action === "IN" && location !== null && !Object.values(AttendanceWorkLocation).includes(location as AttendanceWorkLocation)) attendanceError("Choose OFFICE, FACTORY, SITE or REMOTE.");
 
+  // Geo-fencing & GPS validation:
+  const lat = input.latitude !== undefined && input.latitude !== null && input.latitude !== "" ? Number(input.latitude) : null;
+  const lon = input.longitude !== undefined && input.longitude !== null && input.longitude !== "" ? Number(input.longitude) : null;
+  const acc = input.accuracy !== undefined && input.accuracy !== null ? Number(input.accuracy) : null;
+  const addr = typeof input.address === "string" ? input.address.trim().slice(0, 500) : null;
+
+  // On IN/OUT: require GPS unless super-admin is manually marking for someone
+  let matchedLocationId: number | null = null;
+  let matchedLocationAddress: string | null = addr;
+
+  if (action === "IN" || action === "OUT") {
+    if (lat === null || lon === null || isNaN(lat) || isNaN(lon)) {
+      attendanceError("Location verification is required to mark attendance. Please enable GPS / location permissions on your device.", 400);
+    }
+
+    if (action === "IN") {
+      const geoCheck = await verifyEmployeeGeoFence(employee.vendor_id, employee.id, {
+        latitude: lat,
+        longitude: lon,
+        accuracy: acc ?? undefined,
+      });
+
+      if (!geoCheck.allowed) {
+        attendanceError(
+          "You are outside the permitted attendance location. Please move near your assigned office/site to mark attendance.",
+          403
+        );
+      }
+
+      if (geoCheck.matched_location) {
+        matchedLocationId = geoCheck.matched_location.id;
+        if (!matchedLocationAddress) {
+          matchedLocationAddress = geoCheck.matched_location.address;
+        }
+      }
+    }
+  }
+
   return prisma.$transaction(async tx => {
     await lockEmployee(tx, employee.id);
     const now = new Date();
@@ -63,7 +114,24 @@ export async function punchAttendance(actor: AttendanceActor | undefined, input:
     let record = await tx.attendance.findFirst({ where: { ...scope, check_out: null }, include: recordInclude });
     if (action === "IN") {
       if (record) attendanceError("Check out of your open attendance session before checking in again.", 409);
-      record = await tx.attendance.create({ data: { ...scope, franchise_id: employee.franchise_id, attendance_date: attendanceDate, check_in: now, source: source as "MANUAL" | "PHONE" | "CARD", work_location: location as AttendanceWorkLocation | null, shift_minutes: franchise?.shift_minutes ?? 480, time_zone: context.timeZone }, include: recordInclude });
+      record = await tx.attendance.create({
+        data: {
+          ...scope,
+          franchise_id: employee.franchise_id,
+          attendance_date: attendanceDate,
+          check_in: now,
+          source: source as "MANUAL" | "PHONE" | "CARD",
+          work_location: location as AttendanceWorkLocation | null,
+          shift_minutes: franchise?.shift_minutes ?? 480,
+          time_zone: context.timeZone,
+          latitude: lat,
+          longitude: lon,
+          location_accuracy: acc,
+          location_id: matchedLocationId,
+          location_address: matchedLocationAddress,
+        },
+        include: recordInclude,
+      });
     } else {
       if (!record) attendanceError("No open attendance session. Check in first.", 409);
       const lastEvent = record.logs[record.logs.length - 1];
@@ -79,9 +147,31 @@ export async function punchAttendance(actor: AttendanceActor | undefined, input:
         await tx.attendance_breaks.update({ where: { id: activeBreak.id }, data: { ended_at: now } });
         await tx.attendance_logs.create({ data: { ...scope, franchise_id: record.franchise_id, attendance_id: record.id, action: "BREAK_END", action_time: now, source: source as "MANUAL" | "PHONE" | "CARD", actor_id: context.user.id } });
       }
-      record = await tx.attendance.update({ where: { id: record.id }, data: { ...(action === "OUT" ? { check_out: now } : {}), updated_at: now }, include: recordInclude });
+      record = await tx.attendance.update({
+        where: { id: record.id },
+        data: {
+          ...(action === "OUT" ? { check_out: now } : {}),
+          updated_at: now,
+        },
+        include: recordInclude,
+      });
     }
-    const log = await tx.attendance_logs.create({ data: { ...scope, franchise_id: record.franchise_id, attendance_id: record.id, action: action as AttendanceAction, action_time: now, source: source as "MANUAL" | "PHONE" | "CARD", actor_id: context.user.id } });
+    const log = await tx.attendance_logs.create({
+      data: {
+        ...scope,
+        franchise_id: record.franchise_id,
+        attendance_id: record.id,
+        action: action as AttendanceAction,
+        action_time: now,
+        source: source as "MANUAL" | "PHONE" | "CARD",
+        actor_id: context.user.id,
+        latitude: lat,
+        longitude: lon,
+        location_accuracy: acc,
+        location_id: matchedLocationId || record.location_id,
+        location_address: matchedLocationAddress || record.location_address,
+      },
+    });
     const fresh = await tx.attendance.findUniqueOrThrow({ where: { id: record.id }, include: recordInclude });
     return { attendance: decorateAttendance(fresh, context.timeZone, now), log, server_time: now, latest_action: log };
   }, { timeout: 15000 });

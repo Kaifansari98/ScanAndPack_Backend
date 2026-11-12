@@ -293,13 +293,12 @@ export const ModelName = {
   LeaveHoliday: 'LeaveHoliday',
   LeaveWeeklyOff: 'LeaveWeeklyOff',
   LeaveRequest: 'LeaveRequest',
-<<<<<<< HEAD
-  EmployeeComplaint: 'EmployeeComplaint'
-=======
   FMRequirementMaster: 'FMRequirementMaster',
   FMRequirementResponse: 'FMRequirementResponse',
-  FMRequirementUpload: 'FMRequirementUpload'
->>>>>>> dd75049d72269b99ac15dda9082e28d5fa9db335
+  FMRequirementUpload: 'FMRequirementUpload',
+  EmployeeComplaint: 'EmployeeComplaint',
+  AttendanceLocation: 'AttendanceLocation',
+  UserAttendanceLocation: 'UserAttendanceLocation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -4502,6 +4501,11 @@ export const AttendanceScalarFieldEnum = {
   work_location: 'work_location',
   shift_minutes: 'shift_minutes',
   time_zone: 'time_zone',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  location_accuracy: 'location_accuracy',
+  location_id: 'location_id',
+  location_address: 'location_address',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -4522,6 +4526,11 @@ export const Attendance_logsScalarFieldEnum = {
   correction_id: 'correction_id',
   before_values: 'before_values',
   after_values: 'after_values',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  location_accuracy: 'location_accuracy',
+  location_id: 'location_id',
+  location_address: 'location_address',
   created_at: 'created_at'
 } as const
 
@@ -4619,24 +4628,6 @@ export const LeaveRequestScalarFieldEnum = {
 export type LeaveRequestScalarFieldEnum = (typeof LeaveRequestScalarFieldEnum)[keyof typeof LeaveRequestScalarFieldEnum]
 
 
-<<<<<<< HEAD
-export const EmployeeComplaintScalarFieldEnum = {
-  id: 'id',
-  vendor_id: 'vendor_id',
-  user_id: 'user_id',
-  franchise_id: 'franchise_id',
-  subject: 'subject',
-  category: 'category',
-  description: 'description',
-  status: 'status',
-  admin_remarks: 'admin_remarks',
-  reviewed_by: 'reviewed_by',
-  reviewed_at: 'reviewed_at',
-  attachment_key: 'attachment_key',
-  attachment_name: 'attachment_name',
-  attachment_mime: 'attachment_mime',
-  attachment_size: 'attachment_size',
-=======
 export const FMRequirementMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
@@ -4645,14 +4636,10 @@ export const FMRequirementMasterScalarFieldEnum = {
   version: 'version',
   created_by: 'created_by',
   updated_by: 'updated_by',
->>>>>>> dd75049d72269b99ac15dda9082e28d5fa9db335
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
 
-<<<<<<< HEAD
-export type EmployeeComplaintScalarFieldEnum = (typeof EmployeeComplaintScalarFieldEnum)[keyof typeof EmployeeComplaintScalarFieldEnum]
-=======
 export type FMRequirementMasterScalarFieldEnum = (typeof FMRequirementMasterScalarFieldEnum)[keyof typeof FMRequirementMasterScalarFieldEnum]
 
 
@@ -4687,7 +4674,57 @@ export const FMRequirementUploadScalarFieldEnum = {
 } as const
 
 export type FMRequirementUploadScalarFieldEnum = (typeof FMRequirementUploadScalarFieldEnum)[keyof typeof FMRequirementUploadScalarFieldEnum]
->>>>>>> dd75049d72269b99ac15dda9082e28d5fa9db335
+
+
+export const EmployeeComplaintScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_id: 'user_id',
+  franchise_id: 'franchise_id',
+  subject: 'subject',
+  category: 'category',
+  description: 'description',
+  status: 'status',
+  admin_remarks: 'admin_remarks',
+  reviewed_by: 'reviewed_by',
+  reviewed_at: 'reviewed_at',
+  attachment_key: 'attachment_key',
+  attachment_name: 'attachment_name',
+  attachment_mime: 'attachment_mime',
+  attachment_size: 'attachment_size',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type EmployeeComplaintScalarFieldEnum = (typeof EmployeeComplaintScalarFieldEnum)[keyof typeof EmployeeComplaintScalarFieldEnum]
+
+
+export const AttendanceLocationScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
+  name: 'name',
+  location_type: 'location_type',
+  address: 'address',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  radius_meters: 'radius_meters',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type AttendanceLocationScalarFieldEnum = (typeof AttendanceLocationScalarFieldEnum)[keyof typeof AttendanceLocationScalarFieldEnum]
+
+
+export const UserAttendanceLocationScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  location_id: 'location_id',
+  created_at: 'created_at'
+} as const
+
+export type UserAttendanceLocationScalarFieldEnum = (typeof UserAttendanceLocationScalarFieldEnum)[keyof typeof UserAttendanceLocationScalarFieldEnum]
 
 
 export const SortOrder = {
