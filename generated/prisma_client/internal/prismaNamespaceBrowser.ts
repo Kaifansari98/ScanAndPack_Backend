@@ -295,7 +295,28 @@ export const ModelName = {
   LeaveRequest: 'LeaveRequest',
   FMRequirementMaster: 'FMRequirementMaster',
   FMRequirementResponse: 'FMRequirementResponse',
-  FMRequirementUpload: 'FMRequirementUpload'
+  FMRequirementUpload: 'FMRequirementUpload',
+  ComplaintCategoryMaster: 'ComplaintCategoryMaster',
+  ComplaintExternalClient: 'ComplaintExternalClient',
+  ComplaintMaster: 'ComplaintMaster',
+  ComplaintCycle: 'ComplaintCycle',
+  ComplaintAssignment: 'ComplaintAssignment',
+  ComplaintAttachment: 'ComplaintAttachment',
+  ComplaintDecision: 'ComplaintDecision',
+  ComplaintVisit: 'ComplaintVisit',
+  ComplaintInspectionReport: 'ComplaintInspectionReport',
+  ComplaintInspectionMaterial: 'ComplaintInspectionMaterial',
+  ComplaintQuotation: 'ComplaintQuotation',
+  ComplaintQuotationItem: 'ComplaintQuotationItem',
+  ComplaintCharge: 'ComplaintCharge',
+  ComplaintPayment: 'ComplaintPayment',
+  ComplaintPaymentAllocation: 'ComplaintPaymentAllocation',
+  ComplaintExecution: 'ComplaintExecution',
+  ComplaintTask: 'ComplaintTask',
+  ComplaintClosure: 'ComplaintClosure',
+  ComplaintNotification: 'ComplaintNotification',
+  ComplaintSlaConfig: 'ComplaintSlaConfig',
+  ComplaintActivityLog: 'ComplaintActivityLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -366,7 +387,8 @@ export const VendorMasterScalarFieldEnum = {
   is_walkin_questions_feature_enabled: 'is_walkin_questions_feature_enabled',
   push_lead_to_cadbid: 'push_lead_to_cadbid',
   is_available_unique_code: 'is_available_unique_code',
-  is_furnixcrm_app_enabled: 'is_furnixcrm_app_enabled'
+  is_furnixcrm_app_enabled: 'is_furnixcrm_app_enabled',
+  is_client_complaints_enabled: 'is_client_complaints_enabled'
 } as const
 
 export type VendorMasterScalarFieldEnum = (typeof VendorMasterScalarFieldEnum)[keyof typeof VendorMasterScalarFieldEnum]
@@ -2320,6 +2342,8 @@ export const MiscellaneousMasterScalarFieldEnum = {
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
   account_id: 'account_id',
+  complaint_id: 'complaint_id',
+  complaint_execution_id: 'complaint_execution_id',
   misc_type_id: 'misc_type_id',
   problem_description: 'problem_description',
   reorder_material_details: 'reorder_material_details',
@@ -4655,6 +4679,499 @@ export const FMRequirementUploadScalarFieldEnum = {
 } as const
 
 export type FMRequirementUploadScalarFieldEnum = (typeof FMRequirementUploadScalarFieldEnum)[keyof typeof FMRequirementUploadScalarFieldEnum]
+
+
+export const ComplaintCategoryMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  name: 'name',
+  is_active: 'is_active',
+  sort_order: 'sort_order',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ComplaintCategoryMasterScalarFieldEnum = (typeof ComplaintCategoryMasterScalarFieldEnum)[keyof typeof ComplaintCategoryMasterScalarFieldEnum]
+
+
+export const ComplaintExternalClientScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  external_client_code: 'external_client_code',
+  client_name: 'client_name',
+  mobile: 'mobile',
+  alternate_mobile: 'alternate_mobile',
+  email: 'email',
+  address: 'address',
+  city: 'city',
+  product_type: 'product_type',
+  installation_date: 'installation_date',
+  email_verified_at: 'email_verified_at',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ComplaintExternalClientScalarFieldEnum = (typeof ComplaintExternalClientScalarFieldEnum)[keyof typeof ComplaintExternalClientScalarFieldEnum]
+
+
+export const ComplaintMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_code: 'complaint_code',
+  sequence_no: 'sequence_no',
+  registration_channel: 'registration_channel',
+  client_type: 'client_type',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  instance_id: 'instance_id',
+  external_client_id: 'external_client_id',
+  client_name: 'client_name',
+  client_mobile: 'client_mobile',
+  client_alternate_mobile: 'client_alternate_mobile',
+  client_email: 'client_email',
+  site_address: 'site_address',
+  city: 'city',
+  product_type: 'product_type',
+  component: 'component',
+  category_id: 'category_id',
+  description: 'description',
+  additional_remarks: 'additional_remarks',
+  preferred_visit_date: 'preferred_visit_date',
+  installation_date: 'installation_date',
+  usable_handover_date: 'usable_handover_date',
+  final_handover_date: 'final_handover_date',
+  priority: 'priority',
+  warranty_status: 'warranty_status',
+  exceptional_reason: 'exceptional_reason',
+  possible_duplicate: 'possible_duplicate',
+  duplicate_reviewed_by: 'duplicate_reviewed_by',
+  duplicate_reviewed_at: 'duplicate_reviewed_at',
+  duplicate_review_remarks: 'duplicate_review_remarks',
+  assigned_ss_id: 'assigned_ss_id',
+  assigned_hss_id: 'assigned_hss_id',
+  raised_by_actor_type: 'raised_by_actor_type',
+  raised_by_user_id: 'raised_by_user_id',
+  raised_by_client_reference: 'raised_by_client_reference',
+  status: 'status',
+  status_changed_at: 'status_changed_at',
+  current_cycle_id: 'current_cycle_id',
+  version: 'version',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ComplaintMasterScalarFieldEnum = (typeof ComplaintMasterScalarFieldEnum)[keyof typeof ComplaintMasterScalarFieldEnum]
+
+
+export const ComplaintCycleScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_number: 'cycle_number',
+  reopened_reason: 'reopened_reason',
+  opened_by_actor_type: 'opened_by_actor_type',
+  opened_by_user_id: 'opened_by_user_id',
+  opened_by_client_reference: 'opened_by_client_reference',
+  opened_at: 'opened_at',
+  resolved_at: 'resolved_at',
+  closed_at: 'closed_at',
+  ended_at: 'ended_at',
+  end_reason: 'end_reason'
+} as const
+
+export type ComplaintCycleScalarFieldEnum = (typeof ComplaintCycleScalarFieldEnum)[keyof typeof ComplaintCycleScalarFieldEnum]
+
+
+export const ComplaintAssignmentScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  role: 'role',
+  previous_user_id: 'previous_user_id',
+  new_user_id: 'new_user_id',
+  reason: 'reason',
+  assigned_by_actor_type: 'assigned_by_actor_type',
+  assigned_by: 'assigned_by',
+  assigned_at: 'assigned_at'
+} as const
+
+export type ComplaintAssignmentScalarFieldEnum = (typeof ComplaintAssignmentScalarFieldEnum)[keyof typeof ComplaintAssignmentScalarFieldEnum]
+
+
+export const ComplaintAttachmentScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  storage_key: 'storage_key',
+  original_name: 'original_name',
+  mime_type: 'mime_type',
+  size_bytes: 'size_bytes',
+  media_type: 'media_type',
+  category: 'category',
+  actor_type: 'actor_type',
+  actor_user_id: 'actor_user_id',
+  actor_client_reference: 'actor_client_reference',
+  visit_id: 'visit_id',
+  inspection_report_id: 'inspection_report_id',
+  execution_id: 'execution_id',
+  decision_id: 'decision_id',
+  created_at: 'created_at'
+} as const
+
+export type ComplaintAttachmentScalarFieldEnum = (typeof ComplaintAttachmentScalarFieldEnum)[keyof typeof ComplaintAttachmentScalarFieldEnum]
+
+
+export const ComplaintDecisionScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  decision_type: 'decision_type',
+  outcome: 'outcome',
+  remarks: 'remarks',
+  remote_instructions: 'remote_instructions',
+  client_response: 'client_response',
+  actor_type: 'actor_type',
+  actor_user_id: 'actor_user_id',
+  actor_client_reference: 'actor_client_reference',
+  acting_on_behalf_of_client: 'acting_on_behalf_of_client',
+  visit_id: 'visit_id',
+  quotation_id: 'quotation_id',
+  decided_at: 'decided_at'
+} as const
+
+export type ComplaintDecisionScalarFieldEnum = (typeof ComplaintDecisionScalarFieldEnum)[keyof typeof ComplaintDecisionScalarFieldEnum]
+
+
+export const ComplaintVisitScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  visit_number: 'visit_number',
+  purpose: 'purpose',
+  status: 'status',
+  charge_mode: 'charge_mode',
+  standard_fee: 'standard_fee',
+  currency: 'currency',
+  assigned_ss_id: 'assigned_ss_id',
+  team_details: 'team_details',
+  repeat_of_visit_id: 'repeat_of_visit_id',
+  repeat_remarks: 'repeat_remarks',
+  free_approval_decision_id: 'free_approval_decision_id',
+  scheduled_for: 'scheduled_for',
+  reschedule_count: 'reschedule_count',
+  completed_at: 'completed_at',
+  remarks: 'remarks',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ComplaintVisitScalarFieldEnum = (typeof ComplaintVisitScalarFieldEnum)[keyof typeof ComplaintVisitScalarFieldEnum]
+
+
+export const ComplaintInspectionReportScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  visit_id: 'visit_id',
+  actual_visit_date: 'actual_visit_date',
+  client_available: 'client_available',
+  issue_observed: 'issue_observed',
+  root_cause: 'root_cause',
+  affected_product: 'affected_product',
+  affected_unit_number: 'affected_unit_number',
+  responsibility: 'responsibility',
+  responsibility_remarks: 'responsibility_remarks',
+  repair_actions: 'repair_actions',
+  material_required: 'material_required',
+  remarks: 'remarks',
+  estimated_work_days: 'estimated_work_days',
+  expected_completion_date: 'expected_completion_date',
+  additional_visit_required: 'additional_visit_required',
+  further_approval_required: 'further_approval_required',
+  submitted_by: 'submitted_by',
+  submitted_at: 'submitted_at'
+} as const
+
+export type ComplaintInspectionReportScalarFieldEnum = (typeof ComplaintInspectionReportScalarFieldEnum)[keyof typeof ComplaintInspectionReportScalarFieldEnum]
+
+
+export const ComplaintInspectionMaterialScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  inspection_report_id: 'inspection_report_id',
+  sequence: 'sequence',
+  material_name: 'material_name',
+  quantity: 'quantity',
+  unit: 'unit',
+  specification: 'specification',
+  finish_colour: 'finish_colour',
+  estimated_cost: 'estimated_cost',
+  remarks: 'remarks'
+} as const
+
+export type ComplaintInspectionMaterialScalarFieldEnum = (typeof ComplaintInspectionMaterialScalarFieldEnum)[keyof typeof ComplaintInspectionMaterialScalarFieldEnum]
+
+
+export const ComplaintQuotationScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  quotation_number: 'quotation_number',
+  revision: 'revision',
+  status: 'status',
+  inspection_report_id: 'inspection_report_id',
+  currency: 'currency',
+  subtotal: 'subtotal',
+  tax_amount: 'tax_amount',
+  warranty_covered_amount: 'warranty_covered_amount',
+  client_payable_amount: 'client_payable_amount',
+  total_amount: 'total_amount',
+  hss_approval_decision_id: 'hss_approval_decision_id',
+  client_response_decision_id: 'client_response_decision_id',
+  shared_at: 'shared_at',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ComplaintQuotationScalarFieldEnum = (typeof ComplaintQuotationScalarFieldEnum)[keyof typeof ComplaintQuotationScalarFieldEnum]
+
+
+export const ComplaintQuotationItemScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  quotation_id: 'quotation_id',
+  sequence: 'sequence',
+  category: 'category',
+  description: 'description',
+  quantity: 'quantity',
+  unit: 'unit',
+  unit_rate: 'unit_rate',
+  line_total: 'line_total',
+  warranty_covered_amount: 'warranty_covered_amount',
+  client_payable_amount: 'client_payable_amount',
+  chargeable_reason: 'chargeable_reason'
+} as const
+
+export type ComplaintQuotationItemScalarFieldEnum = (typeof ComplaintQuotationItemScalarFieldEnum)[keyof typeof ComplaintQuotationItemScalarFieldEnum]
+
+
+export const ComplaintChargeScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  charge_type: 'charge_type',
+  visit_id: 'visit_id',
+  quotation_id: 'quotation_id',
+  amount: 'amount',
+  currency: 'currency',
+  status: 'status',
+  waiver_decision_id: 'waiver_decision_id',
+  due_at: 'due_at',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type ComplaintChargeScalarFieldEnum = (typeof ComplaintChargeScalarFieldEnum)[keyof typeof ComplaintChargeScalarFieldEnum]
+
+
+export const ComplaintPaymentScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  amount: 'amount',
+  currency: 'currency',
+  method: 'method',
+  transaction_reference: 'transaction_reference',
+  payment_date: 'payment_date',
+  status: 'status',
+  proof_attachment_id: 'proof_attachment_id',
+  actor_type: 'actor_type',
+  actor_user_id: 'actor_user_id',
+  actor_client_reference: 'actor_client_reference',
+  verified_by: 'verified_by',
+  verified_at: 'verified_at',
+  rejection_remarks: 'rejection_remarks',
+  refunded_by: 'refunded_by',
+  refunded_at: 'refunded_at',
+  refund_remarks: 'refund_remarks',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ComplaintPaymentScalarFieldEnum = (typeof ComplaintPaymentScalarFieldEnum)[keyof typeof ComplaintPaymentScalarFieldEnum]
+
+
+export const ComplaintPaymentAllocationScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  payment_id: 'payment_id',
+  charge_id: 'charge_id',
+  amount: 'amount',
+  allocated_by: 'allocated_by',
+  created_at: 'created_at'
+} as const
+
+export type ComplaintPaymentAllocationScalarFieldEnum = (typeof ComplaintPaymentAllocationScalarFieldEnum)[keyof typeof ComplaintPaymentAllocationScalarFieldEnum]
+
+
+export const ComplaintExecutionScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  quotation_id: 'quotation_id',
+  inspection_skip_decision_id: 'inspection_skip_decision_id',
+  quotation_skip_decision_id: 'quotation_skip_decision_id',
+  material_required: 'material_required',
+  status: 'status',
+  purchase_order_reference: 'purchase_order_reference',
+  material_expected_date: 'material_expected_date',
+  material_received_date: 'material_received_date',
+  repair_visit_id: 'repair_visit_id',
+  assigned_ss_id: 'assigned_ss_id',
+  team_details: 'team_details',
+  scheduled_for: 'scheduled_for',
+  started_at: 'started_at',
+  completed_at: 'completed_at',
+  completed_by: 'completed_by',
+  material_used: 'material_used',
+  replacement_details: 'replacement_details',
+  client_remarks: 'client_remarks',
+  completion_remarks: 'completion_remarks',
+  pending_work: 'pending_work',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ComplaintExecutionScalarFieldEnum = (typeof ComplaintExecutionScalarFieldEnum)[keyof typeof ComplaintExecutionScalarFieldEnum]
+
+
+export const ComplaintTaskScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  task_type: 'task_type',
+  task_key: 'task_key',
+  assigned_to: 'assigned_to',
+  status: 'status',
+  due_date: 'due_date',
+  visit_id: 'visit_id',
+  execution_id: 'execution_id',
+  remark: 'remark',
+  created_by: 'created_by',
+  completed_by: 'completed_by',
+  completed_at: 'completed_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ComplaintTaskScalarFieldEnum = (typeof ComplaintTaskScalarFieldEnum)[keyof typeof ComplaintTaskScalarFieldEnum]
+
+
+export const ComplaintClosureScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  status: 'status',
+  client_confirmation_status: 'client_confirmation_status',
+  client_confirmation_decision_id: 'client_confirmation_decision_id',
+  no_response_reason: 'no_response_reason',
+  completion_verified_by: 'completion_verified_by',
+  completion_verified_at: 'completion_verified_at',
+  financial_verified_by: 'financial_verified_by',
+  financial_verified_at: 'financial_verified_at',
+  closed_by: 'closed_by',
+  closed_at: 'closed_at',
+  closure_remarks: 'closure_remarks',
+  created_at: 'created_at'
+} as const
+
+export type ComplaintClosureScalarFieldEnum = (typeof ComplaintClosureScalarFieldEnum)[keyof typeof ComplaintClosureScalarFieldEnum]
+
+
+export const ComplaintNotificationScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  event: 'event',
+  channel: 'channel',
+  recipient_type: 'recipient_type',
+  recipient_user_id: 'recipient_user_id',
+  recipient_address: 'recipient_address',
+  delivery_status: 'delivery_status',
+  failure_reason: 'failure_reason',
+  payload: 'payload',
+  sent_at: 'sent_at',
+  created_at: 'created_at'
+} as const
+
+export type ComplaintNotificationScalarFieldEnum = (typeof ComplaintNotificationScalarFieldEnum)[keyof typeof ComplaintNotificationScalarFieldEnum]
+
+
+export const ComplaintSlaConfigScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  status: 'status',
+  target_hours: 'target_hours',
+  reminder_every_hours: 'reminder_every_hours',
+  escalate_after_hours: 'escalate_after_hours',
+  is_active: 'is_active',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ComplaintSlaConfigScalarFieldEnum = (typeof ComplaintSlaConfigScalarFieldEnum)[keyof typeof ComplaintSlaConfigScalarFieldEnum]
+
+
+export const ComplaintActivityLogScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  complaint_id: 'complaint_id',
+  cycle_id: 'cycle_id',
+  action: 'action',
+  from_status: 'from_status',
+  to_status: 'to_status',
+  actor_type: 'actor_type',
+  actor_user_id: 'actor_user_id',
+  actor_client_reference: 'actor_client_reference',
+  acting_on_behalf_of_client: 'acting_on_behalf_of_client',
+  remarks: 'remarks',
+  decision_id: 'decision_id',
+  assignment_id: 'assignment_id',
+  task_id: 'task_id',
+  visit_id: 'visit_id',
+  quotation_id: 'quotation_id',
+  payment_id: 'payment_id',
+  execution_id: 'execution_id',
+  closure_id: 'closure_id',
+  metadata: 'metadata',
+  created_at: 'created_at'
+} as const
+
+export type ComplaintActivityLogScalarFieldEnum = (typeof ComplaintActivityLogScalarFieldEnum)[keyof typeof ComplaintActivityLogScalarFieldEnum]
 
 
 export const SortOrder = {

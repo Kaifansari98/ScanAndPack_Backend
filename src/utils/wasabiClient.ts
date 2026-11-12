@@ -1,4 +1,5 @@
 import {
+  DeleteObjectCommand,
   GetObjectCommand,
   PutObjectCommand,
   S3Client,
@@ -71,6 +72,21 @@ export const uploadFMRequirementFile = async (buffer: Buffer, vendorId: number, 
   const key=`fm_requirements/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
   await wasabi.send(new PutObjectCommand({ Bucket:process.env.WASABI_BUCKET_NAME!,Key:key,Body:buffer,ContentType:mimeType }));
   return key;
+};
+
+export const uploadComplaintFile = async (buffer: Buffer, vendorId: number, mimeType: string) => {
+  const extensions: Record<string,string> = { "image/jpeg":"jpg", "image/png":"png", "image/webp":"webp", "image/gif":"gif", "image/heic":"heic", "image/heif":"heif", "video/mp4":"mp4", "video/quicktime":"mov", "video/webm":"webm" };
+  const ext=extensions[mimeType];
+  if (!ext) throw new Error("Unsupported complaint file format");
+  const key=`client_complaints/${vendorId}/${uuidv4()}.${ext}`;
+  await wasabi.send(new PutObjectCommand({ Bucket:process.env.WASABI_BUCKET_NAME!,Key:key,Body:buffer,ContentType:mimeType }));
+  return key;
+};
+
+export const deleteWasabiObjects = async (keys: string[]) => {
+  await Promise.allSettled(
+    keys.map((key) => wasabi.send(new DeleteObjectCommand({ Bucket: process.env.WASABI_BUCKET_NAME!, Key: key }))),
+  );
 };
 
 export const uploadWalkinReferenceFile = async (buffer: Buffer, vendorId: number, mimeType: string) => {

@@ -82,6 +82,57 @@ export class LeadSuperAdminApprovalLockInService {
     return tx ?? prisma;
   }
 
+  private async assertApprovalActor(db: TxClient, vendorId: number, userId: number) {
+    const actor = await db.userMaster.findFirst({
+      where: {
+        id: userId,
+        vendor_id: vendorId,
+        status: "active",
+        user_type: { user_type: { equals: "super-admin", mode: "insensitive" } },
+      },
+      select: { id: true },
+    });
+    if (!actor) {
+      throw Object.assign(new Error("Only an active Super Admin for this vendor can approve this task"), { statusCode: 403 });
+    }
+  }
+
+  async approveTaskIfApplicable(input: ApproveBookingDoneTaskInput) {
+    const task = await prisma.userLeadTask.findFirst({
+      where: { id: input.task_id, lead_id: input.lead_id },
+      select: { task_type: true },
+    });
+    switch (task?.task_type) {
+      case "Booking Done Approval": return this.approveBookingDoneTask(input);
+      case "Order Login Approval": return this.approveOrderLoginTask(input);
+      case "Dispatch Planning Approval": return this.approveDispatchPlanningTask(input);
+      default: return null;
+    }
+  }
+
+  // Stage changes made through the general lead API must honor the same
+  // account lock-ins as the dedicated booking and installation flows.
+  async createForStage(
+    input: CreateBookingDoneLockInInput & { stage_tag: string },
+    tx?: TxClient,
+  ) {
+    if (!["Type 4", "Type 9", "Type 13"].includes(input.stage_tag)) return null;
+    const vendor = await this.getDb(tx).vendorMaster.findUnique({
+      where: { id: input.vendor_id },
+      select: { IsAccountLocInEnabled: true },
+    });
+    if (vendor?.IsAccountLocInEnabled !== true) return null;
+
+    switch (input.stage_tag) {
+      case "Type 4":
+        return this.createBookingDoneLockIn(input, tx);
+      case "Type 9":
+        return this.createOrderLoginLockIn(input, tx);
+      case "Type 13":
+        return this.createDispatchPlanningLockIn(input, tx);
+    }
+  }
+
   private formatDisplayDate(date: Date) {
     return new Intl.DateTimeFormat("en-IN", {
       day: "2-digit",
@@ -196,6 +247,10 @@ export class LeadSuperAdminApprovalLockInService {
         },
       });
       isNewApproval = true;
+    }
+
+    if (approval.is_approved) {
+      return { approval, task: null, superAdminId: superAdmin.id };
     }
 
     const orderLoginStatusType = await db.statusTypeMaster.findFirst({
@@ -631,6 +686,10 @@ export class LeadSuperAdminApprovalLockInService {
       isNewApproval = true;
     }
 
+    if (approval.is_approved) {
+      return { approval, task: null, superAdminId: superAdmin.id };
+    }
+
     const dispatchPlanningStatusType = await db.statusTypeMaster.findFirst({
       where: {
         vendor_id: input.vendor_id,
@@ -786,13 +845,13 @@ export class LeadSuperAdminApprovalLockInService {
       return lockIns;
     }
 
-    const pendingTasks = await db.userLeadTask.findMany({
+    const approvalTasks = await db.userLeadTask.findMany({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
         task_type: taskType,
         status: {
-          in: ["open", "in_progress"],
+          in: ["open", "in_progress", "completed"],
         },
       },
       select: {
@@ -806,7 +865,8 @@ export class LeadSuperAdminApprovalLockInService {
 
     return lockIns.map((lockIn) => ({
       ...lockIn,
-      pending_tasks: pendingTasks,
+      pending_tasks: approvalTasks.filter(task => task.status !== "completed"),
+      latest_task: approvalTasks[0] ?? null,
     }));
   }
 
@@ -868,6 +928,8 @@ export class LeadSuperAdminApprovalLockInService {
       if (task.task_type !== "Booking Done Approval") {
         throw new Error("This task is not a Booking Done Approval task");
       }
+
+      await this.assertApprovalActor(tx, task.vendor_id, input.approved_by);
 
       const approval = await tx.leadSuperAdminApprovalLocIns.findFirst({
         where: {
@@ -1065,6 +1127,8 @@ export class LeadSuperAdminApprovalLockInService {
       if (task.task_type !== "Order Login Approval") {
         throw new Error("This task is not an Order Login Approval task");
       }
+
+      await this.assertApprovalActor(tx, task.vendor_id, input.approved_by);
 
       const approval = await tx.leadSuperAdminApprovalLocIns.findFirst({
         where: {
@@ -1349,6 +1413,8 @@ export class LeadSuperAdminApprovalLockInService {
       if (task.task_type !== "Dispatch Planning Approval") {
         throw new Error("This task is not a Dispatch Planning Approval task");
       }
+
+      await this.assertApprovalActor(tx, task.vendor_id, input.approved_by);
 
       const approval = await tx.leadSuperAdminApprovalLocIns.findFirst({
         where: {

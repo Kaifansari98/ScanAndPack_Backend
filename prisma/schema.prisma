@@ -8,6 +8,10 @@ datasource db {
 }
 
 model VendorMaster {
+  complaints ComplaintMaster[]
+  complaintCategories ComplaintCategoryMaster[]
+  complaintExternalClients ComplaintExternalClient[]
+  complaintSlaConfigs ComplaintSlaConfig[]
   fmRequirements FMRequirementMaster[]
   fmResponses FMRequirementResponse[]
   fmUploads FMRequirementUpload[]
@@ -73,6 +77,7 @@ model VendorMaster {
   push_lead_to_cadbid                          Boolean                                        @default(false)
   is_available_unique_code                     Boolean                                        @default(false)
   is_furnixcrm_app_enabled                     Boolean                                        @default(false)
+  is_client_complaints_enabled                 Boolean                                        @default(false)
   accounts                                    AccountMaster[]
   additionalCostMasters                        AdditionalCostMaster[]                         @relation("AdditionalCostVendor")
   architechuremasters                          Architechuremaster[]
@@ -296,6 +301,40 @@ model PrivilegeMaster {
 }
 
 model UserMaster {
+  @@unique([id, vendor_id])
+  complaintCategoryCreatedBy ComplaintCategoryMaster[] @relation("ComplaintCategoryCreatedBy")
+  complaintExternalClientCreatedBy ComplaintExternalClient[] @relation("ComplaintExternalClientCreatedBy")
+  complaintMasterAssignedSS ComplaintMaster[] @relation("ComplaintMasterAssignedSS")
+  complaintMasterAssignedHSS ComplaintMaster[] @relation("ComplaintMasterAssignedHSS")
+  complaintMasterRaisedBy ComplaintMaster[] @relation("ComplaintMasterRaisedBy")
+  complaintMasterDuplicateReviewedBy ComplaintMaster[] @relation("ComplaintMasterDuplicateReviewedBy")
+  complaintCycleOpenedBy ComplaintCycle[] @relation("ComplaintCycleOpenedBy")
+  complaintAssignmentPrevious ComplaintAssignment[] @relation("ComplaintAssignmentPrevious")
+  complaintAssignmentNew ComplaintAssignment[] @relation("ComplaintAssignmentNew")
+  complaintAssignmentAssignedBy ComplaintAssignment[] @relation("ComplaintAssignmentAssignedBy")
+  complaintAttachmentUploadedBy ComplaintAttachment[] @relation("ComplaintAttachmentUploadedBy")
+  complaintDecisionPerformedBy ComplaintDecision[] @relation("ComplaintDecisionPerformedBy")
+  complaintVisitAssignedSS ComplaintVisit[] @relation("ComplaintVisitAssignedSS")
+  complaintVisitCreatedBy ComplaintVisit[] @relation("ComplaintVisitCreatedBy")
+  complaintInspectionReportSubmittedBy ComplaintInspectionReport[] @relation("ComplaintInspectionReportSubmittedBy")
+  complaintQuotationCreatedBy ComplaintQuotation[] @relation("ComplaintQuotationCreatedBy")
+  complaintChargeCreatedBy ComplaintCharge[] @relation("ComplaintChargeCreatedBy")
+  complaintPaymentRecordedBy ComplaintPayment[] @relation("ComplaintPaymentRecordedBy")
+  complaintPaymentVerifiedBy ComplaintPayment[] @relation("ComplaintPaymentVerifiedBy")
+  complaintPaymentRefundedBy ComplaintPayment[] @relation("ComplaintPaymentRefundedBy")
+  complaintPaymentAllocationAllocatedBy ComplaintPaymentAllocation[] @relation("ComplaintPaymentAllocationAllocatedBy")
+  complaintExecutionAssignedSS ComplaintExecution[] @relation("ComplaintExecutionAssignedSS")
+  complaintExecutionCompletedBy ComplaintExecution[] @relation("ComplaintExecutionCompletedBy")
+  complaintExecutionCreatedBy ComplaintExecution[] @relation("ComplaintExecutionCreatedBy")
+  complaintTaskAssignedTo ComplaintTask[] @relation("ComplaintTaskAssignedTo")
+  complaintTaskCreatedBy ComplaintTask[] @relation("ComplaintTaskCreatedBy")
+  complaintTaskCompletedBy ComplaintTask[] @relation("ComplaintTaskCompletedBy")
+  complaintClosureCompletionVerifiedBy ComplaintClosure[] @relation("ComplaintClosureCompletionVerifiedBy")
+  complaintClosureFinancialVerifiedBy ComplaintClosure[] @relation("ComplaintClosureFinancialVerifiedBy")
+  complaintClosureClosedBy ComplaintClosure[] @relation("ComplaintClosureClosedBy")
+  complaintNotificationRecipientUser ComplaintNotification[] @relation("ComplaintNotificationRecipientUser")
+  complaintSlaConfigUpdatedBy ComplaintSlaConfig[] @relation("ComplaintSlaConfigUpdatedBy")
+  complaintActivityLogActor ComplaintActivityLog[] @relation("ComplaintActivityLogActor")
   leaveRequests LeaveRequest[] @relation("LeaveRequestOwner")
   leaveRequestsReviewed LeaveRequest[] @relation("LeaveRequestReviewer")
   leaveHolidaysCreated LeaveHoliday[] @relation("LeaveHolidayCreator")
@@ -892,6 +931,8 @@ model ClientTypeMaster {
 }
 
 model LeadMaster {
+  @@unique([id, account_id, vendor_id])
+  complaints ComplaintMaster[] @relation("ComplaintMasterLead")
   fmResponses FMRequirementResponse[]
   fmUploads FMRequirementUpload[]
   productsRequiredForProduction                ProductsRequiredForProduction[]
@@ -1283,6 +1324,8 @@ model SourceMaster {
 }
 
 model AccountMaster {
+  @@unique([id, vendor_id])
+  complaints ComplaintMaster[] @relation("ComplaintMasterAccount")
   id                                  Int                                  @id @default(autoincrement())
   name                                String
   country_code                        String
@@ -2044,6 +2087,8 @@ model LeadProductStructureMapping {
 }
 
 model LeadProductStructureInstance {
+  @@unique([id, lead_id, vendor_id])
+  complaints ComplaintMaster[] @relation("ComplaintMasterInstance")
   productsRequiredForProduction              ProductsRequiredForProduction[]
   id                                         Int                             @id @default(autoincrement())
   vendor_id                                  Int
@@ -3021,10 +3066,14 @@ model InstallationUpdateDocuments {
 }
 
 model MiscellaneousMaster {
+  @@unique([id, vendor_id])
+  @@index([vendor_id, complaint_id])
   id                               Int                                            @id @default(autoincrement())
   vendor_id                        Int
-  lead_id                          Int
-  account_id                       Int
+  lead_id                          Int?
+  account_id                       Int?
+  complaint_id                     Int?
+  complaint_execution_id           Int?
   misc_type_id                     Int
   problem_description              String
   reorder_material_details         String
@@ -3049,9 +3098,9 @@ model MiscellaneousMaster {
   returned_by                      Int?
   return_handover_remark           String?
   documents                        MiscellaneousDocument[]
-  account                          AccountMaster                                  @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  account                          AccountMaster?                                 @relation(fields: [account_id], references: [id], onDelete: Cascade)
   createdBy                        UserMaster                                     @relation("MiscCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  lead                             LeadMaster                                     @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  lead                             LeadMaster?                                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   type                             MiscellaneousTypeMaster                        @relation(fields: [misc_type_id], references: [id])
   updatedBy                        UserMaster?                                    @relation("MiscUpdatedBy", fields: [updated_by], references: [id])
   returnedBy                       UserMaster?                                    @relation("MiscReturnedBy", fields: [returned_by], references: [id])
@@ -3059,6 +3108,8 @@ model MiscellaneousMaster {
   teams                            MiscellaneousTeamMapping[]
   followups                        MiscellaneousFollowup[]
   reorderInstancesMaterialMappings MiscellaneousReorderInstancesMaterialMapping[]
+  complaint                        ComplaintMaster?                               @relation("MiscellaneousComplaint", fields: [complaint_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+  complaintExecution               ComplaintExecution?                            @relation("MiscellaneousComplaintExecution", fields: [complaint_execution_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
 }
 
 model MiscellaneousTypeMaster {
@@ -6456,4 +6507,1119 @@ model FMRequirementUpload {
   vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   lead LeadMaster @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   @@index([vendor_id, lead_id])
+}
+
+// Complaint journey: independent of lead lifecycle; supports external clients.
+// Complaint codes are CMP{n}-{lead_code} for CRM clients and CMP{n}-{external_client_code}
+// for external clients, where n counts complaints per lead / external client.
+
+model ComplaintCategoryMaster {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  name String @db.VarChar(120)
+  is_active Boolean @default(true)
+  sort_order Int @default(0)
+  created_by Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  createdBy UserMaster @relation("ComplaintCategoryCreatedBy", fields: [created_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+  complaints ComplaintMaster[] @relation("ComplaintMasterCategory")
+  @@unique([vendor_id, name])
+  @@unique([id, vendor_id])
+  @@index([vendor_id, is_active, sort_order])
+
+}
+
+// Clients without a CRM lead. Never counted as a sales lead and never merged
+// automatically; matching mobile numbers only raise a duplicate warning.
+model ComplaintExternalClient {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  external_client_code String @db.VarChar(64)
+  client_name String @db.VarChar(200)
+  mobile String @db.VarChar(40)
+  alternate_mobile String? @db.VarChar(40)
+  email String? @db.VarChar(320)
+  address String @db.VarChar(2000)
+  city String @db.VarChar(120)
+  product_type String? @db.VarChar(200)
+  installation_date DateTime? @db.Date
+  email_verified_at DateTime?
+  created_by Int?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  createdBy UserMaster? @relation("ComplaintExternalClientCreatedBy", fields: [created_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+  complaints ComplaintMaster[] @relation("ComplaintMasterExternalClient")
+  @@unique([vendor_id, external_client_code])
+  @@unique([id, vendor_id])
+  @@index([vendor_id, mobile])
+  @@index([vendor_id, email])
+
+}
+
+model ComplaintMaster {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_code String @db.VarChar(100)
+  sequence_no Int
+  registration_channel ComplaintRegistrationChannel
+  client_type ComplaintClientType
+  lead_id Int?
+  account_id Int?
+  instance_id Int?
+  external_client_id Int?
+  client_name String @db.VarChar(200)
+  client_mobile String @db.VarChar(40)
+  client_alternate_mobile String? @db.VarChar(40)
+  client_email String? @db.VarChar(320)
+  site_address String @db.VarChar(2000)
+  city String? @db.VarChar(120)
+  product_type String? @db.VarChar(200)
+  component ComplaintComponent
+  category_id Int
+  description String @db.Text
+  additional_remarks String? @db.Text
+  preferred_visit_date DateTime? @db.Date
+  installation_date DateTime? @db.Date
+  usable_handover_date DateTime? @db.Date
+  final_handover_date DateTime? @db.Date
+  priority ComplaintPriority?
+  warranty_status ComplaintWarrantyStatus @default(UNDETERMINED)
+  exceptional_reason String? @db.VarChar(4000)
+  possible_duplicate Boolean @default(false)
+  duplicate_reviewed_by Int?
+  duplicate_reviewed_at DateTime?
+  duplicate_review_remarks String? @db.VarChar(2000)
+  assigned_ss_id Int?
+  assigned_hss_id Int?
+  raised_by_actor_type ComplaintActorType
+  raised_by_user_id Int?
+  raised_by_client_reference String? @db.VarChar(255)
+  status ComplaintStatus @default(NEW)
+  status_changed_at DateTime @default(now())
+  current_cycle_id Int?
+  version Int @default(1)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  cycles ComplaintCycle[] @relation("ComplaintCycles")
+  currentCycle ComplaintCycle? @relation("ComplaintCurrentCycle", fields: [current_cycle_id, id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([vendor_id, complaint_code])
+  @@unique([current_cycle_id, id, vendor_id])
+  @@unique([id, vendor_id])
+  @@index([vendor_id, status, created_at])
+  @@index([vendor_id, assigned_ss_id, status])
+  @@index([vendor_id, assigned_hss_id, status])
+  @@index([vendor_id, lead_id])
+  @@index([vendor_id, external_client_id])
+  @@index([vendor_id, client_mobile])
+  @@index([vendor_id, category_id])
+
+  lead LeadMaster? @relation("ComplaintMasterLead", fields: [lead_id, account_id, vendor_id], references: [id, account_id, vendor_id], onDelete: Restrict)
+
+  account AccountMaster? @relation("ComplaintMasterAccount", fields: [account_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  instance LeadProductStructureInstance? @relation("ComplaintMasterInstance", fields: [instance_id, lead_id, vendor_id], references: [id, lead_id, vendor_id], onDelete: Restrict)
+
+  externalClient ComplaintExternalClient? @relation("ComplaintMasterExternalClient", fields: [external_client_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  category ComplaintCategoryMaster @relation("ComplaintMasterCategory", fields: [category_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  assignedSS UserMaster? @relation("ComplaintMasterAssignedSS", fields: [assigned_ss_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  assignedHSS UserMaster? @relation("ComplaintMasterAssignedHSS", fields: [assigned_hss_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  raisedBy UserMaster? @relation("ComplaintMasterRaisedBy", fields: [raised_by_user_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  duplicateReviewedBy UserMaster? @relation("ComplaintMasterDuplicateReviewedBy", fields: [duplicate_reviewed_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  miscellaneous MiscellaneousMaster[] @relation("MiscellaneousComplaint")
+  notifications ComplaintNotification[] @relation("ComplaintNotificationComplaint")
+
+}
+
+model ComplaintCycle {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_number Int
+  reopened_reason String? @db.VarChar(4000)
+  opened_by_actor_type ComplaintActorType
+  opened_by_user_id Int?
+  opened_by_client_reference String? @db.VarChar(255)
+  opened_at DateTime @default(now())
+  resolved_at DateTime?
+  closed_at DateTime?
+  ended_at DateTime?
+  end_reason ComplaintCycleEndReason?
+  complaint ComplaintMaster @relation("ComplaintCycles", fields: [complaint_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+  currentFor ComplaintMaster? @relation("ComplaintCurrentCycle")
+  @@unique([id, complaint_id, vendor_id])
+  @@unique([complaint_id, cycle_number])
+  @@index([vendor_id, complaint_id])
+
+  openedBy UserMaster? @relation("ComplaintCycleOpenedBy", fields: [opened_by_user_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  complaintAssignment ComplaintAssignment[]
+  complaintAttachment ComplaintAttachment[]
+  complaintDecision ComplaintDecision[]
+  complaintVisit ComplaintVisit[]
+  complaintInspectionReport ComplaintInspectionReport[]
+  complaintInspectionMaterial ComplaintInspectionMaterial[]
+  complaintQuotation ComplaintQuotation[]
+  complaintQuotationItem ComplaintQuotationItem[]
+  complaintCharge ComplaintCharge[]
+  complaintPayment ComplaintPayment[]
+  complaintPaymentAllocation ComplaintPaymentAllocation[]
+  complaintExecution ComplaintExecution[]
+  complaintTask ComplaintTask[]
+  complaintClosure ComplaintClosure[]
+  complaintActivityLog ComplaintActivityLog[]
+
+}
+
+// Every SS / HSS (re)assignment, so ownership history survives reassignment.
+model ComplaintAssignment {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  role ComplaintAssigneeRole
+  previous_user_id Int?
+  new_user_id Int
+  reason String? @db.VarChar(2000)
+  assigned_by_actor_type ComplaintActorType
+  assigned_by Int?
+  assigned_at DateTime @default(now())
+
+  previousUser UserMaster? @relation("ComplaintAssignmentPrevious", fields: [previous_user_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  newUser UserMaster @relation("ComplaintAssignmentNew", fields: [new_user_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  assignedBy UserMaster? @relation("ComplaintAssignmentAssignedBy", fields: [assigned_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  activityLogs ComplaintActivityLog[] @relation("ComplaintActivityLogAssignment")
+
+}
+
+model ComplaintAttachment {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  storage_key String @unique
+  original_name String @db.VarChar(255)
+  mime_type String @db.VarChar(127)
+  size_bytes Int
+  media_type ComplaintMediaType
+  category ComplaintAttachmentCategory
+  actor_type ComplaintActorType
+  actor_user_id Int?
+  actor_client_reference String? @db.VarChar(255)
+  visit_id Int?
+  inspection_report_id Int?
+  execution_id Int?
+  decision_id Int?
+  created_at DateTime @default(now())
+
+  uploadedBy UserMaster? @relation("ComplaintAttachmentUploadedBy", fields: [actor_user_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  visit ComplaintVisit? @relation("ComplaintAttachmentVisit", fields: [visit_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  inspectionReport ComplaintInspectionReport? @relation("ComplaintAttachmentInspectionReport", fields: [inspection_report_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  execution ComplaintExecution? @relation("ComplaintAttachmentExecution", fields: [execution_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  decision ComplaintDecision? @relation("ComplaintAttachmentDecision", fields: [decision_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  payments ComplaintPayment[] @relation("ComplaintPaymentProof")
+  @@index([complaint_id, category, media_type])
+
+}
+
+model ComplaintDecision {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  decision_type ComplaintDecisionType
+  outcome ComplaintDecisionOutcome
+  remarks String? @db.VarChar(4000)
+  remote_instructions String? @db.Text
+  client_response String? @db.Text
+  actor_type ComplaintActorType
+  actor_user_id Int?
+  actor_client_reference String? @db.VarChar(255)
+  acting_on_behalf_of_client Boolean @default(false)
+  visit_id Int?
+  quotation_id Int?
+  decided_at DateTime @default(now())
+  @@index([vendor_id, complaint_id, decision_type, decided_at])
+
+  performedBy UserMaster? @relation("ComplaintDecisionPerformedBy", fields: [actor_user_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  visit ComplaintVisit? @relation("ComplaintDecisionVisit", fields: [visit_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  quotation ComplaintQuotation? @relation("ComplaintDecisionQuotation", fields: [quotation_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  attachments ComplaintAttachment[] @relation("ComplaintAttachmentDecision")
+  freeVisits ComplaintVisit[] @relation("ComplaintVisitFreeApproval")
+  approvedQuotations ComplaintQuotation[] @relation("ComplaintQuotationHssApproval")
+  respondedQuotations ComplaintQuotation[] @relation("ComplaintQuotationClientResponse")
+  waivedCharges ComplaintCharge[] @relation("ComplaintChargeWaiver")
+  inspectionSkippedExecutions ComplaintExecution[] @relation("ComplaintExecutionInspectionSkip")
+  quotationSkippedExecutions ComplaintExecution[] @relation("ComplaintExecutionQuotationSkip")
+  closures ComplaintClosure[] @relation("ComplaintClosureClientConfirmation")
+  activityLogs ComplaintActivityLog[] @relation("ComplaintActivityLogDecision")
+
+}
+
+model ComplaintVisit {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  visit_number Int
+  purpose ComplaintVisitPurpose
+  status ComplaintVisitStatus
+  charge_mode ComplaintVisitChargeMode @default(CHARGEABLE)
+  standard_fee Decimal @default(800) @db.Decimal(12, 2)
+  currency String @default("INR") @db.VarChar(3)
+  assigned_ss_id Int?
+  team_details String? @db.VarChar(2000)
+  repeat_of_visit_id Int?
+  repeat_remarks String? @db.VarChar(2000)
+  free_approval_decision_id Int?
+  scheduled_for DateTime?
+  reschedule_count Int @default(0)
+  completed_at DateTime?
+  remarks String? @db.VarChar(4000)
+  created_by Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  @@unique([complaint_id, visit_number])
+  @@unique([id, complaint_id, vendor_id])
+  @@index([vendor_id, assigned_ss_id, status, scheduled_for])
+
+  assignedSS UserMaster? @relation("ComplaintVisitAssignedSS", fields: [assigned_ss_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  createdBy UserMaster @relation("ComplaintVisitCreatedBy", fields: [created_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  repeatOf ComplaintVisit? @relation("ComplaintVisitRepeatOf", fields: [repeat_of_visit_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+
+  freeApproval ComplaintDecision? @relation("ComplaintVisitFreeApproval", fields: [free_approval_decision_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  repeatVisits ComplaintVisit[] @relation("ComplaintVisitRepeatOf")
+  inspectionReports ComplaintInspectionReport[] @relation("ComplaintInspectionReportVisit")
+  decisions ComplaintDecision[] @relation("ComplaintDecisionVisit")
+  charges ComplaintCharge[] @relation("ComplaintChargeVisit")
+  executions ComplaintExecution[] @relation("ComplaintExecutionRepairVisit")
+  tasks ComplaintTask[] @relation("ComplaintTaskVisit")
+  attachments ComplaintAttachment[] @relation("ComplaintAttachmentVisit")
+  activityLogs ComplaintActivityLog[] @relation("ComplaintActivityLogVisit")
+
+}
+
+model ComplaintInspectionReport {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  visit_id Int
+  actual_visit_date DateTime
+  client_available Boolean
+  issue_observed String @db.Text
+  root_cause String @db.Text
+  affected_product String @db.VarChar(200)
+  affected_unit_number String @db.VarChar(100)
+  responsibility ComplaintResponsibility
+  responsibility_remarks String? @db.VarChar(2000)
+  repair_actions ComplaintRepairAction[]
+  material_required Boolean
+  remarks String? @db.Text
+  estimated_work_days Int?
+  expected_completion_date DateTime? @db.Date
+  additional_visit_required Boolean @default(false)
+  further_approval_required Boolean @default(false)
+  submitted_by Int
+  submitted_at DateTime @default(now())
+  @@unique([visit_id])
+
+  submittedBy UserMaster @relation("ComplaintInspectionReportSubmittedBy", fields: [submitted_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  visit ComplaintVisit @relation("ComplaintInspectionReportVisit", fields: [visit_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  materials ComplaintInspectionMaterial[] @relation("ComplaintInspectionMaterialReport")
+  quotations ComplaintQuotation[] @relation("ComplaintQuotationInspectionReport")
+  attachments ComplaintAttachment[] @relation("ComplaintAttachmentInspectionReport")
+
+}
+
+model ComplaintInspectionMaterial {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  inspection_report_id Int
+  sequence Int
+  material_name String @db.VarChar(250)
+  quantity Decimal @db.Decimal(12, 3)
+  unit String? @db.VarChar(40)
+  specification String? @db.VarChar(2000)
+  finish_colour String? @db.VarChar(200)
+  estimated_cost Decimal? @db.Decimal(12, 2)
+  remarks String? @db.VarChar(2000)
+  @@unique([inspection_report_id, sequence])
+
+  inspectionReport ComplaintInspectionReport @relation("ComplaintInspectionMaterialReport", fields: [inspection_report_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+}
+
+model ComplaintQuotation {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  quotation_number Int
+  revision Int @default(1)
+  status ComplaintQuotationStatus @default(DRAFT)
+  inspection_report_id Int?
+  currency String @default("INR") @db.VarChar(3)
+  subtotal Decimal @db.Decimal(12, 2)
+  tax_amount Decimal @default(0) @db.Decimal(12, 2)
+  warranty_covered_amount Decimal @default(0) @db.Decimal(12, 2)
+  client_payable_amount Decimal @db.Decimal(12, 2)
+  total_amount Decimal @db.Decimal(12, 2)
+  hss_approval_decision_id Int?
+  client_response_decision_id Int?
+  shared_at DateTime?
+  created_by Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  @@unique([complaint_id, quotation_number, revision])
+  @@index([vendor_id, status, created_at])
+
+  createdBy UserMaster @relation("ComplaintQuotationCreatedBy", fields: [created_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  inspectionReport ComplaintInspectionReport? @relation("ComplaintQuotationInspectionReport", fields: [inspection_report_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  hssApproval ComplaintDecision? @relation("ComplaintQuotationHssApproval", fields: [hss_approval_decision_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  clientResponse ComplaintDecision? @relation("ComplaintQuotationClientResponse", fields: [client_response_decision_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  decisions ComplaintDecision[] @relation("ComplaintDecisionQuotation")
+  items ComplaintQuotationItem[] @relation("ComplaintQuotationItemQuotation")
+  charges ComplaintCharge[] @relation("ComplaintChargeQuotation")
+  executions ComplaintExecution[] @relation("ComplaintExecutionQuotation")
+  activityLogs ComplaintActivityLog[] @relation("ComplaintActivityLogQuotation")
+
+}
+
+model ComplaintQuotationItem {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  quotation_id Int
+  sequence Int
+  category ComplaintQuotationItemCategory
+  description String @db.VarChar(2000)
+  quantity Decimal @db.Decimal(12, 3)
+  unit String? @db.VarChar(40)
+  unit_rate Decimal @db.Decimal(12, 2)
+  line_total Decimal @db.Decimal(12, 2)
+  warranty_covered_amount Decimal @default(0) @db.Decimal(12, 2)
+  client_payable_amount Decimal @db.Decimal(12, 2)
+  chargeable_reason String? @db.VarChar(2000)
+  @@unique([quotation_id, sequence])
+
+  quotation ComplaintQuotation @relation("ComplaintQuotationItemQuotation", fields: [quotation_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+}
+
+model ComplaintCharge {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  charge_type ComplaintChargeType
+  visit_id Int? @unique
+  quotation_id Int? @unique
+  amount Decimal @db.Decimal(12, 2)
+  currency String @default("INR") @db.VarChar(3)
+  status ComplaintChargeStatus @default(OPEN)
+  waiver_decision_id Int?
+  due_at DateTime?
+  created_by Int
+  created_at DateTime @default(now())
+
+  createdBy UserMaster @relation("ComplaintChargeCreatedBy", fields: [created_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  visit ComplaintVisit? @relation("ComplaintChargeVisit", fields: [visit_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  quotation ComplaintQuotation? @relation("ComplaintChargeQuotation", fields: [quotation_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  waiver ComplaintDecision? @relation("ComplaintChargeWaiver", fields: [waiver_decision_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  allocations ComplaintPaymentAllocation[] @relation("ComplaintPaymentAllocationCharge")
+
+}
+
+model ComplaintPayment {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  amount Decimal @db.Decimal(12, 2)
+  currency String @default("INR") @db.VarChar(3)
+  method ComplaintPaymentMethod
+  transaction_reference String @db.VarChar(255)
+  payment_date DateTime
+  status ComplaintPaymentStatus @default(PENDING_VERIFICATION)
+  proof_attachment_id Int
+  actor_type ComplaintActorType
+  actor_user_id Int?
+  actor_client_reference String? @db.VarChar(255)
+  verified_by Int?
+  verified_at DateTime?
+  rejection_remarks String? @db.VarChar(2000)
+  refunded_by Int?
+  refunded_at DateTime?
+  refund_remarks String? @db.VarChar(2000)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  @@index([vendor_id, status, payment_date])
+
+  recordedBy UserMaster? @relation("ComplaintPaymentRecordedBy", fields: [actor_user_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  verifiedBy UserMaster? @relation("ComplaintPaymentVerifiedBy", fields: [verified_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  refundedBy UserMaster? @relation("ComplaintPaymentRefundedBy", fields: [refunded_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  proof ComplaintAttachment @relation("ComplaintPaymentProof", fields: [proof_attachment_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  allocations ComplaintPaymentAllocation[] @relation("ComplaintPaymentAllocationPayment")
+  activityLogs ComplaintActivityLog[] @relation("ComplaintActivityLogPayment")
+
+}
+
+model ComplaintPaymentAllocation {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  payment_id Int
+  charge_id Int
+  amount Decimal @db.Decimal(12, 2)
+  allocated_by Int
+  created_at DateTime @default(now())
+  @@unique([payment_id, charge_id])
+
+  allocatedBy UserMaster @relation("ComplaintPaymentAllocationAllocatedBy", fields: [allocated_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  payment ComplaintPayment @relation("ComplaintPaymentAllocationPayment", fields: [payment_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  charge ComplaintCharge @relation("ComplaintPaymentAllocationCharge", fields: [charge_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+}
+
+// Procurement + repair + the supervisor's completion report. Factory material
+// requests are MiscellaneousMaster rows pointing back here.
+model ComplaintExecution {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@unique([id, vendor_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  quotation_id Int?
+  inspection_skip_decision_id Int?
+  quotation_skip_decision_id Int?
+  material_required Boolean @default(false)
+  status ComplaintExecutionStatus
+  purchase_order_reference String? @db.VarChar(255)
+  material_expected_date DateTime? @db.Date
+  material_received_date DateTime? @db.Date
+  repair_visit_id Int?
+  assigned_ss_id Int?
+  team_details String? @db.VarChar(2000)
+  scheduled_for DateTime?
+  started_at DateTime?
+  completed_at DateTime?
+  completed_by Int?
+  material_used String? @db.Text
+  replacement_details String? @db.Text
+  client_remarks String? @db.Text
+  completion_remarks String? @db.Text
+  pending_work String? @db.Text
+  created_by Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  @@index([vendor_id, status])
+
+  assignedSS UserMaster? @relation("ComplaintExecutionAssignedSS", fields: [assigned_ss_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  completedBy UserMaster? @relation("ComplaintExecutionCompletedBy", fields: [completed_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  createdBy UserMaster @relation("ComplaintExecutionCreatedBy", fields: [created_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  quotation ComplaintQuotation? @relation("ComplaintExecutionQuotation", fields: [quotation_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  repairVisit ComplaintVisit? @relation("ComplaintExecutionRepairVisit", fields: [repair_visit_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  inspectionSkip ComplaintDecision? @relation("ComplaintExecutionInspectionSkip", fields: [inspection_skip_decision_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  quotationSkip ComplaintDecision? @relation("ComplaintExecutionQuotationSkip", fields: [quotation_skip_decision_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  miscellaneous MiscellaneousMaster[] @relation("MiscellaneousComplaintExecution")
+  tasks ComplaintTask[] @relation("ComplaintTaskExecution")
+  attachments ComplaintAttachment[] @relation("ComplaintAttachmentExecution")
+  activityLogs ComplaintActivityLog[] @relation("ComplaintActivityLogExecution")
+
+}
+
+model ComplaintTask {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  task_type ComplaintTaskType
+  task_key String @db.VarChar(150)
+  assigned_to Int
+  status LeadTaskStatus @default(open)
+  due_date DateTime?
+  visit_id Int?
+  execution_id Int?
+  remark String? @db.VarChar(4000)
+  created_by Int
+  completed_by Int?
+  completed_at DateTime?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  @@unique([cycle_id, task_key])
+  @@index([vendor_id, assigned_to, status, due_date])
+
+  assignedTo UserMaster @relation("ComplaintTaskAssignedTo", fields: [assigned_to, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  createdBy UserMaster @relation("ComplaintTaskCreatedBy", fields: [created_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  completedBy UserMaster? @relation("ComplaintTaskCompletedBy", fields: [completed_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  visit ComplaintVisit? @relation("ComplaintTaskVisit", fields: [visit_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  execution ComplaintExecution? @relation("ComplaintTaskExecution", fields: [execution_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  activityLogs ComplaintActivityLog[] @relation("ComplaintActivityLogTask")
+
+}
+
+model ComplaintClosure {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  status ComplaintClosureStatus @default(PENDING)
+  client_confirmation_status ComplaintClientConfirmationStatus @default(PENDING)
+  client_confirmation_decision_id Int?
+  no_response_reason String? @db.VarChar(2000)
+  completion_verified_by Int?
+  completion_verified_at DateTime?
+  financial_verified_by Int?
+  financial_verified_at DateTime?
+  closed_by Int?
+  closed_at DateTime?
+  closure_remarks String? @db.VarChar(4000)
+  created_at DateTime @default(now())
+  @@unique([cycle_id])
+
+  completionVerifiedBy UserMaster? @relation("ComplaintClosureCompletionVerifiedBy", fields: [completion_verified_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  financialVerifiedBy UserMaster? @relation("ComplaintClosureFinancialVerifiedBy", fields: [financial_verified_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  closedBy UserMaster? @relation("ComplaintClosureClosedBy", fields: [closed_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  clientConfirmation ComplaintDecision? @relation("ComplaintClosureClientConfirmation", fields: [client_confirmation_decision_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  activityLogs ComplaintActivityLog[] @relation("ComplaintActivityLogClosure")
+
+}
+
+// One row per recipient per channel; kept even when a channel is unavailable.
+model ComplaintNotification {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int?
+  event ComplaintNotificationEvent
+  channel ComplaintNotificationChannel
+  recipient_type ComplaintNotificationRecipient
+  recipient_user_id Int?
+  recipient_address String? @db.VarChar(320)
+  delivery_status ComplaintNotificationDeliveryStatus @default(PENDING)
+  failure_reason String? @db.VarChar(2000)
+  payload Json?
+  sent_at DateTime?
+  created_at DateTime @default(now())
+  @@index([vendor_id, complaint_id, created_at])
+  @@index([vendor_id, delivery_status])
+
+  complaint ComplaintMaster @relation("ComplaintNotificationComplaint", fields: [complaint_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  recipientUser UserMaster? @relation("ComplaintNotificationRecipientUser", fields: [recipient_user_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+}
+
+// SLA timings per status, editable by HSS / super-admin. Nothing is hardcoded.
+model ComplaintSlaConfig {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  status ComplaintStatus
+  target_hours Int
+  reminder_every_hours Int?
+  escalate_after_hours Int?
+  is_active Boolean @default(true)
+  updated_by Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  @@unique([vendor_id, status])
+
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+
+  updatedBy UserMaster @relation("ComplaintSlaConfigUpdatedBy", fields: [updated_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+}
+
+model ComplaintActivityLog {
+
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  complaint_id Int
+  cycle_id Int
+  cycle ComplaintCycle @relation(fields: [cycle_id, complaint_id, vendor_id], references: [id, complaint_id, vendor_id], onDelete: Restrict)
+  @@unique([id, cycle_id])
+  @@index([vendor_id, complaint_id, cycle_id])
+
+  action String @db.VarChar(100)
+  from_status ComplaintStatus?
+  to_status ComplaintStatus?
+  actor_type ComplaintActorType
+  actor_user_id Int?
+  actor_client_reference String? @db.VarChar(255)
+  acting_on_behalf_of_client Boolean @default(false)
+  remarks String? @db.VarChar(4000)
+  decision_id Int?
+  assignment_id Int?
+  task_id Int?
+  visit_id Int?
+  quotation_id Int?
+  payment_id Int?
+  execution_id Int?
+  closure_id Int?
+  metadata Json?
+  created_at DateTime @default(now())
+  @@index([vendor_id, complaint_id, created_at, id])
+
+  actor UserMaster? @relation("ComplaintActivityLogActor", fields: [actor_user_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  decision ComplaintDecision? @relation("ComplaintActivityLogDecision", fields: [decision_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  assignment ComplaintAssignment? @relation("ComplaintActivityLogAssignment", fields: [assignment_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  task ComplaintTask? @relation("ComplaintActivityLogTask", fields: [task_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  visit ComplaintVisit? @relation("ComplaintActivityLogVisit", fields: [visit_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  quotation ComplaintQuotation? @relation("ComplaintActivityLogQuotation", fields: [quotation_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  payment ComplaintPayment? @relation("ComplaintActivityLogPayment", fields: [payment_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  execution ComplaintExecution? @relation("ComplaintActivityLogExecution", fields: [execution_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+  closure ComplaintClosure? @relation("ComplaintActivityLogClosure", fields: [closure_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
+
+}
+
+enum ComplaintRegistrationChannel {
+  CLIENT_PORTAL
+  WEBSITE
+  STAFF
+}
+
+enum ComplaintClientType {
+  CRM_LEAD
+  EXTERNAL
+  EXCEPTIONAL
+}
+
+enum ComplaintActorType {
+  STAFF
+  CLIENT
+  SYSTEM
+}
+
+enum ComplaintCycleEndReason {
+  CLOSED
+  REOPENED
+  REJECTED
+  CANCELLED
+}
+
+// Internal statuses from the spec; client-facing labels are derived in code.
+enum ComplaintStatus {
+  NEW
+  UNDER_VERIFICATION
+  MORE_INFORMATION_REQUIRED
+  REJECTED
+  APPROVED_FOR_VISIT
+  AWAITING_CLIENT_ACCEPTANCE
+  PAYMENT_PENDING
+  VISIT_SCHEDULED
+  INSPECTION_SUBMITTED
+  QUOTATION_PREPARATION
+  DEPARTMENT_HEAD_APPROVAL
+  QUOTATION_SHARED
+  AWAITING_CLIENT_APPROVAL
+  AWAITING_PAYMENT
+  PROCUREMENT_PENDING
+  MATERIAL_RECEIVED
+  REPAIR_SCHEDULED
+  WORK_IN_PROGRESS
+  AWAITING_CLIENT_CONFIRMATION
+  AWAITING_HO_CLOSURE_APPROVAL
+  CLOSED
+  REOPENED
+  ON_HOLD
+  CANCELLED
+}
+
+enum ComplaintComponent {
+  SHUTTER
+  CARCASS
+  HARDWARE
+  ACCESSORY
+}
+
+enum ComplaintPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum ComplaintWarrantyStatus {
+  UNDETERMINED
+  COVERED
+  PARTIALLY_COVERED
+  NOT_COVERED
+}
+
+enum ComplaintAssigneeRole {
+  SITE_SUPERVISOR
+  DEPARTMENT_HEAD
+}
+
+enum ComplaintMediaType {
+  PHOTO
+  VIDEO
+  DOCUMENT
+}
+
+enum ComplaintAttachmentCategory {
+  REGISTRATION
+  ADDITIONAL_INFORMATION
+  INSPECTION
+  PAYMENT_PROOF
+  QUOTATION
+  BEFORE_EXECUTION
+  AFTER_EXECUTION
+  CLIENT_CONFIRMATION
+  OTHER
+}
+
+enum ComplaintDecisionType {
+  HO_VERIFICATION
+  WARRANTY_DECISION
+  EXCEPTIONAL_APPROVAL
+  EXTERNAL_LEAD_LINK
+  VISIT_CHARGE_ACCEPTANCE
+  FREE_REPEAT_VISIT
+  CHARGE_WAIVER
+  INSPECTION_SKIP
+  QUOTATION_SKIP
+  HSS_QUOTATION_APPROVAL
+  CLIENT_QUOTATION_RESPONSE
+  CLIENT_RESOLUTION_CONFIRMATION
+  REOPEN_REVIEW
+}
+
+enum ComplaintDecisionOutcome {
+  APPROVED_FOR_VISIT
+  MORE_INFORMATION_REQUIRED
+  REMOTE_RESOLUTION
+  REJECTED
+  ON_HOLD
+  APPROVED
+  DECLINED
+  SENT_FOR_REVISION
+  ACCEPTED
+  MODIFICATION_REQUESTED
+  SATISFIED
+  NOT_SATISFIED
+  SKIPPED
+  COVERED
+  PARTIALLY_COVERED
+  NOT_COVERED
+}
+
+enum ComplaintVisitPurpose {
+  INSPECTION
+  REPAIR
+}
+
+enum ComplaintVisitStatus {
+  PENDING_FREE_APPROVAL
+  AWAITING_CHARGE_ACCEPTANCE
+  AWAITING_PAYMENT
+  READY_TO_SCHEDULE
+  SCHEDULED
+  CONFIRMED
+  COMPLETED
+  CLIENT_NOT_AVAILABLE
+  SITE_NOT_ACCESSIBLE
+  CANCELLED
+}
+
+enum ComplaintVisitChargeMode {
+  CHARGEABLE
+  FREE_REPEAT
+}
+
+enum ComplaintResponsibility {
+  MANUFACTURING
+  INSTALLATION_TEAM
+  HARDWARE_VENDOR
+  MATERIAL_DEFECT
+  CLIENT_MISUSE
+  CIVIL_SITE_CONDITION
+  WATER_MOISTURE_DAMAGE
+  NORMAL_WEAR_AND_TEAR
+  OUT_OF_WARRANTY
+  OTHER
+}
+
+enum ComplaintRepairAction {
+  HARDWARE_REPLACEMENT
+  SHUTTER_REPLACEMENT
+  CARCASS_PANEL_REPLACEMENT
+  ACCESSORY_REPLACEMENT
+  NEW_MATERIAL_REQUIRED
+  REMOTE_RESOLUTION
+  NO_ACTION_REQUIRED
+}
+
+enum ComplaintQuotationStatus {
+  DRAFT
+  PENDING_HSS_APPROVAL
+  SENT_FOR_REVISION
+  HSS_APPROVED
+  SHARED
+  CLIENT_ACCEPTED
+  CLIENT_REJECTED
+  MODIFICATION_REQUESTED
+  SUPERSEDED
+  CANCELLED
+}
+
+enum ComplaintQuotationItemCategory {
+  MATERIAL
+  HARDWARE
+  LABOUR
+  TRANSPORTATION
+  OTHER
+}
+
+enum ComplaintChargeType {
+  VISIT
+  REPAIR
+}
+
+enum ComplaintChargeStatus {
+  OPEN
+  WAIVED
+  VOIDED
+}
+
+enum ComplaintPaymentMethod {
+  CASH
+  UPI
+  BANK_TRANSFER
+  CARD
+  CHEQUE
+  OTHER
+}
+
+enum ComplaintPaymentStatus {
+  PENDING_VERIFICATION
+  VERIFIED
+  REJECTED
+  REFUNDED
+  VOIDED
+}
+
+enum ComplaintExecutionStatus {
+  MATERIAL_APPROVAL_PENDING
+  PROCUREMENT_PENDING
+  MATERIAL_ORDERED
+  MATERIAL_RECEIVED
+  MATERIAL_READY
+  REPAIR_SCHEDULED
+  WORK_IN_PROGRESS
+  WORK_COMPLETED
+  CANCELLED
+}
+
+enum ComplaintTaskType {
+  VERIFICATION
+  INFORMATION_FOLLOW_UP
+  VISIT_CHARGE_FOLLOW_UP
+  PAYMENT_VERIFICATION
+  SITE_VISIT
+  INSPECTION_REPORT
+  QUOTATION_PREPARATION
+  QUOTATION_APPROVAL
+  CLIENT_APPROVAL_FOLLOW_UP
+  PROCUREMENT
+  REPAIR
+  CLIENT_CONFIRMATION_FOLLOW_UP
+  REOPEN_REVIEW
+  FINAL_CLOSURE
+}
+
+enum ComplaintClosureStatus {
+  PENDING
+  CLOSED
+}
+
+enum ComplaintClientConfirmationStatus {
+  PENDING
+  SATISFIED
+  NOT_SATISFIED
+  NO_RESPONSE_HO_AUTHORISED
+}
+
+enum ComplaintNotificationEvent {
+  COMPLAINT_REGISTERED
+  SUPERVISOR_ASSIGNED
+  INFORMATION_REQUIRED
+  COMPLAINT_APPROVED
+  COMPLAINT_REJECTED
+  VISIT_CHARGES_RAISED
+  PAYMENT_RECEIVED
+  VISIT_SCHEDULED
+  VISIT_RESCHEDULED
+  INSPECTION_SUBMITTED
+  QUOTATION_APPROVED
+  QUOTATION_ACCEPTED
+  MATERIAL_READY
+  WORK_COMPLETED
+  COMPLAINT_REOPENED
+  COMPLAINT_CLOSED
+  REMINDER
+  ESCALATION
+}
+
+enum ComplaintNotificationChannel {
+  IN_APP
+  EMAIL
+  CLIENT_PORTAL
+  COMPLAINTS_CHAT
+}
+
+enum ComplaintNotificationRecipient {
+  CLIENT
+  STAFF
+}
+
+enum ComplaintNotificationDeliveryStatus {
+  PENDING
+  SENT
+  FAILED
+  CHANNEL_UNAVAILABLE
 }

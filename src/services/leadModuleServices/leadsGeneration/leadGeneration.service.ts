@@ -40,6 +40,7 @@ import {
 } from "../../email/brevoEmail.service";
 import { sendBrevoEmail } from "../../email/brevoEmail.service";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { LeadSuperAdminApprovalLockInService } from "../../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
 
 type TxClient = Prisma.TransactionClient | typeof prisma;
 
@@ -4590,6 +4591,27 @@ export const editTaskISMService = async (payload: EditTaskISMInput, baseUrl = "h
     closed_by,
   } = value;
 
+  if (status === "completed") {
+    // Approval tasks are business approvals, not ordinary to-do status changes.
+    // Reuse the dedicated transaction so the lock-in and task change together.
+    const approved = await new LeadSuperAdminApprovalLockInService().approveTaskIfApplicable({
+      lead_id,
+      task_id,
+      approved_by: updated_by,
+      approval_remark: remark,
+      clientBaseUrl: baseUrl,
+    });
+    if (approved) {
+      const task = approved.task;
+      await Promise.allSettled(
+        [...new Set([task.user_id, updated_by])].map(userId =>
+          cache.del(`dashboard:tasks:${task.vendor_id}:${userId}`),
+        ),
+      );
+      return task;
+    }
+  }
+
   const result = await prisma.$transaction(async (tx) => {
     // 1️⃣ Validate task existence
     const task = await tx.userLeadTask.findFirst({
@@ -5139,8 +5161,18 @@ export const updateLeadStageService = async (
         stage_id: newStatusId, // Explicity set the stage_id for the log
       });
 
+      await new LeadSuperAdminApprovalLockInService().createForStage(
+        {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          created_by: userId,
+          stage_tag: statusType.tag,
+        },
+        tx,
+      );
+
       return updatedLead;
-    });
+    }, { timeout: 15000 });
 
     return { success: true, data: result };
   } catch (error: any) {

@@ -3291,24 +3291,15 @@ export class OrderLoginService {
     }
 
     if (isSoValueReceived && vendor?.IsAccountLocInEnabled === true) {
-      const existingOrderLoginApprovalTask = await prisma.userLeadTask.findFirst({
-        where: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          task_type: "Order Login Approval",
-        },
-        select: { id: true },
+      // The lock-in service checks pending tasks and approval state. A cancelled
+      // historical task must not prevent restoring a still-pending approval.
+      await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn({
+        vendor_id: vendorId,
+        lead_id: leadId,
+        created_by: updatedBy,
+        base_date: new Date(),
+        clientBaseUrl,
       });
-
-      if (!existingOrderLoginApprovalTask) {
-        await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn({
-          vendor_id: vendorId,
-          lead_id: leadId,
-          created_by: updatedBy,
-          base_date: new Date(),
-          clientBaseUrl,
-        });
-      }
     }
 
     return updated;
