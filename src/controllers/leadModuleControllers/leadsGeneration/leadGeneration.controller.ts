@@ -2001,6 +2001,8 @@ export class LeadController {
           assigneeUserType,
           requiredPrivilegeCode,
           taskType,
+          strictFranchise: req.query.strict_franchise === "true",
+          requesterUserId: Number((req as any).user?.id),
         },
       );
 
@@ -2034,12 +2036,13 @@ export class LeadController {
     } catch (error: any) {
       console.error("[CONTROLLER] fetchSalesExecutivesByVendor error:", error);
 
+      const statusCode = error.statusCode || 500;
       return res
-        .status(500)
+        .status(statusCode)
         .json(
           ApiResponse.error(
-            "Failed to fetch sales executives",
-            500,
+            statusCode === 403 ? error.message : "Failed to fetch sales executives",
+            statusCode,
             process.env.NODE_ENV === "development" ? error.message : undefined,
           ),
         );

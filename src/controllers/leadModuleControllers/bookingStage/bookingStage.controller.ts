@@ -858,6 +858,7 @@ export class BookingStageController {
         page,
         limit,
         filters,
+        Number((req as any).user?.id),
       );
 
       return res.status(200).json({
@@ -879,7 +880,7 @@ export class BookingStageController {
         stack: error.stack,
       });
 
-      return res.status(500).json({
+      return res.status(error.statusCode || 500).json({
         success: false,
         message: error.message || "Something went wrong",
       });
@@ -1019,6 +1020,7 @@ export class BookingStageController {
         page,
         limit,
         filters,
+        { requesterUserId: Number((req as any).user?.id) },
       );
 
       return res.status(200).json({
@@ -1039,7 +1041,7 @@ export class BookingStageController {
         error: error.message,
         stack: error.stack,
       });
-      return res.status(500).json({
+      return res.status(error.statusCode || 500).json({
         success: false,
         message: error.message || "Something went wrong",
       });
@@ -1235,6 +1237,7 @@ export class BookingStageController {
         page,
         limit,
         {},
+        { requesterUserId: Number((req as any).user?.id) },
       );
 
       logger.info("Fetched universal table data successfully", {

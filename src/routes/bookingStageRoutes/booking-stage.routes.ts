@@ -72,6 +72,7 @@ bookingStageRouter.post(
 
 bookingStageRouter.post(
   "/vendorId/:vendorId/vendor-leads-by-tag/all-leads",
+  verifyToken,
   bookingStageController.getVendorLeadsByTag2,
 );
 

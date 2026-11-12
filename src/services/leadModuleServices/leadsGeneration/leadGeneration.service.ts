@@ -41,6 +41,7 @@ import {
 import { sendBrevoEmail } from "../../email/brevoEmail.service";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
 import { LeadSuperAdminApprovalLockInService } from "../../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
+import { getAdminFranchiseScope } from "../../../utils/adminFranchiseScope";
 
 type TxClient = Prisma.TransactionClient | typeof prisma;
 
@@ -3622,6 +3623,8 @@ export const getSalesExecutivesByVendor = async (
     assigneeUserType?: string;
     requiredPrivilegeCode?: string;
     taskType?: string;
+    strictFranchise?: boolean;
+    requesterUserId?: number;
   },
 ): Promise<SalesExecutiveData[]> => {
   try {
@@ -3630,13 +3633,27 @@ export const getSalesExecutivesByVendor = async (
     );
 
     const normalizedTaskType = options?.taskType?.trim().toLowerCase();
+    let strictFranchise = options?.strictFranchise === true;
+    if (options?.requesterUserId !== undefined) {
+      const scope = await getAdminFranchiseScope(vendorId, options.requesterUserId);
+      if (scope.isAdmin) {
+        if (!scope.franchiseId) return [];
+        franchiseId = scope.franchiseId;
+        strictFranchise = true;
+      }
+    }
+    const franchiseWhere: Prisma.UserMasterWhereInput = franchiseId !== undefined
+      ? strictFranchise
+        ? { franchise_id: franchiseId }
+        : { OR: [{ franchise_id: franchiseId }, { franchise_id: null }] }
+      : {};
 
     if (normalizedTaskType === "followup") {
       const allUsers = await prisma.userMaster.findMany({
         where: {
           vendor_id: vendorId,
           status: "active",
-          ...(franchiseId !== undefined ? { OR: [{ franchise_id: franchiseId }, { franchise_id: null }] } : {}),
+          ...franchiseWhere,
         },
         include: {
           user_type: true,
@@ -3685,7 +3702,7 @@ export const getSalesExecutivesByVendor = async (
         where: {
           vendor_id: vendorId,
           status: "active",
-          ...(franchiseId !== undefined ? { OR: [{ franchise_id: franchiseId }, { franchise_id: null }] } : {}),
+          AND: [franchiseWhere],
           OR: [
             {
               user_type: {
@@ -3765,9 +3782,7 @@ export const getSalesExecutivesByVendor = async (
           vendor_id: vendorId,
           status: "active",
           AND: [
-            ...(franchiseId !== undefined
-              ? [{ OR: [{ franchise_id: franchiseId }, { franchise_id: null }] }]
-              : []),
+            franchiseWhere,
             {
               OR: [
                 {
@@ -3837,7 +3852,7 @@ export const getSalesExecutivesByVendor = async (
       where: {
         vendor_id: vendorId,
         status: "active",
-        ...(franchiseId !== undefined ? { OR: [{ franchise_id: franchiseId }, { franchise_id: null }] } : {}),
+        AND: [franchiseWhere],
         OR: [
           {
             user_type: {

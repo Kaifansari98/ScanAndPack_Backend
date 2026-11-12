@@ -30,6 +30,7 @@ import { AssignTaskBookingInput } from "../../types/leadModule.types";
 import Joi from "joi";
 import { createTaskHistoryLog } from "../task/taskHistory.service";
 import { LeadSuperAdminApprovalLockInService } from "../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
+import { getAdminFranchiseScope } from "../../utils/adminFranchiseScope";
 import { createLeadLog } from "../../utils/leadDetailedLog";
 
 const assignTaskBookingSchema = Joi.object({
@@ -1801,6 +1802,7 @@ export class BookingStageService {
       material_issue_ready_only?: boolean;
       material_issue_completed_only?: boolean;
     },
+    requesterUserId?: number,
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getVendorLeadsByTag2 called", {
       vendorId,
@@ -1820,6 +1822,17 @@ export class BookingStageService {
       page,
       limit,
     });
+    if (requesterUserId !== undefined) {
+      const scope = await getAdminFranchiseScope(vendorId, requesterUserId);
+      if (scope.isAdmin && String(tag).trim().toLowerCase() === "all") {
+        if (!scope.franchiseId) return { leads: [], count: 0 };
+        franchiseId = scope.franchiseId;
+        franchiseIds = undefined;
+        filters = { ...filters, franchises: undefined, franchise_ids: undefined };
+        // Admin Overall Leads includes all franchise leads, including their own.
+        userId = null;
+      }
+    }
     const normalizedFranchises = filters.franchises ?? filters.franchise_ids;
 
     const skip = (page - 1) * limit;
@@ -4665,6 +4678,7 @@ export class BookingStageService {
     options: {
       requireMiscellaneous?: boolean;
       requirePendingMiscellaneous?: boolean;
+      requesterUserId?: number;
     } = {},
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getUniversalTableData called", {
@@ -4685,6 +4699,16 @@ export class BookingStageService {
       page,
       limit,
     });
+    if (options.requesterUserId !== undefined) {
+      const scope = await getAdminFranchiseScope(vendorId, options.requesterUserId);
+      if (scope.isAdmin && String(tag).trim().toLowerCase() === "all") {
+        if (!scope.franchiseId) return { leads: [], count: 0 };
+        userId = options.requesterUserId;
+        franchiseId = scope.franchiseId;
+        franchiseIds = undefined;
+        filters = { ...filters, franchises: undefined, franchise_ids: undefined };
+      }
+    }
     const normalizedFranchises = filters.franchises ?? filters.franchise_ids;
 
     if (!tag) {

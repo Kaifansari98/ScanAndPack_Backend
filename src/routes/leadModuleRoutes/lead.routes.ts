@@ -500,6 +500,7 @@ leadsRouter.post(
 // Fetch all sales executives for a specific vendor
 leadsRouter.get(
   "/sales-executives/vendor/:vendorId",
+  verifyToken,
   leadController.fetchSalesExecutivesByVendor
 );
 
