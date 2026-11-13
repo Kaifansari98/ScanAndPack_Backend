@@ -12,6 +12,7 @@ import {
   requireComplaintsVendor,
 } from "../../services/clientComplaints/clientComplaints.service";
 import logger from "../../utils/logger";
+import { getComplaintDetail, getComplaintActivity } from "../../services/clientComplaints/complaintDetails.service";
 
 const positiveId = (value: unknown) => {
   const id = Number(value);
@@ -78,6 +79,8 @@ export const getDuplicates = handle(async (req) => {
 });
 
 export const list = handle((req) => listComplaints(actor(req), req.query as Record<string, unknown>));
+export const detail = handle((req) => getComplaintDetail(actor(req), positiveId(req.params.complaintId)));
+export const activity = handle((req) => getComplaintActivity(actor(req), positiveId(req.params.complaintId), req.query as Record<string, unknown>));
 
 export const create = handle(async (req) => {
   let body: Record<string, unknown>;

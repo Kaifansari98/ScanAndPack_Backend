@@ -15,6 +15,8 @@ router.get("/vendor/:vendorId/meta", controller.getMeta);
 router.get("/vendor/:vendorId/lead-lookup", controller.lookupLead);
 router.get("/vendor/:vendorId/duplicates", controller.getDuplicates);
 router.get("/vendor/:vendorId/complaints", controller.list);
+router.get("/vendor/:vendorId/complaints/:complaintId", controller.detail);
+router.get("/vendor/:vendorId/complaints/:complaintId/activity", controller.activity);
 
 // Per-type size and format checks happen in the service; multer only caps the request.
 const upload = multer({
