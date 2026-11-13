@@ -7,6 +7,12 @@ import {
   ComplaintActor,
   ComplaintError,
 } from "./clientComplaints.service";
+import { availableVerificationActions } from "./complaintVerification.service";
+import { visitPermissions } from "./complaintVisit.service";
+import { inspectionPermissions } from "./complaintInspection.service";
+import { quotationPermissions } from "./complaintQuotation.service";
+import { executionPermissions } from "./complaintExecution.service";
+import { closurePermissions } from "./complaintClosure.service";
 
 const person = { id: true, user_name: true } as const;
 const financialCategories = ["PAYMENT_PROOF", "QUOTATION"] as const;
@@ -59,6 +65,7 @@ export async function getComplaintDetail(actor: ComplaintActor, id: number) {
       status: true,
       status_changed_at: true,
       current_cycle_id: true,
+      version: true,
       created_at: true,
       updated_at: true,
       category: { select: { id: true, name: true } },
@@ -397,6 +404,32 @@ export async function getComplaintDetail(actor: ComplaintActor, id: number) {
     }),
   ]);
 
+  const visitPerms = await visitPermissions(actor, {
+    id: complaint.id,
+    status: complaint.status,
+    assigned_ss_id: complaint.assignedSS?.id ?? null,
+    current_cycle_id: complaint.current_cycle_id,
+  });
+
+  const stageInput = {
+    id: complaint.id,
+    status: complaint.status,
+    assigned_ss_id: complaint.assignedSS?.id ?? null,
+    current_cycle_id: complaint.current_cycle_id,
+  };
+  const [inspectionPerms, quotationPerms, executionPerms, closurePerms] = await Promise.all([
+    inspectionPermissions(actor, stageInput),
+    quotationPermissions(actor, stageInput),
+    executionPermissions(actor, stageInput),
+    closurePermissions(actor, stageInput),
+  ]);
+  const stagePerms = {
+    inspection: inspectionPerms,
+    quotation: quotationPerms,
+    execution: executionPerms,
+    closure: closurePerms,
+  };
+
   const media = await Promise.all(
     attachments.map(async ({ storage_key, ...file }) => {
       try {
@@ -420,7 +453,16 @@ export async function getComplaintDetail(actor: ComplaintActor, id: number) {
   );
   return {
     ...complaint,
-    permissions: { can_view_financial: canViewFinancial },
+    permissions: {
+      can_view_financial: canViewFinancial,
+      actions: availableVerificationActions(actor, {
+        status: complaint.status,
+        priority: complaint.priority,
+        assigned_ss_id: complaint.assignedSS?.id ?? null,
+      }),
+      visits: visitPerms,
+      ...stagePerms,
+    },
     attachments: media,
     assignments,
     decisions,

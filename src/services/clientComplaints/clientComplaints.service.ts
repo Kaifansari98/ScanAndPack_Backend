@@ -138,7 +138,7 @@ export async function ensureDefaultCategories(vendorId: number, actorId: number)
 
 export async function getComplaintMeta(actor: ComplaintActor) {
   await ensureDefaultCategories(actor.vendorId, actor.actorId);
-  const [categories, productTypes] = await Promise.all([
+  const [categories, productTypes, vendor] = await Promise.all([
     prisma.complaintCategoryMaster.findMany({
       where: { vendor_id: actor.vendorId, is_active: true },
       orderBy: [{ sort_order: "asc" }, { name: "asc" }],
@@ -149,13 +149,36 @@ export async function getComplaintMeta(actor: ComplaintActor) {
       orderBy: { type: "asc" },
       select: { id: true, type: true },
     }),
+    prisma.vendorMaster.findUniqueOrThrow({
+      where: { id: actor.vendorId },
+      select: { complaint_visit_fee: true },
+    }),
   ]);
   return {
     categories,
     product_types: productTypes,
     components: Object.values(ComplaintComponent),
     can_register: canRegisterComplaints(actor.role),
+    visit_fee: Number(vendor.complaint_visit_fee),
+    can_configure: canConfigureComplaints(actor.role),
   };
+}
+
+// Vendor-wide money policy, so only a super-admin may change it.
+export const canConfigureComplaints = (role: string) => role === "super-admin";
+
+export async function updateComplaintSettings(actor: ComplaintActor, body: Record<string, unknown>) {
+  if (!canConfigureComplaints(actor.role))
+    throw new ComplaintError("Only a super-admin can change complaint settings.", 403);
+  const fee = Number(body.visit_fee);
+  if (!Number.isFinite(fee) || fee < 0 || fee > 1_000_000 || Math.round(fee * 100) !== fee * 100)
+    throw new ComplaintError("Enter a valid visiting charge (₹0 or more, up to 2 decimals).");
+  const vendor = await prisma.vendorMaster.update({
+    where: { id: actor.vendorId },
+    data: { complaint_visit_fee: fee },
+    select: { complaint_visit_fee: true },
+  });
+  return { visit_fee: Number(vendor.complaint_visit_fee) };
 }
 
 function leadForComplaintQuery(vendorId: number, leadCode: string) {
@@ -178,17 +201,104 @@ function leadForComplaintQuery(vendorId: number, leadCode: string) {
       site_address: true,
       usable_handover_completed_at: true,
       final_handover_marked_at: true,
+      franchise_id: true,
     },
   });
 }
 
-async function activeSiteSupervisor(vendorId: number, leadId: number) {
-  const mapping = await prisma.leadSiteSupervisorMapping.findFirst({
-    where: { vendor_id: vendorId, lead_id: leadId, status: "active" },
+// The supervisor already working the lead. LeadUserMapping is the current
+// record; LeadSiteSupervisorMapping is the legacy one for site supervisors.
+async function leadOwnSupervisor(
+  vendorId: number,
+  leadId: number,
+  type: "site-supervisor" | "head-site-supervisor",
+) {
+  const mapping = await prisma.leadUserMapping.findFirst({
+    where: { vendor_id: vendorId, lead_id: leadId, type, status: "active", user: { status: "active" } },
+    orderBy: { created_at: "desc" },
+    select: { user: { select: { id: true, user_name: true } } },
+  });
+  if (mapping || type === "head-site-supervisor") return mapping?.user ?? null;
+  const legacy = await prisma.leadSiteSupervisorMapping.findFirst({
+    where: { vendor_id: vendorId, lead_id: leadId, status: "active", supervisor: { status: "active" } },
     orderBy: { created_at: "desc" },
     select: { supervisor: { select: { id: true, user_name: true } } },
   });
-  return mapping?.supervisor ?? null;
+  return legacy?.supervisor ?? null;
+}
+
+type Assignee = { id: number; name: string };
+
+const SS_TYPES = ["site-supervisor", "site supervisor", "site_supervisor"];
+const HSS_TYPES = ["head-site-supervisor", "head site supervisor", "head_site_supervisor"];
+
+// Spec 1: the complaint goes to the SS (and HSS) already assigned to the lead.
+// Only a lead without one falls back to whoever covers its franchise.
+async function complaintAssigneeOptions(
+  vendorId: number,
+  lead: { id: number; franchise_id: number | null },
+) {
+  const franchiseId = lead.franchise_id;
+  const userSelect = { id: true, user_name: true } as const;
+  const [siteSupervisors, headSiteSupervisors] = franchiseId
+    ? await Promise.all([
+        prisma.userMaster.findMany({
+          where: {
+            vendor_id: vendorId,
+            status: "active",
+            user_type: { user_type: { in: SS_TYPES, mode: "insensitive" } },
+            OR: [
+              { franchise_id: franchiseId },
+              { siteSupervisorFranchiseMappings: { some: { vendor_id: vendorId, franchise_id: franchiseId } } },
+            ],
+          },
+          orderBy: { user_name: "asc" },
+          select: userSelect,
+        }),
+        prisma.userMaster.findMany({
+          where: {
+            vendor_id: vendorId,
+            status: "active",
+            OR: [
+              {
+                headSiteSupervisorFranchiseMappings: {
+                  some: { vendor_id: vendorId, franchise_id: franchiseId, status: true },
+                },
+              },
+              {
+                franchise_id: franchiseId,
+                user_type: { user_type: { in: HSS_TYPES, mode: "insensitive" } },
+              },
+            ],
+          },
+          orderBy: { user_name: "asc" },
+          select: userSelect,
+        }),
+      ])
+    : [[], []];
+
+  const toAssignee = (u: { id: number; user_name: string }): Assignee => ({ id: u.id, name: u.user_name });
+  const [leadSs, leadHss] = await Promise.all([
+    leadOwnSupervisor(vendorId, lead.id, "site-supervisor"),
+    leadOwnSupervisor(vendorId, lead.id, "head-site-supervisor"),
+  ]);
+  return {
+    siteSupervisors: (leadSs ? [leadSs] : siteSupervisors).map(toAssignee),
+    headSiteSupervisors: (leadHss ? [leadHss] : headSiteSupervisors).map(toAssignee),
+    leadSupervisorId: leadSs?.id ?? null,
+  };
+}
+
+// One candidate is assigned automatically; several require an explicit pick.
+function pickAssignee(options: Assignee[], rawId: unknown, label: string) {
+  const id = optionalId(rawId, label);
+  if (id) {
+    if (!options.some((o) => o.id === id))
+      throw new ComplaintError(`The selected ${label.toLowerCase()} is not assigned to this lead or its franchise.`);
+    return id;
+  }
+  if (options.length > 1) throw new ComplaintError(`Select the ${label.toLowerCase()} for this complaint.`);
+  return options[0]?.id ?? null;
 }
 
 const leadMobile = (lead: { country_code: string; contact_no: string }) =>
@@ -201,13 +311,13 @@ export async function lookupLeadForComplaint(actor: ComplaintActor, rawLeadCode:
   if (!lead.account_id)
     throw new ComplaintError("This lead has no client account yet, so a complaint cannot be raised against it.");
 
-  const [products, supervisor, complaints] = await Promise.all([
+  const [products, assignees, complaints] = await Promise.all([
     prisma.leadProductStructureInstance.findMany({
       where: { vendor_id: actor.vendorId, lead_id: lead.id, is_archived: false },
       orderBy: [{ product_type_id: "asc" }, { quantity_index: "asc" }],
       select: { id: true, title: true, productType: { select: { type: true } } },
     }),
-    activeSiteSupervisor(actor.vendorId, lead.id),
+    complaintAssigneeOptions(actor.vendorId, lead),
     prisma.complaintMaster.findMany({
       where: { vendor_id: actor.vendorId, lead_id: lead.id },
       orderBy: { created_at: "desc" },
@@ -231,7 +341,10 @@ export async function lookupLeadForComplaint(actor: ComplaintActor, rawLeadCode:
       title: p.title,
       product_type: p.productType.type,
     })),
-    site_supervisor: supervisor ? { id: supervisor.id, name: supervisor.user_name } : null,
+    site_supervisors: assignees.siteSupervisors,
+    head_site_supervisors: assignees.headSiteSupervisors,
+    // Preselected when the franchise has several candidates.
+    default_site_supervisor_id: assignees.leadSupervisorId,
     existing_complaints: complaints,
   };
 }
@@ -423,7 +536,8 @@ export async function registerComplaint(
 
       const snapshot = leadContext ?? externalContext!;
       const assignedSsId = leadContext?.siteSupervisorId ?? null;
-      const assignedHssId = actor.role === "head-site-supervisor" ? actor.actorId : null;
+      const assignedHssId =
+        leadContext?.headSiteSupervisorId ?? (actor.role === "head-site-supervisor" ? actor.actorId : null);
 
       const complaint = await tx.complaintMaster.create({
         data: {
@@ -564,7 +678,13 @@ async function resolveLeadContext(
     lead.final_handover_marked_at ?? parseDate(body.final_handover_date, "Final handover date", true);
 
   const siteAddress = lead.site_address?.trim() || text(body.site_address, "Site address", 2000, true)!;
-  const supervisor = await activeSiteSupervisor(actor.vendorId, lead.id);
+  const assignees = await complaintAssigneeOptions(actor.vendorId, lead);
+  const siteSupervisorId = pickAssignee(assignees.siteSupervisors, body.site_supervisor_id, "Site supervisor");
+  const headSiteSupervisorId = pickAssignee(
+    assignees.headSiteSupervisors,
+    body.head_site_supervisor_id,
+    "Head site supervisor",
+  );
 
   const openForSameProduct = await prisma.complaintMaster.count({
     where: {
@@ -588,7 +708,8 @@ async function resolveLeadContext(
     productType: product ? `${product.productType.type} – ${product.title}` : null,
     usableHandoverDate,
     finalHandoverDate,
-    siteSupervisorId: supervisor?.id ?? null,
+    siteSupervisorId,
+    headSiteSupervisorId,
     possibleDuplicate: openForSameProduct > 0,
   };
 }

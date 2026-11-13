@@ -78,7 +78,8 @@ model VendorMaster {
   is_available_unique_code                     Boolean                                        @default(false)
   is_furnixcrm_app_enabled                     Boolean                                        @default(false)
   is_client_complaints_enabled                 Boolean                                        @default(false)
-  accounts                                    AccountMaster[]
+  complaint_visit_fee                          Decimal                                        @default(800) @db.Decimal(12, 2)
+  accounts                                   AccountMaster[]
   additionalCostMasters                        AdditionalCostMaster[]                         @relation("AdditionalCostVendor")
   architechuremasters                          Architechuremaster[]
   b2bRequirementTypes                          B2BRequirementTypeMaster[]
@@ -7544,6 +7545,7 @@ enum ComplaintPaymentStatus {
 }
 
 enum ComplaintExecutionStatus {
+  MATERIAL_NOT_REQUIRED
   MATERIAL_APPROVAL_PENDING
   PROCUREMENT_PENDING
   MATERIAL_ORDERED

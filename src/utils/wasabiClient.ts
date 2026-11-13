@@ -75,7 +75,7 @@ export const uploadFMRequirementFile = async (buffer: Buffer, vendorId: number, 
 };
 
 export const uploadComplaintFile = async (buffer: Buffer, vendorId: number, mimeType: string) => {
-  const extensions: Record<string,string> = { "image/jpeg":"jpg", "image/png":"png", "image/webp":"webp", "image/gif":"gif", "image/heic":"heic", "image/heif":"heif", "video/mp4":"mp4", "video/quicktime":"mov", "video/webm":"webm" };
+  const extensions: Record<string,string> = { "image/jpeg":"jpg", "image/png":"png", "image/webp":"webp", "image/gif":"gif", "image/heic":"heic", "image/heif":"heif", "video/mp4":"mp4", "video/quicktime":"mov", "video/webm":"webm", "application/pdf":"pdf" };
   const ext=extensions[mimeType];
   if (!ext) throw new Error("Unsupported complaint file format");
   const key=`client_complaints/${vendorId}/${uuidv4()}.${ext}`;

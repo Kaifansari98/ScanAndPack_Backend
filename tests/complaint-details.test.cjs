@@ -165,6 +165,7 @@ function controllerSetup({ enabled = true } = {}) {
   vm.runInNewContext(ts.transpileModule(controller, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText, {
     exports,
     require(name) {
+      if (name.includes('complaintLeadPicker.service')) return { getComplaintLeadOptions: async () => ({}), getComplaintLeadFranchises: async () => [] };
       if (name.includes('complaintDetails.service')) return { getComplaintDetail: async (...args) => { called.push(args); return { id: 7 }; }, getComplaintActivity: async (...args) => { called.push(args); return { rows: [], total: 0 }; } };
       if (name.includes('clientComplaints.service')) return { ...permissions, requireComplaintsVendor: async id => { called.push(['vendor', id]); if (!enabled) throw new ComplaintError('Complaints are disabled.', 403); } };
       if (name.includes('logger')) return { default: { error() {} } };
@@ -176,7 +177,7 @@ function controllerSetup({ enabled = true } = {}) {
   return { ...exports, called, res, request };
 }
 test('controller rejects a vendor URL that differs from the authenticated employee', async () => {
-  for (const method of ['detail', 'activity']) {
+  for (const method of ['detail', 'activity', 'leadOptions', 'leadFranchises']) {
     const service = controllerSetup(); service.request.params.vendorId = '2';
     await service[method](service.request, service.res);
     assert.equal(service.res.statusCode, 403); assert.equal(service.called.length, 0);
