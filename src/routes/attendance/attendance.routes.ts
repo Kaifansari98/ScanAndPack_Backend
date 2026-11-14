@@ -7,9 +7,37 @@ import {
   getEmployeeTodayAttendanceController,
 } from "../../controllers/attendance/attendance.controller";
 import { verifyToken } from "../../middlewares/auth.middleware";
-import { attendanceWorkspaceController, attendancePunchController, attendanceCorrectionRequestController, attendanceCorrectionsController, attendanceCorrectionDecisionController, attendanceLogsController, attendanceLogDetailController, attendanceCalendarController, attendanceCalendarDayController } from "../../controllers/attendance/attendance-workspace.controller";
+import {
+  attendanceWorkspaceController,
+  attendancePunchController,
+  attendanceCorrectionRequestController,
+  attendanceCorrectionsController,
+  attendanceCorrectionDecisionController,
+  attendanceLogsController,
+  attendanceLogDetailController,
+  attendanceCalendarController,
+  attendanceCalendarDayController,
+} from "../../controllers/attendance/attendance-workspace.controller";
+import {
+  createLocationController,
+  updateLocationController,
+  deleteLocationController,
+  listLocationsController,
+  assignLocationsController,
+  authorizedLocationsController,
+  getEmployeesForLocationController,
+} from "../../controllers/attendance/attendance-location.controller";
 
 const attendanceRoutes = Router();
+
+// Geo-fence & Attendance Locations (Super Admin & Authorized list)
+attendanceRoutes.get("/locations/employees", verifyToken, getEmployeesForLocationController);
+attendanceRoutes.get("/locations/authorized", verifyToken, authorizedLocationsController);
+attendanceRoutes.post("/locations/assign", verifyToken, assignLocationsController);
+attendanceRoutes.get("/locations", verifyToken, listLocationsController);
+attendanceRoutes.post("/locations", verifyToken, createLocationController);
+attendanceRoutes.patch("/locations/:id", verifyToken, updateLocationController);
+attendanceRoutes.delete("/locations/:id", verifyToken, deleteLocationController);
 
 attendanceRoutes.get("/calendar/day", verifyToken, attendanceCalendarDayController);
 attendanceRoutes.get("/calendar", verifyToken, attendanceCalendarController);

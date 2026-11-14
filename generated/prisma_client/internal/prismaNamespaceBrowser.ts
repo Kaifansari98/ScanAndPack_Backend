@@ -316,7 +316,10 @@ export const ModelName = {
   ComplaintClosure: 'ComplaintClosure',
   ComplaintNotification: 'ComplaintNotification',
   ComplaintSlaConfig: 'ComplaintSlaConfig',
-  ComplaintActivityLog: 'ComplaintActivityLog'
+  ComplaintActivityLog: 'ComplaintActivityLog',
+  EmployeeComplaint: 'EmployeeComplaint',
+  AttendanceLocation: 'AttendanceLocation',
+  UserAttendanceLocation: 'UserAttendanceLocation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -454,6 +457,7 @@ export const UserMasterScalarFieldEnum = {
   designation: 'designation',
   user_contact: 'user_contact',
   user_email: 'user_email',
+  personal_email: 'personal_email',
   user_timezone: 'user_timezone',
   password: 'password',
   user_type_id: 'user_type_id',
@@ -462,7 +466,10 @@ export const UserMasterScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   franchise_id: 'franchise_id',
+  employee_type: 'employee_type',
   employee_code: 'employee_code',
+  contract_start_date: 'contract_start_date',
+  contract_end_date: 'contract_end_date',
   department: 'department',
   aadhar_no: 'aadhar_no',
   pan_no: 'pan_no',
@@ -473,6 +480,8 @@ export const UserMasterScalarFieldEnum = {
   bank_account_holder_name: 'bank_account_holder_name',
   bank_account_number: 'bank_account_number',
   bank_ifsc_code: 'bank_ifsc_code',
+  bank_name: 'bank_name',
+  bank_document_file: 'bank_document_file',
   joining_date: 'joining_date',
   exit_date: 'exit_date',
   salary_rate_type: 'salary_rate_type',
@@ -4517,6 +4526,11 @@ export const AttendanceScalarFieldEnum = {
   work_location: 'work_location',
   shift_minutes: 'shift_minutes',
   time_zone: 'time_zone',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  location_accuracy: 'location_accuracy',
+  location_id: 'location_id',
+  location_address: 'location_address',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -4537,6 +4551,11 @@ export const Attendance_logsScalarFieldEnum = {
   correction_id: 'correction_id',
   before_values: 'before_values',
   after_values: 'after_values',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  location_accuracy: 'location_accuracy',
+  location_id: 'location_id',
+  location_address: 'location_address',
   created_at: 'created_at'
 } as const
 
@@ -5173,6 +5192,57 @@ export const ComplaintActivityLogScalarFieldEnum = {
 } as const
 
 export type ComplaintActivityLogScalarFieldEnum = (typeof ComplaintActivityLogScalarFieldEnum)[keyof typeof ComplaintActivityLogScalarFieldEnum]
+
+
+export const EmployeeComplaintScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_id: 'user_id',
+  franchise_id: 'franchise_id',
+  subject: 'subject',
+  category: 'category',
+  description: 'description',
+  status: 'status',
+  admin_remarks: 'admin_remarks',
+  reviewed_by: 'reviewed_by',
+  reviewed_at: 'reviewed_at',
+  attachment_key: 'attachment_key',
+  attachment_name: 'attachment_name',
+  attachment_mime: 'attachment_mime',
+  attachment_size: 'attachment_size',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type EmployeeComplaintScalarFieldEnum = (typeof EmployeeComplaintScalarFieldEnum)[keyof typeof EmployeeComplaintScalarFieldEnum]
+
+
+export const AttendanceLocationScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
+  name: 'name',
+  location_type: 'location_type',
+  address: 'address',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  radius_meters: 'radius_meters',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type AttendanceLocationScalarFieldEnum = (typeof AttendanceLocationScalarFieldEnum)[keyof typeof AttendanceLocationScalarFieldEnum]
+
+
+export const UserAttendanceLocationScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  location_id: 'location_id',
+  created_at: 'created_at'
+} as const
+
+export type UserAttendanceLocationScalarFieldEnum = (typeof UserAttendanceLocationScalarFieldEnum)[keyof typeof UserAttendanceLocationScalarFieldEnum]
 
 
 export const SortOrder = {

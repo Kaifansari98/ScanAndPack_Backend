@@ -379,6 +379,81 @@ const getPhoneVariants = (identifier: string): string[] => {
   return Array.from(variants);
 };
 
+
+export const generateNextEmployeeCode = async (
+  vendorId: number,
+  client: any = prisma,
+): Promise<string> => {
+  const usersWithCode = await client.userMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      employee_code: { startsWith: "EMP-" },
+    },
+    select: { employee_code: true },
+  });
+
+  let maxNum = 0;
+  for (const u of usersWithCode) {
+    if (u.employee_code) {
+      const match = u.employee_code.trim().match(/^EMP-(\d+)$/i);
+      if (match) {
+        const num = parseInt(match[1], 10);
+        if (!isNaN(num) && num > maxNum) {
+          maxNum = num;
+        }
+      }
+    }
+  }
+
+  return "EMP-" + String(maxNum + 1).padStart(3, "0");
+};
+
+export const ensureEmployeeCodesForVendor = async (
+  vendorId: number,
+  client: any = prisma,
+): Promise<void> => {
+  const unassignedUsers = await client.userMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      OR: [{ employee_code: null }, { employee_code: "" }],
+    },
+    select: { id: true },
+    orderBy: { id: "asc" },
+  });
+
+  if (unassignedUsers.length === 0) return;
+
+  const usersWithCode = await client.userMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      employee_code: { startsWith: "EMP-" },
+    },
+    select: { employee_code: true },
+  });
+
+  let maxNum = 0;
+  for (const u of usersWithCode) {
+    if (u.employee_code) {
+      const match = u.employee_code.trim().match(/^EMP-(\d+)$/i);
+      if (match) {
+        const num = parseInt(match[1], 10);
+        if (!isNaN(num) && num > maxNum) {
+          maxNum = num;
+        }
+      }
+    }
+  }
+
+  for (const u of unassignedUsers) {
+    maxNum++;
+    const generatedCode = "EMP-" + String(maxNum).padStart(3, "0");
+    await client.userMaster.update({
+      where: { id: u.id },
+      data: { employee_code: generatedCode },
+    });
+  }
+};
+
 export const createUserService = async (data: {
   vendor_id: number;
   franchise_id?: number;
@@ -397,6 +472,8 @@ export const createUserService = async (data: {
   bank_account_holder_name?: string | null;
   bank_account_number?: string | null;
   bank_ifsc_code?: string | null;
+  bank_name?: string | null;
+  bank_document_file?: string | null;
   joining_date?: string | Date | null;
   exit_date?: string | Date | null;
   salary_rate_type?: string | null;
@@ -405,6 +482,7 @@ export const createUserService = async (data: {
   work_location?: string | null;
   user_contact: string;
   user_email: string;
+  personal_email?: string | null;
   user_timezone: string;
   password: string;
   user_type_id: number;
@@ -415,6 +493,18 @@ export const createUserService = async (data: {
   const { franchise_ids: _franchiseIds, confirm_additional_supervisor, ...userData } = data;
   if (userData.employee_code) {
     userData.employee_code = typeof userData.employee_code === 'string' ? userData.employee_code.trim() : userData.employee_code;
+    const existingCode = await prisma.userMaster.findFirst({
+      where: {
+        vendor_id: Number(data.vendor_id),
+        employee_code: { equals: String(userData.employee_code).trim(), mode: "insensitive" },
+      },
+      select: { id: true, user_name: true },
+    });
+    if (existingCode) {
+      const error = new Error(`Employee code "${userData.employee_code}" is already in use by user "${existingCode.user_name}".`);
+      (error as any).statusCode = 409;
+      throw error;
+    }
   }
 
   if (data.user_contact) {
@@ -469,39 +559,29 @@ export const createUserService = async (data: {
     const isHrmsEnabled = vendor?.is_hrms_master_enabled === true;
 
     let employeeCode = userData.employee_code ? String(userData.employee_code).trim() : null;
-    if (isHrmsEnabled && !employeeCode) {
-      const usersWithCode = await tx.userMaster.findMany({
-        where: {
-          vendor_id: Number(data.vendor_id),
-          employee_code: { startsWith: 'EMP-' },
-        },
-        select: { employee_code: true },
-      });
-
-      let maxNum = 0;
-      for (const u of usersWithCode) {
-        if (u.employee_code) {
-          const match = u.employee_code.trim().match(/^EMP-(\d+)$/i);
-          if (match) {
-            const num = parseInt(match[1], 10);
-            if (!isNaN(num) && num > maxNum) {
-              maxNum = num;
-            }
-          }
-        }
-      }
-
-      employeeCode = 'EMP-' + String(maxNum + 1).padStart(3, '0');
+    let effectiveEmail = userData.user_email ? String(userData.user_email).trim() : '';
+    if (!effectiveEmail) {
+      const cleanContact = userData.user_contact ? String(userData.user_contact).replace(/\D/g, '') : String(Date.now());
+      effectiveEmail = `user_${cleanContact}@noemail.local`;
+    }
+    if (!employeeCode) {
+      employeeCode = await generateNextEmployeeCode(Number(data.vendor_id), tx);
     }
 
     const joiningDate = userData.joining_date ? new Date(userData.joining_date) : null;
     const exitDate = userData.exit_date ? new Date(userData.exit_date) : null;
+    const contractStartDate = userData.contract_start_date ? new Date(userData.contract_start_date) : null;
+    const contractEndDate = userData.contract_end_date ? new Date(userData.contract_end_date) : null;
 
     const user = await tx.userMaster.create({
       data: {
         ...userData,
+        user_email: effectiveEmail,
         joining_date: joiningDate,
         exit_date: exitDate,
+        employee_type: userData.employee_type || "permanent",
+        contract_start_date: contractStartDate,
+        contract_end_date: contractEndDate,
         employee_code: employeeCode,
         franchise_id: franchiseIds[0],
         password: hashedPassword,
@@ -527,6 +607,17 @@ export const createUserService = async (data: {
             document_name: "Pan Card",
             document_number: userData.pan_no || "",
             filename: userData.pan_card_file || "",
+          },
+        });
+      }
+
+      if (userData.bank_document_file) {
+        await tx.userDocument.create({
+          data: {
+            user_id: user.id,
+            document_name: "Bank Document",
+            document_number: userData.bank_account_number || "",
+            filename: userData.bank_document_file || "",
           },
         });
       }
@@ -587,7 +678,10 @@ export const updateUserService = async (
   userId: number,
   data: {
     user_name?: string;
+    employee_type?: string | null;
     employee_code?: string | null;
+    contract_start_date?: string | Date | null;
+    contract_end_date?: string | Date | null;
     designation?: string | null;
     department?: string | null;
     aadhar_no?: string | null;
@@ -599,6 +693,8 @@ export const updateUserService = async (
     bank_account_holder_name?: string | null;
       bank_account_number?: string | null;
       bank_ifsc_code?: string | null;
+      bank_name?: string | null;
+      bank_document_file?: string | null;
       joining_date?: string | Date | null;
       exit_date?: string | Date | null;
       salary_rate_type?: string | null;
@@ -620,7 +716,7 @@ export const updateUserService = async (
   const user = await prisma.userMaster.findUnique({
     where: { id: userId },
     select: {
-      id: true, vendor_id: true, franchise_id: true, user_type_id: true,
+      id: true, vendor_id: true, franchise_id: true, user_type_id: true, employee_code: true,
       siteSupervisorFranchiseMappings: { select: { franchise_id: true } },
     },
   });
@@ -634,8 +730,14 @@ export const updateUserService = async (
   const updateData: Record<string, any> = {};
 
   if (data.user_name !== undefined) updateData.user_name = data.user_name;
+  if (data.employee_type !== undefined) updateData.employee_type = data.employee_type || "permanent";
+  if (data.contract_start_date !== undefined) updateData.contract_start_date = data.contract_start_date ? new Date(data.contract_start_date) : null;
+  if (data.contract_end_date !== undefined) updateData.contract_end_date = data.contract_end_date ? new Date(data.contract_end_date) : null;
   if (data.employee_code !== undefined) {
     updateData.employee_code = data.employee_code ? data.employee_code.trim() : null;
+  }
+  if (!updateData.employee_code && !user.employee_code) {
+    updateData.employee_code = await generateNextEmployeeCode(user.vendor_id, prisma);
   }
   if (data.designation !== undefined) updateData.designation = data.designation;
   if (data.user_contact !== undefined) {
@@ -656,6 +758,7 @@ export const updateUserService = async (
     }
     updateData.user_contact = data.user_contact;
   }
+  if (data.personal_email !== undefined) updateData.personal_email = data.personal_email ? data.personal_email.trim() : null;
   if (data.user_email !== undefined) {
     const existingEmail = await prisma.userMaster.findFirst({
       where: {
@@ -691,6 +794,8 @@ export const updateUserService = async (
   if (data.bank_account_holder_name !== undefined) updateData.bank_account_holder_name = data.bank_account_holder_name;
   if (data.bank_account_number !== undefined) updateData.bank_account_number = data.bank_account_number;
   if (data.bank_ifsc_code !== undefined) updateData.bank_ifsc_code = data.bank_ifsc_code;
+  if (data.bank_name !== undefined) updateData.bank_name = data.bank_name;
+  if (data.bank_document_file !== undefined) updateData.bank_document_file = data.bank_document_file;
   if (data.joining_date !== undefined) updateData.joining_date = data.joining_date ? new Date(data.joining_date) : null;
   if (data.exit_date !== undefined) updateData.exit_date = data.exit_date ? new Date(data.exit_date) : null;
   if (data.salary_rate_type !== undefined) updateData.salary_rate_type = data.salary_rate_type;
@@ -770,6 +875,30 @@ export const updateUserService = async (
             document_name: "Pan Card",
             document_number: data.pan_no || "",
             filename: data.pan_card_file || "",
+          },
+        });
+      }
+    }
+
+    if (data.bank_document_file !== undefined) {
+      const existingBankDoc = await tx.userDocument.findFirst({
+        where: { user_id: userId, document_name: "Bank Document" },
+      });
+      if (existingBankDoc) {
+        await tx.userDocument.update({
+          where: { id: existingBankDoc.id },
+          data: {
+            document_number: data.bank_account_number !== undefined ? (data.bank_account_number || "") : existingBankDoc.document_number,
+            filename: data.bank_document_file !== undefined ? (data.bank_document_file || "") : existingBankDoc.filename,
+          },
+        });
+      } else if (data.bank_document_file) {
+        await tx.userDocument.create({
+          data: {
+            user_id: userId,
+            document_name: "Bank Document",
+            document_number: data.bank_account_number || "",
+            filename: data.bank_document_file || "",
           },
         });
       }
@@ -893,6 +1022,12 @@ export const getUsersByVendorService = async ({
     ];
   }
 
+  try {
+    await ensureEmployeeCodesForVendor(vendorId, prisma);
+  } catch (err) {
+    console.error("Failed to backfill employee codes for vendor:", err);
+  }
+
   const [users, count] = await Promise.all([
     prisma.userMaster.findMany({
       where,
@@ -903,7 +1038,10 @@ export const getUsersByVendorService = async ({
         id: true,
         vendor_id: true,
         franchise_id: true,
+        employee_type: true,
         employee_code: true,
+        contract_start_date: true,
+        contract_end_date: true,
         department: true,
         aadhar_no: true,
         pan_no: true,
@@ -914,6 +1052,8 @@ export const getUsersByVendorService = async ({
         bank_account_holder_name: true,
         bank_account_number: true,
         bank_ifsc_code: true,
+        bank_name: true,
+        bank_document_file: true,
         joining_date: true,
         exit_date: true,
         salary_rate_type: true,
@@ -928,6 +1068,7 @@ export const getUsersByVendorService = async ({
         designation: true,
         user_contact: true,
         user_email: true,
+        personal_email: true,
         user_timezone: true,
         status: true,
         created_at: true,
@@ -981,7 +1122,10 @@ export const getUserByIdService = async (userId: number, vendorId?: number) => {
       id: true,
       vendor_id: true,
       franchise_id: true,
+      employee_type: true,
       employee_code: true,
+      contract_start_date: true,
+      contract_end_date: true,
       department: true,
       aadhar_no: true,
       pan_no: true,
@@ -992,6 +1136,8 @@ export const getUserByIdService = async (userId: number, vendorId?: number) => {
         bank_account_holder_name: true,
         bank_account_number: true,
         bank_ifsc_code: true,
+        bank_name: true,
+        bank_document_file: true,
         joining_date: true,
         exit_date: true,
         salary_rate_type: true,
@@ -1006,6 +1152,7 @@ export const getUserByIdService = async (userId: number, vendorId?: number) => {
       designation: true,
       user_contact: true,
       user_email: true,
+      personal_email: true,
       user_timezone: true,
       status: true,
       created_at: true,

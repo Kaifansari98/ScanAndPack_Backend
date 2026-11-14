@@ -8,7 +8,7 @@ type Franchise = { id: number; franchise_name: string; Department: string };
 const statuses: LogStatus[] = ["WORKING", "ON_BREAK", "COMPLETED", "MISSING_PUNCH", "NO_RECORD"];
 const units = ["BRANCH", "FRANCHISE", "FACTORY"];
 const HEAD_OFFICE = "head-office";
-const MAX_RANGE_DAYS = 31;
+const MAX_RANGE_DAYS = 35;
 const EXPORT_LIMIT = 20000;
 // Open sessions older than this are flagged for review; shorter ones may be overnight shifts.
 const MISSING_PUNCH_AFTER_MS = 16 * 3600 * 1000;
@@ -75,26 +75,112 @@ export async function listAttendanceLogs(actor: AttendanceActor | undefined, fil
       select: { id: true, user_name: true, designation: true, status: true, created_at: true, franchise_id: true, user_type: { select: { user_type: true } } },
       orderBy: { user_name: "asc" },
     }),
-    prisma.attendance.findMany({ where: { vendor_id: vendorId, attendance_date: range.where }, include: { ...breakInclude, logs: { where: { action: "CORRECTED" }, select: { id: true }, take: 1 } } }),
+    prisma.attendance.findMany({
+      where: { vendor_id: vendorId, attendance_date: range.where },
+      include: {
+        ...breakInclude,
+        attendanceLocation: { select: { id: true, name: true, location_type: true, address: true, latitude: true, longitude: true, radius_meters: true } },
+        logs: { where: { action: "CORRECTED" }, select: { id: true }, take: 1 },
+      },
+    }),
   ]);
   const franchiseById = new Map(franchises.map(franchise => [franchise.id, franchise]));
-  const recordByKey = new Map(records.map(record => [`${record.attendance_date.toISOString().slice(0, 10)}-${record.user_id}`, record]));
+  const recordsByKey = new Map<string, typeof records>();
+  for (const record of records) {
+    const key = `${record.attendance_date.toISOString().slice(0, 10)}-${record.user_id}`;
+    const list = recordsByKey.get(key);
+    if (list) list.push(record);
+    else recordsByKey.set(key, [record]);
+  }
 
   const rows = [];
   for (const user of users) {
     const joined = deriveVendorLocalDate(user.created_at, context.timeZone).localDateString;
     for (const date of range.dates) {
-      const record = recordByKey.get(`${date}-${user.id}`);
-      if (!record && (user.status !== "active" || date < joined)) continue;
-      const franchiseId = record ? record.franchise_id : user.franchise_id;
+      const userRecords = recordsByKey.get(`${date}-${user.id}`);
+      if (!userRecords?.length && (user.status !== "active" || date < joined)) continue;
+      const primaryRecord = userRecords?.[0];
+      const franchiseId = primaryRecord ? primaryRecord.franchise_id : user.franchise_id;
       const employee = employeeOf(user, franchiseId ? franchiseById.get(franchiseId) : undefined);
       if (location && employee.location_id !== location) continue;
       if (role && employee.role !== role) continue;
       if (unit && employee.unit !== unit) continue;
       if (search && ![employee.name, employee.designation, employee.role].some(value => value?.toLowerCase().includes(search))) continue;
+
+      let rowData;
+      if (userRecords?.length) {
+        const sorted = [...userRecords].sort((a, b) => new Date(a.check_in).getTime() - new Date(b.check_in).getTime());
+        const hasOpen = sorted.some(r => !r.check_out);
+        const hasBreak = sorted.some(r => r.breaks?.some(b => !b.ended_at));
+        const hasCorrected = sorted.some(r => !!r.logs?.length);
+        const firstIn = sorted[0].check_in;
+        const lastRecord = sorted[sorted.length - 1];
+        const lastOut = hasOpen ? null : lastRecord.check_out;
+        
+        let totalBreakMinutes = 0;
+        let totalWorkMinutes = 0;
+        let isMissingPunch = false;
+
+        for (const rec of sorted) {
+          const dec = decorateAttendance(rec, context.timeZone, now)!;
+          totalBreakMinutes += Math.round(dec.break_seconds / 60);
+          if (!rec.check_out && now.getTime() - new Date(rec.check_in).getTime() > Math.max(MISSING_PUNCH_AFTER_MS, ((rec.shift_minutes ?? 480) + 480) * 60000)) {
+            isMissingPunch = true;
+          }
+          totalWorkMinutes += Math.round(dec.work_seconds / 60);
+        }
+
+        const status: LogStatus = isMissingPunch ? "MISSING_PUNCH"
+          : hasBreak ? "ON_BREAK"
+          : hasOpen ? "WORKING"
+          : "COMPLETED";
+
+        rowData = {
+          attendance_id: lastRecord.id,
+          status,
+          check_in: firstIn,
+          check_out: lastOut,
+          source: lastRecord.source as string,
+          work_location: lastRecord.work_location as string | null,
+          time_zone: context.timeZone,
+          break_minutes: totalBreakMinutes,
+          work_minutes: isMissingPunch ? null : totalWorkMinutes,
+          corrected: hasCorrected,
+          latitude: lastRecord.latitude,
+          longitude: lastRecord.longitude,
+          location_accuracy: lastRecord.location_accuracy,
+          location_id: lastRecord.location_id,
+          location_name: lastRecord.attendanceLocation?.name || null,
+          location_type: lastRecord.attendanceLocation?.location_type || null,
+          location_address: lastRecord.location_address || lastRecord.attendanceLocation?.address || null,
+        };
+      } else {
+        rowData = {
+          attendance_id: null,
+          status: "NO_RECORD" as LogStatus,
+          check_in: null,
+          check_out: null,
+          source: null,
+          work_location: null,
+          time_zone: context.timeZone,
+          break_minutes: 0,
+          work_minutes: null,
+          corrected: false,
+          latitude: null,
+          longitude: null,
+          location_accuracy: null,
+          location_id: null,
+          location_name: null,
+          location_type: null,
+          location_address: null,
+        };
+      }
+
       rows.push({
-        id: `${date}-${user.id}`, date, employee, corrected: !!record?.logs.length,
-        ...(record ? rowOf(record, context.timeZone, now) : { attendance_id: null, status: "NO_RECORD" as LogStatus, check_in: null, check_out: null, source: null, work_location: null, time_zone: context.timeZone, break_minutes: 0, work_minutes: null }),
+        id: `${date}-${user.id}`,
+        date,
+        employee,
+        ...rowData,
       });
     }
   }
@@ -146,11 +232,16 @@ export async function getAttendanceLogDetail(actor: AttendanceActor | undefined,
     where: { id: attendanceId, vendor_id: context.user.vendor_id },
     include: {
       ...breakInclude,
+      attendanceLocation: { select: { id: true, name: true, location_type: true, address: true, latitude: true, longitude: true, radius_meters: true } },
       user: { select: { id: true, user_name: true, designation: true, user_type: { select: { user_type: true } } } },
       franchise: { select: { id: true, franchise_name: true, Department: true } },
       logs: {
         orderBy: [{ action_time: "asc" }, { id: "asc" }],
-        include: { actor: { select: { id: true, user_name: true } }, correction: { select: { reason: true, review_note: true, requestedBy: { select: { user_name: true } } } } },
+        include: {
+          actor: { select: { id: true, user_name: true } },
+          attendanceLocation: { select: { id: true, name: true, location_type: true, address: true, latitude: true, longitude: true, radius_meters: true } },
+          correction: { select: { reason: true, review_note: true, requestedBy: { select: { user_name: true } } } },
+        },
       },
     },
   });
@@ -160,10 +251,21 @@ export async function getAttendanceLogDetail(actor: AttendanceActor | undefined,
     id: `${record.attendance_date.toISOString().slice(0, 10)}-${record.user_id}`, date: record.attendance_date.toISOString().slice(0, 10),
     employee: employeeOf(record.user, record.franchise ?? undefined), corrected: record.logs.some(log => log.action === "CORRECTED"),
     ...rowOf(record, context.timeZone, now),
+    latitude: record.latitude,
+    longitude: record.longitude,
+    location_accuracy: record.location_accuracy,
+    location_id: record.location_id,
+    location_name: record.attendanceLocation?.name || null,
+    location_type: record.attendanceLocation?.location_type || null,
+    location_address: record.location_address || record.attendanceLocation?.address || null,
     breaks: record.breaks.map(pause => ({ started_at: pause.started_at, ended_at: pause.ended_at })),
     events: record.logs.map(log => ({
       id: log.id, action: log.action, time: log.action_time, source: log.source, actor: log.actor && log.actor.id !== record.user_id ? log.actor.user_name : null,
       before: log.before_values, after: log.after_values,
+      latitude: log.latitude,
+      longitude: log.longitude,
+      location_name: log.attendanceLocation?.name || null,
+      location_address: log.location_address || log.attendanceLocation?.address || null,
       correction: log.correction ? { reason: log.correction.reason, review_note: log.correction.review_note, requested_by: log.correction.requestedBy.user_name } : null,
     })),
     server_time: now,

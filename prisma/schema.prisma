@@ -12,9 +12,11 @@ model VendorMaster {
   complaintCategories ComplaintCategoryMaster[]
   complaintExternalClients ComplaintExternalClient[]
   complaintSlaConfigs ComplaintSlaConfig[]
+  attendanceLocations AttendanceLocation[]
   fmRequirements FMRequirementMaster[]
   fmResponses FMRequirementResponse[]
   fmUploads FMRequirementUpload[]
+  employeeComplaints EmployeeComplaint[]
   leaveHolidays LeaveHoliday[]
   leaveWeeklyOffs LeaveWeeklyOff[]
   leaveRequests LeaveRequest[]
@@ -336,6 +338,9 @@ model UserMaster {
   complaintNotificationRecipientUser ComplaintNotification[] @relation("ComplaintNotificationRecipientUser")
   complaintSlaConfigUpdatedBy ComplaintSlaConfig[] @relation("ComplaintSlaConfigUpdatedBy")
   complaintActivityLogActor ComplaintActivityLog[] @relation("ComplaintActivityLogActor")
+  assignedAttendanceLocations UserAttendanceLocation[]
+  complaintsFiled EmployeeComplaint[] @relation("ComplaintOwner")
+  complaintsReviewed EmployeeComplaint[] @relation("ComplaintReviewer")
   leaveRequests LeaveRequest[] @relation("LeaveRequestOwner")
   leaveRequestsReviewed LeaveRequest[] @relation("LeaveRequestReviewer")
   leaveHolidaysCreated LeaveHoliday[] @relation("LeaveHolidayCreator")
@@ -350,6 +355,7 @@ model UserMaster {
   designation                                                                    String?
   user_contact                                                                   String                                         @unique
   user_email                                                                     String
+  personal_email                                                                 String?
   user_timezone                                                                  String
   password                                                                       String
   user_type_id                                                                   Int
@@ -358,7 +364,10 @@ model UserMaster {
   created_at                                                                     DateTime                                       @default(now())
   updated_at                                                                     DateTime                                       @updatedAt
   franchise_id                                                                   Int?
+  employee_type                                                                  String?                                        @default("permanent")
   employee_code                                                                  String?
+  contract_start_date                                                            DateTime?
+  contract_end_date                                                              DateTime?
   department                                                                     String?
   aadhar_no                                                                      String?
   pan_no                                                                         String?
@@ -369,6 +378,8 @@ model UserMaster {
   bank_account_holder_name                                                       String?
   bank_account_number                                                            String?
   bank_ifsc_code                                                                 String?
+  bank_name                                                                      String?
+  bank_document_file                                                             String?
   joining_date                                                                   DateTime?
   exit_date                                                                      DateTime?
   salary_rate_type                                                               String?
@@ -3681,6 +3692,8 @@ enum FranchiseDepartment {
 }
 
 model FranchiseMaster {
+  attendanceLocations AttendanceLocation[]
+  employeeComplaints EmployeeComplaint[]
   leaveHolidays LeaveHoliday[]
   leaveWeeklyOffs LeaveWeeklyOff[]
   leaveRequests LeaveRequest[]
@@ -6278,17 +6291,23 @@ model attendance {
   work_location   AttendanceWorkLocation?
   shift_minutes   Int?
   time_zone       String?
+  latitude        Float?
+  longitude       Float?
+  location_accuracy Float?
+  location_id     Int?
+  location_address String?        @db.VarChar(500)
   created_at      DateTime         @default(now())
   updated_at      DateTime         @updatedAt
 
   vendor    VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
   franchise FranchiseMaster?  @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
   user      UserMaster        @relation(fields: [user_id], references: [id], onDelete: Restrict)
+  attendanceLocation AttendanceLocation? @relation(fields: [location_id], references: [id], onDelete: SetNull)
   logs      attendance_logs[]
   breaks    attendance_breaks[]
   corrections attendance_corrections[]
 
-  @@unique([vendor_id, user_id, attendance_date])
+  @@index([vendor_id, user_id, attendance_date])
   @@index([vendor_id])
   @@index([franchise_id])
   @@index([user_id])
@@ -6308,6 +6327,11 @@ model attendance_logs {
   correction_id Int?
   before_values Json?
   after_values  Json?
+  latitude      Float?
+  longitude     Float?
+  location_accuracy Float?
+  location_id   Int?
+  location_address String?        @db.VarChar(500)
   created_at    DateTime         @default(now())
 
   attendance attendance       @relation(fields: [attendance_id], references: [id], onDelete: Restrict)
@@ -6315,6 +6339,7 @@ model attendance_logs {
   franchise  FranchiseMaster? @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
   user       UserMaster       @relation(fields: [user_id], references: [id], onDelete: Restrict)
   actor      UserMaster?       @relation("AttendanceActor", fields: [actor_id], references: [id], onDelete: Restrict)
+  attendanceLocation AttendanceLocation? @relation(fields: [location_id], references: [id], onDelete: SetNull)
   correction attendance_corrections? @relation(fields: [correction_id], references: [id], onDelete: Restrict)
 
   @@index([attendance_id])
@@ -7624,4 +7649,73 @@ enum ComplaintNotificationDeliveryStatus {
   SENT
   FAILED
   CHANNEL_UNAVAILABLE
+}
+
+model EmployeeComplaint {
+  id Int @id @default(autoincrement())
+  vendor_id Int
+  user_id Int
+  franchise_id Int?
+  subject String @db.VarChar(150)
+  category String @db.VarChar(100)
+  description String @db.VarChar(2000)
+  status String @default("PENDING") @db.VarChar(50)
+  admin_remarks String? @db.VarChar(1000)
+  reviewed_by Int?
+  reviewed_at DateTime?
+  attachment_key String?
+  attachment_name String?
+  attachment_mime String?
+  attachment_size Int?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  user UserMaster @relation("ComplaintOwner", fields: [user_id], references: [id], onDelete: Restrict)
+  franchise FranchiseMaster? @relation(fields: [franchise_id], references: [id], onDelete: Restrict)
+  reviewer UserMaster? @relation("ComplaintReviewer", fields: [reviewed_by], references: [id], onDelete: Restrict)
+
+  @@index([vendor_id, status])
+  @@index([user_id])
+  @@index([created_at])
+  @@map("employee_complaint")
+}
+
+model AttendanceLocation {
+  id            Int      @id @default(autoincrement())
+  vendor_id     Int
+  franchise_id  Int?
+  name          String   @db.VarChar(150)
+  location_type String   @default("OFFICE") @db.VarChar(50)
+  address       String   @db.VarChar(500)
+  latitude      Float
+  longitude     Float
+  radius_meters Int      @default(100)
+  is_active     Boolean  @default(true)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  vendor        VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Restrict)
+  franchise     FranchiseMaster?  @relation(fields: [franchise_id], references: [id], onDelete: SetNull)
+  userAssignments UserAttendanceLocation[]
+  attendanceRecords attendance[]
+  attendanceLogs attendance_logs[]
+
+  @@index([vendor_id])
+  @@index([is_active])
+  @@map("attendance_location")
+}
+
+model UserAttendanceLocation {
+  id          Int      @id @default(autoincrement())
+  user_id     Int
+  location_id Int
+  created_at  DateTime @default(now())
+
+  user        UserMaster         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  location    AttendanceLocation @relation(fields: [location_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, location_id], map: "uq_user_attendance_location")
+  @@index([user_id])
+  @@index([location_id])
+  @@map("user_attendance_location")
 }

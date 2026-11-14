@@ -76,6 +76,7 @@ import purchaseOrderRoutes from "./purchaseOrderRoutes/purchaseOrder.routes";
 import timeZoneRoutes from "./timeZone/timeZone.routes";
 import attendanceRoutes from "./attendance/attendance.routes";
 import leaveRoutes from "./leaves/leaves.routes";
+import complaintRoutes from "./complaints/complaint.routes";
   const router = Router();
 
   router.use("/dashboard", DashboardRouter);
@@ -169,6 +170,7 @@ router.use("/client-complaints", clientComplaintsRouter);
 router.use("/time-zones", timeZoneRoutes);
 router.use("/attendance", attendanceRoutes);
 router.use("/leaves", leaveRoutes);
+router.use("/complaints", complaintRoutes);
 
 router.use("/cadbid", cadbidRoutes);
 router.use("/furnixcrm-mobile-app", mobileAppRouter);
