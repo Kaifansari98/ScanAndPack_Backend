@@ -19,6 +19,8 @@ interface LeadsOverviewReportRow {
   current_stage: string;
   site_type: string;
   source: string;
+  mrp_value: number | null;
+  booking_value: number | null;
   furniture_type: string;
   furniture_structure: string;
   instance: string;
@@ -29,6 +31,7 @@ interface LeadsOverviewReportRow {
   handle_selection: string;
   designer_assigned: string;
   supervisor_assigned: string;
+  activity_status?: string;
 }
 
 interface TechCheckStageReportRow {
@@ -439,6 +442,9 @@ export const getLeadsOverviewReportData = async (
       archetech_name: true,
       archetech_number: true,
       activity_status: true,
+      mrp_value: true,
+      total_project_amount: true,
+      booking_amount: true,
       statusType: {
         select: {
           type: true,
@@ -572,6 +578,8 @@ export const getLeadsOverviewReportData = async (
           current_stage: lead.statusType?.type ?? "-",
           site_type: lead.siteType?.type ?? "-",
           source: lead.source?.type ?? "-",
+          mrp_value: lead.mrp_value ?? null,
+          booking_value: lead.total_project_amount ?? lead.booking_amount ?? null,
           furniture_type: defaultFurnitureTypes.join(", ") || "-",
           furniture_structure: defaultFurnitureStructures.join(", ") || "-",
           instance: "-",
@@ -620,6 +628,8 @@ export const getLeadsOverviewReportData = async (
         current_stage: lead.statusType?.type ?? "-",
         site_type: lead.siteType?.type ?? "-",
         source: lead.source?.type ?? "-",
+        mrp_value: lead.mrp_value ?? null,
+        booking_value: lead.total_project_amount ?? lead.booking_amount ?? null,
         furniture_type: instance.productType?.type ?? "-",
         furniture_structure: instance.productStructure?.type ?? "-",
         instance:
