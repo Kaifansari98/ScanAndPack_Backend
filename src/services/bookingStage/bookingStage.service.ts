@@ -6495,8 +6495,58 @@ export class BookingStageService {
           }
         : null;
 
+      const toString = (value: unknown) =>
+        typeof value === "string" ? value.trim() : "";
+      const searchConditions: any[] = [];
+
+      const nameFilter = toString(filters.filter_name);
+      if (nameFilter) {
+        searchConditions.push({
+          OR: [
+            { firstname: { contains: nameFilter, mode: "insensitive" } },
+            { lastname: { contains: nameFilter, mode: "insensitive" } },
+            { leads_name: { contains: nameFilter, mode: "insensitive" } },
+          ],
+        });
+      }
+
+      const globalSearch = toString(filters.global_search);
+      if (globalSearch) {
+        searchConditions.push({
+          OR: [
+            { firstname: { contains: globalSearch, mode: "insensitive" } },
+            { lastname: { contains: globalSearch, mode: "insensitive" } },
+            { leads_name: { contains: globalSearch, mode: "insensitive" } },
+            { lead_code: { contains: globalSearch, mode: "insensitive" } },
+            { contact: { contains: globalSearch, mode: "insensitive" } },
+          ],
+        });
+      }
+
+      const contactFilter = toString(filters.contact);
+      if (contactFilter) {
+        searchConditions.push({
+          contact: { contains: contactFilter, mode: "insensitive" },
+        });
+      }
+
+      const emailFilter = toString(filters.email);
+      if (emailFilter) {
+        searchConditions.push({
+          email: { contains: emailFilter, mode: "insensitive" },
+        });
+      }
+
+      const andClauses: any[] = [];
+      if (storeCondition) {
+        andClauses.push(storeCondition);
+      }
+      if (searchConditions.length > 0) {
+        andClauses.push(...searchConditions);
+      }
+
       if (!isOverall && normalizedUserType === "sales-executive") {
-        const userCondition: any = {
+        andClauses.push({
           OR: [
             { final_assigned_leads: userId },
             {
@@ -6506,18 +6556,9 @@ export class BookingStageService {
               ],
             },
           ],
-        };
-
-        if (storeCondition) {
-          pendingOnlineWhere.AND = [
-            storeCondition,
-            userCondition,
-          ];
-        } else {
-          Object.assign(pendingOnlineWhere, userCondition);
-        }
+        });
       } else if (!isOverall && isCaller && userId) {
-        const callerCondition: any = {
+        andClauses.push({
           OR: [
             { assign_to: userId },
             { final_assigned_leads: userId },
@@ -6525,17 +6566,11 @@ export class BookingStageService {
             { online_lead_call_log: { some: { telecaller_id: userId } } },
             { online_lead_history: { some: { created_by: userId } } },
           ],
-        };
-        if (storeCondition) {
-          pendingOnlineWhere.AND = [
-            storeCondition,
-            callerCondition,
-          ];
-        } else {
-          Object.assign(pendingOnlineWhere, callerCondition);
-        }
-      } else if (storeCondition) {
-        Object.assign(pendingOnlineWhere, storeCondition);
+        });
+      }
+
+      if (andClauses.length > 0) {
+        pendingOnlineWhere.AND = andClauses;
       }
 
       pendingOnlineLeads = await prisma.online_leads.findMany({
@@ -6762,7 +6797,25 @@ export class BookingStageService {
     };
 
     const combinedLeads = [...formattedPendingLeads, ...filteredProcessed];
+
+    const searchKeyword = (filters.global_search || filters.filter_name || "").trim().toLowerCase();
+
     const finalLeads = combinedLeads.sort((a: any, b: any) => {
+      if (searchKeyword) {
+        const getFullName = (lead: any) => `${lead.firstname || ""} ${lead.lastname || ""}`.trim().toLowerCase();
+        const aName = getFullName(a);
+        const bName = getFullName(b);
+        const aStarts = aName.startsWith(searchKeyword);
+        const bStarts = bName.startsWith(searchKeyword);
+        if (aStarts && !bStarts) return -1;
+        if (!aStarts && bStarts) return 1;
+
+        const aIncludes = aName.includes(searchKeyword);
+        const bIncludes = bName.includes(searchKeyword);
+        if (aIncludes && !bIncludes) return -1;
+        if (!aIncludes && bIncludes) return 1;
+      }
+
       if (isOnlineLeadFeatureEnabled) {
         const isPendingA =
           a.approval_status === "PENDING" ||
