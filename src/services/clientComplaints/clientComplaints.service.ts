@@ -104,6 +104,14 @@ function text(
   return trimmed;
 }
 
+// Optional Google Maps (or any http/https) link to the site.
+function mapLink(value: unknown) {
+  const link = text(value, "Map link", 1000);
+  if (link && !/^https?:\/\/\S+$/i.test(link))
+    throw new ComplaintError("Enter a valid map link starting with http:// or https://.");
+  return link;
+}
+
 function mobile(value: unknown, label: string, required = false) {
   const raw = text(value, label, 40, required);
   if (raw === null) return null;
@@ -216,6 +224,7 @@ function leadForComplaintQuery(vendorId: number, leadCode: string) {
       alt_contact_no: true,
       email: true,
       site_address: true,
+      site_map_link: true,
       usable_handover_completed_at: true,
       final_handover_marked_at: true,
       franchise_id: true,
@@ -351,6 +360,7 @@ export async function lookupLeadForComplaint(actor: ComplaintActor, rawLeadCode:
     alternate_mobile: lead.alt_contact_no,
     email: lead.email,
     site_address: lead.site_address,
+    site_map_link: lead.site_map_link?.trim() || null,
     usable_handover_date: toDateOnly(lead.usable_handover_completed_at),
     final_handover_date: toDateOnly(lead.final_handover_marked_at),
     products: products.map((p) => ({
@@ -569,6 +579,7 @@ export async function registerComplaint(
           client_alternate_mobile: snapshot.alternateMobile,
           client_email: snapshot.email,
           site_address: snapshot.siteAddress,
+          site_map_link: snapshot.siteMapLink,
           city: externalContext?.city ?? null,
           product_type: snapshot.productType,
           category_id: category.id,
@@ -689,6 +700,7 @@ async function resolveLeadContext(
   const finalHandoverDate = lead.final_handover_marked_at;
 
   const siteAddress = lead.site_address?.trim() || text(body.site_address, "Site address", 2000, true)!;
+  const siteMapLink = lead.site_map_link?.trim() || mapLink(body.site_map_link);
   const assignees = await complaintAssigneeOptions(actor.vendorId, lead);
   const siteSupervisorId = pickAssignee(assignees.siteSupervisors, body.site_supervisor_id, "Site supervisor");
   const headSiteSupervisorId = pickAssignee(
@@ -716,7 +728,8 @@ async function resolveLeadContext(
     alternateMobile: lead.alt_contact_no,
     email: lead.email,
     siteAddress,
-    productType: product ? `${product.productType.type} – ${product.title}` : null,
+    siteMapLink,
+    productType: product ?`${product.productType.type} – ${product.title}` : null,
     usableHandoverDate,
     finalHandoverDate,
     siteSupervisorId,
@@ -734,6 +747,7 @@ async function resolveExternalContext(actor: ComplaintActor, body: Record<string
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
     throw new ComplaintError("Enter a valid email address.");
   const siteAddress = text(body.site_address, "Complete site address", 2000, true)!;
+  const siteMapLink = mapLink(body.site_map_link);
   const city = text(body.city, "Store city", 120, true)!;
   // A linked existing client keeps the city already on record.
   if (!existingClientId && !(await storeCities(actor.vendorId)).some((c) => c.name === city))
@@ -765,6 +779,7 @@ async function resolveExternalContext(actor: ComplaintActor, body: Record<string
     alternateMobile,
     email,
     siteAddress,
+    siteMapLink,
     city,
     productType,
     installationDate,

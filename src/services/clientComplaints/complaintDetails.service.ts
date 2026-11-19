@@ -47,6 +47,7 @@ export async function getComplaintDetail(actor: ComplaintActor, id: number) {
       client_alternate_mobile: true,
       client_email: true,
       site_address: true,
+      site_map_link: true,
       city: true,
       product_type: true,
       component: true,

@@ -4753,6 +4753,7 @@ export const ComplaintMasterScalarFieldEnum = {
   client_alternate_mobile: 'client_alternate_mobile',
   client_email: 'client_email',
   site_address: 'site_address',
+  site_map_link: 'site_map_link',
   city: 'city',
   product_type: 'product_type',
   component: 'component',

@@ -6605,6 +6605,7 @@ model ComplaintMaster {
   client_alternate_mobile String? @db.VarChar(40)
   client_email String? @db.VarChar(320)
   site_address String @db.VarChar(2000)
+  site_map_link String? @db.VarChar(1000)
   city String? @db.VarChar(120)
   product_type String? @db.VarChar(200)
   component ComplaintComponent?
