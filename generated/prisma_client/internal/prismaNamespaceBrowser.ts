@@ -4839,6 +4839,7 @@ export const ComplaintAttachmentScalarFieldEnum = {
   inspection_report_id: 'inspection_report_id',
   execution_id: 'execution_id',
   decision_id: 'decision_id',
+  quotation_id: 'quotation_id',
   created_at: 'created_at'
 } as const
 
@@ -4877,6 +4878,7 @@ export const ComplaintVisitScalarFieldEnum = {
   status: 'status',
   charge_mode: 'charge_mode',
   standard_fee: 'standard_fee',
+  pay_at_visit: 'pay_at_visit',
   currency: 'currency',
   assigned_ss_id: 'assigned_ss_id',
   team_details: 'team_details',
@@ -4916,6 +4918,7 @@ export const ComplaintInspectionReportScalarFieldEnum = {
   expected_completion_date: 'expected_completion_date',
   additional_visit_required: 'additional_visit_required',
   further_approval_required: 'further_approval_required',
+  pending_work: 'pending_work',
   submitted_by: 'submitted_by',
   submitted_at: 'submitted_at'
 } as const
@@ -4960,6 +4963,7 @@ export const ComplaintQuotationScalarFieldEnum = {
   hss_approval_decision_id: 'hss_approval_decision_id',
   client_response_decision_id: 'client_response_decision_id',
   shared_at: 'shared_at',
+  payment_at_resolution: 'payment_at_resolution',
   created_by: 'created_by',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -5115,6 +5119,7 @@ export const ComplaintClosureScalarFieldEnum = {
   cycle_id: 'cycle_id',
   status: 'status',
   client_confirmation_status: 'client_confirmation_status',
+  client_rating: 'client_rating',
   client_confirmation_decision_id: 'client_confirmation_decision_id',
   no_response_reason: 'no_response_reason',
   completion_verified_by: 'completion_verified_by',

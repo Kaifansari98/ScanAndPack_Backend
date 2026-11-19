@@ -6606,7 +6606,7 @@ model ComplaintMaster {
   site_address String @db.VarChar(2000)
   city String? @db.VarChar(120)
   product_type String? @db.VarChar(200)
-  component ComplaintComponent
+  component ComplaintComponent?
   category_id Int
   description String @db.Text
   additional_remarks String? @db.Text
@@ -6762,9 +6762,12 @@ model ComplaintAttachment {
   inspection_report_id Int?
   execution_id Int?
   decision_id Int?
+  quotation_id Int?
   created_at DateTime @default(now())
 
   uploadedBy UserMaster? @relation("ComplaintAttachmentUploadedBy", fields: [actor_user_id, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+
+  quotation ComplaintQuotation? @relation("ComplaintAttachmentQuotation", fields: [quotation_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
 
   visit ComplaintVisit? @relation("ComplaintAttachmentVisit", fields: [visit_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
 
@@ -6836,6 +6839,8 @@ model ComplaintVisit {
   status ComplaintVisitStatus
   charge_mode ComplaintVisitChargeMode @default(CHARGEABLE)
   standard_fee Decimal @default(800) @db.Decimal(12, 2)
+  // The client pays the visiting charge in cash to the team; it is recorded before completion.
+  pay_at_visit Boolean @default(false)
   currency String @default("INR") @db.VarChar(3)
   assigned_ss_id Int?
   team_details String? @db.VarChar(2000)
@@ -6898,6 +6903,8 @@ model ComplaintInspectionReport {
   expected_completion_date DateTime? @db.Date
   additional_visit_required Boolean @default(false)
   further_approval_required Boolean @default(false)
+  // Required on new reports; older reports have none.
+  pending_work String? @db.Text
   submitted_by Int
   submitted_at DateTime @default(now())
   @@unique([visit_id])
@@ -6960,6 +6967,8 @@ model ComplaintQuotation {
   hss_approval_decision_id Int?
   client_response_decision_id Int?
   shared_at DateTime?
+  // The client accepted and pays the repair amount when the work is resolved.
+  payment_at_resolution Boolean @default(false)
   created_by Int
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -6978,6 +6987,7 @@ model ComplaintQuotation {
   items ComplaintQuotationItem[] @relation("ComplaintQuotationItemQuotation")
   charges ComplaintCharge[] @relation("ComplaintChargeQuotation")
   executions ComplaintExecution[] @relation("ComplaintExecutionQuotation")
+  attachments ComplaintAttachment[] @relation("ComplaintAttachmentQuotation")
   activityLogs ComplaintActivityLog[] @relation("ComplaintActivityLogQuotation")
 
 }
@@ -7221,6 +7231,8 @@ model ComplaintClosure {
 
   status ComplaintClosureStatus @default(PENDING)
   client_confirmation_status ComplaintClientConfirmationStatus @default(PENDING)
+  // Client's 1–5 star feedback, recorded with their confirmation.
+  client_rating Int?
   client_confirmation_decision_id Int?
   no_response_reason String? @db.VarChar(2000)
   completion_verified_by Int?
@@ -7477,6 +7489,8 @@ enum ComplaintDecisionOutcome {
 enum ComplaintVisitPurpose {
   INSPECTION
   REPAIR
+  // Installation team inspects and fixes on the spot; the complaint skips the quotation step.
+  INSTALLATION_TEAM
 }
 
 enum ComplaintVisitStatus {

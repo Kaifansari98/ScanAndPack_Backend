@@ -138,7 +138,7 @@ export async function ensureDefaultCategories(vendorId: number, actorId: number)
 
 export async function getComplaintMeta(actor: ComplaintActor) {
   await ensureDefaultCategories(actor.vendorId, actor.actorId);
-  const [categories, productTypes, vendor] = await Promise.all([
+  const [categories, productTypes, vendor, masterCities, usedCities] = await Promise.all([
     prisma.complaintCategoryMaster.findMany({
       where: { vendor_id: actor.vendorId, is_active: true },
       orderBy: [{ sort_order: "asc" }, { name: "asc" }],
@@ -153,9 +153,23 @@ export async function getComplaintMeta(actor: ComplaintActor) {
       where: { id: actor.vendorId },
       select: { complaint_visit_fee: true },
     }),
+    prisma.cityMaster.findMany({ select: { name: true } }),
+    prisma.complaintExternalClient.findMany({
+      where: { vendor_id: actor.vendorId },
+      distinct: ["city"],
+      select: { city: true },
+    }),
   ]);
+  // City suggestions: the city master plus cities already used on complaints.
+  const cities = new Map<string, string>();
+  for (const name of [...masterCities.map((c) => c.name), ...usedCities.map((c) => c.city)]) {
+    const clean = name?.trim();
+    if (clean && !cities.has(clean.toLowerCase()))
+      cities.set(clean.toLowerCase(), clean.replace(/\b\w/g, (ch) => ch.toUpperCase()));
+  }
   return {
     categories,
+    cities: [...cities.values()].sort((x, y) => x.localeCompare(y)),
     product_types: productTypes,
     components: Object.values(ComplaintComponent),
     can_register: canRegisterComplaints(actor.role),
@@ -448,9 +462,6 @@ export async function registerComplaint(
   if (mode !== "CRM_LEAD" && mode !== "EXTERNAL")
     throw new ComplaintError("Choose whether the client has a CRM lead code.");
 
-  const component = body.component as ComplaintComponent;
-  if (!Object.values(ComplaintComponent).includes(component))
-    throw new ComplaintError("Select the affected component.");
   const categoryId = optionalId(body.category_id, "Complaint category");
   if (!categoryId) throw new ComplaintError("Select a complaint category.");
   const description = text(body.description, "Issue description", 10000, true)!;
@@ -473,7 +484,7 @@ export async function registerComplaint(
   // never uploads files.
   let leadContext: Awaited<ReturnType<typeof resolveLeadContext>> | null = null;
   let externalContext: Awaited<ReturnType<typeof resolveExternalContext>> | null = null;
-  if (mode === "CRM_LEAD") leadContext = await resolveLeadContext(actor, body, component);
+  if (mode === "CRM_LEAD") leadContext = await resolveLeadContext(actor, body);
   else externalContext = await resolveExternalContext(actor, body);
 
   const uploaded: { key: string; file: ComplaintUpload; media: "PHOTO" | "VIDEO" }[] = [];
@@ -557,7 +568,6 @@ export async function registerComplaint(
           site_address: snapshot.siteAddress,
           city: externalContext?.city ?? null,
           product_type: snapshot.productType,
-          component,
           category_id: category.id,
           description,
           additional_remarks: additionalRemarks,
@@ -654,7 +664,6 @@ export async function registerComplaint(
 async function resolveLeadContext(
   actor: ComplaintActor,
   body: Record<string, unknown>,
-  component: ComplaintComponent,
 ) {
   const leadCode = text(body.lead_code, "Lead code", 100, true)!;
   const lead = await leadForComplaintQuery(actor.vendorId, leadCode);
@@ -671,11 +680,10 @@ async function resolveLeadContext(
   const product = instanceId ? products.find((p) => p.id === instanceId) : null;
   if (instanceId && !product) throw new ComplaintError("The selected product does not belong to this lead.");
 
-  // Lead dates are authoritative; staff fill them only when the CRM has none.
-  const usableHandoverDate =
-    lead.usable_handover_completed_at ?? parseDate(body.usable_handover_date, "Usable handover date", true);
-  const finalHandoverDate =
-    lead.final_handover_marked_at ?? parseDate(body.final_handover_date, "Final handover date", true);
+  // Handover dates come from the lead's installation stage; a lead that has not
+  // reached handover yet has none.
+  const usableHandoverDate = lead.usable_handover_completed_at;
+  const finalHandoverDate = lead.final_handover_marked_at;
 
   const siteAddress = lead.site_address?.trim() || text(body.site_address, "Site address", 2000, true)!;
   const assignees = await complaintAssigneeOptions(actor.vendorId, lead);
@@ -691,7 +699,7 @@ async function resolveLeadContext(
       vendor_id: actor.vendorId,
       lead_id: lead.id,
       status: { notIn: FINISHED_STATUSES },
-      ...(product ? { instance_id: product.id } : { component }),
+      ...(product ? { instance_id: product.id } : {}),
     },
   });
 
@@ -719,7 +727,7 @@ async function resolveExternalContext(actor: ComplaintActor, body: Record<string
   const clientName = text(body.client_name, "Client name", 200, true)!;
   const clientMobile = mobile(body.client_mobile, "Mobile number", true)!;
   const alternateMobile = mobile(body.client_alternate_mobile, "Alternate number");
-  const email = text(body.client_email, "Email address", 320);
+  const email = text(body.client_email, "Email address", 320, true)!;
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
     throw new ComplaintError("Enter a valid email address.");
   const siteAddress = text(body.site_address, "Complete site address", 2000, true)!;
@@ -837,4 +845,33 @@ export async function listComplaints(actor: ComplaintActor, query: Record<string
     limit,
     status_counts: Object.fromEntries(grouped.map((g) => [g.status, g._count._all])),
   };
+}
+
+// Open complaint tasks assigned to this user, shown under My Tasks.
+export async function myComplaintTasks(actor: ComplaintActor) {
+  const tasks = await prisma.complaintTask.findMany({
+    where: {
+      vendor_id: actor.vendorId,
+      assigned_to: actor.actorId,
+      status: { in: ["open", "in_progress"] },
+      cycle: { complaint: { status: { notIn: FINISHED_STATUSES } } },
+    },
+    orderBy: [{ due_date: "asc" }, { id: "asc" }],
+    take: 200,
+    select: {
+      id: true,
+      task_type: true,
+      status: true,
+      due_date: true,
+      remark: true,
+      cycle: {
+        select: {
+          complaint: {
+            select: { id: true, complaint_code: true, client_name: true, client_mobile: true, status: true, site_address: true },
+          },
+        },
+      },
+    },
+  });
+  return tasks.map(({ cycle, ...task }) => ({ ...task, complaint: cycle.complaint }));
 }

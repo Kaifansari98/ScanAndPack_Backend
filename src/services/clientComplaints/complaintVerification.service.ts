@@ -36,7 +36,6 @@ const DECISION_OUTCOMES = [
   "MORE_INFORMATION_REQUIRED",
   "REMOTE_RESOLUTION",
   "REJECTED",
-  "ON_HOLD",
 ] as const satisfies readonly ComplaintDecisionOutcome[];
 type VerificationOutcome = (typeof DECISION_OUTCOMES)[number];
 
@@ -46,7 +45,6 @@ const OUTCOME_STATUS: Record<VerificationOutcome, ComplaintStatus> = {
   // The client still has to confirm the remote fix before HO can close it.
   REMOTE_RESOLUTION: "AWAITING_CLIENT_CONFIRMATION",
   REJECTED: "REJECTED",
-  ON_HOLD: "ON_HOLD",
 };
 
 // The only status moves this stage may make. Anything else is refused.
@@ -57,8 +55,10 @@ const STAGE_TRANSITIONS: Record<
   START_REVIEW: ["NEW", "REOPENED"],
   INFORMATION_RECEIVED: ["MORE_INFORMATION_REQUIRED"],
   RESUME: ["ON_HOLD"],
-  DECIDE: ["UNDER_VERIFICATION"],
+  // HO can decide straight from a new complaint; that also starts verification.
+  DECIDE: ["NEW", "REOPENED", "UNDER_VERIFICATION"],
 };
+const NOT_YET_STARTED: ComplaintStatus[] = ["NEW", "REOPENED"];
 
 // Priority and ownership stay editable until the complaint is finished.
 const FINISHED: ComplaintStatus[] = ["CLOSED", "REJECTED", "CANCELLED"];
@@ -135,7 +135,6 @@ export async function decideVerification(actor: ComplaintActor, id: number, body
     MORE_INFORMATION_REQUIRED: "Details of the missing information",
     REMOTE_RESOLUTION: "Remarks",
     REJECTED: "Rejection reason",
-    ON_HOLD: "Reason for hold",
   };
   const remarks = remarksOf(body.remarks, label[outcome])!;
   const remoteInstructions =
@@ -163,6 +162,13 @@ export async function decideVerification(actor: ComplaintActor, id: number, body
         ? { duplicate_reviewed_by: actor.actorId, duplicate_reviewed_at: now, duplicate_review_remarks: duplicateRemarks.slice(0, 2000) }
         : {}),
     });
+    // Keep the history the same as a separate start followed by a decision.
+    if (NOT_YET_STARTED.includes(complaint.status))
+      await log(tx, actor, complaint, {
+        action: "VERIFICATION_STARTED",
+        from_status: complaint.status,
+        to_status: "UNDER_VERIFICATION",
+      });
     const decision = await tx.complaintDecision.create({
       data: {
         vendor_id: actor.vendorId,
@@ -189,7 +195,7 @@ export async function decideVerification(actor: ComplaintActor, id: number, body
       });
     await log(tx, actor, complaint, {
       action: `VERIFICATION_${outcome}`,
-      from_status: complaint.status,
+      from_status: NOT_YET_STARTED.includes(complaint.status) ? "UNDER_VERIFICATION" : complaint.status,
       to_status: toStatus,
       remarks,
       decision_id: decision.id,
