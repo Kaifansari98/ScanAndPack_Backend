@@ -23,6 +23,7 @@ import {
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { onFactoryRequestReady } from "../../clientComplaints/complaintExecution.service";
 import {
   sendSmallOrderDispatchedForInstallationEmail,
   sendSmallOrderDispatchedEmail,
@@ -6833,6 +6834,13 @@ export class UnderInstallationStageService {
         taskId: closedTask?.id,
       };
     });
+
+    // A client complaint waiting on this request moves on to Start Resolution.
+    try {
+      await onFactoryRequestReady(misc_id, ready_by);
+    } catch (error) {
+      console.error("[markMiscTaskReady] complaint update failed", error);
+    }
 
     await UnderInstallationStageService.notifyMiscTaskReady({
       vendor_id, lead_id, misc_id, ready_by, baseUrl, taskId: result.taskId,

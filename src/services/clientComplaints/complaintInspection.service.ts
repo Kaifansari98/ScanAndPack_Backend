@@ -181,6 +181,18 @@ export async function submitInspection(
     pending_work: remarksOf(body.pending_work, "Pending work")!.slice(0, 4000),
   };
   const materials = materialRequired ? parseMaterials(body.materials) : [];
+  // Material for a CRM lead goes to the factory as a Miscellaneous request.
+  let miscTypeId: number | null = null;
+  if (materialRequired && complaint.lead_id) {
+    miscTypeId = Number(body.misc_type_id);
+    const miscType = Number.isSafeInteger(miscTypeId)
+      ? await prisma.miscellaneousTypeMaster.findFirst({
+          where: { id: miscTypeId, vendor_id: actor.vendorId, status: "active" },
+          select: { id: true },
+        })
+      : null;
+    if (!miscType) throw new ComplaintError("Select the miscellaneous type for the factory request.");
+  }
   if (files.photos.length === 0) throw new ComplaintError("Add at least one damage photograph.");
   const checked = classifyUploads([...files.photos, ...files.videos, ...files.documents], MAX_INSPECTION_FILES);
   const uploaded = await uploadAll(actor, checked);
@@ -198,6 +210,7 @@ export async function submitInspection(
           cycle_id: complaint.current_cycle_id,
           visit_id: visit.id,
           submitted_by: actor.actorId,
+          misc_type_id: miscTypeId,
           ...report,
         },
       });

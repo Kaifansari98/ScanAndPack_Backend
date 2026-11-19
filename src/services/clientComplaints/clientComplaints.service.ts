@@ -136,9 +136,18 @@ export async function ensureDefaultCategories(vendorId: number, actorId: number)
   });
 }
 
+// The vendor's store cities, in their configured order.
+function storeCities(vendorId: number) {
+  return prisma.storeCityMaster.findMany({
+    where: { vendor_id: vendorId, is_active: true },
+    orderBy: [{ sort_order: "asc" }, { name: "asc" }],
+    select: { name: true },
+  });
+}
+
 export async function getComplaintMeta(actor: ComplaintActor) {
   await ensureDefaultCategories(actor.vendorId, actor.actorId);
-  const [categories, productTypes, vendor, masterCities, usedCities] = await Promise.all([
+  const [categories, productTypes, vendor, cities, miscTypes] = await Promise.all([
     prisma.complaintCategoryMaster.findMany({
       where: { vendor_id: actor.vendorId, is_active: true },
       orderBy: [{ sort_order: "asc" }, { name: "asc" }],
@@ -153,23 +162,17 @@ export async function getComplaintMeta(actor: ComplaintActor) {
       where: { id: actor.vendorId },
       select: { complaint_visit_fee: true },
     }),
-    prisma.cityMaster.findMany({ select: { name: true } }),
-    prisma.complaintExternalClient.findMany({
-      where: { vendor_id: actor.vendorId },
-      distinct: ["city"],
-      select: { city: true },
+    storeCities(actor.vendorId),
+    prisma.miscellaneousTypeMaster.findMany({
+      where: { vendor_id: actor.vendorId, status: "active" },
+      orderBy: { name: "asc" },
+      select: { id: true, name: true },
     }),
   ]);
-  // City suggestions: the city master plus cities already used on complaints.
-  const cities = new Map<string, string>();
-  for (const name of [...masterCities.map((c) => c.name), ...usedCities.map((c) => c.city)]) {
-    const clean = name?.trim();
-    if (clean && !cities.has(clean.toLowerCase()))
-      cities.set(clean.toLowerCase(), clean.replace(/\b\w/g, (ch) => ch.toUpperCase()));
-  }
   return {
     categories,
-    cities: [...cities.values()].sort((x, y) => x.localeCompare(y)),
+    cities: cities.map((c) => c.name),
+    misc_types: miscTypes,
     product_types: productTypes,
     components: Object.values(ComplaintComponent),
     can_register: canRegisterComplaints(actor.role),
@@ -731,7 +734,10 @@ async function resolveExternalContext(actor: ComplaintActor, body: Record<string
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
     throw new ComplaintError("Enter a valid email address.");
   const siteAddress = text(body.site_address, "Complete site address", 2000, true)!;
-  const city = text(body.city, "City", 120, true)!;
+  const city = text(body.city, "Store city", 120, true)!;
+  // A linked existing client keeps the city already on record.
+  if (!existingClientId && !(await storeCities(actor.vendorId)).some((c) => c.name === city))
+    throw new ComplaintError("Select the store city from the list.");
   const productType = text(body.product_type, "Product type", 200, true)!;
   const installationDate = parseDate(body.installation_date, "Installation date");
 

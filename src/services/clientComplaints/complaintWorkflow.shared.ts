@@ -56,6 +56,8 @@ export async function loadComplaint(actor: ComplaintActor, id: number) {
       assigned_ss_id: true,
       assigned_hss_id: true,
       current_cycle_id: true,
+      lead_id: true,
+      account_id: true,
       lead: { select: { franchise_id: true } },
     },
   });

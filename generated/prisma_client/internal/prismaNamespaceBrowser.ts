@@ -319,7 +319,8 @@ export const ModelName = {
   ComplaintActivityLog: 'ComplaintActivityLog',
   EmployeeComplaint: 'EmployeeComplaint',
   AttendanceLocation: 'AttendanceLocation',
-  UserAttendanceLocation: 'UserAttendanceLocation'
+  UserAttendanceLocation: 'UserAttendanceLocation',
+  StoreCityMaster: 'StoreCityMaster'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -4919,6 +4920,7 @@ export const ComplaintInspectionReportScalarFieldEnum = {
   additional_visit_required: 'additional_visit_required',
   further_approval_required: 'further_approval_required',
   pending_work: 'pending_work',
+  misc_type_id: 'misc_type_id',
   submitted_by: 'submitted_by',
   submitted_at: 'submitted_at'
 } as const
@@ -5248,6 +5250,18 @@ export const UserAttendanceLocationScalarFieldEnum = {
 } as const
 
 export type UserAttendanceLocationScalarFieldEnum = (typeof UserAttendanceLocationScalarFieldEnum)[keyof typeof UserAttendanceLocationScalarFieldEnum]
+
+
+export const StoreCityMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  name: 'name',
+  sort_order: 'sort_order',
+  is_active: 'is_active',
+  created_at: 'created_at'
+} as const
+
+export type StoreCityMasterScalarFieldEnum = (typeof StoreCityMasterScalarFieldEnum)[keyof typeof StoreCityMasterScalarFieldEnum]
 
 
 export const SortOrder = {

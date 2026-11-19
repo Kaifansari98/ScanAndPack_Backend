@@ -250,6 +250,7 @@ model VendorMaster {
 
   @@index([state_id])
   @@index([time_zone_id])
+  storeCities                                  StoreCityMaster[]
 }
 
 model VendorAddress {
@@ -6905,6 +6906,8 @@ model ComplaintInspectionReport {
   further_approval_required Boolean @default(false)
   // Required on new reports; older reports have none.
   pending_work String? @db.Text
+  // Miscellaneous type for the factory request raised when material is required.
+  misc_type_id Int?
   submitted_by Int
   submitted_at DateTime @default(now())
   @@unique([visit_id])
@@ -7732,4 +7735,18 @@ model UserAttendanceLocation {
   @@index([user_id])
   @@index([location_id])
   @@map("user_attendance_location")
+}
+
+// Store cities offered when registering a complaint, per vendor.
+model StoreCityMaster {
+  id         Int          @id @default(autoincrement())
+  vendor_id  Int
+  name       String       @db.VarChar(120)
+  sort_order Int          @default(0)
+  is_active  Boolean      @default(true)
+  created_at DateTime     @default(now())
+  vendor     VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@unique([vendor_id, name])
+  @@index([vendor_id, is_active, sort_order])
 }
