@@ -74,7 +74,12 @@ export async function preparePayment(
     throw new ComplaintError(`The amount exceeds the outstanding ₹${outstanding.toFixed(2)}.`);
   const method = body.method as ComplaintPaymentMethod;
   if (!Object.values(ComplaintPaymentMethod).includes(method)) throw new ComplaintError("Select the payment method.");
-  const reference = remarksOf(body.transaction_reference, "Transaction reference")!.slice(0, 255);
+  // Cash has no transaction reference; the receipt photo is the proof.
+  const reference = (
+    method === "CASH"
+      ? (remarksOf(body.transaction_reference, "Transaction reference", false) ?? "Cash")
+      : remarksOf(body.transaction_reference, "Transaction reference")!
+  ).slice(0, 255);
   const paymentDate = dateOnly(body.payment_date, "Payment date", { required: true, notFuture: true })!;
   if (proofs.length !== 1) throw new ComplaintError("Attach one payment proof (photo or PDF).");
   const uploaded = await uploadAll(actor, classifyUploads(proofs, 1, false));
@@ -82,6 +87,38 @@ export async function preparePayment(
 }
 
 export type PreparedPayment = Awaited<ReturnType<typeof preparePayment>>;
+
+// Cash the client paid to the visiting team, recorded with the report that
+// follows the visit (inspection report, or the completion report for an
+// installation team visit). Returns null when no payment was sent.
+export async function prepareVisitCash(
+  actor: ComplaintActor,
+  complaint: LoadedComplaint,
+  raw: unknown,
+  proofs: ComplaintUpload[],
+  visitId?: number,
+) {
+  if (!raw || typeof raw !== "object") return null;
+  const charge = await prisma.complaintCharge.findFirst({
+    where: {
+      vendor_id: actor.vendorId,
+      complaint_id: complaint.id,
+      cycle_id: complaint.current_cycle_id,
+      charge_type: "VISIT",
+      status: "OPEN",
+      visit: { pay_at_visit: true, ...(visitId ? { id: visitId } : {}) },
+    },
+    orderBy: { id: "desc" },
+    select: { id: true },
+  });
+  if (!charge) throw new ComplaintError("There is no visiting charge to collect for this visit.", 409);
+  const balance = await chargeBalance(prisma, charge.id);
+  if (balance.outstanding <= 0) throw new ComplaintError("The visiting charge is already paid.", 409);
+  const prepared = await preparePayment(actor, raw as Record<string, unknown>, proofs, balance.outstanding);
+  return { charge: balance.charge, prepared };
+}
+
+export type VisitCash = NonNullable<Awaited<ReturnType<typeof prepareVisitCash>>>;
 
 // Stores the proof, the payment and its allocation to one charge.
 export async function insertPaymentTx(

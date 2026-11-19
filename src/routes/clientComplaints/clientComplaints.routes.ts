@@ -113,6 +113,7 @@ router.post(
     { name: "photos", maxCount: 15 },
     { name: "videos", maxCount: 5 },
     { name: "documents", maxCount: 5 },
+    { name: "payment_proof", maxCount: 1 },
   ]),
   controller.inspection,
 );
@@ -150,6 +151,7 @@ router.post(
   multipartRoute([
     { name: "before", maxCount: 10 },
     { name: "after", maxCount: 10 },
+    { name: "payment_proof", maxCount: 1 },
   ]),
   controller.executionComplete,
 );

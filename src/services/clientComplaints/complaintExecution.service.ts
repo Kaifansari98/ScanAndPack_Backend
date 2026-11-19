@@ -18,6 +18,7 @@ import {
   uploadAll,
   versionOf,
 } from "./complaintWorkflow.shared";
+import { insertPaymentTx, prepareVisitCash } from "./complaintPayment.service";
 
 // Material procurement and repair execution (spec 15), ending with the site
 // supervisor's completion report (spec 16.1).
@@ -443,7 +444,7 @@ export async function completeExecution(
   id: number,
   executionId: number,
   body: Record<string, unknown>,
-  files: { before: ComplaintUpload[]; after: ComplaintUpload[] },
+  files: { before: ComplaintUpload[]; after: ComplaintUpload[]; paymentProof?: ComplaintUpload[] },
 ) {
   const { complaint, execution } = await loadForExecution(actor, id, executionId, "COMPLETE_WORK");
   const version = versionOf(body.version);
@@ -457,13 +458,17 @@ export async function completeExecution(
   if (files.after.length === 0) throw new ComplaintError("Add at least one after-repair photo.");
   const before = classifyUploads(files.before, MAX_COMPLETION_PHOTOS);
   const after = classifyUploads(files.after, MAX_COMPLETION_PHOTOS);
-  const uploadedBefore = await uploadAll(actor, before);
+  // Cash an installation team collected at its visit comes with this report.
+  const cash = await prepareVisitCash(actor, complaint, body.visit_payment, files.paymentProof ?? []);
+  let uploadedBefore: Awaited<ReturnType<typeof uploadAll>> = [];
   let uploadedAfter: Awaited<ReturnType<typeof uploadAll>> = [];
   const now = new Date();
   try {
+    uploadedBefore = await uploadAll(actor, before);
     uploadedAfter = await uploadAll(actor, after);
     await prisma.$transaction(async (tx) => {
       await moveStatus(tx, complaint, version, {});
+      if (cash) await insertPaymentTx(tx, actor, complaint, cash.charge, cash.prepared, true);
       await tx.complaintExecution.update({
         where: { id: execution.id },
         data: {
@@ -496,7 +501,9 @@ export async function completeExecution(
       });
     });
   } catch (error) {
-    await deleteWasabiObjects([...uploadedBefore, ...uploadedAfter].map((u) => u.key));
+    await deleteWasabiObjects(
+      [...uploadedBefore, ...uploadedAfter, ...(cash?.prepared.uploaded ?? [])].map((u) => u.key),
+    );
     throw error;
   }
   return { status: "AWAITING_CLIENT_CONFIRMATION" as const };

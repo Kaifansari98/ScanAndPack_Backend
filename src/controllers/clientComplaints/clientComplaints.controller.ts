@@ -198,6 +198,7 @@ export const inspection = handle((req) =>
     photos: uploads(req, "photos"),
     videos: uploads(req, "videos"),
     documents: uploads(req, "documents"),
+    paymentProof: uploads(req, "payment_proof"),
   }),
 );
 export const inspectionDecision = handle((req) =>
@@ -240,6 +241,7 @@ export const executionComplete = handle((req) =>
   completeExecution(actor(req), complaintId(req), param(req, "executionId"), multipartBody(req, "Completion report"), {
     before: uploads(req, "before"),
     after: uploads(req, "after"),
+    paymentProof: uploads(req, "payment_proof"),
   }),
 );
 export const clientConfirmation = handle((req) =>

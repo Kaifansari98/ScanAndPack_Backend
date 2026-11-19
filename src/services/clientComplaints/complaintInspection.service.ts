@@ -30,6 +30,7 @@ import {
 import { startExecutionTx } from "./complaintExecution.service";
 import { completeVisitTx, visitAwaitingReport, visitChargeBlocker } from "./complaintVisit.service";
 import { canPrepareQuotation, quotationFiles, shareQuotationTx } from "./complaintQuotation.service";
+import { insertPaymentTx, prepareVisitCash } from "./complaintPayment.service";
 
 // Warranty decision (spec 8), site inspection report (spec 12) and HO's call on
 // how a submitted inspection proceeds.
@@ -133,7 +134,12 @@ export async function submitInspection(
   actor: ComplaintActor,
   id: number,
   body: Record<string, unknown>,
-  files: { photos: ComplaintUpload[]; videos: ComplaintUpload[]; documents: ComplaintUpload[] },
+  files: {
+    photos: ComplaintUpload[];
+    videos: ComplaintUpload[];
+    documents: ComplaintUpload[];
+    paymentProof?: ComplaintUpload[];
+  },
 ) {
   const complaint = await loadComplaint(actor, id);
   if (!isComplaintStaff(actor, complaint))
@@ -195,13 +201,17 @@ export async function submitInspection(
   }
   if (files.photos.length === 0) throw new ComplaintError("Add at least one damage photograph.");
   const checked = classifyUploads([...files.photos, ...files.videos, ...files.documents], MAX_INSPECTION_FILES);
-  const uploaded = await uploadAll(actor, checked);
+  // Cash collected at the visit is recorded with the report.
+  const cash = await prepareVisitCash(actor, complaint, body.visit_payment, files.paymentProof ?? [], visit.id);
+  let uploaded: Awaited<ReturnType<typeof uploadAll>> = [];
   const installationVisit = visit.purpose === "INSTALLATION_TEAM";
   let status: ComplaintStatus = "INSPECTION_SUBMITTED";
 
   try {
+    uploaded = await uploadAll(actor, checked);
     await prisma.$transaction(async (tx) => {
       await moveStatus(tx, complaint, version, {});
+      if (cash) await insertPaymentTx(tx, actor, complaint, cash.charge, cash.prepared, true);
       if (completesVisit) await completeVisitTx(tx, actor, complaint, visit.id);
       const created = await tx.complaintInspectionReport.create({
         data: {
@@ -260,7 +270,7 @@ export async function submitInspection(
       }
     });
   } catch (error) {
-    await deleteWasabiObjects(uploaded.map((u) => u.key));
+    await deleteWasabiObjects([...uploaded, ...(cash?.prepared.uploaded ?? [])].map((u) => u.key));
     throw error;
   }
   return { status };
