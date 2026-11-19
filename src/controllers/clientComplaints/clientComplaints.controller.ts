@@ -7,6 +7,7 @@ import {
   findPossibleDuplicates,
   getComplaintMeta,
   listComplaints,
+  myComplaintTasks,
   lookupLeadForComplaint,
   registerComplaint,
   requireComplaintsVendor,
@@ -31,11 +32,13 @@ import {
 } from "../../services/clientComplaints/complaintVisit.service";
 import {
   recordRepairPayment,
+  recordResolutionPayment,
   verifyPayment,
   waiveRepairCharge,
+  waiveResolutionPayment,
 } from "../../services/clientComplaints/complaintPayment.service";
 import { afterInspection, setWarranty, submitInspection } from "../../services/clientComplaints/complaintInspection.service";
-import { runQuotationAction, saveQuotation } from "../../services/clientComplaints/complaintQuotation.service";
+import { runQuotationAction, uploadQuotation } from "../../services/clientComplaints/complaintQuotation.service";
 import { completeExecution, runExecutionAction } from "../../services/clientComplaints/complaintExecution.service";
 import {
   approveClosure,
@@ -122,6 +125,7 @@ export const getDuplicates = handle(async (req) => {
 });
 
 export const list = handle((req) => listComplaints(actor(req), req.query as Record<string, unknown>));
+export const myTasks = handle((req) => myComplaintTasks(actor(req)));
 export const detail = handle((req) => getComplaintDetail(actor(req), positiveId(req.params.complaintId)));
 export const activity = handle((req) => getComplaintActivity(actor(req), positiveId(req.params.complaintId), req.query as Record<string, unknown>));
 
@@ -196,10 +200,32 @@ export const inspection = handle((req) =>
     documents: uploads(req, "documents"),
   }),
 );
-export const inspectionDecision = handle((req) => afterInspection(actor(req), complaintId(req), jsonBody(req)));
-export const quotation = handle((req) => saveQuotation(actor(req), complaintId(req), jsonBody(req)));
+export const inspectionDecision = handle((req) =>
+  afterInspection(actor(req), complaintId(req), multipartBody(req, "Decision details"), uploads(req, "files")),
+);
+export const quotation = handle((req) =>
+  uploadQuotation(actor(req), complaintId(req), multipartBody(req, "Quotation details"), uploads(req, "files")),
+);
 export const quotationAction = handle((req) =>
-  runQuotationAction(actor(req), complaintId(req), param(req, "quotationId"), jsonBody(req)),
+  runQuotationAction(
+    actor(req),
+    complaintId(req),
+    param(req, "quotationId"),
+    multipartBody(req, "Client response"),
+    uploads(req, "proof"),
+  ),
+);
+export const resolutionPayment = handle((req) =>
+  recordResolutionPayment(
+    actor(req),
+    complaintId(req),
+    param(req, "quotationId"),
+    multipartBody(req, "Payment details"),
+    uploads(req, "proof"),
+  ),
+);
+export const resolutionWaiver = handle((req) =>
+  waiveResolutionPayment(actor(req), complaintId(req), param(req, "quotationId"), jsonBody(req)),
 );
 export const repairPayment = handle((req) =>
   recordRepairPayment(actor(req), complaintId(req), param(req, "chargeId"), multipartBody(req, "Payment details"), uploads(req, "proof")),

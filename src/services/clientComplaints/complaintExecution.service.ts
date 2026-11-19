@@ -263,7 +263,7 @@ export async function completeExecution(
     material_used: remarksOf(body.material_used, "Material used", false),
     replacement_details: remarksOf(body.replacement_details, "Replacement details", false),
     client_remarks: remarksOf(body.client_remarks, "Client remarks", false),
-    pending_work: remarksOf(body.pending_work, "Pending work", false),
+    pending_work: remarksOf(body.pending_work, "Pending work"),
   };
   if (files.after.length === 0) throw new ComplaintError("Add at least one after-repair photo.");
   const before = classifyUploads(files.before, MAX_COMPLETION_PHOTOS);

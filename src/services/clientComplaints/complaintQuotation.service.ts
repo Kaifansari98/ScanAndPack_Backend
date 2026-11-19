@@ -1,30 +1,42 @@
-import { prisma } from "../../prisma/client";
-import { ComplaintQuotationItemCategory, ComplaintStatus } from "../../prisma/generated";
-import { ComplaintActor, ComplaintError } from "./clientComplaints.service";
+import { prisma, Prisma } from "../../prisma/client";
+import { ComplaintStatus } from "../../prisma/generated";
+import { deleteWasabiObjects } from "../../utils/wasabiClient";
+import { ComplaintActor, ComplaintError, ComplaintUpload } from "./clientComplaints.service";
 import {
+  attachmentRows,
+  classifyUploads,
   clientReferenceOf,
+  LoadedComplaint,
   decisionData,
   isComplaintStaff,
   isHead,
   loadComplaint,
   log,
-  money,
   moveStatus,
   remarksOf,
   requireHead,
   requireStatus,
   setComplaintStatus,
+  uploadAll,
   versionOf,
 } from "./complaintWorkflow.shared";
 import { startExecutionTx } from "./complaintExecution.service";
-import { chargeBalance } from "./complaintPayment.service";
+import {
+  chargeBalance,
+  insertPaymentTx,
+  preparePayment,
+  resolutionPaymentDue,
+} from "./complaintPayment.service";
 
-// Repair quotations (spec 13): prepared by HO, approved by the department head,
-// shared with and answered by the client. Revisions keep every earlier version.
-// The visiting charge is never part of a quotation.
+// Repair quotations (spec 13): the quotation is an uploaded file that is
+// shared with the client as soon as it is uploaded. HO prepares it and
+// records the client's answer together with any payment. Revisions keep
+// every earlier version. The visiting charge is never part of a quotation.
 
 const EDITABLE = ["DRAFT", "SENT_FOR_REVISION", "MODIFICATION_REQUESTED"] as const;
-const round2 = (n: number) => Math.round(n * 100) / 100;
+
+export const canPrepareQuotation = (actor: ComplaintActor) => isHead(actor.role);
+const MAX_QUOTATION_FILES = 5;
 
 async function latestQuotation(complaintId: number, cycleId: number) {
   return prisma.complaintQuotation.findFirst({
@@ -40,9 +52,10 @@ export async function quotationPermissions(
 ) {
   if (!complaint.current_cycle_id) return null;
   const head = isHead(actor.role);
+  const staff = isComplaintStaff(actor, complaint);
   const latest = await latestQuotation(complaint.id, complaint.current_cycle_id);
   let repairCharge = null;
-  if (complaint.status === "AWAITING_PAYMENT" && isComplaintStaff(actor, complaint)) {
+  if (complaint.status === "AWAITING_PAYMENT" && staff) {
     const charge = await prisma.complaintCharge.findFirst({
       where: { complaint_id: complaint.id, cycle_id: complaint.current_cycle_id, charge_type: "REPAIR", status: "OPEN" },
       orderBy: { id: "desc" },
@@ -60,140 +73,105 @@ export async function quotationPermissions(
       };
     }
   }
+  const due = staff ? await resolutionPaymentDue(prisma, complaint) : null;
   const is = (s: ComplaintStatus, q: string) => complaint.status === s && latest?.status === q;
   return {
     latest_id: latest?.id ?? null,
-    can_edit: head && complaint.status === "QUOTATION_PREPARATION",
-    // Prefill source when editing: the draft itself or the version being revised.
-    edit_from_id: latest && (EDITABLE as readonly string[]).includes(latest.status) ? latest.id : null,
+    can_upload: canPrepareQuotation(actor) && complaint.status === "QUOTATION_PREPARATION",
+    // Quotations sent for approval before uploads replaced it.
     can_review: head && is("DEPARTMENT_HEAD_APPROVAL", "PENDING_HSS_APPROVAL"),
     can_share: head && is("DEPARTMENT_HEAD_APPROVAL", "HSS_APPROVED"),
     can_record_client_response: head && is("QUOTATION_SHARED", "SHARED"),
     repair_charge: repairCharge,
+    // Repair amount the client pays once the work is resolved.
+    resolution_payment: due ? { quotation_id: due.id, can_waive: head } : null,
   };
 }
 
-type ItemInput = {
-  category?: unknown;
-  description?: unknown;
-  quantity?: unknown;
-  unit?: unknown;
-  unit_rate?: unknown;
-  warranty_covered_amount?: unknown;
-  chargeable_reason?: unknown;
-};
-
-export async function saveQuotation(actor: ComplaintActor, id: number, body: Record<string, unknown>) {
-  requireHead(actor, "prepare quotations");
-  const complaint = await loadComplaint(actor, id);
-  requireStatus(complaint, ["QUOTATION_PREPARATION"], "edit the quotation");
-  const version = versionOf(body.version);
-  const { warranty_status: warranty } = await prisma.complaintMaster.findUniqueOrThrow({
-    where: { id: complaint.id },
-    select: { warranty_status: true },
+// Creates the next quotation (or revision) from the uploaded file and shares
+// it with the client. The caller has checked the version.
+export async function shareQuotationTx(
+  tx: Prisma.TransactionClient,
+  actor: ComplaintActor,
+  complaint: LoadedComplaint,
+  uploaded: Awaited<ReturnType<typeof uploadAll>>,
+  remarks: string | null,
+) {
+  const latest = await tx.complaintQuotation.findFirst({
+    where: { complaint_id: complaint.id, cycle_id: complaint.current_cycle_id, status: { not: "SUPERSEDED" } },
+    orderBy: [{ quotation_number: "desc" }, { revision: "desc" }],
+    select: { id: true, quotation_number: true, revision: true, status: true },
   });
-  const underWarranty = warranty === "COVERED" || warranty === "PARTIALLY_COVERED";
-
-  if (!Array.isArray(body.items) || body.items.length === 0) throw new ComplaintError("Add at least one quotation line.");
-  if (body.items.length > 100) throw new ComplaintError("Add up to 100 quotation lines.");
-  const items = (body.items as ItemInput[]).map((item, i) => {
-    const line = `Line ${i + 1}`;
-    const category = item.category as ComplaintQuotationItemCategory;
-    if (!Object.values(ComplaintQuotationItemCategory).includes(category))
-      throw new ComplaintError(`${line}: choose material, hardware, labour, transportation or other.`);
-    const quantity = Number(item.quantity);
-    if (!Number.isFinite(quantity) || quantity <= 0) throw new ComplaintError(`${line}: enter a quantity above 0.`);
-    const rate = money(item.unit_rate, `${line} rate`, { allowZero: true });
-    const total = round2(quantity * rate);
-    const covered = money(item.warranty_covered_amount ?? 0, `${line} warranty-covered amount`, { allowZero: true });
-    if (covered > total) throw new ComplaintError(`${line}: the warranty-covered amount exceeds the line total.`);
-    if (covered > 0 && !underWarranty)
-      throw new ComplaintError("Record a warranty decision of covered or partially covered before marking items as warranty covered.");
-    const payable = round2(total - covered);
-    // Spec 13.4: any chargeable amount on a warranty complaint needs a reason.
-    const reason = remarksOf(item.chargeable_reason, `${line} reason for charging`, underWarranty && payable > 0);
-    return {
-      sequence: i + 1,
-      category,
-      description: remarksOf(item.description, `${line} description`)!.slice(0, 2000),
-      quantity,
-      unit: remarksOf(item.unit, `${line} unit`, false)?.slice(0, 40) ?? null,
-      unit_rate: rate,
-      line_total: total,
-      warranty_covered_amount: covered,
-      client_payable_amount: payable,
-      chargeable_reason: reason?.slice(0, 2000) ?? null,
-    };
+  const revising = latest && !["CLIENT_ACCEPTED", "CANCELLED"].includes(latest.status);
+  if (latest && revising && (EDITABLE as readonly string[]).includes(latest.status))
+    await tx.complaintQuotation.update({ where: { id: latest.id }, data: { status: "SUPERSEDED" } });
+  const last = await tx.complaintQuotation.aggregate({
+    where: { complaint_id: complaint.id },
+    _max: { quotation_number: true },
   });
-  const tax = money(body.tax_amount ?? 0, "Applicable taxes", { allowZero: true });
-  const subtotal = round2(items.reduce((t, i) => t + i.line_total, 0));
-  const covered = round2(items.reduce((t, i) => t + i.warranty_covered_amount, 0));
-  const totals = {
-    subtotal,
-    tax_amount: tax,
-    total_amount: round2(subtotal + tax),
-    warranty_covered_amount: covered,
-    client_payable_amount: round2(subtotal + tax - covered),
-  };
-  const submit = body.submit === true;
-
-  const latest = await latestQuotation(complaint.id, complaint.current_cycle_id);
-  const report = await prisma.complaintInspectionReport.findFirst({
+  const report = await tx.complaintInspectionReport.findFirst({
     where: { complaint_id: complaint.id, cycle_id: complaint.current_cycle_id },
     orderBy: { submitted_at: "desc" },
     select: { id: true },
   });
-
-  return prisma.$transaction(async (tx) => {
-    await moveStatus(tx, complaint, version, {});
-    let quotationId: number;
-    const status = submit ? "PENDING_HSS_APPROVAL" : "DRAFT";
-    if (latest?.status === "DRAFT") {
-      quotationId = latest.id;
-      await tx.complaintQuotationItem.deleteMany({ where: { quotation_id: latest.id } });
-      await tx.complaintQuotation.update({ where: { id: latest.id }, data: { ...totals, status } });
-    } else {
-      const revising = latest && (EDITABLE as readonly string[]).includes(latest.status);
-      if (latest && revising)
-        await tx.complaintQuotation.update({ where: { id: latest.id }, data: { status: "SUPERSEDED" } });
-      const last = await tx.complaintQuotation.aggregate({
-        where: { complaint_id: complaint.id },
-        _max: { quotation_number: true },
-      });
-      const created = await tx.complaintQuotation.create({
-        data: {
-          vendor_id: actor.vendorId,
-          complaint_id: complaint.id,
-          cycle_id: complaint.current_cycle_id,
-          quotation_number: revising ? latest!.quotation_number : (last._max.quotation_number ?? 0) + 1,
-          revision: revising ? latest!.revision + 1 : 1,
-          inspection_report_id: report?.id ?? null,
-          created_by: actor.actorId,
-          status,
-          ...totals,
-        },
-      });
-      quotationId = created.id;
-    }
-    await tx.complaintQuotationItem.createMany({
-      data: items.map((item) => ({
-        vendor_id: actor.vendorId,
-        complaint_id: complaint.id,
-        cycle_id: complaint.current_cycle_id,
-        quotation_id: quotationId,
-        ...item,
-      })),
-    });
-    if (submit) await setComplaintStatus(tx, complaint, "DEPARTMENT_HEAD_APPROVAL");
-    await log(tx, actor, complaint, {
-      action: submit ? "QUOTATION_SUBMITTED_FOR_APPROVAL" : "QUOTATION_DRAFT_SAVED",
-      from_status: complaint.status,
-      to_status: submit ? "DEPARTMENT_HEAD_APPROVAL" : complaint.status,
-      remarks: `Total ₹${totals.total_amount.toFixed(2)} · client payable ₹${totals.client_payable_amount.toFixed(2)}`,
-      quotation_id: quotationId,
-    });
-    return { quotation_id: quotationId, status };
+  // Amounts live in the uploaded file; the client pays what HO records.
+  const quotation = await tx.complaintQuotation.create({
+    data: {
+      vendor_id: actor.vendorId,
+      complaint_id: complaint.id,
+      cycle_id: complaint.current_cycle_id,
+      quotation_number: revising ? latest!.quotation_number : (last._max.quotation_number ?? 0) + 1,
+      revision: revising ? latest!.revision + 1 : 1,
+      inspection_report_id: report?.id ?? null,
+      created_by: actor.actorId,
+      status: "SHARED",
+      shared_at: new Date(),
+      subtotal: 0,
+      total_amount: 0,
+      client_payable_amount: 0,
+    },
   });
+  await tx.complaintAttachment.createMany({
+    data: attachmentRows(actor, complaint, uploaded, { category: "QUOTATION", quotation_id: quotation.id }),
+  });
+  await setComplaintStatus(tx, complaint, "QUOTATION_SHARED");
+  await log(tx, actor, complaint, {
+    action: "QUOTATION_SHARED",
+    from_status: complaint.status,
+    to_status: "QUOTATION_SHARED",
+    remarks: remarks ?? `Quotation Q${quotation.quotation_number} rev ${quotation.revision} shared with the client.`,
+    quotation_id: quotation.id,
+  });
+  return quotation;
+}
+
+export function quotationFiles(files: ComplaintUpload[], required: boolean) {
+  if (required && files.length === 0) throw new ComplaintError("Upload the quotation file.");
+  return classifyUploads(files, MAX_QUOTATION_FILES, false);
+}
+
+export async function uploadQuotation(
+  actor: ComplaintActor,
+  id: number,
+  body: Record<string, unknown>,
+  files: ComplaintUpload[],
+) {
+  if (!canPrepareQuotation(actor)) throw new ComplaintError("Only HO can upload quotations.", 403);
+  const complaint = await loadComplaint(actor, id);
+  requireStatus(complaint, ["QUOTATION_PREPARATION"], "upload the quotation");
+  const version = versionOf(body.version);
+  const remarks = remarksOf(body.remarks, "Remarks", false);
+  const uploaded = await uploadAll(actor, quotationFiles(files, true));
+  try {
+    const quotation = await prisma.$transaction(async (tx) => {
+      await moveStatus(tx, complaint, version, {});
+      return shareQuotationTx(tx, actor, complaint, uploaded, remarks);
+    });
+    return { quotation_id: quotation.id, status: "QUOTATION_SHARED" as const };
+  } catch (error) {
+    await deleteWasabiObjects(uploaded.map((u) => u.key));
+    throw error;
+  }
 }
 
 export type QuotationAction =
@@ -204,11 +182,15 @@ export type QuotationAction =
   | "CLIENT_REJECTED"
   | "MODIFICATION_REQUESTED";
 
+// How the client pays an accepted quotation.
+const PAYMENT_OPTIONS = ["PAID_NOW", "AT_RESOLUTION", "NONE"] as const;
+
 export async function runQuotationAction(
   actor: ComplaintActor,
   id: number,
   quotationId: number,
   body: Record<string, unknown>,
+  proofs: ComplaintUpload[] = [],
 ) {
   requireHead(actor, "act on quotations");
   const complaint = await loadComplaint(actor, id);
@@ -216,7 +198,7 @@ export async function runQuotationAction(
   const action = body.action as QuotationAction;
   const quotation = await prisma.complaintQuotation.findFirst({
     where: { id: quotationId, complaint_id: complaint.id, cycle_id: complaint.current_cycle_id },
-    select: { id: true, status: true, quotation_number: true, revision: true, client_payable_amount: true },
+    select: { id: true, status: true, quotation_number: true, revision: true },
   });
   if (!quotation) throw new ComplaintError("Quotation not found for this complaint.", 404);
 
@@ -241,89 +223,104 @@ export async function runQuotationAction(
     remarksRequired,
   );
   const clientReference = clientAction ? clientReferenceOf(body.client_reference) : null;
-  const payable = Number(quotation.client_payable_amount);
+  const paymentOption = body.payment_option as (typeof PAYMENT_OPTIONS)[number];
+  if (action === "CLIENT_ACCEPTED" && !PAYMENT_OPTIONS.includes(paymentOption))
+    throw new ComplaintError("Choose how the client pays for the repair.");
+  // Accepting and paying are recorded together.
+  const payment =
+    action === "CLIENT_ACCEPTED" && paymentOption === "PAID_NOW" ? await preparePayment(actor, body, proofs) : null;
   const label = `Quotation Q${quotation.quotation_number} rev ${quotation.revision}`;
   let status: ComplaintStatus = complaint.status;
 
-  await prisma.$transaction(async (tx) => {
-    await moveStatus(tx, complaint, version, {});
-    let decisionId: number | undefined;
-    if (action === "APPROVE" || action === "SEND_FOR_REVISION") {
-      const decision = await tx.complaintDecision.create({
-        data: decisionData(actor, complaint, {
-          decision_type: "HSS_QUOTATION_APPROVAL",
-          outcome: action === "APPROVE" ? "APPROVED" : "SENT_FOR_REVISION",
-          remarks,
-          quotation_id: quotation.id,
-        }),
+  try {
+    await prisma.$transaction(async (tx) => {
+      await moveStatus(tx, complaint, version, {});
+      let decisionId: number | undefined;
+      if (action === "APPROVE" || action === "SEND_FOR_REVISION") {
+        const decision = await tx.complaintDecision.create({
+          data: decisionData(actor, complaint, {
+            decision_type: "HSS_QUOTATION_APPROVAL",
+            outcome: action === "APPROVE" ? "APPROVED" : "SENT_FOR_REVISION",
+            remarks,
+            quotation_id: quotation.id,
+          }),
+        });
+        decisionId = decision.id;
+        await tx.complaintQuotation.update({
+          where: { id: quotation.id },
+          data: {
+            status: action === "APPROVE" ? "HSS_APPROVED" : "SENT_FOR_REVISION",
+            hss_approval_decision_id: decision.id,
+          },
+        });
+        status = action === "APPROVE" ? "DEPARTMENT_HEAD_APPROVAL" : "QUOTATION_PREPARATION";
+      } else if (action === "SHARE") {
+        await tx.complaintQuotation.update({
+          where: { id: quotation.id },
+          data: { status: "SHARED", shared_at: new Date() },
+        });
+        status = "QUOTATION_SHARED";
+      } else {
+        const outcome = action === "CLIENT_ACCEPTED" ? "ACCEPTED" : action === "CLIENT_REJECTED" ? "REJECTED" : "MODIFICATION_REQUESTED";
+        const decision = await tx.complaintDecision.create({
+          data: decisionData(actor, complaint, {
+            decision_type: "CLIENT_QUOTATION_RESPONSE",
+            outcome,
+            remarks,
+            quotation_id: quotation.id,
+            acting_on_behalf_of_client: true,
+            actor_client_reference: clientReference,
+          }),
+        });
+        decisionId = decision.id;
+        await tx.complaintQuotation.update({
+          where: { id: quotation.id },
+          data: {
+            status: action === "CLIENT_ACCEPTED" ? "CLIENT_ACCEPTED" : action === "CLIENT_REJECTED" ? "CLIENT_REJECTED" : "MODIFICATION_REQUESTED",
+            client_response_decision_id: decision.id,
+            payment_at_resolution: action === "CLIENT_ACCEPTED" && paymentOption === "AT_RESOLUTION",
+          },
+        });
+        if (action === "CLIENT_REJECTED") status = "ON_HOLD";
+        else if (action === "MODIFICATION_REQUESTED") status = "QUOTATION_PREPARATION";
+      }
+      if (action !== "CLIENT_ACCEPTED") await setComplaintStatus(tx, complaint, status);
+      await log(tx, actor, complaint, {
+        action: `QUOTATION_${action}`,
+        from_status: complaint.status,
+        to_status: action === "CLIENT_ACCEPTED" ? null : status,
+        remarks:
+          remarks ??
+          (action === "CLIENT_ACCEPTED"
+            ? `${label} accepted · ${paymentOption === "PAID_NOW" ? "paid now" : paymentOption === "AT_RESOLUTION" ? "pays at resolution" : "nothing to pay"}`
+            : label),
+        quotation_id: quotation.id,
+        decision_id: decisionId,
+        acting_on_behalf_of_client: clientAction,
+        actor_client_reference: clientReference,
+        metadata: clientAction ? { quotation: label, payment_option: paymentOption ?? null } : undefined,
       });
-      decisionId = decision.id;
-      await tx.complaintQuotation.update({
-        where: { id: quotation.id },
-        data: {
-          status: action === "APPROVE" ? "HSS_APPROVED" : "SENT_FOR_REVISION",
-          hss_approval_decision_id: decision.id,
-        },
-      });
-      status = action === "APPROVE" ? "DEPARTMENT_HEAD_APPROVAL" : "QUOTATION_PREPARATION";
-    } else if (action === "SHARE") {
-      await tx.complaintQuotation.update({
-        where: { id: quotation.id },
-        data: { status: "SHARED", shared_at: new Date() },
-      });
-      status = "QUOTATION_SHARED";
-    } else {
-      const outcome = action === "CLIENT_ACCEPTED" ? "ACCEPTED" : action === "CLIENT_REJECTED" ? "REJECTED" : "MODIFICATION_REQUESTED";
-      const decision = await tx.complaintDecision.create({
-        data: decisionData(actor, complaint, {
-          decision_type: "CLIENT_QUOTATION_RESPONSE",
-          outcome,
-          remarks,
-          quotation_id: quotation.id,
-          acting_on_behalf_of_client: true,
-          actor_client_reference: clientReference,
-        }),
-      });
-      decisionId = decision.id;
-      await tx.complaintQuotation.update({
-        where: { id: quotation.id },
-        data: {
-          status: action === "CLIENT_ACCEPTED" ? "CLIENT_ACCEPTED" : action === "CLIENT_REJECTED" ? "CLIENT_REJECTED" : "MODIFICATION_REQUESTED",
-          client_response_decision_id: decision.id,
-        },
-      });
-      if (action === "CLIENT_REJECTED") status = "ON_HOLD";
-      else if (action === "MODIFICATION_REQUESTED") status = "QUOTATION_PREPARATION";
-    }
-    if (action === "CLIENT_ACCEPTED" && payable > 0) {
-      await tx.complaintCharge.create({
-        data: {
-          vendor_id: actor.vendorId,
-          complaint_id: complaint.id,
-          cycle_id: complaint.current_cycle_id,
-          charge_type: "REPAIR",
-          quotation_id: quotation.id,
-          amount: payable,
-          created_by: actor.actorId,
-        },
-      });
-      status = "AWAITING_PAYMENT";
-    }
-    if (action !== "CLIENT_ACCEPTED" || payable > 0) await setComplaintStatus(tx, complaint, status);
-    await log(tx, actor, complaint, {
-      action: `QUOTATION_${action}`,
-      from_status: complaint.status,
-      to_status: status,
-      remarks: remarks ?? label,
-      quotation_id: quotation.id,
-      decision_id: decisionId,
-      acting_on_behalf_of_client: clientAction,
-      actor_client_reference: clientReference,
-      metadata: clientAction ? { quotation: label, client_payable: payable } : undefined,
+      if (action === "CLIENT_ACCEPTED") {
+        if (payment) {
+          const charge = await tx.complaintCharge.create({
+            data: {
+              vendor_id: actor.vendorId,
+              complaint_id: complaint.id,
+              cycle_id: complaint.current_cycle_id,
+              charge_type: "REPAIR",
+              quotation_id: quotation.id,
+              amount: payment.amount,
+              created_by: actor.actorId,
+            },
+          });
+          await insertPaymentTx(tx, actor, complaint, charge, payment, true);
+        }
+        status = await startExecutionTx(tx, actor, complaint, { quotationId: quotation.id });
+      }
     });
-    // Nothing for the client to pay (e.g. fully warranty covered): start the work.
-    if (action === "CLIENT_ACCEPTED" && payable === 0)
-      status = await startExecutionTx(tx, actor, complaint, { quotationId: quotation.id });
-  });
+  } catch (error) {
+    if (payment) await deleteWasabiObjects(payment.uploaded.map((u) => u.key));
+    throw error;
+  }
   return { status };
 }

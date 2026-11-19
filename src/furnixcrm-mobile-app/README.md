@@ -35,3 +35,14 @@ OTP state is kept in Redis. Client tokens are signed with a secret derived from
 `JWT_SECRET`, so the web `verifyToken` middleware does not accept them; use
 `verifyClientToken` from `services/auth.service.ts` for client-only routes.
 With `BACKEND_ENVIRONMENT=LOCAL`, an OTP whose email fails to send is logged to the console.
+
+## Client projects (`/api/furnixcrm-mobile-app/client/projects`)
+
+Client token required (`middleware/client-auth.middleware.ts`). Leads are matched live by the
+token's email (`is_deleted = false`, app-enabled vendor), so leads added after sign-in appear.
+
+| Endpoint                      | Purpose                                                                                       |
+| ----------------------------- | --------------------------------------------------------------------------------------------- |
+| `GET /`                       | The client's leads with `product_types` (non-archived mappings), `stage` and `instance_count`. |
+| `GET /:leadId/instances`      | Non-archived product structure instances; `stage` falls back to the lead's stage. 404 if the lead isn't the client's. |
+| `GET /:leadId/instances/:instanceId/tracker` | Client project tracker for one item. Currently `booking`: confirmation date, `mrp_value`, `total_booking_value`, `advance_received` (+ date) and booking documents (Type 8, excluding payment proofs) with 1-hour signed URLs. `null` until the lead is booked. |

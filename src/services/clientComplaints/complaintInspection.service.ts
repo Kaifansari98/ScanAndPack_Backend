@@ -14,6 +14,7 @@ import {
   decisionData,
   isComplaintStaff,
   isHead,
+  isSuperAdmin,
   loadComplaint,
   log,
   money,
@@ -21,11 +22,14 @@ import {
   remarksOf,
   requireHead,
   requireStatus,
+  requireSuperAdmin,
   setComplaintStatus,
   uploadAll,
   versionOf,
 } from "./complaintWorkflow.shared";
 import { startExecutionTx } from "./complaintExecution.service";
+import { completeVisitTx, visitAwaitingReport, visitChargeBlocker } from "./complaintVisit.service";
+import { canPrepareQuotation, quotationFiles, shareQuotationTx } from "./complaintQuotation.service";
 
 // Warranty decision (spec 8), site inspection report (spec 12) and HO's call on
 // how a submitted inspection proceeds.
@@ -35,7 +39,7 @@ const FINISHED: ComplaintStatus[] = ["CLOSED", "REJECTED", "CANCELLED"];
 export const WARRANTY_OUTCOMES = ["COVERED", "PARTIALLY_COVERED", "NOT_COVERED"] as const;
 
 export async function setWarranty(actor: ComplaintActor, id: number, body: Record<string, unknown>) {
-  requireHead(actor, "decide warranty");
+  requireSuperAdmin(actor, "decide warranty");
   const complaint = await loadComplaint(actor, id);
   if (FINISHED.includes(complaint.status)) throw new ComplaintError("This complaint is already finished.", 409);
   const outcome = body.outcome as (typeof WARRANTY_OUTCOMES)[number];
@@ -52,15 +56,6 @@ export async function setWarranty(actor: ComplaintActor, id: number, body: Recor
   return { warranty_status: outcome };
 }
 
-// The completed visit still waiting for its inspection report, if any.
-async function visitAwaitingReport(complaintId: number, cycleId: number) {
-  return prisma.complaintVisit.findFirst({
-    where: { complaint_id: complaintId, cycle_id: cycleId, status: "COMPLETED", inspectionReports: { none: {} } },
-    orderBy: { visit_number: "desc" },
-    select: { id: true, visit_number: true, completed_at: true },
-  });
-}
-
 export async function inspectionPermissions(
   actor: ComplaintActor,
   complaint: { id: number; status: ComplaintStatus; assigned_ss_id: number | null; current_cycle_id: number | null },
@@ -69,7 +64,7 @@ export async function inspectionPermissions(
   const staff = isComplaintStaff(actor, complaint);
   const pendingVisit =
     staff && complaint.current_cycle_id && complaint.status === "VISIT_SCHEDULED"
-      ? await visitAwaitingReport(complaint.id, complaint.current_cycle_id)
+      ? await visitAwaitingReport(prisma, actor.vendorId, complaint.id, complaint.current_cycle_id)
       : null;
   let latestReport: { material_required: boolean } | null = null;
   if (head && complaint.status === "INSPECTION_SUBMITTED" && complaint.current_cycle_id)
@@ -79,13 +74,21 @@ export async function inspectionPermissions(
       select: { material_required: true },
     });
   return {
-    can_set_warranty: head && !FINISHED.includes(complaint.status),
-    // Completed visit that needs its inspection report.
+    can_set_warranty: isSuperAdmin(actor) && !FINISHED.includes(complaint.status),
+    // Scheduled visit whose inspection report completes it.
     report_visit: pendingVisit
-      ? { id: pendingVisit.id, visit_number: pendingVisit.visit_number, completed_at: pendingVisit.completed_at }
+      ? {
+          id: pendingVisit.id,
+          visit_number: pendingVisit.visit_number,
+          purpose: pendingVisit.purpose,
+          // Why the report cannot be submitted yet, e.g. cash still to record.
+          blocked_reason: pendingVisit.status === "COMPLETED" ? null : visitChargeBlocker(pendingVisit),
+        }
       : null,
     // HO decides how a submitted inspection proceeds.
-    after_inspection: latestReport ? { material_required: latestReport.material_required } : null,
+    after_inspection: latestReport
+      ? { material_required: latestReport.material_required, can_prepare_quotation: canPrepareQuotation(actor) }
+      : null,
   };
 }
 
@@ -136,9 +139,12 @@ export async function submitInspection(
   if (!isComplaintStaff(actor, complaint))
     throw new ComplaintError("Only HO or the assigned site supervisor can submit the inspection.", 403);
   requireStatus(complaint, ["VISIT_SCHEDULED"], "submit an inspection");
-  const visit = await visitAwaitingReport(complaint.id, complaint.current_cycle_id);
+  const visit = await visitAwaitingReport(prisma, actor.vendorId, complaint.id, complaint.current_cycle_id);
   if (!visit || visit.id !== Number(body.visit_id))
-    throw new ComplaintError("Mark the visit completed before submitting its inspection report.", 409);
+    throw new ComplaintError("This visit is not waiting for an inspection report.", 409);
+  const completesVisit = visit.status !== "COMPLETED";
+  const chargeBlocker = completesVisit ? visitChargeBlocker(visit) : null;
+  if (chargeBlocker) throw new ComplaintError(chargeBlocker, 409);
   const version = versionOf(body.version);
 
   const responsibility = body.responsibility as ComplaintResponsibility;
@@ -169,18 +175,22 @@ export async function submitInspection(
     material_required: materialRequired,
     remarks: remarksOf(body.remarks, "Remarks", false),
     estimated_work_days: estimatedDays,
-    expected_completion_date: dateOnly(body.expected_completion_date, "Expected completion date"),
+    expected_completion_date: dateOnly(body.expected_completion_date, "Expected completion date", { required: true }),
     additional_visit_required: body.additional_visit_required === true,
     further_approval_required: body.further_approval_required === true,
+    pending_work: remarksOf(body.pending_work, "Pending work")!.slice(0, 4000),
   };
   const materials = materialRequired ? parseMaterials(body.materials) : [];
   if (files.photos.length === 0) throw new ComplaintError("Add at least one damage photograph.");
   const checked = classifyUploads([...files.photos, ...files.videos, ...files.documents], MAX_INSPECTION_FILES);
   const uploaded = await uploadAll(actor, checked);
+  const installationVisit = visit.purpose === "INSTALLATION_TEAM";
+  let status: ComplaintStatus = "INSPECTION_SUBMITTED";
 
   try {
     await prisma.$transaction(async (tx) => {
       await moveStatus(tx, complaint, version, {});
+      if (completesVisit) await completeVisitTx(tx, actor, complaint, visit.id);
       const created = await tx.complaintInspectionReport.create({
         data: {
           vendor_id: actor.vendorId,
@@ -217,18 +227,56 @@ export async function submitInspection(
         visit_id: visit.id,
         metadata: { responsibility, material_required: materialRequired, files: uploaded.length },
       });
+      if (installationVisit) {
+        // The installation team already worked on site, so there is no quotation:
+        // procure any material the report lists, otherwise the issue is resolved.
+        const submitted = { ...complaint, status: "INSPECTION_SUBMITTED" as ComplaintStatus };
+        if (materialRequired) {
+          const decision = await tx.complaintDecision.create({
+            data: decisionData(actor, submitted, {
+              decision_type: "QUOTATION_SKIP",
+              outcome: "SKIPPED",
+              remarks: "Installation team visit; material listed in the inspection report.",
+            }),
+          });
+          status = await startExecutionTx(tx, actor, submitted, {
+            quotationSkipDecisionId: decision.id,
+            materialRequired: true,
+          });
+        } else {
+          await tx.complaintCycle.update({
+            where: { id: complaint.current_cycle_id },
+            data: { resolved_at: new Date() },
+          });
+          status = "AWAITING_CLIENT_CONFIRMATION";
+          await setComplaintStatus(tx, submitted, status);
+          await log(tx, actor, complaint, {
+            action: "RESOLVED_AT_INSTALLATION_VISIT",
+            from_status: "INSPECTION_SUBMITTED",
+            to_status: status,
+            remarks: "Installation team resolved the issue during the visit.",
+            visit_id: visit.id,
+          });
+        }
+      }
     });
   } catch (error) {
     await deleteWasabiObjects(uploaded.map((u) => u.key));
     throw error;
   }
-  return { status: "INSPECTION_SUBMITTED" as const };
+  return { status };
 }
 
 export type AfterInspectionAction = "START_QUOTATION" | "PROCEED_WITHOUT_QUOTATION" | "RESOLVE_WITHOUT_REPAIR";
 
-// HO's decision once the inspection is in (spec 12 → 13 / 15 / 16).
-export async function afterInspection(actor: ComplaintActor, id: number, body: Record<string, unknown>) {
+// HO's decision once the inspection is in (spec 12 → 13 / 15 / 16). A quotation
+// file attached when preparing the quotation is shared with the client at once.
+export async function afterInspection(
+  actor: ComplaintActor,
+  id: number,
+  body: Record<string, unknown>,
+  files: ComplaintUpload[] = [],
+) {
   requireHead(actor, "decide how the inspection proceeds");
   const complaint = await loadComplaint(actor, id);
   requireStatus(complaint, ["INSPECTION_SUBMITTED"], "act on the inspection");
@@ -236,32 +284,45 @@ export async function afterInspection(actor: ComplaintActor, id: number, body: R
   const action = body.action as AfterInspectionAction;
   if (!["START_QUOTATION", "PROCEED_WITHOUT_QUOTATION", "RESOLVE_WITHOUT_REPAIR"].includes(action))
     throw new ComplaintError("Choose how the complaint proceeds.");
-  const remarks = remarksOf(body.remarks, "Remarks", action !== "START_QUOTATION");
+  if (action === "START_QUOTATION" && !canPrepareQuotation(actor))
+    throw new ComplaintError("Only HO can prepare quotations.", 403);
+  const remarks = remarksOf(body.remarks, "Remarks");
+  const uploaded =
+    action === "START_QUOTATION" && files.length ? await uploadAll(actor, quotationFiles(files, false)) : [];
   let status: ComplaintStatus = complaint.status;
 
-  await prisma.$transaction(async (tx) => {
-    await moveStatus(tx, complaint, version, {});
-    if (action === "START_QUOTATION") {
-      status = "QUOTATION_PREPARATION";
-      await setComplaintStatus(tx, complaint, status);
-      await log(tx, actor, complaint, { action: "QUOTATION_PREPARATION_STARTED", from_status: complaint.status, to_status: status, remarks });
-    } else if (action === "PROCEED_WITHOUT_QUOTATION") {
-      // e.g. fully warranty-covered work or a simple adjustment with no cost.
-      const decision = await tx.complaintDecision.create({
-        data: decisionData(actor, complaint, { decision_type: "QUOTATION_SKIP", outcome: "SKIPPED", remarks: remarks! }),
-      });
-      await log(tx, actor, complaint, { action: "QUOTATION_SKIPPED", remarks, decision_id: decision.id });
-      status = await startExecutionTx(tx, actor, complaint, {
-        quotationSkipDecisionId: decision.id,
-        materialRequired: typeof body.material_required === "boolean" ? body.material_required : undefined,
-      });
-    } else {
-      const now = new Date();
-      await tx.complaintCycle.update({ where: { id: complaint.current_cycle_id }, data: { resolved_at: now } });
-      status = "AWAITING_CLIENT_CONFIRMATION";
-      await setComplaintStatus(tx, complaint, status);
-      await log(tx, actor, complaint, { action: "RESOLVED_WITHOUT_REPAIR", from_status: complaint.status, to_status: status, remarks });
-    }
-  });
+  try {
+    await prisma.$transaction(async (tx) => {
+      await moveStatus(tx, complaint, version, {});
+      if (action === "START_QUOTATION") {
+        status = "QUOTATION_PREPARATION";
+        await setComplaintStatus(tx, complaint, status);
+        await log(tx, actor, complaint, { action: "QUOTATION_PREPARATION_STARTED", from_status: complaint.status, to_status: status, remarks });
+        if (uploaded.length) {
+          await shareQuotationTx(tx, actor, { ...complaint, status }, uploaded, null);
+          status = "QUOTATION_SHARED";
+        }
+      } else if (action === "PROCEED_WITHOUT_QUOTATION") {
+        // e.g. fully warranty-covered work or a simple adjustment with no cost.
+        const decision = await tx.complaintDecision.create({
+          data: decisionData(actor, complaint, { decision_type: "QUOTATION_SKIP", outcome: "SKIPPED", remarks: remarks! }),
+        });
+        await log(tx, actor, complaint, { action: "QUOTATION_SKIPPED", remarks, decision_id: decision.id });
+        status = await startExecutionTx(tx, actor, complaint, {
+          quotationSkipDecisionId: decision.id,
+          materialRequired: typeof body.material_required === "boolean" ? body.material_required : undefined,
+        });
+      } else {
+        const now = new Date();
+        await tx.complaintCycle.update({ where: { id: complaint.current_cycle_id }, data: { resolved_at: now } });
+        status = "AWAITING_CLIENT_CONFIRMATION";
+        await setComplaintStatus(tx, complaint, status);
+        await log(tx, actor, complaint, { action: "RESOLVED_WITHOUT_REPAIR", from_status: complaint.status, to_status: status, remarks });
+      }
+    });
+  } catch (error) {
+    await deleteWasabiObjects(uploaded.map((u) => u.key));
+    throw error;
+  }
   return { status };
 }

@@ -178,6 +178,12 @@ export function requireHead(actor: ComplaintActor, what: string) {
   if (!isHead(actor.role)) throw new ComplaintError(`Only HO can ${what}.`, 403);
 }
 
+export const isSuperAdmin = (actor: ComplaintActor) => actor.role === "super-admin";
+
+export function requireSuperAdmin(actor: ComplaintActor, what: string) {
+  if (!isSuperAdmin(actor)) throw new ComplaintError(`Only super admin can ${what}.`, 403);
+}
+
 export function requireStatus(complaint: { status: ComplaintStatus }, allowed: ComplaintStatus[], what: string) {
   if (!allowed.includes(complaint.status))
     throw new ComplaintError(`The complaint is not at a stage where you can ${what}.`, 409);
@@ -204,7 +210,7 @@ export function attachmentRows(
   uploaded: { key: string; file: ComplaintUpload; media: MediaKind }[],
   extra: Pick<
     Prisma.ComplaintAttachmentCreateManyInput,
-    "category" | "visit_id" | "inspection_report_id" | "execution_id" | "decision_id"
+    "category" | "visit_id" | "inspection_report_id" | "execution_id" | "decision_id" | "quotation_id"
   >,
 ): Prisma.ComplaintAttachmentCreateManyInput[] {
   return uploaded.map(({ key, file, media }) => ({

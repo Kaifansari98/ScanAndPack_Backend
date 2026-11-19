@@ -9,6 +9,7 @@ import {
   decisionData,
   isComplaintStaff,
   isHead,
+  isSuperAdmin,
   LoadedComplaint,
   loadComplaint,
   log,
@@ -16,11 +17,12 @@ import {
   remarksOf,
   requireHead,
   requireStatus,
+  requireSuperAdmin,
   setComplaintStatus,
   uploadAll,
   versionOf,
 } from "./complaintWorkflow.shared";
-import { chargeBalance } from "./complaintPayment.service";
+import { chargeBalance, resolutionPaymentDue } from "./complaintPayment.service";
 import { OPEN_EXECUTION } from "./complaintExecution.service";
 
 // Client confirmation, reopening, HO closure (spec 16) and cancellation.
@@ -41,6 +43,7 @@ async function financialIssues(db: typeof prisma | Prisma.TransactionClient, com
     }),
   ]);
   const issues: string[] = [];
+  if (await resolutionPaymentDue(db, complaint)) issues.push("Repair payment due at resolution is not recorded");
   if (pending) issues.push(`${pending} payment${pending === 1 ? "" : "s"} awaiting verification`);
   for (const charge of charges) {
     const b = await chargeBalance(db, charge.id);
@@ -65,7 +68,7 @@ export async function closurePermissions(
       head && complaint.status === "AWAITING_HO_CLOSURE_APPROVAL" && complaint.current_cycle_id
         ? { financial_issues: await financialIssues(prisma, { id: complaint.id, current_cycle_id: complaint.current_cycle_id }) }
         : null,
-    can_cancel: head && !FINISHED.includes(complaint.status),
+    can_cancel: isSuperAdmin(actor) && !FINISHED.includes(complaint.status),
   };
 }
 
@@ -135,6 +138,9 @@ export async function recordClientConfirmation(
   if (!satisfied && body.outcome !== "NOT_SATISFIED") throw new ComplaintError("Choose whether the client is satisfied.");
   const clientReference = clientReferenceOf(body.client_reference);
   const remarks = remarksOf(body.remarks, satisfied ? "Client remarks" : "Reason for reopening", !satisfied);
+  const rating = Number(body.rating);
+  if (satisfied && !(Number.isInteger(rating) && rating >= 1 && rating <= 5))
+    throw new ComplaintError("Record the client's rating from 1 to 5 stars.");
   const uploaded = await uploadAll(actor, classifyUploads(photos, 10));
 
   let status: ComplaintStatus = complaint.status;
@@ -157,6 +163,7 @@ export async function recordClientConfirmation(
       const closure = await upsertClosure(tx, actor, complaint, {
         client_confirmation_status: satisfied ? "SATISFIED" : "NOT_SATISFIED",
         client_confirmation_decision_id: decision.id,
+        client_rating: satisfied ? rating : null,
       });
       status = satisfied ? "AWAITING_HO_CLOSURE_APPROVAL" : "REOPENED";
       if (satisfied) await setComplaintStatus(tx, complaint, status);
@@ -169,6 +176,7 @@ export async function recordClientConfirmation(
         closure_id: closure.id,
         acting_on_behalf_of_client: true,
         actor_client_reference: clientReference,
+        metadata: satisfied ? { rating } : undefined,
       });
       if (!satisfied) await reopenTx(tx, actor, complaint, remarks!);
     });
@@ -250,7 +258,7 @@ export async function approveClosure(actor: ComplaintActor, id: number, body: Re
 }
 
 export async function cancelComplaint(actor: ComplaintActor, id: number, body: Record<string, unknown>) {
-  requireHead(actor, "cancel complaints");
+  requireSuperAdmin(actor, "cancel complaints");
   const complaint = await loadComplaint(actor, id);
   if (FINISHED.includes(complaint.status)) throw new ComplaintError("This complaint is already finished.", 409);
   const version = versionOf(body.version);

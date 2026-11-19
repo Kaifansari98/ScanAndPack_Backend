@@ -9,6 +9,8 @@ import {
   LoadedComplaint,
   loadComplaint,
   log,
+  isComplaintStaff,
+  isHead,
   money,
   moveStatus,
   remarksOf,
@@ -21,7 +23,8 @@ import { startExecutionTx } from "./complaintExecution.service";
 
 // Payments against visit and repair charges (spec 14). Visiting and repair
 // charges stay separate records; every payment needs a transaction reference
-// and proof, and only HO can verify it.
+// and proof. Visiting-charge payments and payments HO records are accepted as
+// recorded; a site supervisor's repair payment is verified by HO.
 
 type Db = Prisma.TransactionClient | typeof prisma;
 
@@ -58,6 +61,78 @@ export async function chargeBalance(db: Db, chargeId: number) {
 export const isSettled = (b: Awaited<ReturnType<typeof chargeBalance>>) =>
   b.charge.status !== "OPEN" || b.verified >= b.amount;
 
+// Validates the payment fields and uploads the proof, before any transaction.
+// Without `outstanding` the amount is not capped (file-only quotations).
+export async function preparePayment(
+  actor: ComplaintActor,
+  body: Record<string, unknown>,
+  proofs: ComplaintUpload[],
+  outstanding?: number,
+) {
+  const amount = money(body.amount, "Payment amount");
+  if (outstanding !== undefined && amount > outstanding)
+    throw new ComplaintError(`The amount exceeds the outstanding ₹${outstanding.toFixed(2)}.`);
+  const method = body.method as ComplaintPaymentMethod;
+  if (!Object.values(ComplaintPaymentMethod).includes(method)) throw new ComplaintError("Select the payment method.");
+  const reference = remarksOf(body.transaction_reference, "Transaction reference")!.slice(0, 255);
+  const paymentDate = dateOnly(body.payment_date, "Payment date", { required: true, notFuture: true })!;
+  if (proofs.length !== 1) throw new ComplaintError("Attach one payment proof (photo or PDF).");
+  const uploaded = await uploadAll(actor, classifyUploads(proofs, 1, false));
+  return { amount, method, reference, paymentDate, uploaded };
+}
+
+export type PreparedPayment = Awaited<ReturnType<typeof preparePayment>>;
+
+// Stores the proof, the payment and its allocation to one charge.
+export async function insertPaymentTx(
+  tx: Prisma.TransactionClient,
+  actor: ComplaintActor,
+  complaint: LoadedComplaint,
+  charge: { id: number; charge_type: string; visit_id: number | null; quotation_id: number | null },
+  p: PreparedPayment,
+  verified: boolean,
+) {
+  const [row] = attachmentRows(actor, complaint, p.uploaded, {
+    category: "PAYMENT_PROOF",
+    visit_id: charge.visit_id,
+  });
+  const proof = await tx.complaintAttachment.create({ data: row });
+  const payment = await tx.complaintPayment.create({
+    data: {
+      vendor_id: actor.vendorId,
+      complaint_id: complaint.id,
+      cycle_id: complaint.current_cycle_id,
+      amount: p.amount,
+      method: p.method,
+      transaction_reference: p.reference,
+      payment_date: p.paymentDate,
+      proof_attachment_id: proof.id,
+      actor_type: "STAFF",
+      actor_user_id: actor.actorId,
+      ...(verified ? { status: "VERIFIED", verified_by: actor.actorId, verified_at: new Date() } : {}),
+    },
+  });
+  await tx.complaintPaymentAllocation.create({
+    data: {
+      vendor_id: actor.vendorId,
+      complaint_id: complaint.id,
+      cycle_id: complaint.current_cycle_id,
+      payment_id: payment.id,
+      charge_id: charge.id,
+      amount: p.amount,
+      allocated_by: actor.actorId,
+    },
+  });
+  await log(tx, actor, complaint, {
+    action: `${charge.charge_type}_PAYMENT_RECORDED`,
+    remarks: `₹${p.amount.toFixed(2)} via ${p.method} · ${p.reference}`,
+    visit_id: charge.visit_id,
+    quotation_id: charge.quotation_id,
+    payment_id: payment.id,
+  });
+  return payment;
+}
+
 export async function recordChargePayment(
   actor: ComplaintActor,
   complaint: LoadedComplaint,
@@ -68,61 +143,24 @@ export async function recordChargePayment(
 ) {
   const balance = await chargeBalance(prisma, chargeId);
   if (balance.charge.status !== "OPEN") throw new ComplaintError("This charge is no longer payable.", 409);
-  const amount = money(body.amount, "Payment amount");
-  if (amount > balance.outstanding)
-    throw new ComplaintError(`The amount exceeds the outstanding ₹${balance.outstanding.toFixed(2)}.`);
-  const method = body.method as ComplaintPaymentMethod;
-  if (!Object.values(ComplaintPaymentMethod).includes(method)) throw new ComplaintError("Select the payment method.");
-  const reference = remarksOf(body.transaction_reference, "Transaction reference")!.slice(0, 255);
-  const paymentDate = dateOnly(body.payment_date, "Payment date", { required: true, notFuture: true })!;
-  if (proofs.length !== 1) throw new ComplaintError("Attach one payment proof (photo or PDF).");
-  const uploaded = await uploadAll(actor, classifyUploads(proofs, 1, false));
-  const prefix = balance.charge.charge_type;
+  const prepared = await preparePayment(actor, body, proofs, balance.outstanding);
+  // Visiting charges, and anything HO records itself, count as verified;
+  // a supervisor's repair payment still waits for HO.
+  const autoVerified = balance.charge.charge_type === "VISIT" || isHead(actor.role);
 
   try {
     return await prisma.$transaction(async (tx) => {
       await moveStatus(tx, complaint, version, {});
-      const [row] = attachmentRows(actor, complaint, uploaded, {
-        category: "PAYMENT_PROOF",
-        visit_id: balance.charge.visit_id,
-      });
-      const proof = await tx.complaintAttachment.create({ data: row });
-      const payment = await tx.complaintPayment.create({
-        data: {
-          vendor_id: actor.vendorId,
-          complaint_id: complaint.id,
-          cycle_id: complaint.current_cycle_id,
-          amount,
-          method,
-          transaction_reference: reference,
-          payment_date: paymentDate,
-          proof_attachment_id: proof.id,
-          actor_type: "STAFF",
-          actor_user_id: actor.actorId,
-        },
-      });
-      await tx.complaintPaymentAllocation.create({
-        data: {
-          vendor_id: actor.vendorId,
-          complaint_id: complaint.id,
-          cycle_id: complaint.current_cycle_id,
-          payment_id: payment.id,
-          charge_id: chargeId,
-          amount,
-          allocated_by: actor.actorId,
-        },
-      });
-      await log(tx, actor, complaint, {
-        action: `${prefix}_PAYMENT_RECORDED`,
-        remarks: `₹${amount.toFixed(2)} via ${method} · ${reference}`,
-        visit_id: balance.charge.visit_id,
-        quotation_id: balance.charge.quotation_id,
-        payment_id: payment.id,
-      });
-      return { payment_id: payment.id };
+      const payment = await insertPaymentTx(tx, actor, complaint, balance.charge, prepared, autoVerified);
+      let status: ComplaintStatus = complaint.status;
+      if (autoVerified) {
+        const settled = await chargeBalance(tx, chargeId);
+        if (isSettled(settled)) status = (await onChargeSettled(tx, actor, complaint, settled)) ?? status;
+      }
+      return { payment_id: payment.id, status };
     });
   } catch (error) {
-    await deleteWasabiObjects(uploaded.map((u) => u.key));
+    await deleteWasabiObjects(prepared.uploaded.map((u) => u.key));
     throw error;
   }
 }
@@ -280,4 +318,105 @@ export async function recordRepairPayment(
   });
   if (!charge) throw new ComplaintError("Repair charge not found for this complaint.", 404);
   return recordChargePayment(actor, complaint, versionOf(body.version), chargeId, body, proofs);
+}
+
+// Stages after the client accepted a quotation, up to closure.
+const RESOLUTION_STAGE: ComplaintStatus[] = [
+  "PROCUREMENT_PENDING",
+  "MATERIAL_RECEIVED",
+  "REPAIR_SCHEDULED",
+  "WORK_IN_PROGRESS",
+  "AWAITING_CLIENT_CONFIRMATION",
+  "AWAITING_HO_CLOSURE_APPROVAL",
+];
+
+// The accepted quotation whose repair amount the client pays at resolution,
+// while that payment is still unrecorded.
+export async function resolutionPaymentDue(db: Db, complaint: { id: number; current_cycle_id: number | null }) {
+  if (!complaint.current_cycle_id) return null;
+  return db.complaintQuotation.findFirst({
+    where: {
+      complaint_id: complaint.id,
+      cycle_id: complaint.current_cycle_id,
+      status: "CLIENT_ACCEPTED",
+      payment_at_resolution: true,
+      charges: { none: {} },
+    },
+    select: { id: true, quotation_number: true, revision: true },
+  });
+}
+
+async function loadResolutionDue(actor: ComplaintActor, id: number, quotationId: number) {
+  const complaint = await loadComplaint(actor, id);
+  if (!RESOLUTION_STAGE.includes(complaint.status))
+    throw new ComplaintError("The repair payment can be recorded once the work is under way.", 409);
+  const due = await resolutionPaymentDue(prisma, complaint);
+  if (!due || due.id !== quotationId)
+    throw new ComplaintError("No repair payment is due at resolution for this quotation.", 409);
+  return complaint;
+}
+
+function repairChargeData(actor: ComplaintActor, complaint: LoadedComplaint, quotationId: number, amount: number) {
+  return {
+    vendor_id: actor.vendorId,
+    complaint_id: complaint.id,
+    cycle_id: complaint.current_cycle_id,
+    charge_type: "REPAIR" as const,
+    quotation_id: quotationId,
+    amount,
+    created_by: actor.actorId,
+  };
+}
+
+// Repair payment the client agreed to pay when the work is resolved.
+export async function recordResolutionPayment(
+  actor: ComplaintActor,
+  id: number,
+  quotationId: number,
+  body: Record<string, unknown>,
+  proofs: ComplaintUpload[],
+) {
+  const complaint = await loadResolutionDue(actor, id, quotationId);
+  if (!isComplaintStaff(actor, complaint))
+    throw new ComplaintError("Only HO or the assigned site supervisor can record payments.", 403);
+  const version = versionOf(body.version);
+  const prepared = await preparePayment(actor, body, proofs);
+  try {
+    await prisma.$transaction(async (tx) => {
+      await moveStatus(tx, complaint, version, {});
+      const charge = await tx.complaintCharge.create({
+        data: repairChargeData(actor, complaint, quotationId, prepared.amount),
+      });
+      await insertPaymentTx(tx, actor, complaint, charge, prepared, isHead(actor.role));
+    });
+  } catch (error) {
+    await deleteWasabiObjects(prepared.uploaded.map((u) => u.key));
+    throw error;
+  }
+  return { status: complaint.status };
+}
+
+// HO decides nothing is collected after all.
+export async function waiveResolutionPayment(
+  actor: ComplaintActor,
+  id: number,
+  quotationId: number,
+  body: Record<string, unknown>,
+) {
+  requireHead(actor, "waive charges");
+  const complaint = await loadResolutionDue(actor, id, quotationId);
+  const version = versionOf(body.version);
+  const remarks = remarksOf(body.remarks, "Reason for the waiver")!;
+  await prisma.$transaction(async (tx) => {
+    await moveStatus(tx, complaint, version, {});
+    const charge = await tx.complaintCharge.create({ data: repairChargeData(actor, complaint, quotationId, 0) });
+    const { decision } = await waiveChargeTx(tx, actor, complaint, charge.id, remarks);
+    await log(tx, actor, complaint, {
+      action: "REPAIR_CHARGE_WAIVED",
+      remarks,
+      decision_id: decision.id,
+      quotation_id: quotationId,
+    });
+  });
+  return { status: complaint.status };
 }

@@ -19,6 +19,7 @@ router.get("/vendor/:vendorId/lead-options", controller.leadOptions);
 router.get("/vendor/:vendorId/lead-franchises", controller.leadFranchises);
 router.get("/vendor/:vendorId/duplicates", controller.getDuplicates);
 router.get("/vendor/:vendorId/complaints", controller.list);
+router.get("/vendor/:vendorId/my-tasks", controller.myTasks);
 router.get("/vendor/:vendorId/complaints/:complaintId", controller.detail);
 router.get("/vendor/:vendorId/complaints/:complaintId/activity", controller.activity);
 router.get("/vendor/:vendorId/complaints/:complaintId/assignee-options", controller.assigneeOptions);
@@ -32,9 +33,6 @@ router.post("/vendor/:vendorId/complaints/:complaintId/visits/:visitId/action", 
 router.post("/vendor/:vendorId/complaints/:complaintId/payments/:paymentId/review", controller.paymentReview);
 router.post("/vendor/:vendorId/complaints/:complaintId/warranty", controller.warranty);
 router.post("/vendor/:vendorId/complaints/:complaintId/cancel", controller.cancel);
-router.post("/vendor/:vendorId/complaints/:complaintId/inspection-decision", controller.inspectionDecision);
-router.post("/vendor/:vendorId/complaints/:complaintId/quotations", controller.quotation);
-router.post("/vendor/:vendorId/complaints/:complaintId/quotations/:quotationId/action", controller.quotationAction);
 router.post("/vendor/:vendorId/complaints/:complaintId/charges/:chargeId/waive", controller.repairWaiver);
 router.post("/vendor/:vendorId/complaints/:complaintId/executions/:executionId/action", controller.executionAction);
 router.post("/vendor/:vendorId/complaints/:complaintId/closure/no-response", controller.noResponseClosure);
@@ -117,6 +115,30 @@ router.post(
     { name: "documents", maxCount: 5 },
   ]),
   controller.inspection,
+);
+router.post(
+  "/vendor/:vendorId/complaints/:complaintId/inspection-decision",
+  multipartRoute([{ name: "files", maxCount: 5 }], COMPLAINT_MAX_PHOTO_SIZE),
+  controller.inspectionDecision,
+);
+router.post(
+  "/vendor/:vendorId/complaints/:complaintId/quotations",
+  multipartRoute([{ name: "files", maxCount: 5 }], COMPLAINT_MAX_PHOTO_SIZE),
+  controller.quotation,
+);
+router.post(
+  "/vendor/:vendorId/complaints/:complaintId/quotations/:quotationId/action",
+  multipartRoute([{ name: "proof", maxCount: 1 }], COMPLAINT_MAX_PHOTO_SIZE),
+  controller.quotationAction,
+);
+router.post(
+  "/vendor/:vendorId/complaints/:complaintId/quotations/:quotationId/resolution-payment",
+  multipartRoute([{ name: "proof", maxCount: 1 }], COMPLAINT_MAX_PHOTO_SIZE),
+  controller.resolutionPayment,
+);
+router.post(
+  "/vendor/:vendorId/complaints/:complaintId/quotations/:quotationId/resolution-waiver",
+  controller.resolutionWaiver,
 );
 router.post(
   "/vendor/:vendorId/complaints/:complaintId/charges/:chargeId/payments",

@@ -51,12 +51,12 @@ export type VisitAction =
   | "DECLINE_CHARGE"
   | "WAIVE_CHARGE"
   | "RECORD_PAYMENT"
+  | "PAY_AT_VISIT"
   | "APPROVE_FREE"
   | "DECLINE_FREE"
   | "SCHEDULE"
   | "CONFIRM"
   | "RESCHEDULE"
-  | "COMPLETE"
   | "CLIENT_NOT_AVAILABLE"
   | "SITE_NOT_ACCESSIBLE"
   | "CANCEL";
@@ -71,10 +71,13 @@ function loadVisits(db: Db, vendorId: number, complaintId: number, cycleId: numb
       id: true,
       visit_number: true,
       status: true,
+      purpose: true,
       charge_mode: true,
       standard_fee: true,
+      pay_at_visit: true,
       assigned_ss_id: true,
       free_approval_decision_id: true,
+      _count: { select: { inspectionReports: true } },
       charges: {
         select: {
           id: true,
@@ -113,6 +116,9 @@ function visitActions(actor: ComplaintActor, complaint: ComplaintForActions, vis
   if (!head && complaint.assigned_ss_id !== actor.actorId) return [];
   const m = money(visit);
   const actions: VisitAction[] = [];
+  // Cash collected by the team is recorded on the visit itself, before completion.
+  const cashDue =
+    visit.pay_at_visit && m.charge?.status === "OPEN" && m.amount - m.committed > 0;
   switch (visit.status) {
     case "PENDING_FREE_APPROVAL":
       if (head) actions.push("APPROVE_FREE", "DECLINE_FREE");
@@ -125,6 +131,7 @@ function visitActions(actor: ComplaintActor, complaint: ComplaintForActions, vis
       break;
     case "AWAITING_PAYMENT":
       if (m.amount - m.committed > 0) actions.push("RECORD_PAYMENT");
+      if (m.committed === 0) actions.push("PAY_AT_VISIT", "DECLINE_CHARGE");
       if (head && m.committed === 0) actions.push("WAIVE_CHARGE");
       if (!m.pending) actions.push("CANCEL");
       break;
@@ -135,10 +142,53 @@ function visitActions(actor: ComplaintActor, complaint: ComplaintForActions, vis
       actions.push("CONFIRM");
     // falls through
     case "CONFIRMED":
-      actions.push("RESCHEDULE", "COMPLETE", "CLIENT_NOT_AVAILABLE", "SITE_NOT_ACCESSIBLE", "CANCEL");
+      if (cashDue) actions.push("RECORD_PAYMENT");
+      // The visit completes when its inspection report is submitted.
+      actions.push("RESCHEDULE", "CLIENT_NOT_AVAILABLE", "SITE_NOT_ACCESSIBLE", "CANCEL");
       break;
   }
   return actions;
+}
+
+// Spec 10.4: never complete a visit without a cleared charge or an approved
+// exception. Cash collected at the visit only has to be recorded.
+export function visitChargeBlocker(visit: VisitRow): string | null {
+  const m = money(visit);
+  const cleared =
+    visit.charge_mode === "FREE_REPEAT"
+      ? !!visit.free_approval_decision_id
+      : m.charge?.status === "WAIVED" ||
+        (m.charge?.status === "OPEN" && (visit.pay_at_visit ? m.committed : m.verified) >= m.amount);
+  if (cleared) return null;
+  return visit.pay_at_visit
+    ? "Record the cash collected at the visit before submitting the inspection report."
+    : "The visiting charge is not cleared for this visit.";
+}
+
+// The visit whose inspection report is due: the scheduled one (submitting the
+// report completes it), or an older completed visit still missing its report.
+export async function visitAwaitingReport(db: Db, vendorId: number, complaintId: number, cycleId: number) {
+  const visits = await loadVisits(db, vendorId, complaintId, cycleId);
+  const due = visits.filter(
+    (v) => ["SCHEDULED", "CONFIRMED", "COMPLETED"].includes(v.status) && v._count.inspectionReports === 0,
+  );
+  return due[due.length - 1] ?? null;
+}
+
+// Marks the visit done and closes its site-visit task.
+export async function completeVisitTx(
+  tx: Prisma.TransactionClient,
+  actor: ComplaintActor,
+  complaint: LoadedComplaint,
+  visitId: number,
+) {
+  const now = new Date();
+  await tx.complaintVisit.update({ where: { id: visitId }, data: { status: "COMPLETED", completed_at: now } });
+  await tx.complaintTask.updateMany({
+    where: { cycle_id: complaint.current_cycle_id, task_key: `SITE_VISIT:${visitId}` },
+    data: { status: "completed", completed_by: actor.actorId, completed_at: now },
+  });
+  await log(tx, actor, complaint, { action: "VISIT_COMPLETE", visit_id: visitId });
 }
 
 // What the details page needs to render the visit stage for this viewer.
@@ -235,10 +285,11 @@ export async function createVisitTx(
   const head = isHead(actor.role);
   const free = opts.chargeMode === "FREE_REPEAT";
   // HO's own free-repeat request is its approval; an SS request waits for HO.
-  // A vendor charging ₹0 has nothing for the client to accept or pay.
+  // A vendor charging ₹0 has nothing for the client to pay. Recording the
+  // payment is also the client's acceptance of the charge.
   const status: ComplaintVisitStatus = !free
     ? fee > 0
-      ? "AWAITING_CHARGE_ACCEPTANCE"
+      ? "AWAITING_PAYMENT"
       : "READY_TO_SCHEDULE"
     : head
       ? "READY_TO_SCHEDULE"
@@ -341,7 +392,6 @@ export async function runVisitAction(
     throw new ComplaintError("This action is not available for the visit's current status.", 409);
   const m = money(visit);
   const ssId = visit.assigned_ss_id ?? complaint.assigned_ss_id;
-  const now = new Date();
 
   // Validate everything before opening the transaction.
   const remarksRequired: VisitAction[] = [
@@ -363,28 +413,24 @@ export async function runVisitAction(
   const when =
     action === "SCHEDULE" || action === "RESCHEDULE" ? futureDateTime(body.scheduled_for, "Visit date and time") : null;
   const team = action === "SCHEDULE" ? remarksOf(body.team_details, "Team details", false) : null;
+  // An installation team visit inspects and fixes in one go.
+  const purpose = body.purpose ?? "INSPECTION";
+  if (action === "SCHEDULE" && purpose !== "INSPECTION" && purpose !== "INSTALLATION_TEAM")
+    throw new ComplaintError("Choose the visit type.");
   if ((action === "SCHEDULE" || action === "RESCHEDULE") && !ssId)
     throw new ComplaintError("Assign a site supervisor before scheduling the visit.");
-  if (action === "COMPLETE") {
-    // Spec 10.4: never complete without verified payment or an approved exception.
-    const cleared =
-      visit.charge_mode === "FREE_REPEAT"
-        ? !!visit.free_approval_decision_id
-        : m.charge?.status === "WAIVED" || (m.charge?.status === "OPEN" && m.verified >= m.amount);
-    if (!cleared) throw new ComplaintError("The visiting charge is not cleared for this visit.", 409);
-  }
 
   const next: Record<VisitAction, ComplaintVisitStatus> = {
     ACCEPT_CHARGE: "AWAITING_PAYMENT",
     DECLINE_CHARGE: "CANCELLED",
     WAIVE_CHARGE: "READY_TO_SCHEDULE",
     RECORD_PAYMENT: "AWAITING_PAYMENT",
+    PAY_AT_VISIT: "READY_TO_SCHEDULE",
     APPROVE_FREE: "READY_TO_SCHEDULE",
-    DECLINE_FREE: "AWAITING_CHARGE_ACCEPTANCE",
+    DECLINE_FREE: "AWAITING_PAYMENT",
     SCHEDULE: "SCHEDULED",
     CONFIRM: "CONFIRMED",
     RESCHEDULE: "SCHEDULED",
-    COMPLETE: "COMPLETED",
     CLIENT_NOT_AVAILABLE: "CLIENT_NOT_AVAILABLE",
     SITE_NOT_ACCESSIBLE: "SITE_NOT_ACCESSIBLE",
     CANCEL: "CANCELLED",
@@ -419,6 +465,9 @@ export async function runVisitAction(
           await tx.complaintCharge.update({ where: { id: m.charge.id }, data: { status: "VOIDED" } });
         break;
       }
+      case "PAY_AT_VISIT":
+        visitData.pay_at_visit = true;
+        break;
       case "WAIVE_CHARGE": {
         const decision = await tx.complaintDecision.create({
           data: decisionData(actor, complaint, { visit_id: visit.id, decision_type: "CHARGE_WAIVER", outcome: "APPROVED", remarks }),
@@ -452,6 +501,7 @@ export async function runVisitAction(
         visitData.scheduled_for = when;
         visitData.assigned_ss_id = ssId;
         if (team) visitData.team_details = team;
+        if (action === "SCHEDULE") visitData.purpose = purpose as "INSPECTION" | "INSTALLATION_TEAM";
         if (action === "RESCHEDULE") visitData.reschedule_count = { increment: 1 };
         // Spec: no site visit without an approved CRM task.
         await tx.complaintTask.upsert({
@@ -469,13 +519,6 @@ export async function runVisitAction(
             created_by: actor.actorId,
           },
           update: { assigned_to: ssId!, due_date: when, status: "open", remark: remarks },
-        });
-        break;
-      case "COMPLETE":
-        visitData.completed_at = now;
-        await tx.complaintTask.updateMany({
-          where: { cycle_id: complaint.current_cycle_id, task_key: taskKey },
-          data: { status: "completed", completed_by: actor.actorId, completed_at: now },
         });
         break;
       case "CLIENT_NOT_AVAILABLE":
@@ -503,7 +546,9 @@ export async function runVisitAction(
       decision_id: decisionId,
       acting_on_behalf_of_client: onBehalf,
       actor_client_reference: clientReference,
-      metadata: when ? { scheduled_for: when.toISOString() } : undefined,
+      metadata: when
+        ? { scheduled_for: when.toISOString(), ...(action === "SCHEDULE" ? { purpose } : {}) }
+        : undefined,
     });
   });
   return { status: complaintStatus, visit_status: visitStatus };
