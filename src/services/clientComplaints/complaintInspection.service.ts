@@ -228,36 +228,22 @@ export async function submitInspection(
         metadata: { responsibility, material_required: materialRequired, files: uploaded.length },
       });
       if (installationVisit) {
-        // The installation team already worked on site, so there is no quotation:
-        // procure any material the report lists, otherwise the issue is resolved.
+        // Installation team visit: no quotation. Material listed in the report
+        // is procured first; then the resolution visit is scheduled.
         const submitted = { ...complaint, status: "INSPECTION_SUBMITTED" as ComplaintStatus };
-        if (materialRequired) {
-          const decision = await tx.complaintDecision.create({
-            data: decisionData(actor, submitted, {
-              decision_type: "QUOTATION_SKIP",
-              outcome: "SKIPPED",
-              remarks: "Installation team visit; material listed in the inspection report.",
-            }),
-          });
-          status = await startExecutionTx(tx, actor, submitted, {
-            quotationSkipDecisionId: decision.id,
-            materialRequired: true,
-          });
-        } else {
-          await tx.complaintCycle.update({
-            where: { id: complaint.current_cycle_id },
-            data: { resolved_at: new Date() },
-          });
-          status = "AWAITING_CLIENT_CONFIRMATION";
-          await setComplaintStatus(tx, submitted, status);
-          await log(tx, actor, complaint, {
-            action: "RESOLVED_AT_INSTALLATION_VISIT",
-            from_status: "INSPECTION_SUBMITTED",
-            to_status: status,
-            remarks: "Installation team resolved the issue during the visit.",
-            visit_id: visit.id,
-          });
-        }
+        const decision = await tx.complaintDecision.create({
+          data: decisionData(actor, submitted, {
+            decision_type: "QUOTATION_SKIP",
+            outcome: "SKIPPED",
+            remarks: materialRequired
+              ? "Installation team visit; material listed in the inspection report."
+              : "Installation team visit; no material required.",
+          }),
+        });
+        status = await startExecutionTx(tx, actor, submitted, {
+          quotationSkipDecisionId: decision.id,
+          materialRequired,
+        });
       }
     });
   } catch (error) {

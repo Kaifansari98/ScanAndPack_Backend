@@ -3,7 +3,7 @@ import { ComplaintStatus, ComplaintVisitStatus } from "../../prisma/generated";
 import { ComplaintActor, ComplaintError, ComplaintUpload } from "./clientComplaints.service";
 import {
   decisionData,
-  futureDateTime,
+  upcomingDate,
   isHead,
   LoadedComplaint,
   loadComplaint,
@@ -110,15 +110,22 @@ function money(visit: VisitRow) {
 
 type ComplaintForActions = { status: ComplaintStatus; assigned_ss_id: number | null };
 
+// Cash the client pays the visiting team that is not recorded yet.
+const cashDue = (visit: VisitRow) => {
+  const m = money(visit);
+  return visit.pay_at_visit && m.charge?.status === "OPEN" && m.amount - m.committed > 0;
+};
+
 function visitActions(actor: ComplaintActor, complaint: ComplaintForActions, visit: VisitRow): VisitAction[] {
   const head = isHead(actor.role);
-  if (!VISIT_STAGE.includes(complaint.status)) return [];
   if (!head && complaint.assigned_ss_id !== actor.actorId) return [];
+  // The inspection does not wait for the cash: it can be recorded after the
+  // visit, at any stage until closure.
+  if (visit.status === "COMPLETED")
+    return cashDue(visit) && !["CLOSED", "REJECTED", "CANCELLED"].includes(complaint.status) ? ["RECORD_PAYMENT"] : [];
+  if (!VISIT_STAGE.includes(complaint.status)) return [];
   const m = money(visit);
   const actions: VisitAction[] = [];
-  // Cash collected by the team is recorded on the visit itself, before completion.
-  const cashDue =
-    visit.pay_at_visit && m.charge?.status === "OPEN" && m.amount - m.committed > 0;
   switch (visit.status) {
     case "PENDING_FREE_APPROVAL":
       if (head) actions.push("APPROVE_FREE", "DECLINE_FREE");
@@ -142,7 +149,7 @@ function visitActions(actor: ComplaintActor, complaint: ComplaintForActions, vis
       actions.push("CONFIRM");
     // falls through
     case "CONFIRMED":
-      if (cashDue) actions.push("RECORD_PAYMENT");
+      if (cashDue(visit)) actions.push("RECORD_PAYMENT");
       // The visit completes when its inspection report is submitted.
       actions.push("RESCHEDULE", "CLIENT_NOT_AVAILABLE", "SITE_NOT_ACCESSIBLE", "CANCEL");
       break;
@@ -151,18 +158,16 @@ function visitActions(actor: ComplaintActor, complaint: ComplaintForActions, vis
 }
 
 // Spec 10.4: never complete a visit without a cleared charge or an approved
-// exception. Cash collected at the visit only has to be recorded.
+// exception. Cash collected at the visit may be recorded afterwards; until it
+// is, HO cannot close the complaint.
 export function visitChargeBlocker(visit: VisitRow): string | null {
+  if (visit.pay_at_visit) return null;
   const m = money(visit);
   const cleared =
     visit.charge_mode === "FREE_REPEAT"
       ? !!visit.free_approval_decision_id
-      : m.charge?.status === "WAIVED" ||
-        (m.charge?.status === "OPEN" && (visit.pay_at_visit ? m.committed : m.verified) >= m.amount);
-  if (cleared) return null;
-  return visit.pay_at_visit
-    ? "Record the cash collected at the visit before submitting the inspection report."
-    : "The visiting charge is not cleared for this visit.";
+      : m.charge?.status === "WAIVED" || (m.charge?.status === "OPEN" && m.verified >= m.amount);
+  return cleared ? null : "The visiting charge is not cleared for this visit.";
 }
 
 // The visit whose inspection report is due: the scheduled one (submitting the
@@ -222,7 +227,7 @@ export async function visitPermissions(
       .map((v) => ({ id: v.id, visit_number: v.visit_number })),
     visit_actions: Object.fromEntries(
       visits
-        .filter((v) => !ENDED.includes(v.status))
+        .filter((v) => !ENDED.includes(v.status) || (v.status === "COMPLETED" && cashDue(v)))
         .map((v) => {
           const m = money(v);
           return [
@@ -411,7 +416,7 @@ export async function runVisitAction(
     ? remarksOf(body.client_reference, "How the client confirmed")!.slice(0, 255)
     : null;
   const when =
-    action === "SCHEDULE" || action === "RESCHEDULE" ? futureDateTime(body.scheduled_for, "Visit date and time") : null;
+    action === "SCHEDULE" || action === "RESCHEDULE" ? upcomingDate(body.scheduled_for, "Visit date") : null;
   const team = action === "SCHEDULE" ? remarksOf(body.team_details, "Team details", false) : null;
   // An installation team visit inspects and fixes in one go.
   const purpose = body.purpose ?? "INSPECTION";

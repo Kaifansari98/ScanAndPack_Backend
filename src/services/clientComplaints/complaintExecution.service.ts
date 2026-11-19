@@ -6,7 +6,7 @@ import {
   attachmentRows,
   classifyUploads,
   dateOnly,
-  futureDateTime,
+  upcomingDate,
   isComplaintStaff,
   LoadedComplaint,
   loadComplaint,
@@ -191,7 +191,7 @@ export async function runExecutionAction(
     case "RESCHEDULE_REPAIR":
       if (!ssId) throw new ComplaintError("Assign a site supervisor before scheduling the repair.");
       next = "REPAIR_SCHEDULED";
-      when = futureDateTime(body.scheduled_for, "Repair date and time");
+      when = upcomingDate(body.scheduled_for, "Repair date");
       data.scheduled_for = when;
       data.assigned_ss_id = ssId;
       {
