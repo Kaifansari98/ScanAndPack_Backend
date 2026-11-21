@@ -45,4 +45,5 @@ token's email (`is_deleted = false`, app-enabled vendor), so leads added after s
 | ----------------------------- | --------------------------------------------------------------------------------------------- |
 | `GET /`                       | The client's leads with `product_types` (non-archived mappings), `stage` and `instance_count`. |
 | `GET /:leadId/instances`      | Non-archived product structure instances; `stage` falls back to the lead's stage. 404 if the lead isn't the client's. |
-| `GET /:leadId/instances/:instanceId/tracker` | Client project tracker for one item. Currently `booking`: confirmation date, `mrp_value`, `total_booking_value`, `advance_received` (+ date) and booking documents (Type 8, excluding payment proofs) with 1-hour signed URLs. `null` until the lead is booked. |
+| `GET /:leadId/tracker`       | Client Project Tracker for one booking: `project`, `current` stage card (status, dates, client remark, On Hold / Delayed details, items), all 8 `stages`, `expected_completion` (original + latest approved), `booking` summary and documents, `latest_update`. Built by `services/projectTracker/projectTracker.core.ts`. |
+| `GET /:leadId/updates`       | Published project updates, newest first: staff updates (with signed file URLs) plus stage milestones from the CRM. |

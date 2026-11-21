@@ -28,6 +28,7 @@ private static taskIncludes() {
       updated_by: true,
       updated_at: true,
       instance_id: true, // ✅ NEW
+      complaint_id: true,
 
       // ----------------
       // RELATIONS
@@ -162,6 +163,8 @@ private static mapTaskWithLead(task: any) {
       updated_by: task.updated_by,
       updated_at: task.updated_at,
       instance_id: task.instance_id ?? null,
+      // Complaint tasks open the complaint instead of a lead stage.
+      complaint_id: task.complaint_id ?? null,
     },
     leadMaster: {
       id: task.lead?.id,

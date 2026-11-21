@@ -83,6 +83,15 @@ export const uploadComplaintFile = async (buffer: Buffer, vendorId: number, mime
   return key;
 };
 
+export const uploadProjectTrackerFile = async (buffer: Buffer, vendorId: number, leadId: number, mimeType: string) => {
+  const extensions: Record<string,string> = { "image/jpeg":"jpg", "image/png":"png", "image/webp":"webp", "image/gif":"gif", "image/heic":"heic", "image/heif":"heif", "video/mp4":"mp4", "video/quicktime":"mov", "video/webm":"webm", "application/pdf":"pdf" };
+  const ext=extensions[mimeType];
+  if (!ext) throw new Error("Unsupported project tracker file format");
+  const key=`project_tracker/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  await wasabi.send(new PutObjectCommand({ Bucket:process.env.WASABI_BUCKET_NAME!,Key:key,Body:buffer,ContentType:mimeType }));
+  return key;
+};
+
 export const deleteWasabiObjects = async (keys: string[]) => {
   await Promise.allSettled(
     keys.map((key) => wasabi.send(new DeleteObjectCommand({ Bucket: process.env.WASABI_BUCKET_NAME!, Key: key }))),

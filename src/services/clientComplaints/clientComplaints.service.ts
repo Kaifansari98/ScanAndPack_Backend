@@ -104,6 +104,14 @@ function text(
   return trimmed;
 }
 
+// Optional Google Maps (or any http/https) link to the site.
+function mapLink(value: unknown) {
+  const link = text(value, "Map link", 1000);
+  if (link && !/^https?:\/\/\S+$/i.test(link))
+    throw new ComplaintError("Enter a valid map link starting with http:// or https://.");
+  return link;
+}
+
 function mobile(value: unknown, label: string, required = false) {
   const raw = text(value, label, 40, required);
   if (raw === null) return null;
@@ -136,9 +144,18 @@ export async function ensureDefaultCategories(vendorId: number, actorId: number)
   });
 }
 
+// The vendor's store cities, in their configured order.
+function storeCities(vendorId: number) {
+  return prisma.storeCityMaster.findMany({
+    where: { vendor_id: vendorId, is_active: true },
+    orderBy: [{ sort_order: "asc" }, { name: "asc" }],
+    select: { name: true },
+  });
+}
+
 export async function getComplaintMeta(actor: ComplaintActor) {
   await ensureDefaultCategories(actor.vendorId, actor.actorId);
-  const [categories, productTypes, vendor, masterCities, usedCities] = await Promise.all([
+  const [categories, productTypes, vendor, cities, miscTypes] = await Promise.all([
     prisma.complaintCategoryMaster.findMany({
       where: { vendor_id: actor.vendorId, is_active: true },
       orderBy: [{ sort_order: "asc" }, { name: "asc" }],
@@ -153,23 +170,17 @@ export async function getComplaintMeta(actor: ComplaintActor) {
       where: { id: actor.vendorId },
       select: { complaint_visit_fee: true },
     }),
-    prisma.cityMaster.findMany({ select: { name: true } }),
-    prisma.complaintExternalClient.findMany({
-      where: { vendor_id: actor.vendorId },
-      distinct: ["city"],
-      select: { city: true },
+    storeCities(actor.vendorId),
+    prisma.miscellaneousTypeMaster.findMany({
+      where: { vendor_id: actor.vendorId, status: "active" },
+      orderBy: { name: "asc" },
+      select: { id: true, name: true },
     }),
   ]);
-  // City suggestions: the city master plus cities already used on complaints.
-  const cities = new Map<string, string>();
-  for (const name of [...masterCities.map((c) => c.name), ...usedCities.map((c) => c.city)]) {
-    const clean = name?.trim();
-    if (clean && !cities.has(clean.toLowerCase()))
-      cities.set(clean.toLowerCase(), clean.replace(/\b\w/g, (ch) => ch.toUpperCase()));
-  }
   return {
     categories,
-    cities: [...cities.values()].sort((x, y) => x.localeCompare(y)),
+    cities: cities.map((c) => c.name),
+    misc_types: miscTypes,
     product_types: productTypes,
     components: Object.values(ComplaintComponent),
     can_register: canRegisterComplaints(actor.role),
@@ -213,6 +224,7 @@ function leadForComplaintQuery(vendorId: number, leadCode: string) {
       alt_contact_no: true,
       email: true,
       site_address: true,
+      site_map_link: true,
       usable_handover_completed_at: true,
       final_handover_marked_at: true,
       franchise_id: true,
@@ -348,6 +360,7 @@ export async function lookupLeadForComplaint(actor: ComplaintActor, rawLeadCode:
     alternate_mobile: lead.alt_contact_no,
     email: lead.email,
     site_address: lead.site_address,
+    site_map_link: lead.site_map_link?.trim() || null,
     usable_handover_date: toDateOnly(lead.usable_handover_completed_at),
     final_handover_date: toDateOnly(lead.final_handover_marked_at),
     products: products.map((p) => ({
@@ -499,20 +512,23 @@ export async function registerComplaint(
       let sequenceNo: number;
       let externalClientId: number | null = null;
 
+      // One running complaint number per vendor (CMP1, CMP2, …) whatever the
+      // client; the client's code follows it. The vendor lock keeps two
+      // registrations from taking the same number.
+      await tx.$queryRaw`SELECT id FROM "VendorMaster" WHERE id = ${actor.vendorId} FOR UPDATE`;
+      const last = await tx.complaintMaster.aggregate({
+        where: { vendor_id: actor.vendorId },
+        _max: { sequence_no: true },
+      });
+      sequenceNo = (last._max.sequence_no ?? 0) + 1;
+
       if (leadContext) {
-        await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${leadContext.leadId} FOR UPDATE`;
-        const last = await tx.complaintMaster.aggregate({
-          where: { vendor_id: actor.vendorId, lead_id: leadContext.leadId, client_type: "CRM_LEAD" },
-          _max: { sequence_no: true },
-        });
-        sequenceNo = (last._max.sequence_no ?? 0) + 1;
         complaintCode = `CMP${sequenceNo}-${leadContext.leadCode}`;
       } else {
         const ext = externalContext!;
         if (ext.existingClientId) {
           externalClientId = ext.existingClientId;
         } else {
-          await tx.$queryRaw`SELECT id FROM "VendorMaster" WHERE id = ${actor.vendorId} FOR UPDATE`;
           const clientCount = await tx.complaintExternalClient.count({ where: { vendor_id: actor.vendorId } });
           const prefix = (vendor.vendor_code || "SH").trim().toUpperCase();
           const client = await tx.complaintExternalClient.create({
@@ -532,16 +548,10 @@ export async function registerComplaint(
           });
           externalClientId = client.id;
         }
-        await tx.$queryRaw`SELECT id FROM "ComplaintExternalClient" WHERE id = ${externalClientId} FOR UPDATE`;
         const client = await tx.complaintExternalClient.findUniqueOrThrow({
           where: { id: externalClientId },
           select: { external_client_code: true },
         });
-        const last = await tx.complaintMaster.aggregate({
-          where: { vendor_id: actor.vendorId, external_client_id: externalClientId },
-          _max: { sequence_no: true },
-        });
-        sequenceNo = (last._max.sequence_no ?? 0) + 1;
         complaintCode = `CMP${sequenceNo}-${client.external_client_code}`;
       }
 
@@ -566,6 +576,7 @@ export async function registerComplaint(
           client_alternate_mobile: snapshot.alternateMobile,
           client_email: snapshot.email,
           site_address: snapshot.siteAddress,
+          site_map_link: snapshot.siteMapLink,
           city: externalContext?.city ?? null,
           product_type: snapshot.productType,
           category_id: category.id,
@@ -686,6 +697,7 @@ async function resolveLeadContext(
   const finalHandoverDate = lead.final_handover_marked_at;
 
   const siteAddress = lead.site_address?.trim() || text(body.site_address, "Site address", 2000, true)!;
+  const siteMapLink = lead.site_map_link?.trim() || mapLink(body.site_map_link);
   const assignees = await complaintAssigneeOptions(actor.vendorId, lead);
   const siteSupervisorId = pickAssignee(assignees.siteSupervisors, body.site_supervisor_id, "Site supervisor");
   const headSiteSupervisorId = pickAssignee(
@@ -713,7 +725,8 @@ async function resolveLeadContext(
     alternateMobile: lead.alt_contact_no,
     email: lead.email,
     siteAddress,
-    productType: product ? `${product.productType.type} – ${product.title}` : null,
+    siteMapLink,
+    productType: product ?`${product.productType.type} – ${product.title}` : null,
     usableHandoverDate,
     finalHandoverDate,
     siteSupervisorId,
@@ -731,7 +744,11 @@ async function resolveExternalContext(actor: ComplaintActor, body: Record<string
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
     throw new ComplaintError("Enter a valid email address.");
   const siteAddress = text(body.site_address, "Complete site address", 2000, true)!;
-  const city = text(body.city, "City", 120, true)!;
+  const siteMapLink = mapLink(body.site_map_link);
+  const city = text(body.city, "Store city", 120, true)!;
+  // A linked existing client keeps the city already on record.
+  if (!existingClientId && !(await storeCities(actor.vendorId)).some((c) => c.name === city))
+    throw new ComplaintError("Select the store city from the list.");
   const productType = text(body.product_type, "Product type", 200, true)!;
   const installationDate = parseDate(body.installation_date, "Installation date");
 
@@ -759,6 +776,7 @@ async function resolveExternalContext(actor: ComplaintActor, body: Record<string
     alternateMobile,
     email,
     siteAddress,
+    siteMapLink,
     city,
     productType,
     installationDate,
@@ -845,33 +863,4 @@ export async function listComplaints(actor: ComplaintActor, query: Record<string
     limit,
     status_counts: Object.fromEntries(grouped.map((g) => [g.status, g._count._all])),
   };
-}
-
-// Open complaint tasks assigned to this user, shown under My Tasks.
-export async function myComplaintTasks(actor: ComplaintActor) {
-  const tasks = await prisma.complaintTask.findMany({
-    where: {
-      vendor_id: actor.vendorId,
-      assigned_to: actor.actorId,
-      status: { in: ["open", "in_progress"] },
-      cycle: { complaint: { status: { notIn: FINISHED_STATUSES } } },
-    },
-    orderBy: [{ due_date: "asc" }, { id: "asc" }],
-    take: 200,
-    select: {
-      id: true,
-      task_type: true,
-      status: true,
-      due_date: true,
-      remark: true,
-      cycle: {
-        select: {
-          complaint: {
-            select: { id: true, complaint_code: true, client_name: true, client_mobile: true, status: true, site_address: true },
-          },
-        },
-      },
-    },
-  });
-  return tasks.map(({ cycle, ...task }) => ({ ...task, complaint: cycle.complaint }));
 }

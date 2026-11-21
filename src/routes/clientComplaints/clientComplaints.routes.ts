@@ -19,7 +19,6 @@ router.get("/vendor/:vendorId/lead-options", controller.leadOptions);
 router.get("/vendor/:vendorId/lead-franchises", controller.leadFranchises);
 router.get("/vendor/:vendorId/duplicates", controller.getDuplicates);
 router.get("/vendor/:vendorId/complaints", controller.list);
-router.get("/vendor/:vendorId/my-tasks", controller.myTasks);
 router.get("/vendor/:vendorId/complaints/:complaintId", controller.detail);
 router.get("/vendor/:vendorId/complaints/:complaintId/activity", controller.activity);
 router.get("/vendor/:vendorId/complaints/:complaintId/assignee-options", controller.assigneeOptions);
@@ -113,6 +112,7 @@ router.post(
     { name: "photos", maxCount: 15 },
     { name: "videos", maxCount: 5 },
     { name: "documents", maxCount: 5 },
+    { name: "payment_proof", maxCount: 1 },
   ]),
   controller.inspection,
 );
@@ -150,6 +150,7 @@ router.post(
   multipartRoute([
     { name: "before", maxCount: 10 },
     { name: "after", maxCount: 10 },
+    { name: "payment_proof", maxCount: 1 },
   ]),
   controller.executionComplete,
 );

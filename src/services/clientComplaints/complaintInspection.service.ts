@@ -30,6 +30,7 @@ import {
 import { startExecutionTx } from "./complaintExecution.service";
 import { completeVisitTx, visitAwaitingReport, visitChargeBlocker } from "./complaintVisit.service";
 import { canPrepareQuotation, quotationFiles, shareQuotationTx } from "./complaintQuotation.service";
+import { insertPaymentTx, prepareVisitCash } from "./complaintPayment.service";
 
 // Warranty decision (spec 8), site inspection report (spec 12) and HO's call on
 // how a submitted inspection proceeds.
@@ -133,7 +134,12 @@ export async function submitInspection(
   actor: ComplaintActor,
   id: number,
   body: Record<string, unknown>,
-  files: { photos: ComplaintUpload[]; videos: ComplaintUpload[]; documents: ComplaintUpload[] },
+  files: {
+    photos: ComplaintUpload[];
+    videos: ComplaintUpload[];
+    documents: ComplaintUpload[];
+    paymentProof?: ComplaintUpload[];
+  },
 ) {
   const complaint = await loadComplaint(actor, id);
   if (!isComplaintStaff(actor, complaint))
@@ -181,15 +187,31 @@ export async function submitInspection(
     pending_work: remarksOf(body.pending_work, "Pending work")!.slice(0, 4000),
   };
   const materials = materialRequired ? parseMaterials(body.materials) : [];
+  // Material for a CRM lead goes to the factory as a Miscellaneous request.
+  let miscTypeId: number | null = null;
+  if (materialRequired && complaint.lead_id) {
+    miscTypeId = Number(body.misc_type_id);
+    const miscType = Number.isSafeInteger(miscTypeId)
+      ? await prisma.miscellaneousTypeMaster.findFirst({
+          where: { id: miscTypeId, vendor_id: actor.vendorId, status: "active" },
+          select: { id: true },
+        })
+      : null;
+    if (!miscType) throw new ComplaintError("Select the miscellaneous type for the factory request.");
+  }
   if (files.photos.length === 0) throw new ComplaintError("Add at least one damage photograph.");
   const checked = classifyUploads([...files.photos, ...files.videos, ...files.documents], MAX_INSPECTION_FILES);
-  const uploaded = await uploadAll(actor, checked);
+  // Cash collected at the visit is recorded with the report.
+  const cash = await prepareVisitCash(actor, complaint, body.visit_payment, files.paymentProof ?? [], visit.id);
+  let uploaded: Awaited<ReturnType<typeof uploadAll>> = [];
   const installationVisit = visit.purpose === "INSTALLATION_TEAM";
   let status: ComplaintStatus = "INSPECTION_SUBMITTED";
 
   try {
+    uploaded = await uploadAll(actor, checked);
     await prisma.$transaction(async (tx) => {
       await moveStatus(tx, complaint, version, {});
+      if (cash) await insertPaymentTx(tx, actor, complaint, cash.charge, cash.prepared, true);
       if (completesVisit) await completeVisitTx(tx, actor, complaint, visit.id);
       const created = await tx.complaintInspectionReport.create({
         data: {
@@ -198,6 +220,7 @@ export async function submitInspection(
           cycle_id: complaint.current_cycle_id,
           visit_id: visit.id,
           submitted_by: actor.actorId,
+          misc_type_id: miscTypeId,
           ...report,
         },
       });
@@ -228,40 +251,26 @@ export async function submitInspection(
         metadata: { responsibility, material_required: materialRequired, files: uploaded.length },
       });
       if (installationVisit) {
-        // The installation team already worked on site, so there is no quotation:
-        // procure any material the report lists, otherwise the issue is resolved.
+        // Installation team visit: no quotation. Material listed in the report
+        // is procured first; then the resolution visit is scheduled.
         const submitted = { ...complaint, status: "INSPECTION_SUBMITTED" as ComplaintStatus };
-        if (materialRequired) {
-          const decision = await tx.complaintDecision.create({
-            data: decisionData(actor, submitted, {
-              decision_type: "QUOTATION_SKIP",
-              outcome: "SKIPPED",
-              remarks: "Installation team visit; material listed in the inspection report.",
-            }),
-          });
-          status = await startExecutionTx(tx, actor, submitted, {
-            quotationSkipDecisionId: decision.id,
-            materialRequired: true,
-          });
-        } else {
-          await tx.complaintCycle.update({
-            where: { id: complaint.current_cycle_id },
-            data: { resolved_at: new Date() },
-          });
-          status = "AWAITING_CLIENT_CONFIRMATION";
-          await setComplaintStatus(tx, submitted, status);
-          await log(tx, actor, complaint, {
-            action: "RESOLVED_AT_INSTALLATION_VISIT",
-            from_status: "INSPECTION_SUBMITTED",
-            to_status: status,
-            remarks: "Installation team resolved the issue during the visit.",
-            visit_id: visit.id,
-          });
-        }
+        const decision = await tx.complaintDecision.create({
+          data: decisionData(actor, submitted, {
+            decision_type: "QUOTATION_SKIP",
+            outcome: "SKIPPED",
+            remarks: materialRequired
+              ? "Installation team visit; material listed in the inspection report."
+              : "Installation team visit; no material required.",
+          }),
+        });
+        status = await startExecutionTx(tx, actor, submitted, {
+          quotationSkipDecisionId: decision.id,
+          materialRequired,
+        });
       }
     });
   } catch (error) {
-    await deleteWasabiObjects(uploaded.map((u) => u.key));
+    await deleteWasabiObjects([...uploaded, ...(cash?.prepared.uploaded ?? [])].map((u) => u.key));
     throw error;
   }
   return { status };

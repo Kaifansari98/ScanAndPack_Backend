@@ -56,6 +56,8 @@ export async function loadComplaint(actor: ComplaintActor, id: number) {
       assigned_ss_id: true,
       assigned_hss_id: true,
       current_cycle_id: true,
+      lead_id: true,
+      account_id: true,
       lead: { select: { franchise_id: true } },
     },
   });
@@ -241,11 +243,12 @@ export function dateOnly(value: unknown, label: string, opts: { required?: boole
   return date;
 }
 
-export function futureDateTime(value: unknown, label: string) {
-  if (typeof value !== "string" || !value) throw new ComplaintError(`${label} is required.`);
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) throw new ComplaintError(`${label} is not a valid date and time.`);
-  if (date.getTime() < Date.now() - 5 * 60 * 1000) throw new ComplaintError(`${label} must be in the future.`);
+// Visits and repairs are planned by day only, today or later (CRM timezone).
+export function upcomingDate(value: unknown, label: string) {
+  const date = dateOnly(value, label, { required: true })!;
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Kolkata" }).format(new Date());
+  if (date.getTime() < new Date(`${today}T00:00:00Z`).getTime())
+    throw new ComplaintError(`${label} cannot be in the past.`);
   return date;
 }
 

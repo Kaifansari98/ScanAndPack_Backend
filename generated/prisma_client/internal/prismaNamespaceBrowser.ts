@@ -319,7 +319,13 @@ export const ModelName = {
   ComplaintActivityLog: 'ComplaintActivityLog',
   EmployeeComplaint: 'EmployeeComplaint',
   AttendanceLocation: 'AttendanceLocation',
-  UserAttendanceLocation: 'UserAttendanceLocation'
+  UserAttendanceLocation: 'UserAttendanceLocation',
+  StoreCityMaster: 'StoreCityMaster',
+  ProjectTrackerStage: 'ProjectTrackerStage',
+  ProjectTrackerDateRevision: 'ProjectTrackerDateRevision',
+  ProjectTrackerLog: 'ProjectTrackerLog',
+  ProjectTrackerUpdate: 'ProjectTrackerUpdate',
+  ProjectTrackerUpdateFile: 'ProjectTrackerUpdateFile'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -2037,7 +2043,9 @@ export const UserLeadTaskScalarFieldEnum = {
   lead_stage: 'lead_stage',
   instance_id: 'instance_id',
   franchise_id: 'franchise_id',
-  small_order_request_id: 'small_order_request_id'
+  small_order_request_id: 'small_order_request_id',
+  complaint_id: 'complaint_id',
+  complaint_task_id: 'complaint_task_id'
 } as const
 
 export type UserLeadTaskScalarFieldEnum = (typeof UserLeadTaskScalarFieldEnum)[keyof typeof UserLeadTaskScalarFieldEnum]
@@ -4752,6 +4760,7 @@ export const ComplaintMasterScalarFieldEnum = {
   client_alternate_mobile: 'client_alternate_mobile',
   client_email: 'client_email',
   site_address: 'site_address',
+  site_map_link: 'site_map_link',
   city: 'city',
   product_type: 'product_type',
   component: 'component',
@@ -4919,6 +4928,7 @@ export const ComplaintInspectionReportScalarFieldEnum = {
   additional_visit_required: 'additional_visit_required',
   further_approval_required: 'further_approval_required',
   pending_work: 'pending_work',
+  misc_type_id: 'misc_type_id',
   submitted_by: 'submitted_by',
   submitted_at: 'submitted_at'
 } as const
@@ -5248,6 +5258,106 @@ export const UserAttendanceLocationScalarFieldEnum = {
 } as const
 
 export type UserAttendanceLocationScalarFieldEnum = (typeof UserAttendanceLocationScalarFieldEnum)[keyof typeof UserAttendanceLocationScalarFieldEnum]
+
+
+export const StoreCityMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  name: 'name',
+  sort_order: 'sort_order',
+  is_active: 'is_active',
+  created_at: 'created_at'
+} as const
+
+export type StoreCityMasterScalarFieldEnum = (typeof StoreCityMasterScalarFieldEnum)[keyof typeof StoreCityMasterScalarFieldEnum]
+
+
+export const ProjectTrackerStageScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  stage: 'stage',
+  original_expected_date: 'original_expected_date',
+  original_set_at: 'original_set_at',
+  original_set_by: 'original_set_by',
+  approved_expected_date: 'approved_expected_date',
+  hold_status: 'hold_status',
+  hold_reason: 'hold_reason',
+  hold_action: 'hold_action',
+  hold_resume_date: 'hold_resume_date',
+  hold_since: 'hold_since',
+  client_remark: 'client_remark',
+  client_remark_at: 'client_remark_at',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ProjectTrackerStageScalarFieldEnum = (typeof ProjectTrackerStageScalarFieldEnum)[keyof typeof ProjectTrackerStageScalarFieldEnum]
+
+
+export const ProjectTrackerDateRevisionScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  stage: 'stage',
+  previous_date: 'previous_date',
+  proposed_date: 'proposed_date',
+  approved_date: 'approved_date',
+  reason: 'reason',
+  status: 'status',
+  requested_by: 'requested_by',
+  requested_at: 'requested_at',
+  decided_by: 'decided_by',
+  decided_at: 'decided_at',
+  decision_remarks: 'decision_remarks'
+} as const
+
+export type ProjectTrackerDateRevisionScalarFieldEnum = (typeof ProjectTrackerDateRevisionScalarFieldEnum)[keyof typeof ProjectTrackerDateRevisionScalarFieldEnum]
+
+
+export const ProjectTrackerLogScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  stage: 'stage',
+  action: 'action',
+  details: 'details',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type ProjectTrackerLogScalarFieldEnum = (typeof ProjectTrackerLogScalarFieldEnum)[keyof typeof ProjectTrackerLogScalarFieldEnum]
+
+
+export const ProjectTrackerUpdateScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  stage: 'stage',
+  kind: 'kind',
+  title: 'title',
+  description: 'description',
+  published_by: 'published_by',
+  published_at: 'published_at'
+} as const
+
+export type ProjectTrackerUpdateScalarFieldEnum = (typeof ProjectTrackerUpdateScalarFieldEnum)[keyof typeof ProjectTrackerUpdateScalarFieldEnum]
+
+
+export const ProjectTrackerUpdateFileScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  update_id: 'update_id',
+  storage_key: 'storage_key',
+  original_name: 'original_name',
+  mime_type: 'mime_type',
+  size_bytes: 'size_bytes',
+  media_type: 'media_type',
+  created_at: 'created_at'
+} as const
+
+export type ProjectTrackerUpdateFileScalarFieldEnum = (typeof ProjectTrackerUpdateFileScalarFieldEnum)[keyof typeof ProjectTrackerUpdateFileScalarFieldEnum]
 
 
 export const SortOrder = {
