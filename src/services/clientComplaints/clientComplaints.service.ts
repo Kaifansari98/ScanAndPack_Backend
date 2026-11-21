@@ -512,20 +512,23 @@ export async function registerComplaint(
       let sequenceNo: number;
       let externalClientId: number | null = null;
 
+      // One running complaint number per vendor (CMP1, CMP2, …) whatever the
+      // client; the client's code follows it. The vendor lock keeps two
+      // registrations from taking the same number.
+      await tx.$queryRaw`SELECT id FROM "VendorMaster" WHERE id = ${actor.vendorId} FOR UPDATE`;
+      const last = await tx.complaintMaster.aggregate({
+        where: { vendor_id: actor.vendorId },
+        _max: { sequence_no: true },
+      });
+      sequenceNo = (last._max.sequence_no ?? 0) + 1;
+
       if (leadContext) {
-        await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${leadContext.leadId} FOR UPDATE`;
-        const last = await tx.complaintMaster.aggregate({
-          where: { vendor_id: actor.vendorId, lead_id: leadContext.leadId, client_type: "CRM_LEAD" },
-          _max: { sequence_no: true },
-        });
-        sequenceNo = (last._max.sequence_no ?? 0) + 1;
         complaintCode = `CMP${sequenceNo}-${leadContext.leadCode}`;
       } else {
         const ext = externalContext!;
         if (ext.existingClientId) {
           externalClientId = ext.existingClientId;
         } else {
-          await tx.$queryRaw`SELECT id FROM "VendorMaster" WHERE id = ${actor.vendorId} FOR UPDATE`;
           const clientCount = await tx.complaintExternalClient.count({ where: { vendor_id: actor.vendorId } });
           const prefix = (vendor.vendor_code || "SH").trim().toUpperCase();
           const client = await tx.complaintExternalClient.create({
@@ -545,16 +548,10 @@ export async function registerComplaint(
           });
           externalClientId = client.id;
         }
-        await tx.$queryRaw`SELECT id FROM "ComplaintExternalClient" WHERE id = ${externalClientId} FOR UPDATE`;
         const client = await tx.complaintExternalClient.findUniqueOrThrow({
           where: { id: externalClientId },
           select: { external_client_code: true },
         });
-        const last = await tx.complaintMaster.aggregate({
-          where: { vendor_id: actor.vendorId, external_client_id: externalClientId },
-          _max: { sequence_no: true },
-        });
-        sequenceNo = (last._max.sequence_no ?? 0) + 1;
         complaintCode = `CMP${sequenceNo}-${client.external_client_code}`;
       }
 
