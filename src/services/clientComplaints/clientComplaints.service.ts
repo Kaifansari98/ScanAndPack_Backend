@@ -1,8 +1,5 @@
 import { prisma, Prisma } from "../../prisma/client";
-import {
-  ComplaintComponent,
-  ComplaintStatus,
-} from "../../prisma/generated";
+import { ComplaintComponent, ComplaintStatus } from "../../prisma/generated";
 import { PHOTO_TYPES, validFMFileSignature } from "../fmRequirements/schema";
 import { deleteWasabiObjects, uploadComplaintFile } from "../../utils/wasabiClient";
 
@@ -44,13 +41,11 @@ export interface ComplaintActor {
   role: string;
 }
 
-export const canRegisterComplaints = (role: string) =>
-  role === "super-admin" || role === "head-site-supervisor";
+export const canRegisterComplaints = (role: string) => role === "super-admin" || role === "head-site-supervisor";
 
 export const canViewAllComplaints = canRegisterComplaints;
 
-export const canViewComplaints = (role: string) =>
-  canViewAllComplaints(role) || role === "site-supervisor";
+export const canViewComplaints = (role: string) => canViewAllComplaints(role) || role === "site-supervisor";
 
 export async function requireComplaintsVendor(vendorId: number) {
   const vendor = await prisma.vendorMaster.findUnique({
@@ -62,14 +57,16 @@ export async function requireComplaintsVendor(vendorId: number) {
 }
 
 const fullName = (first?: string | null, last?: string | null) =>
-  [first, last].map((v) => v?.trim()).filter(Boolean).join(" ");
+  [first, last]
+    .map((v) => v?.trim())
+    .filter(Boolean)
+    .join(" ");
 
 const digits = (value: string) => value.replace(/\D/g, "");
 
 const lastTen = (value: string) => digits(value).slice(-10);
 
-const toDateOnly = (value: Date | null | undefined) =>
-  value ? value.toISOString().slice(0, 10) : null;
+const toDateOnly = (value: Date | null | undefined) => (value ? value.toISOString().slice(0, 10) : null);
 
 function parseDate(value: unknown, label: string, required = false): Date | null {
   if (value === undefined || value === null || value === "") {
@@ -83,12 +80,7 @@ function parseDate(value: unknown, label: string, required = false): Date | null
   return date;
 }
 
-function text(
-  value: unknown,
-  label: string,
-  max: number,
-  required = false,
-): string | null {
+function text(value: unknown, label: string, max: number, required = false): string | null {
   if (value === undefined || value === null) {
     if (required) throw new ComplaintError(`${label} is required.`);
     return null;
@@ -99,8 +91,7 @@ function text(
     if (required) throw new ComplaintError(`${label} is required.`);
     return null;
   }
-  if (trimmed.length > max)
-    throw new ComplaintError(`${label} must be at most ${max} characters.`);
+  if (trimmed.length > max) throw new ComplaintError(`${label} must be at most ${max} characters.`);
   return trimmed;
 }
 
@@ -116,8 +107,7 @@ function mobile(value: unknown, label: string, required = false) {
   const raw = text(value, label, 40, required);
   if (raw === null) return null;
   const count = digits(raw).length;
-  if (count < 10 || count > 15)
-    throw new ComplaintError(`${label} must contain 10 to 15 digits.`);
+  if (count < 10 || count > 15) throw new ComplaintError(`${label} must contain 10 to 15 digits.`);
   // Stored compact so duplicate checks can match on the trailing 10 digits.
   return raw.replace(/[^\d+]/g, "");
 }
@@ -125,13 +115,14 @@ function mobile(value: unknown, label: string, required = false) {
 function optionalId(value: unknown, label: string) {
   if (value === undefined || value === null || value === "") return null;
   const id = Number(value);
-  if (!Number.isSafeInteger(id) || id <= 0)
-    throw new ComplaintError(`${label} is invalid.`);
+  if (!Number.isSafeInteger(id) || id <= 0) throw new ComplaintError(`${label} is invalid.`);
   return id;
 }
 
 export async function ensureDefaultCategories(vendorId: number, actorId: number) {
-  const count = await prisma.complaintCategoryMaster.count({ where: { vendor_id: vendorId } });
+  const count = await prisma.complaintCategoryMaster.count({
+    where: { vendor_id: vendorId },
+  });
   if (count > 0) return;
   await prisma.complaintCategoryMaster.createMany({
     data: DEFAULT_CATEGORIES.map((name, index) => ({
@@ -234,19 +225,26 @@ function leadForComplaintQuery(vendorId: number, leadCode: string) {
 
 // The supervisor already working the lead. LeadUserMapping is the current
 // record; LeadSiteSupervisorMapping is the legacy one for site supervisors.
-async function leadOwnSupervisor(
-  vendorId: number,
-  leadId: number,
-  type: "site-supervisor" | "head-site-supervisor",
-) {
+async function leadOwnSupervisor(vendorId: number, leadId: number, type: "site-supervisor" | "head-site-supervisor") {
   const mapping = await prisma.leadUserMapping.findFirst({
-    where: { vendor_id: vendorId, lead_id: leadId, type, status: "active", user: { status: "active" } },
+    where: {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      type,
+      status: "active",
+      user: { status: "active" },
+    },
     orderBy: { created_at: "desc" },
     select: { user: { select: { id: true, user_name: true } } },
   });
   if (mapping || type === "head-site-supervisor") return mapping?.user ?? null;
   const legacy = await prisma.leadSiteSupervisorMapping.findFirst({
-    where: { vendor_id: vendorId, lead_id: leadId, status: "active", supervisor: { status: "active" } },
+    where: {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      status: "active",
+      supervisor: { status: "active" },
+    },
     orderBy: { created_at: "desc" },
     select: { supervisor: { select: { id: true, user_name: true } } },
   });
@@ -260,10 +258,7 @@ const HSS_TYPES = ["head-site-supervisor", "head site supervisor", "head_site_su
 
 // Spec 1: the complaint goes to the SS (and HSS) already assigned to the lead.
 // Only a lead without one falls back to whoever covers its franchise.
-async function complaintAssigneeOptions(
-  vendorId: number,
-  lead: { id: number; franchise_id: number | null },
-) {
+async function complaintAssigneeOptions(vendorId: number, lead: { id: number; franchise_id: number | null }) {
   const franchiseId = lead.franchise_id;
   const userSelect = { id: true, user_name: true } as const;
   const [siteSupervisors, headSiteSupervisors] = franchiseId
@@ -275,7 +270,11 @@ async function complaintAssigneeOptions(
             user_type: { user_type: { in: SS_TYPES, mode: "insensitive" } },
             OR: [
               { franchise_id: franchiseId },
-              { siteSupervisorFranchiseMappings: { some: { vendor_id: vendorId, franchise_id: franchiseId } } },
+              {
+                siteSupervisorFranchiseMappings: {
+                  some: { vendor_id: vendorId, franchise_id: franchiseId },
+                },
+              },
             ],
           },
           orderBy: { user_name: "asc" },
@@ -288,12 +287,18 @@ async function complaintAssigneeOptions(
             OR: [
               {
                 headSiteSupervisorFranchiseMappings: {
-                  some: { vendor_id: vendorId, franchise_id: franchiseId, status: true },
+                  some: {
+                    vendor_id: vendorId,
+                    franchise_id: franchiseId,
+                    status: true,
+                  },
                 },
               },
               {
                 franchise_id: franchiseId,
-                user_type: { user_type: { in: HSS_TYPES, mode: "insensitive" } },
+                user_type: {
+                  user_type: { in: HSS_TYPES, mode: "insensitive" },
+                },
               },
             ],
           },
@@ -303,7 +308,10 @@ async function complaintAssigneeOptions(
       ])
     : [[], []];
 
-  const toAssignee = (u: { id: number; user_name: string }): Assignee => ({ id: u.id, name: u.user_name });
+  const toAssignee = (u: { id: number; user_name: string }): Assignee => ({
+    id: u.id,
+    name: u.user_name,
+  });
   const [leadSs, leadHss] = await Promise.all([
     leadOwnSupervisor(vendorId, lead.id, "site-supervisor"),
     leadOwnSupervisor(vendorId, lead.id, "head-site-supervisor"),
@@ -339,16 +347,29 @@ export async function lookupLeadForComplaint(actor: ComplaintActor, rawLeadCode:
 
   const [products, assignees, complaints] = await Promise.all([
     prisma.leadProductStructureInstance.findMany({
-      where: { vendor_id: actor.vendorId, lead_id: lead.id, is_archived: false },
+      where: {
+        vendor_id: actor.vendorId,
+        lead_id: lead.id,
+        is_archived: false,
+      },
       orderBy: [{ product_type_id: "asc" }, { quantity_index: "asc" }],
-      select: { id: true, title: true, productType: { select: { type: true } } },
+      select: {
+        id: true,
+        title: true,
+        productType: { select: { type: true } },
+      },
     }),
     complaintAssigneeOptions(actor.vendorId, lead),
     prisma.complaintMaster.findMany({
       where: { vendor_id: actor.vendorId, lead_id: lead.id },
       orderBy: { created_at: "desc" },
       take: 10,
-      select: { complaint_code: true, status: true, created_at: true, description: true },
+      select: {
+        complaint_code: true,
+        status: true,
+        created_at: true,
+        description: true,
+      },
     }),
   ]);
 
@@ -379,7 +400,11 @@ export async function lookupLeadForComplaint(actor: ComplaintActor, rawLeadCode:
 // Possible matches are only shown to HO; nothing is merged or rejected automatically.
 export async function findPossibleDuplicates(
   vendorId: number,
-  input: { mobile?: string | null; name?: string | null; address?: string | null },
+  input: {
+    mobile?: string | null;
+    name?: string | null;
+    address?: string | null;
+  },
 ) {
   const mobileKey = input.mobile ? lastTen(input.mobile) : "";
   const name = input.name?.trim();
@@ -415,9 +440,19 @@ export async function findPossibleDuplicates(
     }),
     mobileKey.length === 10
       ? prisma.leadMaster.findMany({
-          where: { vendor_id: vendorId, is_deleted: false, contact_no: { contains: mobileKey } },
+          where: {
+            vendor_id: vendorId,
+            is_deleted: false,
+            contact_no: { contains: mobileKey },
+          },
           take: 5,
-          select: { id: true, lead_code: true, firstname: true, lastname: true, site_address: true },
+          select: {
+            id: true,
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            site_address: true,
+          },
         })
       : Promise.resolve([]),
   ]);
@@ -442,10 +477,8 @@ export interface ComplaintUpload {
 
 function validateUploads(photos: ComplaintUpload[], videos: ComplaintUpload[]) {
   if (photos.length === 0) throw new ComplaintError("Add at least one photo of the issue.");
-  if (photos.length > COMPLAINT_MAX_PHOTOS)
-    throw new ComplaintError(`Add up to ${COMPLAINT_MAX_PHOTOS} photos.`);
-  if (videos.length > COMPLAINT_MAX_VIDEOS)
-    throw new ComplaintError(`Add up to ${COMPLAINT_MAX_VIDEOS} videos.`);
+  if (photos.length > COMPLAINT_MAX_PHOTOS) throw new ComplaintError(`Add up to ${COMPLAINT_MAX_PHOTOS} photos.`);
+  if (videos.length > COMPLAINT_MAX_VIDEOS) throw new ComplaintError(`Add up to ${COMPLAINT_MAX_VIDEOS} videos.`);
   for (const photo of photos) {
     if (!PHOTO_TYPES.includes(photo.mimetype) || photo.size > COMPLAINT_MAX_PHOTO_SIZE)
       throw new ComplaintError(`${photo.originalname}: upload a JPG, PNG, WEBP, GIF or HEIC photo up to 15 MB.`);
@@ -462,10 +495,40 @@ function validateUploads(photos: ComplaintUpload[], videos: ComplaintUpload[]) {
 
 type ClientMode = "CRM_LEAD" | "EXTERNAL";
 
+export const COMPLAINT_MAX_ISSUES = 10;
+
+// One issue per selected category: each becomes its own complaint with its own
+// description and photos. Older clients send a single category_id/description.
+function parseIssues(body: Record<string, unknown>) {
+  const raw = Array.isArray(body.issues)
+    ? (body.issues as Record<string, unknown>[])
+    : [{ category_id: body.category_id, description: body.description }];
+  if (raw.length === 0) throw new ComplaintError("Select a complaint category.");
+  if (raw.length > COMPLAINT_MAX_ISSUES)
+    throw new ComplaintError(`Select up to ${COMPLAINT_MAX_ISSUES} complaint categories.`);
+  const issues = raw.map((issue) => {
+    if (!issue || typeof issue !== "object") throw new ComplaintError("Complaint details are malformed.");
+    const categoryId = optionalId(issue.category_id, "Complaint category");
+    if (!categoryId) throw new ComplaintError("Select a complaint category.");
+    return {
+      categoryId,
+      description: text(issue.description, "Issue description", 10000, true)!,
+    };
+  });
+  if (new Set(issues.map((i) => i.categoryId)).size !== issues.length)
+    throw new ComplaintError("Each complaint category can be selected only once.");
+  return issues;
+}
+
+/**
+ * Registers one complaint per selected category, all in one transaction with
+ * consecutive numbers. `photosByIssue[i]` are the photos of `issues[i]`;
+ * videos, the preferred visit date and remarks are shared by every complaint.
+ */
 export async function registerComplaint(
   actor: ComplaintActor,
   body: Record<string, unknown>,
-  photos: ComplaintUpload[],
+  photosByIssue: ComplaintUpload[][],
   videos: ComplaintUpload[],
 ) {
   if (!canRegisterComplaints(actor.role))
@@ -475,18 +538,30 @@ export async function registerComplaint(
   if (mode !== "CRM_LEAD" && mode !== "EXTERNAL")
     throw new ComplaintError("Choose whether the client has a CRM lead code.");
 
-  const categoryId = optionalId(body.category_id, "Complaint category");
-  if (!categoryId) throw new ComplaintError("Select a complaint category.");
-  const description = text(body.description, "Issue description", 10000, true)!;
+  const issues = parseIssues(body);
+  if (photosByIssue.length !== issues.length) throw new ComplaintError("Add photos for each complaint category.");
   const additionalRemarks = text(body.additional_remarks, "Additional remarks", 10000);
   const preferredVisitDate = parseDate(body.preferred_visit_date, "Preferred visit date");
-  validateUploads(photos, videos);
 
-  const category = await prisma.complaintCategoryMaster.findFirst({
-    where: { id: categoryId, vendor_id: actor.vendorId, is_active: true },
-    select: { id: true },
+  const categories = await prisma.complaintCategoryMaster.findMany({
+    where: {
+      id: { in: issues.map((i) => i.categoryId) },
+      vendor_id: actor.vendorId,
+      is_active: true,
+    },
+    select: { id: true, name: true },
   });
-  if (!category) throw new ComplaintError("The selected complaint category is not available.");
+  if (categories.length !== issues.length) throw new ComplaintError("A selected complaint category is not available.");
+  const categoryName = (id: number) => categories.find((c) => c.id === id)!.name;
+  issues.forEach((issue, i) => {
+    try {
+      validateUploads(photosByIssue[i], videos);
+    } catch (error) {
+      if (issues.length > 1 && error instanceof ComplaintError)
+        throw new ComplaintError(`${categoryName(issue.categoryId)}: ${error.message}`);
+      throw error;
+    }
+  });
 
   const vendor = await prisma.vendorMaster.findUniqueOrThrow({
     where: { id: actor.vendorId },
@@ -500,16 +575,35 @@ export async function registerComplaint(
   if (mode === "CRM_LEAD") leadContext = await resolveLeadContext(actor, body);
   else externalContext = await resolveExternalContext(actor, body);
 
-  const uploaded: { key: string; file: ComplaintUpload; media: "PHOTO" | "VIDEO" }[] = [];
+  type Uploaded = {
+    key: string;
+    file: ComplaintUpload;
+    media: "PHOTO" | "VIDEO";
+  };
+  // Each complaint gets its own copy of the shared videos: an attachment's
+  // storage key is unique, and complaints are worked on independently.
+  const uploadedByIssue: Uploaded[][] = [];
+  const allUploaded = () => uploadedByIssue.flat();
   try {
-    for (const file of photos)
-      uploaded.push({ key: await uploadComplaintFile(file.buffer, actor.vendorId, file.mimetype), file, media: "PHOTO" });
-    for (const file of videos)
-      uploaded.push({ key: await uploadComplaintFile(file.buffer, actor.vendorId, file.mimetype), file, media: "VIDEO" });
+    for (let i = 0; i < issues.length; i++) {
+      const uploaded: Uploaded[] = [];
+      uploadedByIssue.push(uploaded);
+      for (const file of photosByIssue[i])
+        uploaded.push({
+          key: await uploadComplaintFile(file.buffer, actor.vendorId, file.mimetype),
+          file,
+          media: "PHOTO",
+        });
+      for (const file of videos)
+        uploaded.push({
+          key: await uploadComplaintFile(file.buffer, actor.vendorId, file.mimetype),
+          file,
+          media: "VIDEO",
+        });
+    }
 
     return await prisma.$transaction(async (tx) => {
-      let complaintCode: string;
-      let sequenceNo: number;
+      let clientCode: string;
       let externalClientId: number | null = null;
 
       // One running complaint number per vendor (CMP1, CMP2, …) whatever the
@@ -520,16 +614,18 @@ export async function registerComplaint(
         where: { vendor_id: actor.vendorId },
         _max: { sequence_no: true },
       });
-      sequenceNo = (last._max.sequence_no ?? 0) + 1;
+      const firstSequenceNo = (last._max.sequence_no ?? 0) + 1;
 
       if (leadContext) {
-        complaintCode = `CMP${sequenceNo}-${leadContext.leadCode}`;
+        clientCode = leadContext.leadCode;
       } else {
         const ext = externalContext!;
         if (ext.existingClientId) {
           externalClientId = ext.existingClientId;
         } else {
-          const clientCount = await tx.complaintExternalClient.count({ where: { vendor_id: actor.vendorId } });
+          const clientCount = await tx.complaintExternalClient.count({
+            where: { vendor_id: actor.vendorId },
+          });
           const prefix = (vendor.vendor_code || "SH").trim().toUpperCase();
           const client = await tx.complaintExternalClient.create({
             data: {
@@ -552,130 +648,154 @@ export async function registerComplaint(
           where: { id: externalClientId },
           select: { external_client_code: true },
         });
-        complaintCode = `CMP${sequenceNo}-${client.external_client_code}`;
+        clientCode = client.external_client_code;
       }
 
-      const snapshot = leadContext ?? externalContext!;
-      const assignedSsId = leadContext?.siteSupervisorId ?? null;
-      const assignedHssId =
-        leadContext?.headSiteSupervisorId ?? (actor.role === "head-site-supervisor" ? actor.actorId : null);
+      const created: {
+        id: number;
+        complaint_code: string;
+        status: string;
+        possible_duplicate: boolean;
+      }[] = [];
+      for (let i = 0; i < issues.length; i++) {
+        const sequenceNo = firstSequenceNo + i;
+        const complaintCode = `CMP${sequenceNo}-${clientCode}`;
+        const { categoryId, description } = issues[i];
+        const uploaded = uploadedByIssue[i];
 
-      const complaint = await tx.complaintMaster.create({
-        data: {
-          vendor_id: actor.vendorId,
-          complaint_code: complaintCode,
-          sequence_no: sequenceNo,
-          registration_channel: "STAFF",
-          client_type: mode,
-          lead_id: leadContext?.leadId ?? null,
-          account_id: leadContext?.accountId ?? null,
-          instance_id: leadContext?.instanceId ?? null,
-          external_client_id: externalClientId,
-          client_name: snapshot.clientName,
-          client_mobile: snapshot.mobile,
-          client_alternate_mobile: snapshot.alternateMobile,
-          client_email: snapshot.email,
-          site_address: snapshot.siteAddress,
-          site_map_link: snapshot.siteMapLink,
-          city: externalContext?.city ?? null,
-          product_type: snapshot.productType,
-          category_id: category.id,
-          description,
-          additional_remarks: additionalRemarks,
-          preferred_visit_date: preferredVisitDate,
-          installation_date: externalContext?.installationDate ?? null,
-          usable_handover_date: leadContext?.usableHandoverDate ?? null,
-          final_handover_date: leadContext?.finalHandoverDate ?? null,
-          possible_duplicate: snapshot.possibleDuplicate,
-          assigned_ss_id: assignedSsId,
-          assigned_hss_id: assignedHssId,
-          raised_by_actor_type: "STAFF",
-          raised_by_user_id: actor.actorId,
-          status: "NEW",
-        },
-      });
+        const snapshot = leadContext ?? externalContext!;
+        const assignedSsId = leadContext?.siteSupervisorId ?? null;
+        const assignedHssId =
+          leadContext?.headSiteSupervisorId ?? (actor.role === "head-site-supervisor" ? actor.actorId : null);
 
-      const cycle = await tx.complaintCycle.create({
-        data: {
-          vendor_id: actor.vendorId,
-          complaint_id: complaint.id,
-          cycle_number: 1,
-          opened_by_actor_type: "STAFF",
-          opened_by_user_id: actor.actorId,
-        },
-      });
-      await tx.complaintMaster.update({
-        where: { id: complaint.id },
-        data: { current_cycle_id: cycle.id },
-      });
+        const complaint = await tx.complaintMaster.create({
+          data: {
+            vendor_id: actor.vendorId,
+            complaint_code: complaintCode,
+            sequence_no: sequenceNo,
+            registration_channel: "STAFF",
+            client_type: mode,
+            lead_id: leadContext?.leadId ?? null,
+            account_id: leadContext?.accountId ?? null,
+            instance_id: leadContext?.instanceId ?? null,
+            external_client_id: externalClientId,
+            client_name: snapshot.clientName,
+            client_mobile: snapshot.mobile,
+            client_alternate_mobile: snapshot.alternateMobile,
+            client_email: snapshot.email,
+            site_address: snapshot.siteAddress,
+            site_map_link: snapshot.siteMapLink,
+            city: externalContext?.city ?? null,
+            product_type: snapshot.productType,
+            category_id: categoryId,
+            description,
+            additional_remarks: additionalRemarks,
+            preferred_visit_date: preferredVisitDate,
+            installation_date: externalContext?.installationDate ?? null,
+            usable_handover_date: leadContext?.usableHandoverDate ?? null,
+            final_handover_date: leadContext?.finalHandoverDate ?? null,
+            possible_duplicate: snapshot.possibleDuplicate,
+            assigned_ss_id: assignedSsId,
+            assigned_hss_id: assignedHssId,
+            raised_by_actor_type: "STAFF",
+            raised_by_user_id: actor.actorId,
+            status: "NEW",
+          },
+        });
 
-      await tx.complaintAttachment.createMany({
-        data: uploaded.map(({ key, file, media }) => ({
-          vendor_id: actor.vendorId,
-          complaint_id: complaint.id,
-          cycle_id: cycle.id,
-          storage_key: key,
-          original_name: file.originalname.slice(0, 255),
-          mime_type: file.mimetype,
-          size_bytes: file.size,
-          media_type: media,
-          category: "REGISTRATION" as const,
-          actor_type: "STAFF" as const,
-          actor_user_id: actor.actorId,
-        })),
-      });
+        const cycle = await tx.complaintCycle.create({
+          data: {
+            vendor_id: actor.vendorId,
+            complaint_id: complaint.id,
+            cycle_number: 1,
+            opened_by_actor_type: "STAFF",
+            opened_by_user_id: actor.actorId,
+          },
+        });
+        await tx.complaintMaster.update({
+          where: { id: complaint.id },
+          data: { current_cycle_id: cycle.id },
+        });
 
-      const assignments = [
-        assignedSsId && { role: "SITE_SUPERVISOR" as const, new_user_id: assignedSsId },
-        assignedHssId && { role: "DEPARTMENT_HEAD" as const, new_user_id: assignedHssId },
-      ].filter(Boolean) as { role: "SITE_SUPERVISOR" | "DEPARTMENT_HEAD"; new_user_id: number }[];
-      if (assignments.length)
-        await tx.complaintAssignment.createMany({
-          data: assignments.map((a) => ({
+        await tx.complaintAttachment.createMany({
+          data: uploaded.map(({ key, file, media }) => ({
             vendor_id: actor.vendorId,
             complaint_id: complaint.id,
             cycle_id: cycle.id,
-            role: a.role,
-            new_user_id: a.new_user_id,
-            assigned_by_actor_type: "STAFF" as const,
-            assigned_by: actor.actorId,
+            storage_key: key,
+            original_name: file.originalname.slice(0, 255),
+            mime_type: file.mimetype,
+            size_bytes: file.size,
+            media_type: media,
+            category: "REGISTRATION" as const,
+            actor_type: "STAFF" as const,
+            actor_user_id: actor.actorId,
           })),
         });
 
-      await tx.complaintActivityLog.create({
-        data: {
-          vendor_id: actor.vendorId,
-          complaint_id: complaint.id,
-          cycle_id: cycle.id,
-          action: "COMPLAINT_REGISTERED",
-          to_status: "NEW",
-          actor_type: "STAFF",
-          actor_user_id: actor.actorId,
-          metadata: {
-            photos: photos.length,
-            videos: videos.length,
-            possible_duplicate: snapshot.possibleDuplicate,
+        const assignments = [
+          assignedSsId && {
+            role: "SITE_SUPERVISOR" as const,
+            new_user_id: assignedSsId,
           },
-        },
-      });
+          assignedHssId && {
+            role: "DEPARTMENT_HEAD" as const,
+            new_user_id: assignedHssId,
+          },
+        ].filter(Boolean) as {
+          role: "SITE_SUPERVISOR" | "DEPARTMENT_HEAD";
+          new_user_id: number;
+        }[];
+        if (assignments.length)
+          await tx.complaintAssignment.createMany({
+            data: assignments.map((a) => ({
+              vendor_id: actor.vendorId,
+              complaint_id: complaint.id,
+              cycle_id: cycle.id,
+              role: a.role,
+              new_user_id: a.new_user_id,
+              assigned_by_actor_type: "STAFF" as const,
+              assigned_by: actor.actorId,
+            })),
+          });
 
-      return {
-        id: complaint.id,
-        complaint_code: complaintCode,
-        status: complaint.status,
-        possible_duplicate: snapshot.possibleDuplicate,
-      };
+        await tx.complaintActivityLog.create({
+          data: {
+            vendor_id: actor.vendorId,
+            complaint_id: complaint.id,
+            cycle_id: cycle.id,
+            action: "COMPLAINT_REGISTERED",
+            to_status: "NEW",
+            actor_type: "STAFF",
+            actor_user_id: actor.actorId,
+            metadata: {
+              photos: photosByIssue[i].length,
+              videos: videos.length,
+              possible_duplicate: snapshot.possibleDuplicate,
+              // Registered together with these other complaints, if any.
+              ...(issues.length > 1 ? { batch_size: issues.length, batch_index: i + 1 } : {}),
+            },
+          },
+        });
+
+        created.push({
+          id: complaint.id,
+          complaint_code: complaintCode,
+          status: complaint.status,
+          possible_duplicate: snapshot.possibleDuplicate,
+        });
+      }
+
+      // The first complaint's fields stay at the top level for older clients.
+      return { ...created[0], complaints: created };
     });
   } catch (error) {
-    await deleteWasabiObjects(uploaded.map((u) => u.key));
+    await deleteWasabiObjects(allUploaded().map((u) => u.key));
     throw error;
   }
 }
 
-async function resolveLeadContext(
-  actor: ComplaintActor,
-  body: Record<string, unknown>,
-) {
+async function resolveLeadContext(actor: ComplaintActor, body: Record<string, unknown>) {
   const leadCode = text(body.lead_code, "Lead code", 100, true)!;
   const lead = await leadForComplaintQuery(actor.vendorId, leadCode);
   if (!lead) throw new ComplaintError("No CRM lead matches this lead code. Registration was not allowed.");
@@ -726,7 +846,7 @@ async function resolveLeadContext(
     email: lead.email,
     siteAddress,
     siteMapLink,
-    productType: product ?`${product.productType.type} – ${product.title}` : null,
+    productType: product ? `${product.productType.type} – ${product.title}` : null,
     usableHandoverDate,
     finalHandoverDate,
     siteSupervisorId,
@@ -741,8 +861,7 @@ async function resolveExternalContext(actor: ComplaintActor, body: Record<string
   const clientMobile = mobile(body.client_mobile, "Mobile number", true)!;
   const alternateMobile = mobile(body.client_alternate_mobile, "Alternate number");
   const email = text(body.client_email, "Email address", 320, true)!;
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-    throw new ComplaintError("Enter a valid email address.");
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new ComplaintError("Enter a valid email address.");
   const siteAddress = text(body.site_address, "Complete site address", 2000, true)!;
   const siteMapLink = mapLink(body.site_map_link);
   const city = text(body.city, "Store city", 120, true)!;
@@ -791,9 +910,9 @@ export async function listComplaints(actor: ComplaintActor, query: Record<string
   const search = typeof query.search === "string" ? query.search.trim() : "";
   const statuses =
     typeof query.status === "string" && query.status
-      ? (query.status.split(",").filter((s) =>
-          Object.values(ComplaintStatus).includes(s as ComplaintStatus),
-        ) as ComplaintStatus[])
+      ? (query.status
+          .split(",")
+          .filter((s) => Object.values(ComplaintStatus).includes(s as ComplaintStatus)) as ComplaintStatus[])
       : [];
 
   const scope: Prisma.ComplaintMasterWhereInput = {
@@ -846,7 +965,11 @@ export async function listComplaints(actor: ComplaintActor, query: Record<string
         currentCycle: { select: { cycle_number: true } },
       },
     }),
-    prisma.complaintMaster.groupBy({ by: ["status"], where: scope, _count: { _all: true } }),
+    prisma.complaintMaster.groupBy({
+      by: ["status"],
+      where: scope,
+      _count: { _all: true },
+    }),
   ]);
 
   return {

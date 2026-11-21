@@ -195,7 +195,15 @@ export const create = step(async (req) => {
   if (!body || typeof body !== "object" || Array.isArray(body))
     throw new ComplaintError("Complaint details are missing or malformed.");
   const files = (req.files ?? {}) as Record<string, ComplaintUpload[]>;
-  return registerComplaint(actor(req), body, files.photos ?? [], files.videos ?? []);
+  // Several categories: issue i's photos come in "photos_<i>".
+  const photosByIssue = Array.isArray(body.issues)
+    ? body.issues.map((_, i) => files[`photos_${i}`] ?? [])
+    : [files.photos ?? []];
+  const result = await registerComplaint(actor(req), body, photosByIssue, files.videos ?? []);
+  // Every complaint registered gets its tasks.
+  for (const c of result.complaints.slice(1))
+    await refreshComplaintTasks(c.id, actor(req).actorId, resolveClientBaseUrl(req));
+  return result;
 }, (_req, result) => result.id);
 
 const param = (req: Request, name: string) => positiveId(req.params[name]);
