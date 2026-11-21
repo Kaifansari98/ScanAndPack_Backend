@@ -1,4 +1,5 @@
 import { prisma, Prisma } from "../../prisma/client";
+import { refreshComplaintTasks } from "./complaintTasks.service";
 import { ComplaintExecutionStatus, ComplaintStatus } from "../../prisma/generated";
 import { deleteWasabiObjects } from "../../utils/wasabiClient";
 import { createTaskHistoryLog } from "../task/taskHistory.service";
@@ -254,6 +255,16 @@ export async function onFactoryRequestReady(miscId: number, readyBy: number) {
     select: { vendor_id: true, complaint_id: true, complaint_execution_id: true },
   });
   if (!misc?.complaint_id || !misc.complaint_execution_id) return;
+  await moveToMaterialReady(misc as { vendor_id: number; complaint_id: number; complaint_execution_id: number }, miscId, readyBy);
+  // The resolution-start task goes to the complaint's site supervisor.
+  await refreshComplaintTasks(misc.complaint_id, readyBy);
+}
+
+async function moveToMaterialReady(
+  misc: { vendor_id: number; complaint_id: number; complaint_execution_id: number },
+  miscId: number,
+  readyBy: number,
+) {
   await prisma.$transaction(async (tx) => {
     const execution = await tx.complaintExecution.findFirst({
       where: {

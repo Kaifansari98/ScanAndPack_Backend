@@ -1,5 +1,10 @@
 import { prisma } from "../../prisma/client";
 import { generateSignedUrl } from "../../utils/wasabiClient";
+import {
+  buildTracker,
+  TrackerError,
+  trackerUpdates,
+} from "../../services/projectTracker/projectTracker.core";
 import type { ClientTokenPayload } from "./auth.service";
 import { clientLeadsWhere } from "./projects.service";
 
@@ -23,73 +28,55 @@ const fileKind = (name: string): FileKind => {
 };
 
 /**
- * Client-facing project tracker. The tracker starts at Booking Confirmation;
- * later milestones will be added as further sections of the response.
+ * Client Project Tracker: one per booking (lead). Read-only for the client;
+ * only client-facing information is returned, never internal CRM remarks.
  */
 export class MobileTrackerService {
-  async getTracker(
-    client: ClientTokenPayload,
-    leadId: number,
-    instanceId: number,
-  ): Promise<ServiceResponse> {
-    if (![leadId, instanceId].every((id) => Number.isInteger(id) && id > 0)) {
-      return { status: 400, body: { message: "Invalid project item." } };
-    }
-
-    const instance = await prisma.leadProductStructureInstance.findFirst({
-      where: {
-        id: instanceId,
-        lead_id: leadId,
-        is_archived: false,
-        lead: clientLeadsWhere(client),
-      },
-      select: { id: true, vendor_id: true, product_type_id: true },
+  private async clientLead(client: ClientTokenPayload, leadId: number) {
+    if (!Number.isInteger(leadId) || leadId <= 0) return null;
+    return prisma.leadMaster.findFirst({
+      where: { id: leadId, ...clientLeadsWhere(client) },
+      select: { id: true, vendor_id: true },
     });
-    if (!instance) return { status: 404, body: { message: "Project item not found." } };
+  }
 
-    return {
-      status: 200,
-      body: { booking: await this.bookingConfirmation(leadId, instance) },
-    };
+  async getProjectTracker(client: ClientTokenPayload, leadId: number): Promise<ServiceResponse> {
+    const lead = await this.clientLead(client, leadId);
+    if (!lead) return { status: 404, body: { message: "Project not found." } };
+    try {
+      const tracker = await buildTracker(lead.id, lead.vendor_id);
+      const [booking, latest] = await Promise.all([
+        this.bookingConfirmation(lead.id, lead.vendor_id),
+        trackerUpdates(tracker, { limit: 1 }),
+      ]);
+      return { status: 200, body: { ...tracker.view, booking, latest_update: latest[0] ?? null } };
+    } catch (error) {
+      if (error instanceof TrackerError) return { status: error.statusCode, body: { message: error.message } };
+      throw error;
+    }
+  }
+
+  async getProjectUpdates(client: ClientTokenPayload, leadId: number): Promise<ServiceResponse> {
+    const lead = await this.clientLead(client, leadId);
+    if (!lead) return { status: 404, body: { message: "Project not found." } };
+    const tracker = await buildTracker(lead.id, lead.vendor_id);
+    return { status: 200, body: { updates: await trackerUpdates(tracker) } };
   }
 
   /** Booking form details: documents, MRP, booking value and advance. Null until booked. */
-  private async bookingConfirmation(
-    leadId: number,
-    instance: { id: number; vendor_id: number; product_type_id: number },
-  ) {
-    // Booking rows are lead-wide, or scoped to this item's product type / instance.
-    const productScope = {
-      AND: [
-        { OR: [{ product_type_id: null }, { product_type_id: instance.product_type_id }] },
-        {
-          OR: [
-            { product_structure_instance_id: null },
-            { product_structure_instance_id: instance.id },
-          ],
-        },
-      ],
-    };
-
+  private async bookingConfirmation(leadId: number, vendorId: number) {
     const [lead, bookingPayments, bookingStatusLog, documents] = await Promise.all([
       prisma.leadMaster.findUnique({
         where: { id: leadId },
         select: { mrp_value: true, total_project_amount: true, booking_amount: true },
       }),
       prisma.paymentInfo.findMany({
-        where: {
-          lead_id: leadId,
-          paymentType: { type: "booking_amount" },
-          OR: [{ product_type_id: null }, { product_type_id: instance.product_type_id }],
-        },
+        where: { lead_id: leadId, paymentType: { type: "booking_amount" } },
         select: { payment_date: true, created_at: true, payment_file_id: true },
         orderBy: { payment_date: "asc" },
       }),
       prisma.leadStatusLogs.findFirst({
-        where: {
-          lead_id: leadId,
-          statusType: { tag: BOOKING_STATUS_TAG, vendor_id: instance.vendor_id },
-        },
+        where: { lead_id: leadId, statusType: { tag: BOOKING_STATUS_TAG, vendor_id: vendorId } },
         select: { created_at: true },
         orderBy: { created_at: "asc" },
       }),
@@ -97,8 +84,7 @@ export class MobileTrackerService {
         where: {
           lead_id: leadId,
           is_deleted: false,
-          documentType: { tag: BOOKING_DOCUMENT_TAG, vendor_id: instance.vendor_id },
-          ...productScope,
+          documentType: { tag: BOOKING_DOCUMENT_TAG, vendor_id: vendorId },
         },
         select: { id: true, doc_og_name: true, doc_sys_name: true, created_at: true },
         orderBy: { created_at: "asc" },

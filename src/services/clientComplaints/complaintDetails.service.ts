@@ -13,6 +13,7 @@ import { inspectionPermissions } from "./complaintInspection.service";
 import { quotationPermissions } from "./complaintQuotation.service";
 import { executionPermissions } from "./complaintExecution.service";
 import { closurePermissions } from "./complaintClosure.service";
+import { complaintTaskTitle } from "./complaintTasks.service";
 
 const person = { id: true, user_name: true } as const;
 const financialCategories = ["PAYMENT_PROOF", "QUOTATION"] as const;
@@ -110,6 +111,7 @@ export async function getComplaintDetail(actor: ComplaintActor, id: number) {
     notifications,
     closures,
     taskCounts,
+    tasks,
   ] = await Promise.all([
     prisma.complaintAttachment.findMany({
       where: {
@@ -408,6 +410,23 @@ export async function getComplaintDetail(actor: ComplaintActor, id: number) {
       where,
       _count: { _all: true },
     }),
+    prisma.complaintTask.findMany({
+      where,
+      orderBy: [{ created_at: "desc" }, { id: "desc" }],
+      select: {
+        id: true,
+        task_type: true,
+        task_key: true,
+        status: true,
+        due_date: true,
+        created_at: true,
+        completed_at: true,
+        cycle: { select: { cycle_number: true } },
+        assignedTo: { select: { ...person, user_type: { select: { user_type: true } } } },
+        completedBy: { select: person },
+        leadTask: { select: { id: true } },
+      },
+    }),
   ]);
 
   const visitPerms = await visitPermissions(actor, {
@@ -484,6 +503,15 @@ export async function getComplaintDetail(actor: ComplaintActor, id: number) {
     task_counts: Object.fromEntries(
       taskCounts.map((row) => [row.status, row._count._all]),
     ),
+    tasks: tasks.map(({ cycle, assignedTo, completedBy, leadTask, task_key, ...task }) => ({
+      ...task,
+      title: complaintTaskTitle(task_key),
+      cycle_number: cycle.cycle_number,
+      assigned_to: { id: assignedTo.id, name: assignedTo.user_name, role: assignedTo.user_type?.user_type ?? null },
+      completed_by: completedBy ? { id: completedBy.id, name: completedBy.user_name } : null,
+      // Set when the task also shows in My Tasks (complaints raised against a lead).
+      my_tasks_id: leadTask?.id ?? null,
+    })),
   };
 }
 

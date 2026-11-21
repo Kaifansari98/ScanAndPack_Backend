@@ -9,6 +9,8 @@ const COLORS = {
   codeBg: "#FDF4EF",
   muted: "#7A6A64",
   border: "#EBE3DF",
+  // Behind the logo: the logo is cream, drawn for dark backgrounds.
+  logoBand: "#493630",
 } as const;
 
 const FONT = "'Helvetica Neue', Helvetica, Arial, sans-serif";
@@ -43,9 +45,10 @@ export function buildClientOtpEmail({
   const vendorName = escapeHtml(vendor.vendor_name);
   const greetingName = escapeHtml(clientName || "there");
 
+  // The app's welcome-screen logo, on the header band.
   const logo = vendor.logoUrl
-    ? `<img src="${escapeHtml(vendor.logoUrl)}" alt="${vendorName}" height="52" style="display:block;height:52px;width:auto;max-width:220px;border:0;outline:none;text-decoration:none;">`
-    : `<span style="font-family:${FONT};font-size:22px;font-weight:700;letter-spacing:-0.5px;color:${COLORS.primary};">${vendorName}</span>`;
+    ? `<img src="${escapeHtml(vendor.logoUrl)}" alt="Shambhala" width="182" height="52" style="display:block;width:182px;height:52px;border:0;outline:none;text-decoration:none;">`
+    : `<span style="font-family:${FONT};font-size:22px;font-weight:700;letter-spacing:-0.5px;color:#FFFFFF;">${vendorName}</span>`;
 
   const digits = otp
     .split("")
@@ -92,14 +95,13 @@ export function buildClientOtpEmail({
 
               <!-- Logo -->
               <tr>
-                <td align="center" style="padding:32px 32px 8px;">${logo}</td>
+                <td align="center" bgcolor="${COLORS.logoBand}" style="padding:30px 32px;background:${COLORS.logoBand};">${logo}</td>
               </tr>
               ${
                 vendor.tag_line
-                  ? `<tr><td align="center" style="padding:0 32px;font-family:${FONT};font-size:12px;letter-spacing:0.4px;color:${COLORS.muted};">${escapeHtml(vendor.tag_line)}</td></tr>`
+                  ? `<tr><td align="center" style="padding:20px 32px 0;font-family:${FONT};font-size:12px;letter-spacing:0.4px;color:${COLORS.muted};">${escapeHtml(vendor.tag_line)}</td></tr>`
                   : ""
               }
-              <tr><td style="padding:24px 32px 0;"><div style="height:1px;background:${COLORS.border};font-size:0;line-height:0;">&nbsp;</div></td></tr>
 
               <!-- Message -->
               <tr>

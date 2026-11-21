@@ -17,6 +17,7 @@ MIGRATIONS=(
   20261119130000_complaint_client_rating
   20261120120000_complaint_store_city_misc
   20261120130000_complaint_site_map_link
+  20261121130000_complaint_tasks_in_my_tasks
 )
 
 for name in "${MIGRATIONS[@]}"; do

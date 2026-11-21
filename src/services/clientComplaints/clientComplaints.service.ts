@@ -867,32 +867,3 @@ export async function listComplaints(actor: ComplaintActor, query: Record<string
     status_counts: Object.fromEntries(grouped.map((g) => [g.status, g._count._all])),
   };
 }
-
-// Open complaint tasks assigned to this user, shown under My Tasks.
-export async function myComplaintTasks(actor: ComplaintActor) {
-  const tasks = await prisma.complaintTask.findMany({
-    where: {
-      vendor_id: actor.vendorId,
-      assigned_to: actor.actorId,
-      status: { in: ["open", "in_progress"] },
-      cycle: { complaint: { status: { notIn: FINISHED_STATUSES } } },
-    },
-    orderBy: [{ due_date: "asc" }, { id: "asc" }],
-    take: 200,
-    select: {
-      id: true,
-      task_type: true,
-      status: true,
-      due_date: true,
-      remark: true,
-      cycle: {
-        select: {
-          complaint: {
-            select: { id: true, complaint_code: true, client_name: true, client_mobile: true, status: true, site_address: true },
-          },
-        },
-      },
-    },
-  });
-  return tasks.map(({ cycle, ...task }) => ({ ...task, complaint: cycle.complaint }));
-}

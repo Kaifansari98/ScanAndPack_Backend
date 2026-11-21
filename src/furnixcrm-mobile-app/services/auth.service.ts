@@ -6,7 +6,6 @@ import { prisma } from "../../prisma/client";
 import { redis } from "../../config/redis";
 import { AuthService } from "../../services/auth/auth.service";
 import { sendBrevoEmail } from "../../services/email/brevoEmail.service";
-import { generateSignedUrl } from "../../utils/wasabiClient";
 import { buildClientOtpEmail, type ClientOtpEmailVendor } from "./client-otp-email";
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
@@ -23,7 +22,15 @@ export const OTP_TTL_SECONDS = 5 * 60;
 export const OTP_RESEND_COOLDOWN_SECONDS = 60;
 const OTP_MAX_ATTEMPTS = 5;
 // Longest S3 presign allowed; mail clients cache the image on first open.
-const LOGO_URL_TTL_SECONDS = 7 * 24 * 60 * 60;
+// Public base URL for images in emails. Email clients can't reach localhost, so
+// local runs use the production URL unless EMAIL_ASSET_BASE_URL is set.
+const EMAIL_ASSET_BASE_URL = (
+  process.env.EMAIL_ASSET_BASE_URL ||
+  ({ STAGING: "https://staging-api.furnixcrm.com", DEMO: "https://demo-api.furnixcrm.com" } as Record<string, string>)[
+    (process.env.BACKEND_ENVIRONMENT || "").toUpperCase()
+  ] ||
+  "https://api.furnixcrm.com"
+).replace(/\/$/, "");
 
 export type AccountType = "system_user" | "client";
 
@@ -115,14 +122,10 @@ export class MobileAuthService {
       },
     });
 
-    let logoUrl: string | null = null;
-    if (vendor?.logo) {
-      try {
-        logoUrl = await generateSignedUrl(vendor.logo, LOGO_URL_TTL_SECONDS);
-      } catch (error) {
-        console.error("[furnixcrm-app] Failed to sign vendor logo for OTP email:", error);
-      }
-    }
+    // The app's welcome-screen logo, served from public/assets. Email clients
+    // load it themselves, so it needs the backend's public URL (a signed storage
+    // link expires and showed as a broken image).
+    const logoUrl = `${EMAIL_ASSET_BASE_URL}/assets/email/shambhala-logo.png`;
 
     return {
       vendor_name: vendor?.vendor_name || "FurnixCRM",

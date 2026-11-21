@@ -28,10 +28,9 @@ export const listProjects = handle("List projects", (_req, res) =>
 export const listInstances = handle("List instances", (req, res) =>
   mobileProjectsService.listInstances(clientFrom(res), Number(req.params.leadId)),
 );
-export const getTracker = handle("Project tracker", (req, res) =>
-  mobileTrackerService.getTracker(
-    clientFrom(res),
-    Number(req.params.leadId),
-    Number(req.params.instanceId),
-  ),
+export const getProjectTracker = handle("Project tracker", (req, res) =>
+  mobileTrackerService.getProjectTracker(clientFrom(res), Number(req.params.leadId)),
+);
+export const getProjectUpdates = handle("Project updates", (req, res) =>
+  mobileTrackerService.getProjectUpdates(clientFrom(res), Number(req.params.leadId)),
 );

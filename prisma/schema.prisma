@@ -2663,6 +2663,10 @@ model UserLeadTask {
   instance_id            Int?
   franchise_id           Int?
   small_order_request_id Int?
+  /// Set when this task mirrors a complaint task (complaints raised against a lead).
+  complaint_id           Int?
+  complaint_task_id      Int?                          @unique
+  complaintTask          ComplaintTask?                @relation(fields: [complaint_task_id], references: [id])
   fastProductionRequest  FastProductionRequest?
   detailedLogs           LeadDetailedLogs[]
   account                AccountMaster                 @relation(fields: [account_id], references: [id], onDelete: Cascade)
@@ -2673,6 +2677,8 @@ model UserLeadTask {
   smallOrderRequest      SmallOrderRequest?            @relation("SmallOrderRequestTasks", fields: [small_order_request_id], references: [id])
   user                   UserMaster                    @relation("LeadTask_User", fields: [user_id], references: [id], onDelete: Cascade)
   vendor                 VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@index([complaint_id])
 }
 
 model FastProductionRequestBatch {
@@ -7221,6 +7227,9 @@ model ComplaintTask {
 
   activityLogs ComplaintActivityLog[] @relation("ComplaintActivityLogTask")
 
+  /// My Tasks row for this task when the complaint belongs to a lead.
+  leadTask UserLeadTask?
+
 }
 
 model ComplaintClosure {
@@ -7615,6 +7624,10 @@ enum ComplaintTaskType {
   CLIENT_CONFIRMATION_FOLLOW_UP
   REOPEN_REVIEW
   FINAL_CLOSURE
+  VISIT_SCHEDULING
+  FREE_VISIT_APPROVAL
+  PAYMENT_COLLECTION
+  ON_HOLD_REVIEW
 }
 
 enum ComplaintClosureStatus {
@@ -7750,4 +7763,125 @@ model StoreCityMaster {
 
   @@unique([vendor_id, name])
   @@index([vendor_id, is_active, sort_order])
+}
+
+// ─── Client Project Tracker ──────────────────────────────────────────────
+// Client-facing layer over the CRM stages: what the client app shows, kept
+// apart from internal CRM data. Stage progress itself comes from the lead's
+// (and its items') CRM stage; these tables hold only what the CRM lacks.
+
+enum ProjectTrackerStageKey {
+  BOOKING
+  FINAL_MEASUREMENT
+  TECH_CHECK
+  PRODUCTION
+  DISPATCH
+  DELIVERY
+  INSTALLATION
+  HANDOVER
+}
+
+enum ProjectTrackerHoldStatus {
+  ON_HOLD
+  DELAYED
+}
+
+enum ProjectTrackerRevisionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model ProjectTrackerStage {
+  id                     Int                      @id @default(autoincrement())
+  vendor_id              Int
+  lead_id                Int
+  stage                  ProjectTrackerStageKey
+  // First expected date; never overwritten.
+  original_expected_date DateTime?                @db.Date
+  original_set_at        DateTime?
+  original_set_by        Int?
+  // Latest approved revision: the current commitment.
+  approved_expected_date DateTime?                @db.Date
+  hold_status            ProjectTrackerHoldStatus?
+  hold_reason            String?                  @db.VarChar(2000)
+  hold_action            String?                  @db.VarChar(2000)
+  hold_resume_date       DateTime?                @db.Date
+  hold_since             DateTime?
+  client_remark          String?                  @db.VarChar(2000)
+  client_remark_at       DateTime?
+  updated_by             Int?
+  created_at             DateTime                 @default(now())
+  updated_at             DateTime                 @updatedAt
+
+  @@unique([lead_id, stage])
+  @@index([vendor_id, hold_status])
+}
+
+model ProjectTrackerDateRevision {
+  id               Int                          @id @default(autoincrement())
+  vendor_id        Int
+  lead_id          Int
+  stage            ProjectTrackerStageKey
+  previous_date    DateTime?                    @db.Date
+  proposed_date    DateTime                     @db.Date
+  // The date approved, which the approver may change from the proposal.
+  approved_date    DateTime?                    @db.Date
+  reason           String                       @db.VarChar(2000)
+  status           ProjectTrackerRevisionStatus @default(PENDING)
+  requested_by     Int
+  requested_at     DateTime                     @default(now())
+  decided_by       Int?
+  decided_at       DateTime?
+  decision_remarks String?                      @db.VarChar(2000)
+
+  @@index([vendor_id, status])
+  @@index([lead_id, stage])
+}
+
+// Internal audit of every tracker change (date, time, employee).
+model ProjectTrackerLog {
+  id         Int                     @id @default(autoincrement())
+  vendor_id  Int
+  lead_id    Int
+  stage      ProjectTrackerStageKey?
+  action     String                  @db.VarChar(60)
+  details    Json?
+  created_by Int
+  created_at DateTime                @default(now())
+
+  @@index([lead_id, created_at])
+}
+
+// Published, client-facing project update.
+model ProjectTrackerUpdate {
+  id           Int                        @id @default(autoincrement())
+  vendor_id    Int
+  lead_id      Int
+  stage        ProjectTrackerStageKey
+  // MANUAL: written by staff. HOLD / DELAYED / RESUMED / REVISION: from a
+  // tracker action, so the client's history explains it.
+  kind         String                     @default("MANUAL") @db.VarChar(20)
+  title        String                     @db.VarChar(200)
+  description  String?                    @db.VarChar(4000)
+  published_by Int
+  published_at DateTime                   @default(now())
+  files        ProjectTrackerUpdateFile[]
+
+  @@index([lead_id, published_at])
+}
+
+model ProjectTrackerUpdateFile {
+  id            Int                  @id @default(autoincrement())
+  vendor_id     Int
+  update_id     Int
+  storage_key   String               @db.VarChar(500)
+  original_name String               @db.VarChar(255)
+  mime_type     String               @db.VarChar(100)
+  size_bytes    Int
+  media_type    String               @db.VarChar(20)
+  created_at    DateTime             @default(now())
+  update        ProjectTrackerUpdate @relation(fields: [update_id], references: [id], onDelete: Cascade)
+
+  @@index([update_id])
 }

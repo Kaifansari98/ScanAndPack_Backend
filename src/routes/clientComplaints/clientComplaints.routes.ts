@@ -19,7 +19,6 @@ router.get("/vendor/:vendorId/lead-options", controller.leadOptions);
 router.get("/vendor/:vendorId/lead-franchises", controller.leadFranchises);
 router.get("/vendor/:vendorId/duplicates", controller.getDuplicates);
 router.get("/vendor/:vendorId/complaints", controller.list);
-router.get("/vendor/:vendorId/my-tasks", controller.myTasks);
 router.get("/vendor/:vendorId/complaints/:complaintId", controller.detail);
 router.get("/vendor/:vendorId/complaints/:complaintId/activity", controller.activity);
 router.get("/vendor/:vendorId/complaints/:complaintId/assignee-options", controller.assigneeOptions);
