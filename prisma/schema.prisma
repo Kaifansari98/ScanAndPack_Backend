@@ -3722,6 +3722,9 @@ model FranchiseMaster {
   region_id                                                                  Int?
   state_id                                                                   Int?
   city_id                                                                    Int?
+  /// The vendor's store city (StoreCityMaster) this franchise belongs to.
+  store_city_id                                                              Int?
+  storeCity                                                                  StoreCityMaster?                     @relation(fields: [store_city_id], references: [id], onDelete: SetNull)
   area_id                                                                    Int?
   address                                                                    String?
   pincode                                                                    String?
@@ -3746,6 +3749,7 @@ model FranchiseMaster {
   attendance_logs                                                            attendance_logs[]
 
   @@unique([vendor_id, franchise_code])
+  @@index([store_city_id])
   @@index([online_lead_sales_executive_id])
 }
 
@@ -7760,6 +7764,7 @@ model StoreCityMaster {
   is_active  Boolean      @default(true)
   created_at DateTime     @default(now())
   vendor     VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  franchises FranchiseMaster[]
 
   @@unique([vendor_id, name])
   @@index([vendor_id, is_active, sort_order])

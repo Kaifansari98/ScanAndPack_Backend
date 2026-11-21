@@ -2863,6 +2863,7 @@ export const FranchiseMasterScalarFieldEnum = {
   region_id: 'region_id',
   state_id: 'state_id',
   city_id: 'city_id',
+  store_city_id: 'store_city_id',
   area_id: 'area_id',
   address: 'address',
   pincode: 'pincode',
