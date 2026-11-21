@@ -17,7 +17,7 @@ export class LeadStatsService {
 
     let whereClause: any = {
       vendor_id: vendorId,
-      is_deleted: false,
+      is_deleted: false, is_complaint_placeholder: false,
     };
 
     const vendorData = await prisma.vendorMaster.findUnique({
@@ -179,7 +179,7 @@ export class LeadStatsService {
             prisma.leadMaster.findMany({
               where: {
                 vendor_id: vendorId,
-                is_deleted: false,
+                is_deleted: false, is_complaint_placeholder: false,
                 OR: [{ created_by: userId }, { assign_to: userId }],
               },
               select: { id: true },
@@ -519,6 +519,15 @@ export class LeadStatsService {
         ? { lead_code: { notIn: installationHiddenLeadCodes } }
         : {}),
     });
+    // Complaint placeholder leads (<VendorCode>EX-n) are listed in Delivered
+    // Projects only, so they count toward its badge but no other total.
+    const deliveredComplaintPlaceholders = await prisma.leadMaster.count({
+      where: {
+        ...baseLeadScope,
+        is_complaint_placeholder: true,
+        statusType: { vendor_id: vendorId, tag: "Type 17" },
+      },
+    });
     const totalServicingStageLeads = await countPostProductionStage("Type 17", {
       ...(installationHiddenLeadCodes.length > 0
         ? { lead_code: { notIn: installationHiddenLeadCodes } }
@@ -629,7 +638,7 @@ export class LeadStatsService {
       total_dispatch_stage_leads: totalDispatchStageLeads,
       total_under_installation_stage_leads: totalUnderInstallationStageLeads,
       total_final_handover_stage_leads: totalFinalhandoverStageLeads,
-      total_project_completed_stage_leads: totalProjectCompletedStageLeads,
+      total_project_completed_stage_leads: totalProjectCompletedStageLeads + deliveredComplaintPlaceholders,
       total_servicing_stage_leads: totalServicingStageLeads,
 
       // =====================

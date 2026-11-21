@@ -7,6 +7,7 @@ import {
   getHeadSiteSupervisorFranchiseMapping,
   getSiteSupervisorFranchiseMapping,
   getStoreCitiesByVendorId,
+  addStoreCity,
   updateFranchise,
 } from "../../services/franchise/franchise.service";
 
@@ -213,5 +214,18 @@ export const getStoreCitiesController = async (req: Request, res: Response) => {
     return res.json({ success: true, data: cities });
   } catch (error: any) {
     return sendError(res, error, "Unable to load cities.");
+  }
+};
+
+export const addStoreCityController = async (req: Request, res: Response) => {
+  try {
+    const city = await addStoreCity((req as any).user, Number(req.params.vendorId), req.body?.name);
+    return res.status(city.created ? 201 : 200).json({
+      success: true,
+      message: city.created ? "City added" : "City already in the city master",
+      data: city,
+    });
+  } catch (error: any) {
+    return sendError(res, error, "Unable to add the city.");
   }
 };

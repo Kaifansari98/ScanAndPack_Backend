@@ -7,6 +7,7 @@ import {
   getHeadSiteSupervisorFranchiseMappingController,
   getSiteSupervisorFranchiseMappingController,
   getStoreCitiesController,
+  addStoreCityController,
   updateFranchiseController,
 } from "../../controllers/franchise/franchise.controller";
 import { verifyToken } from "../../middlewares/auth.middleware";
@@ -19,6 +20,7 @@ franchiseRoutes.patch("/:id/shift", verifyToken, franchiseShiftController);
 franchiseRoutes.post("/create", createFranchiseController);
 franchiseRoutes.get("/vendor/:vendorId", verifyToken, getFranchisesByVendorIdController);
 franchiseRoutes.get("/vendor/:vendorId/store-cities", verifyToken, getStoreCitiesController);
+franchiseRoutes.post("/vendor/:vendorId/store-cities", verifyToken, addStoreCityController);
 franchiseRoutes.put("/:id", verifyToken, updateFranchiseController);
 franchiseRoutes.post(
   "/head-site-supervisor-mapping",

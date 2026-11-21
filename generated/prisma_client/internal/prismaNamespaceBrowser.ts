@@ -883,6 +883,7 @@ export const LeadMasterScalarFieldEnum = {
   order_number: 'order_number',
   refered_by: 'refered_by',
   is_so_value_received: 'is_so_value_received',
+  is_complaint_placeholder: 'is_complaint_placeholder',
   so_value_received_at: 'so_value_received_at',
   project_status: 'project_status'
 } as const
@@ -4737,6 +4738,7 @@ export const ComplaintExternalClientScalarFieldEnum = {
   product_type: 'product_type',
   installation_date: 'installation_date',
   email_verified_at: 'email_verified_at',
+  lead_id: 'lead_id',
   created_by: 'created_by',
   created_at: 'created_at',
   updated_at: 'updated_at'

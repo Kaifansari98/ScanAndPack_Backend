@@ -1,6 +1,7 @@
 import { prisma, Prisma } from "../../prisma/client";
 import { ComplaintComponent, ComplaintStatus } from "../../prisma/generated";
 import { PHOTO_TYPES, validFMFileSignature } from "../fmRequirements/schema";
+import { ensurePlaceholderLead, type PlaceholderLead } from "./complaintPlaceholderLead.service";
 import { deleteWasabiObjects, uploadComplaintFile } from "../../utils/wasabiClient";
 
 export class ComplaintError extends Error {
@@ -443,6 +444,7 @@ export async function findPossibleDuplicates(
           where: {
             vendor_id: vendorId,
             is_deleted: false,
+            is_complaint_placeholder: false,
             contact_no: { contains: mobileKey },
           },
           take: 5,
@@ -605,6 +607,8 @@ export async function registerComplaint(
     return await prisma.$transaction(async (tx) => {
       let clientCode: string;
       let externalClientId: number | null = null;
+      // Clients without a lead code get (or reuse) a placeholder lead.
+      let placeholder: PlaceholderLead | null = null;
 
       // One running complaint number per vendor (CMP1, CMP2, …) whatever the
       // client; the client's code follows it. The vendor lock keeps two
@@ -644,11 +648,20 @@ export async function registerComplaint(
           });
           externalClientId = client.id;
         }
-        const client = await tx.complaintExternalClient.findUniqueOrThrow({
-          where: { id: externalClientId },
-          select: { external_client_code: true },
+        placeholder = await ensurePlaceholderLead(tx, {
+          vendorId: actor.vendorId,
+          vendorCode: vendor.vendor_code,
+          actorId: actor.actorId,
+          externalClientId: externalClientId!,
+          clientName: ext.clientName,
+          mobile: ext.mobile,
+          alternateMobile: ext.alternateMobile,
+          email: ext.email,
+          siteAddress: ext.siteAddress,
+          siteMapLink: ext.siteMapLink,
+          city: ext.city,
         });
-        clientCode = client.external_client_code;
+        clientCode = placeholder.leadCode;
       }
 
       const created: {
@@ -664,9 +677,11 @@ export async function registerComplaint(
         const uploaded = uploadedByIssue[i];
 
         const snapshot = leadContext ?? externalContext!;
-        const assignedSsId = leadContext?.siteSupervisorId ?? null;
+        const assignedSsId = leadContext?.siteSupervisorId ?? placeholder?.siteSupervisorId ?? null;
         const assignedHssId =
-          leadContext?.headSiteSupervisorId ?? (actor.role === "head-site-supervisor" ? actor.actorId : null);
+          leadContext?.headSiteSupervisorId ??
+          placeholder?.headSiteSupervisorId ??
+          (actor.role === "head-site-supervisor" ? actor.actorId : null);
 
         const complaint = await tx.complaintMaster.create({
           data: {
@@ -675,8 +690,8 @@ export async function registerComplaint(
             sequence_no: sequenceNo,
             registration_channel: "STAFF",
             client_type: mode,
-            lead_id: leadContext?.leadId ?? null,
-            account_id: leadContext?.accountId ?? null,
+            lead_id: leadContext?.leadId ?? placeholder?.leadId ?? null,
+            account_id: leadContext?.accountId ?? placeholder?.accountId ?? null,
             instance_id: leadContext?.instanceId ?? null,
             external_client_id: externalClientId,
             client_name: snapshot.clientName,

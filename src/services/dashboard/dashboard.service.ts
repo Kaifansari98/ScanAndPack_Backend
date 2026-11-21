@@ -187,7 +187,7 @@ export class DashboardService {
     // Pre-fetch franchise lead IDs if franchise filter is active
     const franchiseLeadIds = franchise_id
       ? (await prisma.leadMaster.findMany({
-          where: { vendor_id, franchise_id, is_deleted: false },
+          where: { vendor_id, franchise_id, is_deleted: false, is_complaint_placeholder: false },
           select: { id: true },
         })).map((l) => l.id)
       : null;
@@ -210,7 +210,7 @@ export class DashboardService {
             ActivityStatus.lost,
           ],
         },
-        is_deleted: false,
+        is_deleted: false, is_complaint_placeholder: false,
       },
     };
 
@@ -648,7 +648,7 @@ export class DashboardService {
         where: {
           vendor_id,
           status_id,
-          is_deleted: false,
+          is_deleted: false, is_complaint_placeholder: false,
           ...(typeTag === "Type 1" ? { is_draft: { not: true } } : {}),
           ...activityStatusFilter,
           ...userFilter,
@@ -714,7 +714,7 @@ export class DashboardService {
 
     const baseWhere = {
       vendor_id,
-      is_deleted: false, // Only active leads
+      is_deleted: false, is_complaint_placeholder: false, // Only active leads
       status_id: { gte: type4.id, lte: type16.id }, // Only Type 4 → Type 16
       ...(franchise_id ? { franchise_id } : {}),
     };
@@ -791,7 +791,7 @@ export class DashboardService {
 
     const baseWhere = {
       vendor_id,
-      is_deleted: false,
+      is_deleted: false, is_complaint_placeholder: false,
       status_id: type17.id,
       ...(franchise_id ? { franchise_id } : {}),
     };
@@ -848,7 +848,7 @@ export class DashboardService {
       activity_status: ActivityStatus.lostApproval,
       lead: {
         vendor_id,
-        is_deleted: false,
+        is_deleted: false, is_complaint_placeholder: false,
         activity_status: ActivityStatus.lostApproval,
         ...(franchise_id ? { franchise_id } : {}),
       },
@@ -887,7 +887,7 @@ export class DashboardService {
     const overall = await prisma.leadMaster.count({
       where: {
         vendor_id,
-        is_deleted: false,
+        is_deleted: false, is_complaint_placeholder: false,
         activity_status: ActivityStatus.lostApproval,
         ...(franchise_id ? { franchise_id } : {}),
       },
@@ -918,7 +918,7 @@ export class DashboardService {
 
     const baseWhere = {
       vendor_id,
-      is_deleted: false,
+      is_deleted: false, is_complaint_placeholder: false,
       activity_status: {
         notIn: [
           ActivityStatus.lostApproval,
@@ -988,7 +988,7 @@ export class DashboardService {
         vendor_id,
         basic_amount: { not: null as null | number },
         lead: {
-          is_deleted: false,
+          is_deleted: false, is_complaint_placeholder: false,
           activity_status: {
             notIn: [
               ActivityStatus.lostApproval,
@@ -1115,7 +1115,7 @@ export class DashboardService {
     let leadIdFilter: { in: number[] } | undefined;
     if (franchise_id) {
       const franchiseLeads = await prisma.leadMaster.findMany({
-        where: { vendor_id, franchise_id, is_deleted: false },
+        where: { vendor_id, franchise_id, is_deleted: false, is_complaint_placeholder: false },
         select: { id: true },
       });
       const ids = franchiseLeads.map((l) => l.id);
@@ -1196,7 +1196,7 @@ export class DashboardService {
     const results = await Promise.all(
       franchises.map(async (f) => {
         const leads = await prisma.leadMaster.findMany({
-          where: { vendor_id, franchise_id: f.id, is_deleted: false },
+          where: { vendor_id, franchise_id: f.id, is_deleted: false, is_complaint_placeholder: false },
           select: { id: true, total_project_amount: true },
         });
 
@@ -1488,7 +1488,7 @@ export class DashboardService {
       where: {
         vendor_id,
         franchise_id,
-        is_deleted: false,
+        is_deleted: false, is_complaint_placeholder: false,
       
       },
       select: {
@@ -1710,7 +1710,7 @@ export class DashboardService {
       by: ["status_id"],
       where: {
         vendor_id,
-        is_deleted: false,
+        is_deleted: false, is_complaint_placeholder: false,
         activity_status: { not: "lost" },
         ...(franchise_id ? { franchise_id } : {}),
       },
@@ -1732,7 +1732,7 @@ export class DashboardService {
             lead: {
               vendor_id,
               status_id: st.id,
-              is_deleted: false,
+              is_deleted: false, is_complaint_placeholder: false,
               activity_status: { not: "lost" },
               ...(franchise_id ? { franchise_id } : {}),
             },
@@ -1775,7 +1775,7 @@ export class DashboardService {
         name: f.franchise_name,
         code: f.franchise_code ?? f.franchise_name,
         leads: await prisma.leadMaster.count({
-          where: { vendor_id, franchise_id: f.id, is_deleted: false, activity_status: "onGoing"},
+          where: { vendor_id, franchise_id: f.id, is_deleted: false, is_complaint_placeholder: false, activity_status: "onGoing"},
         }),
       }))
     );
@@ -1791,7 +1791,7 @@ export class DashboardService {
     const count = await prisma.leadMaster.count({
       where: {
         vendor_id,
-        is_deleted: false,
+        is_deleted: false, is_complaint_placeholder: false,
         created_at: { gte: start, lte: end },
       },
     });
@@ -1817,7 +1817,7 @@ export class DashboardService {
 
     const baseWhere = {
       vendor_id,
-      is_deleted: false,
+      is_deleted: false, is_complaint_placeholder: false,
       activity_status: {
         notIn: [
           ActivityStatus.onHold,
@@ -1927,7 +1927,7 @@ export class DashboardService {
 
     const baseWhere = {
       vendor_id,
-      is_deleted: false,
+      is_deleted: false, is_complaint_placeholder: false,
       activity_status: {
         notIn: [
           ActivityStatus.onHold,
@@ -1970,7 +1970,7 @@ export class DashboardService {
     const leads = await prisma.leadMaster.findMany({
       where: {
         vendor_id,
-        is_deleted: false,
+        is_deleted: false, is_complaint_placeholder: false,
         activity_status: ActivityStatus.lostApproval,
         ...(franchise_id ? { franchise_id } : {}),
       },
@@ -2154,7 +2154,7 @@ export class DashboardService {
       return prisma.leadMaster.count({
         where: {
           vendor_id,
-          is_deleted: false,
+          is_deleted: false, is_complaint_placeholder: false,
           status_id,
           ...activityStatusFilter,
           ...userFilter,
@@ -2215,7 +2215,7 @@ export class DashboardService {
     const count = await prisma.leadMaster.count({
       where: {
         vendor_id,
-        is_deleted: false,
+        is_deleted: false, is_complaint_placeholder: false,
         status_id: type14.id,
         userMappings: { some: { user_id, status: LeadUserStatus.active } },
       },
@@ -2236,7 +2236,7 @@ export class DashboardService {
 
     const where = {
       vendor_id,
-      is_deleted: false,
+      is_deleted: false, is_complaint_placeholder: false,
       activity_status: {
         not: ActivityStatus.lost,
       },
@@ -2376,7 +2376,7 @@ export class DashboardService {
     const leads = await prisma.leadMaster.findMany({
       where: {
         vendor_id,
-        is_deleted: false,
+        is_deleted: false, is_complaint_placeholder: false,
         dispatch_date: { not: null },
         userMappings: {
           some: { user_id, status: LeadUserStatus.active },
@@ -2422,7 +2422,7 @@ export class DashboardService {
         vendor_id,
         is_resolved: false,
         lead: {
-          is_deleted: false,
+          is_deleted: false, is_complaint_placeholder: false,
           userMappings: {
             some: { user_id, status: LeadUserStatus.active },
           },
@@ -2511,7 +2511,7 @@ export class DashboardService {
     const leads = await prisma.leadMaster.findMany({
       where: {
         vendor_id,
-        is_deleted: false,
+        is_deleted: false, is_complaint_placeholder: false,
         actual_installation_start_date: { not: null },
         final_handover_marked_at: { not: null },
         userMappings: {
@@ -2570,7 +2570,7 @@ export class DashboardService {
       prisma.leadMaster.count({
         where: {
           vendor_id,
-          is_deleted: false,
+          is_deleted: false, is_complaint_placeholder: false,
           activity_status: status as any,
           ...userFilter,
         },
@@ -2636,7 +2636,7 @@ export class DashboardService {
       const leads = await prisma.leadMaster.findMany({
         where: {
           vendor_id,
-          is_deleted: false,
+          is_deleted: false, is_complaint_placeholder: false,
           status_id,
           ...activityStatusFilter,
           ...userFilter,
@@ -2737,7 +2737,7 @@ export class DashboardService {
       const leads = await prisma.leadMaster.findMany({
         where: {
           vendor_id,
-          is_deleted: false,
+          is_deleted: false, is_complaint_placeholder: false,
           status_id,
           ...activityStatusFilter,
           ...userFilter,
@@ -2846,7 +2846,7 @@ export class DashboardService {
       const leads = await prisma.leadMaster.findMany({
         where: {
           vendor_id,
-          is_deleted: false,
+          is_deleted: false, is_complaint_placeholder: false,
           status_id,
           ...activityStatusFilter,
           ...userFilter,
@@ -2955,7 +2955,7 @@ export class DashboardService {
       const leads = await prisma.leadMaster.findMany({
         where: {
           vendor_id,
-          is_deleted: false,
+          is_deleted: false, is_complaint_placeholder: false,
           status_id,
           activity_status: ActivityStatus.onGoing,
           ...(franchise_id ? { franchise_id } : {}),
@@ -3036,7 +3036,7 @@ export class DashboardService {
       prisma.leadMaster.count({
         where: {
           vendor_id,
-          is_deleted: false,
+          is_deleted: false, is_complaint_placeholder: false,
           activity_status: status,
           ...(range && { created_at: { gte: range.start, lte: range.end } }),
         },
@@ -3088,7 +3088,7 @@ export class DashboardService {
       is_tech_check_completed: true,
       is_order_login_completed: true,
       lead: {
-        is_deleted: false,
+        is_deleted: false, is_complaint_placeholder: false,
         status_id: { in: productionStatusIds },
       },
     };
@@ -3174,7 +3174,7 @@ export class DashboardService {
         vendor_id,
         is_tech_check_completed: false,
         lead: {
-          is_deleted: false,
+          is_deleted: false, is_complaint_placeholder: false,
           status_id: type8.id,
         },
       },
@@ -3200,7 +3200,7 @@ export class DashboardService {
         vendor_id,
         tech_check_completed_at: { not: null },
         lead: {
-          is_deleted: false,
+          is_deleted: false, is_complaint_placeholder: false,
           status_id: type7.id,
         },
       },
@@ -3268,7 +3268,7 @@ export class DashboardService {
     const count = await prisma.leadMaster.count({
       where: {
         vendor_id,
-        is_deleted: false,
+        is_deleted: false, is_complaint_placeholder: false,
         status_id: type9.id,
       },
     });
@@ -3359,7 +3359,7 @@ export class DashboardService {
         is_order_login_completed: true,
         is_pre_prod_done: false,
         lead: {
-          is_deleted: false,
+          is_deleted: false, is_complaint_placeholder: false,
           status_id: { in: productionStatusIds },
         },
       },
@@ -3417,7 +3417,7 @@ export class DashboardService {
       where: {
         vendor_id,
         production_erd_date: { not: null },
-        lead: { is_deleted: false },
+        lead: { is_deleted: false, is_complaint_placeholder: false },
       },
       select: {
         id: true,
@@ -3460,7 +3460,7 @@ export class DashboardService {
     const leads = await prisma.leadMaster.findMany({
       where: {
         vendor_id,
-        is_deleted: false,
+        is_deleted: false, is_complaint_placeholder: false,
         status_id: type14.id,
         dispatch_date: { not: null },
       },

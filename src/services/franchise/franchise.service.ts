@@ -131,6 +131,55 @@ export const getStoreCitiesByVendorId = async (vendorId: number) => {
   });
 };
 
+const FRANCHISE_ADMINS = ["master-admin", "super-admin", "admin"];
+
+/**
+ * Adds a city to the vendor's city master (StoreCityMaster), from the
+ * franchise form. An existing city with the same name (any case) is reused,
+ * and switched back on if it was inactive.
+ */
+export const addStoreCity = async (
+  actor: { id?: number; vendor_id?: number; user_type?: string } | undefined,
+  vendorId: number,
+  rawName: unknown,
+) => {
+  const role = String(actor?.user_type ?? "").trim().toLowerCase();
+  if (!FRANCHISE_ADMINS.includes(role)) badRequest("You do not have permission to add cities.", 403);
+  if (!vendorId || Number.isNaN(vendorId)) badRequest("Valid vendor_id is required.");
+  if (role !== "master-admin" && Number(actor?.vendor_id) !== vendorId) badRequest("Vendor not found.", 404);
+  const name = String(rawName ?? "").trim().replace(/\s+/g, " ");
+  if (!name) badRequest("City name is required.");
+  if (name.length > 120) badRequest("City name must be at most 120 characters.");
+
+  const existing = await prisma.storeCityMaster.findFirst({
+    where: { vendor_id: vendorId, name: { equals: name, mode: "insensitive" } },
+    select: { id: true, name: true, is_active: true },
+  });
+  if (existing) {
+    if (!existing.is_active)
+      await prisma.storeCityMaster.update({ where: { id: existing.id }, data: { is_active: true } });
+    return { id: existing.id, name: existing.name, created: false };
+  }
+  const last = await prisma.storeCityMaster.aggregate({ where: { vendor_id: vendorId }, _max: { sort_order: true } });
+  try {
+    const city = await prisma.storeCityMaster.create({
+      data: { vendor_id: vendorId, name, sort_order: (last._max.sort_order ?? 0) + 1 },
+      select: { id: true, name: true },
+    });
+    return { ...city, created: true };
+  } catch (error: any) {
+    // Someone added the same city at the same moment.
+    if (error?.code === "P2002") {
+      const city = await prisma.storeCityMaster.findFirst({
+        where: { vendor_id: vendorId, name: { equals: name, mode: "insensitive" } },
+        select: { id: true, name: true },
+      });
+      if (city) return { ...city, created: false };
+    }
+    throw error;
+  }
+};
+
 export type UpdateFranchisePayload = Partial<
   Pick<
     CreateFranchisePayload,
@@ -145,8 +194,6 @@ export type UpdateFranchisePayload = Partial<
     | "status"
   >
 >;
-
-const FRANCHISE_ADMINS = ["master-admin", "super-admin", "admin"];
 
 /**
  * Edits a franchise's details. Master admins can edit any vendor's franchise;
