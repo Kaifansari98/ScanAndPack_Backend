@@ -13,6 +13,10 @@ const MASTER_OVERRIDE_PASSWORD =
   process.env.MASTER_LOGIN_OVERRIDE_PASSWORD || "";
 const BACKEND_ENVIRONMENT = (process.env.BACKEND_ENVIRONMENT || "").toUpperCase();
 
+// TEMPORARY: until staging can send email through Brevo, any client can sign in
+// with this code. Never accepted in production. Remove once emails work.
+const TEMP_DEFAULT_CLIENT_OTP = BACKEND_ENVIRONMENT === "PRODUCTION" ? null : "111111";
+
 // Client tokens use a derived secret so the web `verifyToken` middleware
 // (which accepts legacy JWTs signed with JWT_SECRET) never accepts them.
 const CLIENT_JWT_SECRET = `${JWT_SECRET}:furnixcrm-app-client`;
@@ -263,6 +267,9 @@ export class MobileAuthService {
     if (!result.success) {
       if (BACKEND_ENVIRONMENT === "LOCAL") {
         console.warn(`[furnixcrm-app] OTP email not sent; local OTP for ${email}: ${otp}`);
+      } else if (TEMP_DEFAULT_CLIENT_OTP) {
+        // TEMPORARY: let the app continue to the code screen; the default code works.
+        console.warn(`[furnixcrm-app] OTP email not sent to ${email}; the temporary default code is accepted`);
       } else {
         await redis.del([otpKey(email), otpCooldownKey(email)]);
         return {
@@ -293,19 +300,24 @@ export class MobileAuthService {
       return { status: 400, body: { message: "Enter the 6-digit code." } };
     }
 
+    // TEMPORARY: the default code signs in any client email (not in production).
+    const isDefaultCode = TEMP_DEFAULT_CLIENT_OTP !== null && otp === TEMP_DEFAULT_CLIENT_OTP;
+
     const stored = await redis.get(otpKey(email));
-    if (!stored) {
+    if (!stored && !isDefaultCode) {
       return {
         status: 410,
         body: { message: "This code has expired. Request a new one." },
       };
     }
 
-    const record = JSON.parse(stored) as { hash: string; attempts: number };
-    const expected = Buffer.from(record.hash, "hex");
-    const actual = Buffer.from(hashOtp(email, otp), "hex");
+    const record = stored ? (JSON.parse(stored) as { hash: string; attempts: number }) : null;
+    const matches =
+      isDefaultCode ||
+      (record !== null &&
+        crypto.timingSafeEqual(Buffer.from(record.hash, "hex"), Buffer.from(hashOtp(email, otp), "hex")));
 
-    if (!crypto.timingSafeEqual(expected, actual)) {
+    if (!matches && record) {
       const attempts = record.attempts + 1;
       if (attempts >= OTP_MAX_ATTEMPTS) {
         await redis.del(otpKey(email));
