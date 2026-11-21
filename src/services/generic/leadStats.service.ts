@@ -36,6 +36,7 @@ export class LeadStatsService {
     let targetFranchiseId: number | undefined = franchiseId;
     let isHO = false;
     let userFranchiseId: number | undefined;
+    let isFactory = false;
 
     // If userId is provided, check user type and apply appropriate filters
     if (userId) {
@@ -74,9 +75,14 @@ export class LeadStatsService {
         "store caller",
       ].includes(userType);
 
-      targetFranchiseId =
-        franchiseId ??
-        (!isHO && userType !== "super-admin" && !isCaller ? user.franchise_id ?? undefined : undefined);
+      // Factory users work across franchises: their stage lists and My Tasks
+      // page are not franchise-scoped, so their badges must not be either.
+      isFactory = /factory/i.test(userType);
+
+      targetFranchiseId = isFactory
+        ? undefined
+        : franchiseId ??
+          (!isHO && userType !== "super-admin" && !isCaller ? user.franchise_id ?? undefined : undefined);
 
       const shouldUseMapping = ![
         "admin",
@@ -121,6 +127,8 @@ export class LeadStatsService {
             : {}),
           user_id: userId,
           status: { in: ["open", "in_progress"] },
+          // The My Tasks page hides tasks of deleted leads.
+          ...(isFactory ? { lead: { is_deleted: false } } : {}),
         },
       });
 
@@ -170,7 +178,9 @@ export class LeadStatsService {
       if (shouldUseMapping) {
         // These roles are mapping-only — taskLeads would pull leads they
         // don't own (e.g. tasks they created) and inflate the sidebar count.
-        const mappingOnlyRoles = ["pre-prod", "factory", "site-supervisor"];
+        // Factory users are not: their stage lists include leads they have
+        // tasks on, so the badges count them too.
+        const mappingOnlyRoles = ["pre-prod", "site-supervisor"];
         const isMappingOnly = mappingOnlyRoles.includes(userType);
 
         let callerLeadIds: number[] = [];
@@ -251,11 +261,28 @@ export class LeadStatsService {
       // userLeadTask counts are no longer included
     }
 
+    // The factory user's stage lists also show leads awaiting lost approval.
+    const stageActivityStatus = isFactory
+      ? { in: [ActivityStatus.onGoing, ActivityStatus.lostApproval] }
+      : ActivityStatus.onGoing;
+
     const baseLeadScope = {
       ...whereClause,
-      activity_status: ActivityStatus.onGoing,
+      activity_status: stageActivityStatus,
       is_draft: { not: true },
     };
+
+    // A factory user's Installation list shows every lead of the vendor, not
+    // only the leads mapped to them.
+    const installationLeadScope = isFactory
+      ? {
+          vendor_id: vendorId,
+          is_deleted: false,
+          is_complaint_placeholder: false,
+          activity_status: stageActivityStatus,
+          is_draft: { not: true },
+        }
+      : baseLeadScope;
 
     const hiddenSmallOrderRequests = await prisma.smallOrderRequest.findMany({
       where: {
@@ -279,10 +306,10 @@ export class LeadStatsService {
       .filter((code): code is string => Boolean(code));
 
     // Helper: count leads by status tag (Type 1..17)
-    const countByTag = async (statusTag: string, extraWhere: any = {}) =>
+    const countByTag = async (statusTag: string, extraWhere: any = {}, scope: any = baseLeadScope) =>
       prisma.leadMaster.count({
         where: {
-          ...baseLeadScope,
+          ...scope,
           statusType: { vendor_id: vendorId, tag: statusTag },
           ...extraWhere,
         },
@@ -461,8 +488,8 @@ export class LeadStatsService {
     // Stages after Production (Type 11+). Large-scale vendors count instance-wise, the
     // same way the stage lists show them: an instance in its own stage, an instance
     // without one by its lead's stage, and a lead without instances as one row.
-    const countPostProductionStage = async (statusTag: string, leadWhere: any = {}) => {
-      if (!isLargeScale) return countByTag(statusTag, leadWhere);
+    const countPostProductionStage = async (statusTag: string, leadWhere: any = {}, scope: any = baseLeadScope) => {
+      if (!isLargeScale) return countByTag(statusTag, leadWhere, scope);
 
       const [instances, leadsWithoutInstances] = await Promise.all([
         prisma.leadProductStructureInstance.count({
@@ -470,7 +497,7 @@ export class LeadStatsService {
             vendor_id: vendorId,
             is_archived: false,
             AND: [
-              { lead: { ...baseLeadScope, ...leadWhere } },
+              { lead: { ...scope, ...leadWhere } },
               {
                 OR: [
                   { stageStatus: { tag: statusTag } },
@@ -483,7 +510,7 @@ export class LeadStatsService {
             ],
           },
         }),
-        countByTag(statusTag, { ...leadWhere, productStructureInstances: { none: {} } }),
+        countByTag(statusTag, { ...leadWhere, productStructureInstances: { none: {} } }, scope),
       ]);
       return instances + leadsWithoutInstances;
     };
@@ -492,9 +519,20 @@ export class LeadStatsService {
     const totalSiteReadinessStageLeads = await countPostProductionStage("Type 12");
     const totalDispatchPlanningStageLeads = await countPostProductionStage("Type 13");
     const totalDispatchStageLeads = await countPostProductionStage("Type 14");
+    // The Installation list also hides small orders whose request is resolved.
+    const resolvedSmallOrderLeadCodes = (
+      await prisma.smallOrderRequest.findMany({
+        where: { vendor_id: vendorId, is_request_resolved: true, so_code: { not: null } },
+        select: { so_code: true },
+      })
+    )
+      .map((request) => String(request.so_code ?? "").trim())
+      .filter(Boolean);
+    const installationHiddenCodes = [...new Set([...postDispatchHiddenLeadCodes, ...resolvedSmallOrderLeadCodes])];
+
     const totalUnderInstallationStageLeads = await countPostProductionStage("Type 15", {
-      ...(postDispatchHiddenLeadCodes.length > 0
-        ? { lead_code: { notIn: postDispatchHiddenLeadCodes } }
+      ...(installationHiddenCodes.length > 0
+        ? { lead_code: { notIn: installationHiddenCodes } }
         : {}),
 
       // Hide ONLY when usable completed + misc still pending
@@ -508,7 +546,7 @@ export class LeadStatsService {
           },
         ],
       },
-    });
+    }, installationLeadScope);
     const totalFinalhandoverStageLeads = await countPostProductionStage("Type 16", {
       ...(installationHiddenLeadCodes.length > 0
         ? { lead_code: { notIn: installationHiddenLeadCodes } }
