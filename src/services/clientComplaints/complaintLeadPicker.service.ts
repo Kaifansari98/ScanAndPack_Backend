@@ -1,5 +1,6 @@
 import { prisma, Prisma } from "../../prisma/client";
 import { ComplaintActor, ComplaintError } from "./clientComplaints.service";
+import { instanceAwareStageWhere } from "../production/stages/instanceStage";
 
 const PAGE_SIZE = 15;
 
@@ -9,6 +10,39 @@ function requireSuperAdmin(actor: ComplaintActor) {
       "Only Super Admins can browse leads for complaint registration.",
       403,
     );
+}
+
+const DELIVERED_TAG = "Type 17";
+
+/**
+ * The leads listed on /dashboard/delivered-projects: ongoing, non-draft Type 17
+ * leads (instance-aware for large-scale vendors). Complaint placeholder leads
+ * and small-order leads, which that page hides, are left out.
+ */
+async function deliveredProjectsScope(vendorId: number): Promise<Prisma.LeadMasterWhereInput> {
+  const [statuses, vendor] = await Promise.all([
+    prisma.statusTypeMaster.findMany({
+      where: { vendor_id: vendorId, tag: DELIVERED_TAG },
+      select: { id: true },
+    }),
+    prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { handlesLargeScaleProjects: true },
+    }),
+  ]);
+  // No delivered stage configured means nothing can be delivered yet.
+  if (!statuses.length) return { id: { in: [] } };
+  return {
+    ...instanceAwareStageWhere(
+      vendor?.handlesLargeScaleProjects === true,
+      DELIVERED_TAG,
+      statuses.map((s) => s.id),
+    ),
+    activity_status: "onGoing",
+    is_draft: { not: true },
+    is_complaint_placeholder: false,
+    is_small_order_request: { not: true },
+  };
 }
 
 function optionalId(value: unknown, label: string): number | undefined {
@@ -49,24 +83,22 @@ export async function getComplaintLeadOptions(
     if (!franchise)
       throw new ComplaintError("Franchise not found for this vendor.", 404);
   }
+  const searchTerms: Prisma.LeadMasterWhereInput[] = search
+    ? search.split(/\s+/).map((term) => ({
+        OR: [
+          { firstname: { contains: term, mode: "insensitive" as const } },
+          { lastname: { contains: term, mode: "insensitive" as const } },
+          { lead_code: { contains: term, mode: "insensitive" as const } },
+        ],
+      }))
+    : [];
   const where: Prisma.LeadMasterWhereInput = {
     vendor_id: actor.vendorId,
     is_deleted: false,
     ...(franchiseId ? { franchise_id: franchiseId } : {}),
     ...(afterId ? { id: { lt: afterId } } : {}),
-    ...(search
-      ? {
-          AND: search
-            .split(/\s+/)
-            .map((term) => ({
-              OR: [
-                { firstname: { contains: term, mode: "insensitive" as const } },
-                { lastname: { contains: term, mode: "insensitive" as const } },
-                { lead_code: { contains: term, mode: "insensitive" as const } },
-              ],
-            })),
-        }
-      : {}),
+    // Kept in AND so its own AND/id keys cannot clash with the search or cursor.
+    AND: [await deliveredProjectsScope(actor.vendorId), ...searchTerms],
   };
   // Fetch one extra ID to know whether another page exists, without counting all leads.
   const matches = await prisma.leadMaster.findMany({
