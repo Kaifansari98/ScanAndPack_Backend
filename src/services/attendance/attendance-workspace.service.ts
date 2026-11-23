@@ -9,7 +9,7 @@ type CorrectionInput = { attendance_date?: unknown; reason?: unknown; requested_
 const recordInclude = { breaks: { orderBy: { started_at: "asc" as const } }, logs: { orderBy: { action_time: "asc" as const } } };
 const reviewRoles = new Set(["super-admin", "hrms-admin", "hrmsadmin"]);
 export const normalizeRole = (role: string) => role.trim().toLowerCase().replace(/[ _]+/g, "-");
-const snapshot = (record: any) => record ? JSON.parse(JSON.stringify({ check_in: record.check_in, check_out: record.check_out, work_location: record.work_location, time_zone: record.time_zone, breaks: record.breaks || [] })) as Prisma.InputJsonValue : {};
+const snapshot = (record: any) => record ? JSON.parse(JSON.stringify({ check_in: record.check_in, check_out: record.check_out, work_location: record.work_location, time_zone: record.time_zone, shift_minutes: record.shift_minutes, breaks: record.breaks || [] })) as Prisma.InputJsonValue : {};
 
 export async function attendanceContext(actor?: AttendanceActor, requireFeature = true) {
   const id = Number(actor?.id ?? actor?.user_id);
@@ -43,7 +43,8 @@ export async function punchAttendance(actor: AttendanceActor | undefined, input:
   if (targetId !== context.user.id && !context.canReview) attendanceError("You can only mark your own attendance.", 403);
   const employee = targetId === context.user.id ? context.user : await prisma.userMaster.findFirst({ where: { id: targetId, vendor_id: context.user.vendor_id, status: "active" } });
   if (!employee) attendanceError("Employee not found in your vendor.", 404);
-  if (employee.franchise_id && !(await prisma.franchiseMaster.findFirst({ where: { id: employee.franchise_id, vendor_id: employee.vendor_id }, select: { id: true } }))) attendanceError("Employee franchise does not belong to their vendor.", 403);
+  const franchise = employee.franchise_id ? await prisma.franchiseMaster.findFirst({ where: { id: employee.franchise_id, vendor_id: employee.vendor_id }, select: { id: true, shift_minutes: true } }) : null;
+  if (employee.franchise_id && !franchise) attendanceError("Employee franchise does not belong to their vendor.", 403);
   if (input.vendor_id !== undefined && Number(input.vendor_id) !== employee.vendor_id) attendanceError("Vendor does not match the employee.", 403);
   if (input.franchise_id !== undefined && input.franchise_id !== employee.franchise_id) attendanceError("Franchise does not match the employee.");
   if (input.action_time !== undefined) attendanceError("Punch timestamps are assigned by the server. Submit a correction for historical changes.");
@@ -63,7 +64,7 @@ export async function punchAttendance(actor: AttendanceActor | undefined, input:
     if (action === "IN") {
       if (record) attendanceError("Check out of your open attendance session before checking in again.", 409);
       if (await tx.attendance.findFirst({ where: { ...scope, attendance_date: attendanceDate }, select: { id: true } })) attendanceError("Attendance has already been recorded for this date.", 409);
-      record = await tx.attendance.create({ data: { ...scope, franchise_id: employee.franchise_id, attendance_date: attendanceDate, check_in: now, source: source as "MANUAL" | "PHONE" | "CARD", work_location: location as AttendanceWorkLocation | null, time_zone: context.timeZone }, include: recordInclude });
+      record = await tx.attendance.create({ data: { ...scope, franchise_id: employee.franchise_id, attendance_date: attendanceDate, check_in: now, source: source as "MANUAL" | "PHONE" | "CARD", work_location: location as AttendanceWorkLocation | null, shift_minutes: franchise?.shift_minutes ?? 480, time_zone: context.timeZone }, include: recordInclude });
     } else {
       if (!record) attendanceError("No open attendance session. Check in first.", 409);
       const lastEvent = record.logs[record.logs.length - 1];
@@ -172,7 +173,8 @@ export async function decideAttendanceCorrection(actor: AttendanceActor | undefi
       if (existing?.breaks.some(pause => !pause.ended_at || pause.started_at < checkIn || pause.ended_at > checkOut)) attendanceError("The corrected window must include all completed breaks. End an open break before resubmitting.", 409);
       // A corrected interval must not overlap any other day's session.
       if (await tx.attendance.findFirst({ where: { vendor_id: pending.vendor_id, user_id: pending.user_id, ...(existing ? { id: { not: existing.id } } : {}), check_in: { lt: checkOut }, OR: [{ check_out: null }, { check_out: { gt: checkIn } }] }, select: { id: true } })) attendanceError("Corrected times overlap another attendance session.", 409);
-      const values = { check_in: checkIn, check_out: checkOut, time_zone: timeZone };
+      const shiftMinutes = existing?.shift_minutes ?? (employee.franchise_id ? (await tx.franchiseMaster.findFirst({ where: { id: employee.franchise_id, vendor_id: employee.vendor_id }, select: { shift_minutes: true } }))?.shift_minutes : 480) ?? 480;
+      const values = { check_in: checkIn, check_out: checkOut, time_zone: timeZone, shift_minutes: shiftMinutes };
       const corrected = existing
         ? await tx.attendance.update({ where: { id: existing.id }, data: values, include: recordInclude })
         : await tx.attendance.create({ data: { ...values, vendor_id: pending.vendor_id, user_id: pending.user_id, franchise_id: employee.franchise_id, attendance_date: pending.attendance_date, source: "MANUAL" }, include: recordInclude });

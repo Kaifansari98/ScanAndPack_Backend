@@ -1,0 +1,1 @@
+export { mobileAppRouter } from "./routes";

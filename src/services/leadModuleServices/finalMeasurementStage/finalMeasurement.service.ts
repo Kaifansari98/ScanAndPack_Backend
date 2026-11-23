@@ -1,3 +1,4 @@
+import { saveFMAnswers } from "../../fmRequirements/requirements.service";
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient"; // your existing Wasabi config
 import Joi = require("joi");
@@ -18,6 +19,8 @@ import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { validateSelfAssignTask } from "../../../utils/selfAssignTaskType";
 
 interface FinalMeasurementDto {
+  fm_requirements?: unknown;
+  fm_requirement_primary_uploads?: unknown;
   lead_id: number;
   account_id: number;
   vendor_id: number;
@@ -138,6 +141,12 @@ export class FinalMeasurementService {
           sitePhotos: [],
           message: "Final measurement stage completed successfully",
         };
+
+        if (data.fm_requirements !== undefined) {
+          const files = await saveFMAnswers(tx, { vendorId: data.vendor_id, leadId: data.lead_id, actorId: data.created_by, groups: data.fm_requirements, primaryUploads: data.fm_requirement_primary_uploads, draft: false });
+          data.finalMeasurementDocs = files.measurementDocs;
+          data.sitePhotos = files.sitePhotos;
+        }
 
         // 1️⃣ Upload Final Measurement Documents (Type 9)
         const measurementDocType = await tx.documentTypeMaster.findFirst({
@@ -315,6 +324,7 @@ export class FinalMeasurementService {
       },
       {
         timeout: 20000,
+        isolationLevel: data.fm_requirements ? "Serializable" : undefined,
       },
     );
 

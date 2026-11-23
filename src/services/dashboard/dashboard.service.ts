@@ -2857,6 +2857,21 @@ export class DashboardService {
           account_id: true,
           firstname: true,
           lastname: true,
+          ...(["Type 8", "Type 9", "Type 10"].includes(tag)
+            ? {
+                productStructureInstances: {
+                  select: {
+                    id: true,
+                    quantity_index: true,
+                    title: true,
+                    is_tech_check_completed: true,
+                    is_order_login_completed: true,
+                    productStructure: { select: { type: true } },
+                  },
+                  orderBy: { id: "asc" as const },
+                },
+              }
+            : {}),
         },
       });
 
@@ -2865,6 +2880,9 @@ export class DashboardService {
         lead_code: lead.lead_code,
         account_id: lead.account_id,
         name: `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim(),
+        ...(["Type 8", "Type 9", "Type 10"].includes(tag)
+          ? { productStructureInstances: lead.productStructureInstances }
+          : {}),
       }));
     };
 
@@ -2948,6 +2966,21 @@ export class DashboardService {
           account_id: true,
           firstname: true,
           lastname: true,
+          ...(["Type 8", "Type 9", "Type 10"].includes(tag)
+            ? {
+                productStructureInstances: {
+                  select: {
+                    id: true,
+                    quantity_index: true,
+                    title: true,
+                    is_tech_check_completed: true,
+                    is_order_login_completed: true,
+                    productStructure: { select: { type: true } },
+                  },
+                  orderBy: { id: "asc" as const },
+                },
+              }
+            : {}),
         },
       });
 
@@ -2956,6 +2989,9 @@ export class DashboardService {
         lead_code: lead.lead_code,
         account_id: lead.account_id,
         name: `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim(),
+        ...(["Type 8", "Type 9", "Type 10"].includes(tag)
+          ? { productStructureInstances: lead.productStructureInstances }
+          : {}),
       }));
     };
 

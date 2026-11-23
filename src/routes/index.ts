@@ -1,5 +1,7 @@
+import fmRequirementsRouter from "./fmRequirements/requirements.routes";
 import cadbidRoutes from "./cadbid/cadbid.routes";
 import { Router } from "express";
+import { mobileAppRouter } from "../furnixcrm-mobile-app";
 import vendorRoutes from "./vendor.routes";
 import vendorAddressRoutes from "./vendorAddress.routes";
 import vendorTaxInfoRoutes from "./vendorTaxInfo.routes";
@@ -91,6 +93,7 @@ import leaveRoutes from "./leaves/leaves.routes";
   router.use("/scan-items", scanItemRoutes);
   router.use("/auth", authRoutes);
   router.use("/leads/walkin-questions", walkinLeadQuestionsRoutes);
+  router.use("/leads/fm-requirements", fmRequirementsRouter);
   router.use("/clients", clientRoutes);
   router.use("/client-types", clientTypeRoutes);
   router.use("/leads", leadModuleRoutes);
@@ -166,5 +169,6 @@ router.use("/attendance", attendanceRoutes);
 router.use("/leaves", leaveRoutes);
 
 router.use("/cadbid", cadbidRoutes);
+router.use("/furnixcrm-mobile-app", mobileAppRouter);
 
 export { router };

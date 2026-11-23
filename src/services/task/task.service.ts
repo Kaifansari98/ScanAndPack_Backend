@@ -1868,6 +1868,7 @@ private static mapTaskWithLead(task: any) {
         status: { in: ["open", "in_progress"] },
       },
       select: {
+        id: true,
         task_type: true,
         lead_stage: true,
         due_date: true,

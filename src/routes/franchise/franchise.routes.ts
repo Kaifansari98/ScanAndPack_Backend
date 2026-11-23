@@ -9,7 +9,10 @@ import {
 } from "../../controllers/franchise/franchise.controller";
 import { verifyToken } from "../../middlewares/auth.middleware";
 
+import { franchiseShiftController } from "../../controllers/attendance/attendance-workspace.controller";
+
 const franchiseRoutes = Router();
+franchiseRoutes.patch("/:id/shift", verifyToken, franchiseShiftController);
 
 franchiseRoutes.post("/create", createFranchiseController);
 franchiseRoutes.get("/vendor/:vendorId", verifyToken, getFranchisesByVendorIdController);

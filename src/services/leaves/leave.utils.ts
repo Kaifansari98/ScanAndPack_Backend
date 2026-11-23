@@ -1,6 +1,6 @@
 import { attendanceError, validDate } from "../attendance/attendance.utils";
 export const leaveTypes = ["PAID", "SICK", "CASUAL", "UNPAID"] as const;
-export const leaveStatuses = ["PENDING", "APPROVED", "REJECTED"] as const;
+export const leaveStatuses = ["PENDING", "APPROVED", "REJECTED", "RECORDED"] as const;
 export const typeLabels: Record<string, string> = { PAID: "Paid Leave", SICK: "Sick Leave", CASUAL: "Casual Leave", UNPAID: "Unpaid Leave" };
 export function positiveId(value: unknown, label = "id") {
   if ((typeof value !== "number" && typeof value !== "string") || !/^\d+$/.test(String(value))) attendanceError(`Valid ${label} is required.`);
@@ -51,7 +51,6 @@ export function leaveDateRange(input: Record<string, unknown>, today: string) {
   const start = validDate(legacy ? input.date : input.start_date);
   const end = validDate(legacy ? input.date : input.end_date);
   leaveYear(start.getUTCFullYear(), today); leaveYear(end.getUTCFullYear(), today);
-  if (start.toISOString().slice(0, 10) < today) attendanceError("Choose today or a future start date.");
   if (end < start) attendanceError("End date must be on or after start date.");
-  return { start, end, dayCount: Math.round((end.getTime() - start.getTime()) / 86400000) + 1 };
+  return { start, end, isBackdated: start.toISOString().slice(0, 10) < today, dayCount: Math.round((end.getTime() - start.getTime()) / 86400000) + 1 };
 }
