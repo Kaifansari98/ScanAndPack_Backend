@@ -6,6 +6,9 @@ import {
   updateHeadSiteSupervisorFranchiseMappingStatus,
   getHeadSiteSupervisorFranchiseMapping,
   getSiteSupervisorFranchiseMapping,
+  getStoreCitiesByVendorId,
+  addStoreCity,
+  updateFranchise,
 } from "../../services/franchise/franchise.service";
 
 export const createFranchiseController = async (
@@ -182,5 +185,47 @@ export const getSiteSupervisorFranchiseMappingController = async (
         error.message ||
         "Internal server error while fetching site supervisor franchise mapping",
     });
+  }
+};
+
+const sendError = (res: Response, error: any, fallback: string) => {
+  if (error.code === "FRANCHISE_CODE_EXISTS" || (error.code === "P2002" && String(error.meta?.target ?? "").includes("franchise_code")))
+    return res.status(409).json({
+      success: false,
+      code: "FRANCHISE_CODE_EXISTS",
+      message: "This franchise code is already in use for this vendor. Enter a different code.",
+    });
+  if (!error.statusCode) console.error(fallback, error);
+  return res.status(error.statusCode || 500).json({ success: false, message: error.statusCode ? error.message : fallback });
+};
+
+export const updateFranchiseController = async (req: Request, res: Response) => {
+  try {
+    const franchise = await updateFranchise((req as any).user, Number(req.params.id), req.body ?? {});
+    return res.json({ success: true, message: "Franchise updated successfully", data: franchise });
+  } catch (error: any) {
+    return sendError(res, error, "Unable to update the franchise.");
+  }
+};
+
+export const getStoreCitiesController = async (req: Request, res: Response) => {
+  try {
+    const cities = await getStoreCitiesByVendorId(Number(req.params.vendorId));
+    return res.json({ success: true, data: cities });
+  } catch (error: any) {
+    return sendError(res, error, "Unable to load cities.");
+  }
+};
+
+export const addStoreCityController = async (req: Request, res: Response) => {
+  try {
+    const city = await addStoreCity((req as any).user, Number(req.params.vendorId), req.body?.name);
+    return res.status(city.created ? 201 : 200).json({
+      success: true,
+      message: city.created ? "City added" : "City already in the city master",
+      data: city,
+    });
+  } catch (error: any) {
+    return sendError(res, error, "Unable to add the city.");
   }
 };

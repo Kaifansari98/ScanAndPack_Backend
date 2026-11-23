@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Applies the complaint-module migrations of 18–20 Nov 2026 to the database in
+# Applies the complaint-module migrations of 18–21 Nov 2026 to the database in
 # DATABASE_URL (read from .env by Prisma). Every migration is safe to re-run,
 # so if one fails, fix the cause and run the script again.
 #
@@ -18,6 +18,8 @@ MIGRATIONS=(
   20261120120000_complaint_store_city_misc
   20261120130000_complaint_site_map_link
   20261121130000_complaint_tasks_in_my_tasks
+  20261121140000_franchise_store_city
+  20261121150000_complaint_placeholder_lead
 )
 
 for name in "${MIGRATIONS[@]}"; do

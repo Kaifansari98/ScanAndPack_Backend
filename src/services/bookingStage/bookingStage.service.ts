@@ -1522,12 +1522,18 @@ export class BookingStageService {
   /**
    * Fetch all leads for a vendor filtered by tag (Type 1, 2, 3, etc.)
    */
-  private static draftVisibilityFilter(tag: string): Prisma.LeadMasterWhereInput {
+  // Also keeps complaint placeholder leads (<VendorCode>EX-n) out of lead
+  // lists; only Delivered Projects asks for them.
+  private static draftVisibilityFilter(tag: string, includeComplaintPlaceholders = false): Prisma.LeadMasterWhereInput {
+    const placeholders: Prisma.LeadMasterWhereInput = includeComplaintPlaceholders
+      ? {}
+      : { is_complaint_placeholder: false };
     return tag.trim().toLowerCase() === "type 1"
       ? {
           AND: [{ OR: [{ is_draft: false }, { draft_in_open_leads: true }] }],
+          ...placeholders,
         }
-      : { is_draft: { not: true } };
+      : { is_draft: { not: true }, ...placeholders };
   }
 
   public static async getVendorLeadsByTag(
@@ -1801,6 +1807,7 @@ export class BookingStageService {
       strict_status_tag?: boolean;
       material_issue_ready_only?: boolean;
       material_issue_completed_only?: boolean;
+      include_complaint_placeholders?: boolean;
     },
     requesterUserId?: number,
   ): Promise<{ leads: any[]; count: number }> {
@@ -2468,7 +2475,7 @@ export class BookingStageService {
         ? { franchise_id: franchiseId }
         : {}),
       is_deleted: false,
-      ...BookingStageService.draftVisibilityFilter(tag),
+      ...BookingStageService.draftVisibilityFilter(tag, filters.include_complaint_placeholders === true),
       ...(statusIds !== null && instanceAwareStageWhere(vendorForFeature?.handlesLargeScaleProjects === true, tag, statusIds)),
       ...(materialIssueReadyOnly &&
         (vendorForFeature?.handlesLargeScaleProjects === true
@@ -4674,6 +4681,7 @@ export class BookingStageService {
       pending_services?: boolean;
       franchise_ids?: number[];
       franchises?: number[];
+      include_complaint_placeholders?: boolean;
     } = {},
     options: {
       requireMiscellaneous?: boolean;
@@ -5462,7 +5470,7 @@ export class BookingStageService {
       const baseWhere: Prisma.LeadMasterWhereInput = {
         vendor_id: vendorId,
         is_deleted: false,
-        ...BookingStageService.draftVisibilityFilter(tag),
+        ...BookingStageService.draftVisibilityFilter(tag, filters.include_complaint_placeholders === true),
         ...instanceAwareStageWhere(vendorForFeature?.handlesLargeScaleProjects === true, tag, statusIds),
         statusType: shouldExcludeLaterStageTags && !vendorForFeature?.handlesLargeScaleProjects
           ? {
@@ -5691,7 +5699,7 @@ export class BookingStageService {
     const baseWhere: Prisma.LeadMasterWhereInput = {
       id: { in: leadIds },
       is_deleted: false,
-      ...BookingStageService.draftVisibilityFilter(tag),
+      ...BookingStageService.draftVisibilityFilter(tag, filters.include_complaint_placeholders === true),
       vendor_id: vendorId,
       ...instanceAwareStageWhere(vendorForFeature?.handlesLargeScaleProjects === true, tag, statusIds),
       statusType: shouldExcludeLaterStageTags && !vendorForFeature?.handlesLargeScaleProjects

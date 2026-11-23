@@ -3,6 +3,7 @@ import multer from "multer";
 import { verifyToken } from "../../middlewares/auth.middleware";
 import * as controller from "../../controllers/clientComplaints/clientComplaints.controller";
 import {
+  COMPLAINT_MAX_ISSUES,
   COMPLAINT_MAX_PHOTOS,
   COMPLAINT_MAX_PHOTO_SIZE,
   COMPLAINT_MAX_VIDEOS,
@@ -42,11 +43,13 @@ const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
     fileSize: COMPLAINT_MAX_VIDEO_SIZE,
-    files: COMPLAINT_MAX_PHOTOS + COMPLAINT_MAX_VIDEOS,
+    files: COMPLAINT_MAX_PHOTOS * COMPLAINT_MAX_ISSUES + COMPLAINT_MAX_VIDEOS,
     fields: 1,
   },
 }).fields([
   { name: "photos", maxCount: COMPLAINT_MAX_PHOTOS },
+  // One photo field per selected category (photos_0, photos_1, …).
+  ...Array.from({ length: COMPLAINT_MAX_ISSUES }, (_, i) => ({ name: `photos_${i}`, maxCount: COMPLAINT_MAX_PHOTOS })),
   { name: "videos", maxCount: COMPLAINT_MAX_VIDEOS },
 ]);
 router.post(

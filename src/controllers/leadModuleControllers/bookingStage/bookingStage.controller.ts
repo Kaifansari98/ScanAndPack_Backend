@@ -779,6 +779,8 @@ export class BookingStageController {
       }
 
       const filters = {
+        // Delivered Projects lists complaint placeholder leads too.
+        include_complaint_placeholders: req.body.include_complaint_placeholders === true,
         global_search: req.body.global_search,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
@@ -943,6 +945,8 @@ export class BookingStageController {
       }
 
       const filters = {
+        // Delivered Projects lists complaint placeholder leads too.
+        include_complaint_placeholders: req.body.include_complaint_placeholders === true,
         global_search: req.body.global_search,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
@@ -1096,6 +1100,8 @@ export class BookingStageController {
       }
 
       const filters = {
+        // Delivered Projects lists complaint placeholder leads too.
+        include_complaint_placeholders: req.body.include_complaint_placeholders === true,
         global_search: req.body.global_search,
         filter_name: req.body.filter_name,
         contact: req.body.contact,

@@ -1043,6 +1043,10 @@ model LeadMaster {
   order_number                                 String?
   refered_by                                   String?
   is_so_value_received                         Boolean                                        @default(false)
+  /// Placeholder lead made for a complaint from a client without a lead code
+  /// (<VendorCode>EX-n). Lives in Project Completed; hidden from lead lists.
+  is_complaint_placeholder                     Boolean                                        @default(false)
+  complaintExternalClient                      ComplaintExternalClient?
   so_value_received_at                         DateTime?
   project_status                               String?
   cutList                                      CutList[]
@@ -1119,6 +1123,7 @@ model LeadMaster {
   walkinResponses WalkinLeadResponse[]
 
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
+  @@index([vendor_id, is_complaint_placeholder])
 }
 
 model LeadSpecificationsMaster {
@@ -3722,6 +3727,9 @@ model FranchiseMaster {
   region_id                                                                  Int?
   state_id                                                                   Int?
   city_id                                                                    Int?
+  /// The vendor's store city (StoreCityMaster) this franchise belongs to.
+  store_city_id                                                              Int?
+  storeCity                                                                  StoreCityMaster?                     @relation(fields: [store_city_id], references: [id], onDelete: SetNull)
   area_id                                                                    Int?
   address                                                                    String?
   pincode                                                                    String?
@@ -3746,6 +3754,7 @@ model FranchiseMaster {
   attendance_logs                                                            attendance_logs[]
 
   @@unique([vendor_id, franchise_code])
+  @@index([store_city_id])
   @@index([online_lead_sales_executive_id])
 }
 
@@ -6581,6 +6590,9 @@ model ComplaintExternalClient {
   product_type String? @db.VarChar(200)
   installation_date DateTime? @db.Date
   email_verified_at DateTime?
+  /// The client's placeholder lead; every complaint of theirs attaches to it.
+  lead_id Int? @unique
+  lead LeadMaster? @relation(fields: [lead_id], references: [id], onDelete: SetNull)
   created_by Int?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -7760,6 +7772,7 @@ model StoreCityMaster {
   is_active  Boolean      @default(true)
   created_at DateTime     @default(now())
   vendor     VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  franchises FranchiseMaster[]
 
   @@unique([vendor_id, name])
   @@index([vendor_id, is_active, sort_order])
