@@ -40,6 +40,7 @@ import {
   createProjectCategory,
   updateProjectCategory,
   toggleProjectCategoryStatus,
+  deleteProjectCategory,
   getBrandMasters,
   createBrandMaster,
   updateBrandMaster,
@@ -187,6 +188,7 @@ router.get("/project-categories/:vendor_id", getProjectCategories);
 router.post("/project-categories", createProjectCategory);
 router.put("/project-categories/:id", updateProjectCategory);
 router.patch("/project-categories/:id/status", toggleProjectCategoryStatus);
+router.delete("/project-categories/:id", deleteProjectCategory);
 
 // Brand Master
 router.get("/brands/:vendor_id", getBrandMasters);
