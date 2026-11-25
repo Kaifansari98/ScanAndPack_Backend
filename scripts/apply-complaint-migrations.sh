@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Applies the complaint-module migrations of 18–21 Nov 2026 to the database in
+# Applies the complaint-module migrations of 18–21 Nov 2026, plus the client
+# chat migration of 25 Nov 2026, to the database in
 # DATABASE_URL (read from .env by Prisma). Every migration is safe to re-run,
 # so if one fails, fix the cause and run the script again.
 #
@@ -20,6 +21,7 @@ MIGRATIONS=(
   20261121130000_complaint_tasks_in_my_tasks
   20261121140000_franchise_store_city
   20261121150000_complaint_placeholder_lead
+  20261125120000_client_chat
 )
 
 for name in "${MIGRATIONS[@]}"; do
@@ -36,4 +38,4 @@ done
 
 echo "Regenerating the Prisma client…"
 npx prisma generate
-echo "Done: ${#MIGRATIONS[@]} complaint migrations applied."
+echo "Done: ${#MIGRATIONS[@]} migrations applied."

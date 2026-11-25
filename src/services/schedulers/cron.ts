@@ -4,6 +4,7 @@ import { NotificationService } from "../notification/notification.service";
 import { NotificationType } from "../../prisma/generated";
 import logger from "../../utils/logger";
 import { wixStudioService } from "../wixStudio.service";
+import { processClientChatAutoMessages } from "../clientChat/clientChatAuto";
 
 export async function processPendingNotificationQueue() {
   try {
@@ -256,6 +257,11 @@ for (let i = 0; i < users.length; i += BATCH_SIZE) {
 let isWixStudioSweeping = false;
 
 export function startCronJobs() {
+  // Client chat: post new CRM events (stages, visits, dispatch, payments).
+  cron.schedule("*/30 * * * * *", async () => {
+    await processClientChatAutoMessages();
+  });
+
   // Run every 10 seconds for real-time notification processing
   cron.schedule("*/10 * * * * *", async () => {
     await processPendingNotificationQueue();

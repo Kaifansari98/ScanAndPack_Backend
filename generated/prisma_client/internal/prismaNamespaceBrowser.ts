@@ -117,6 +117,11 @@ export const ModelName = {
   LeadChatAttachment: 'LeadChatAttachment',
   LeadChatMention: 'LeadChatMention',
   LeadChatDocument: 'LeadChatDocument',
+  ClientChatRoom: 'ClientChatRoom',
+  ClientChatMessage: 'ClientChatMessage',
+  ClientChatReaction: 'ClientChatReaction',
+  ClientChatStaffRead: 'ClientChatStaffRead',
+  ClientPushToken: 'ClientPushToken',
   ProductStructure: 'ProductStructure',
   ProductSubStructure: 'ProductSubStructure',
   ProductItemCode: 'ProductItemCode',
@@ -1556,6 +1561,76 @@ export const LeadChatDocumentScalarFieldEnum = {
 } as const
 
 export type LeadChatDocumentScalarFieldEnum = (typeof LeadChatDocumentScalarFieldEnum)[keyof typeof LeadChatDocumentScalarFieldEnum]
+
+
+export const ClientChatRoomScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  created_at: 'created_at',
+  last_message_at: 'last_message_at',
+  client_delivered_id: 'client_delivered_id',
+  client_read_id: 'client_read_id'
+} as const
+
+export type ClientChatRoomScalarFieldEnum = (typeof ClientChatRoomScalarFieldEnum)[keyof typeof ClientChatRoomScalarFieldEnum]
+
+
+export const ClientChatMessageScalarFieldEnum = {
+  id: 'id',
+  room_id: 'room_id',
+  sender_type: 'sender_type',
+  sender_user_id: 'sender_user_id',
+  kind: 'kind',
+  text: 'text',
+  file_key: 'file_key',
+  file_name: 'file_name',
+  file_size: 'file_size',
+  mime_type: 'mime_type',
+  duration_sec: 'duration_sec',
+  auto_kind: 'auto_kind',
+  auto_title: 'auto_title',
+  reply_to_id: 'reply_to_id',
+  deleted_at: 'deleted_at',
+  created_at: 'created_at'
+} as const
+
+export type ClientChatMessageScalarFieldEnum = (typeof ClientChatMessageScalarFieldEnum)[keyof typeof ClientChatMessageScalarFieldEnum]
+
+
+export const ClientChatReactionScalarFieldEnum = {
+  id: 'id',
+  message_id: 'message_id',
+  reactor_key: 'reactor_key',
+  emoji: 'emoji',
+  created_at: 'created_at'
+} as const
+
+export type ClientChatReactionScalarFieldEnum = (typeof ClientChatReactionScalarFieldEnum)[keyof typeof ClientChatReactionScalarFieldEnum]
+
+
+export const ClientChatStaffReadScalarFieldEnum = {
+  id: 'id',
+  room_id: 'room_id',
+  user_id: 'user_id',
+  delivered_id: 'delivered_id',
+  read_id: 'read_id',
+  updated_at: 'updated_at'
+} as const
+
+export type ClientChatStaffReadScalarFieldEnum = (typeof ClientChatStaffReadScalarFieldEnum)[keyof typeof ClientChatStaffReadScalarFieldEnum]
+
+
+export const ClientPushTokenScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  token: 'token',
+  platform: 'platform',
+  is_active: 'is_active',
+  updated_at: 'updated_at'
+} as const
+
+export type ClientPushTokenScalarFieldEnum = (typeof ClientPushTokenScalarFieldEnum)[keyof typeof ClientPushTokenScalarFieldEnum]
 
 
 export const ProductStructureScalarFieldEnum = {

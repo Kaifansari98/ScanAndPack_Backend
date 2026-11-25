@@ -1,6 +1,7 @@
 import fmRequirementsRouter from "./fmRequirements/requirements.routes";
 import clientComplaintsRouter from "./clientComplaints/clientComplaints.routes";
 import projectTrackerRouter from "./projectTracker/projectTracker.routes";
+import clientChatRouter from "./clientChat/clientChat.routes";
 import cadbidRoutes from "./cadbid/cadbid.routes";
 import { Router } from "express";
 import { mobileAppRouter } from "../furnixcrm-mobile-app";
@@ -169,6 +170,7 @@ router.use("/inventory/payment-requisitions", paymentRequisitionRoutes);
 router.use("/broadcasts", broadcastRouter);
 router.use("/client-complaints", clientComplaintsRouter);
 router.use("/project-tracker", projectTrackerRouter);
+router.use("/client-chats", clientChatRouter);
 router.use("/time-zones", timeZoneRoutes);
 router.use("/attendance", attendanceRoutes);
 router.use("/leaves", leaveRoutes);

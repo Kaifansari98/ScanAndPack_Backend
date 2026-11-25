@@ -92,6 +92,20 @@ export const uploadProjectTrackerFile = async (buffer: Buffer, vendorId: number,
   return key;
 };
 
+export const CLIENT_CHAT_FILE_TYPES: Record<string, string> = {
+  "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/heic": "heic", "image/heif": "heif",
+  "application/pdf": "pdf",
+  "audio/mp4": "m4a", "audio/m4a": "m4a", "audio/x-m4a": "m4a", "audio/aac": "aac", "audio/mpeg": "mp3", "audio/webm": "webm", "audio/ogg": "ogg",
+};
+
+export const uploadClientChatFile = async (buffer: Buffer, vendorId: number, leadId: number, mimeType: string) => {
+  const ext = CLIENT_CHAT_FILE_TYPES[mimeType];
+  if (!ext) throw new Error("Unsupported client chat file format");
+  const key = `client_chat/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+  await wasabi.send(new PutObjectCommand({ Bucket: process.env.WASABI_BUCKET_NAME!, Key: key, Body: buffer, ContentType: mimeType }));
+  return key;
+};
+
 export const deleteWasabiObjects = async (keys: string[]) => {
   await Promise.allSettled(
     keys.map((key) => wasabi.send(new DeleteObjectCommand({ Bucket: process.env.WASABI_BUCKET_NAME!, Key: key }))),

@@ -2,9 +2,11 @@ import { Request, Response } from "express";
 import { clientFrom } from "../middleware/client-auth.middleware";
 import { MobileProjectsService } from "../services/projects.service";
 import { MobileTrackerService } from "../services/tracker.service";
+import { MobileDashboardService } from "../services/dashboard.service";
 
 const mobileProjectsService = new MobileProjectsService();
 const mobileTrackerService = new MobileTrackerService();
+const mobileDashboardService = new MobileDashboardService();
 
 type Handler = (
   req: Request,
@@ -30,6 +32,9 @@ export const listInstances = handle("List instances", (req, res) =>
 );
 export const getProjectTracker = handle("Project tracker", (req, res) =>
   mobileTrackerService.getProjectTracker(clientFrom(res), Number(req.params.leadId)),
+);
+export const getProjectDashboard = handle("Project dashboard", (req, res) =>
+  mobileDashboardService.getDashboard(clientFrom(res), Number(req.params.leadId)),
 );
 export const getProjectUpdates = handle("Project updates", (req, res) =>
   mobileTrackerService.getProjectUpdates(clientFrom(res), Number(req.params.leadId)),
