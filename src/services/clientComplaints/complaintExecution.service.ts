@@ -455,7 +455,7 @@ export async function completeExecution(
   id: number,
   executionId: number,
   body: Record<string, unknown>,
-  files: { before: ComplaintUpload[]; after: ComplaintUpload[]; paymentProof?: ComplaintUpload[] },
+  files: { before: ComplaintUpload[]; after: ComplaintUpload[]; resolutionForm?: ComplaintUpload[]; paymentProof?: ComplaintUpload[] },
 ) {
   const { complaint, execution } = await loadForExecution(actor, id, executionId, "COMPLETE_WORK");
   const version = versionOf(body.version);
@@ -466,17 +466,23 @@ export async function completeExecution(
     client_remarks: remarksOf(body.client_remarks, "Client remarks", false),
     pending_work: remarksOf(body.pending_work, "Pending work"),
   };
+  if (!files.resolutionForm || files.resolutionForm.length === 0) {
+    throw new ComplaintError("COMPLAINT RESOLUTION FORM is required.");
+  }
   if (files.after.length === 0) throw new ComplaintError("Add at least one after-repair photo.");
   const before = classifyUploads(files.before, MAX_COMPLETION_PHOTOS);
   const after = classifyUploads(files.after, MAX_COMPLETION_PHOTOS);
+  const resolutionForm = classifyUploads(files.resolutionForm, 1);
   // Cash an installation team collected at its visit comes with this report.
   const cash = await prepareVisitCash(actor, complaint, body.visit_payment, files.paymentProof ?? []);
   let uploadedBefore: Awaited<ReturnType<typeof uploadAll>> = [];
   let uploadedAfter: Awaited<ReturnType<typeof uploadAll>> = [];
+  let uploadedResolutionForm: Awaited<ReturnType<typeof uploadAll>> = [];
   const now = new Date();
   try {
     uploadedBefore = await uploadAll(actor, before);
     uploadedAfter = await uploadAll(actor, after);
+    uploadedResolutionForm = await uploadAll(actor, resolutionForm);
     await prisma.$transaction(async (tx) => {
       await moveStatus(tx, complaint, version, {});
       if (cash) await insertPaymentTx(tx, actor, complaint, cash.charge, cash.prepared, true);
@@ -494,6 +500,7 @@ export async function completeExecution(
         data: [
           ...attachmentRows(actor, complaint, uploadedBefore, { category: "BEFORE_EXECUTION", execution_id: execution.id }),
           ...attachmentRows(actor, complaint, uploadedAfter, { category: "AFTER_EXECUTION", execution_id: execution.id }),
+          ...attachmentRows(actor, complaint, uploadedResolutionForm, { category: "AFTER_EXECUTION", execution_id: execution.id }),
         ],
       });
       await tx.complaintTask.updateMany({
@@ -513,7 +520,7 @@ export async function completeExecution(
     });
   } catch (error) {
     await deleteWasabiObjects(
-      [...uploadedBefore, ...uploadedAfter, ...(cash?.prepared.uploaded ?? [])].map((u) => u.key),
+      [...uploadedBefore, ...uploadedAfter, ...uploadedResolutionForm, ...(cash?.prepared.uploaded ?? [])].map((u) => u.key),
     );
     throw error;
   }

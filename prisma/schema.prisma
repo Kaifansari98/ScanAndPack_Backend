@@ -348,6 +348,7 @@ model UserMaster {
   leaveWeeklyOffsUpdated                                                         LeaveWeeklyOff[]                               @relation("LeaveWeeklyOffUpdater")
   instanceStageHistory                                                           InstanceStageHistory[]
   onlineLeadAssignedFranchises                                                   FranchiseMaster[]                              @relation("OnlineLeadSalesExecutive")
+  complaintAssignedFranchises                                                    FranchiseMaster[]                              @relation("ComplaintSalesExecutive")
   productsRequiredForProduction                                                  ProductsRequiredForProduction[]
   id                                                                             Int                                            @id @default(autoincrement())
   vendor_id                                                                      Int
@@ -3812,6 +3813,8 @@ model FranchiseMaster {
   leaveRequests                                                              LeaveRequest[]
   online_lead_sales_executive_id                                             Int?
   onlineLeadSalesExecutive                                                   UserMaster?                          @relation("OnlineLeadSalesExecutive", fields: [online_lead_sales_executive_id], references: [id], onDelete: SetNull)
+  complaint_sales_executive_id                                               Int?
+  complaintSalesExecutive                                                    UserMaster?                          @relation("ComplaintSalesExecutive", fields: [complaint_sales_executive_id], references: [id], onDelete: SetNull)
   productsRequiredForProduction                                              ProductsRequiredForProduction[]
   shift_minutes                                                              Int                                  @default(480)
   id                                                                         Int                                  @id @default(autoincrement())

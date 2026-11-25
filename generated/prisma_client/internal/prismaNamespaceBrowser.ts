@@ -2924,6 +2924,7 @@ export type DefectedItemScalarFieldEnum = (typeof DefectedItemScalarFieldEnum)[k
 
 export const FranchiseMasterScalarFieldEnum = {
   online_lead_sales_executive_id: 'online_lead_sales_executive_id',
+  complaint_sales_executive_id: 'complaint_sales_executive_id',
   shift_minutes: 'shift_minutes',
   id: 'id',
   vendor_id: 'vendor_id',

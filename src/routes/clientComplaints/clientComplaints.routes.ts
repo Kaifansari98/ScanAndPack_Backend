@@ -153,6 +153,7 @@ router.post(
   multipartRoute([
     { name: "before", maxCount: 10 },
     { name: "after", maxCount: 10 },
+    { name: "resolution_form", maxCount: 1 },
     { name: "payment_proof", maxCount: 1 },
   ]),
   controller.executionComplete,

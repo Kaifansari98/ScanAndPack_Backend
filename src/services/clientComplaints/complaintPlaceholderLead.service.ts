@@ -193,6 +193,27 @@ export async function ensurePlaceholderLead(
     number += 1;
   const leadCode = `${prefix}${number}`;
 
+  const franchise = franchiseId
+    ? await tx.franchiseMaster.findUnique({
+        where: { id: franchiseId },
+        select: {
+          complaint_sales_executive_id: true,
+          users: {
+            where: {
+              vendor_id: input.vendorId,
+              status: "active",
+              user_type: { user_type: { in: ["sales executive", "sales-executive"], mode: "insensitive" } },
+            },
+            orderBy: { id: "asc" },
+            select: { id: true },
+          },
+        },
+      })
+    : null;
+  const salesExecutiveId =
+    franchise?.complaint_sales_executive_id ??
+    (franchise?.users.length === 1 ? franchise.users[0].id : null);
+
   const lead = await tx.leadMaster.create({
     data: {
       lead_code: leadCode,
@@ -208,6 +229,7 @@ export async function ensurePlaceholderLead(
       franchise_id: franchiseId,
       account_id: account.id,
       status_id: status.id,
+      assign_to: salesExecutiveId,
       created_by: input.actorId,
       is_complaint_placeholder: true,
     },
@@ -228,7 +250,8 @@ export async function ensurePlaceholderLead(
   const mappings = [
     ss && { type: "site-supervisor" as const, user_id: ss },
     hss && { type: "head-site-supervisor" as const, user_id: hss },
-  ].filter(Boolean) as { type: "site-supervisor" | "head-site-supervisor"; user_id: number }[];
+    salesExecutiveId && { type: "ISM" as const, user_id: salesExecutiveId },
+  ].filter(Boolean) as { type: "site-supervisor" | "head-site-supervisor" | "ISM"; user_id: number }[];
   if (mappings.length)
     await tx.leadUserMapping.createMany({
       data: mappings.map((m) => ({

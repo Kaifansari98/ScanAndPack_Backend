@@ -7558,6 +7558,63 @@ export const toggleProjectCategoryStatus = async (
   }
 };
 
+// ─── Hard Delete Project Category ─────────────────────────────────────────────
+export const deleteProjectCategory = async (id: number) => {
+  try {
+    const existing = await prisma.projectCategoriesMaster.findUnique({
+      where: { id },
+    });
+
+    if (!existing) {
+      return validationResponse(0, "Category not found");
+    }
+
+    await prisma.$transaction(async (tx) => {
+      // 1. Delete naming structure if present
+      await tx.categoryNamingStructure.deleteMany({
+        where: { category_id: id },
+      });
+
+      // 2. Delete vendor mappings
+      await tx.projectCategoriesMasterVendorMapping.deleteMany({
+        where: { project_categories_master_id: id },
+      });
+
+      // 3. Delete any subcategories pointing to this as parent
+      const subCategories = await tx.projectCategoriesMaster.findMany({
+        where: { parent_id: id },
+        select: { id: true },
+      });
+
+      if (subCategories.length > 0) {
+        const subIds = subCategories.map((s) => s.id);
+        await tx.projectCategoriesMasterVendorMapping.deleteMany({
+          where: { project_categories_master_id: { in: subIds } },
+        });
+        await tx.projectCategoriesMaster.deleteMany({
+          where: { id: { in: subIds } },
+        });
+      }
+
+      // 4. Finally hard delete the category itself
+      await tx.projectCategoriesMaster.delete({
+        where: { id },
+      });
+    });
+
+    return validationResponse(1, "Category deleted successfully");
+  } catch (error: any) {
+    console.error("Error in deleteProjectCategory", error);
+    if (error?.code === "P2003") {
+      return validationResponse(
+        0,
+        "Cannot delete category because products or records are linked to it.",
+      );
+    }
+    return validationResponse(0, error?.message || "Failed to delete category");
+  }
+};
+
 // ─── Brand Master Services ───────────────────────────────────────────────────
 export const getBrandMasters = async (vendor_id: number) => {
   try {

@@ -256,12 +256,17 @@ export const getEmployeeTodayAttendance = async (userId: number) => {
     },
   });
 
-  if (!record) {
+  if (!record || record.check_out) {
     return {
       has_marked_in: false,
       vendor_time_zone: tz,
-      attendance: null,
-      logs: [],
+      attendance: record ? decorateAttendance(record, tz) : null,
+      logs: record
+        ? record.logs.map((l) => ({
+            ...l,
+            action_time_local: formatInTimeZone(l.action_time, tz),
+          }))
+        : [],
     };
   }
 

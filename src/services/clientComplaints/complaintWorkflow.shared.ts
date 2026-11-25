@@ -4,6 +4,7 @@ import { deleteWasabiObjects, uploadComplaintFile } from "../../utils/wasabiClie
 import { PHOTO_TYPES, validFMFileSignature } from "../fmRequirements/schema";
 import {
   canViewAllComplaints,
+  isSalesExecutiveRole,
   ComplaintActor,
   ComplaintError,
   ComplaintUpload,
@@ -44,7 +45,18 @@ export async function loadComplaint(actor: ComplaintActor, id: number) {
     where: {
       id,
       vendor_id: actor.vendorId,
-      ...(isHead(actor.role) ? {} : { assigned_ss_id: actor.actorId }),
+      ...(isHead(actor.role)
+        ? {}
+        : isSalesExecutiveRole(actor.role)
+          ? {
+              lead: {
+                OR: [
+                  { assign_to: actor.actorId },
+                  { userMappings: { some: { user_id: actor.actorId, status: "active" } } },
+                ],
+              },
+            }
+          : { assigned_ss_id: actor.actorId }),
     },
     select: {
       id: true,
@@ -175,6 +187,29 @@ export const isAssignedSs = (actor: ComplaintActor, complaint: { assigned_ss_id:
 // Staff who may work a complaint day to day: HO or its assigned site supervisor.
 export const isComplaintStaff = (actor: ComplaintActor, complaint: { assigned_ss_id: number | null }) =>
   isHead(actor.role) || isAssignedSs(actor, complaint);
+
+// Who may record confirmation/responses on behalf of the client: HO or the assigned sales executive (NOT site supervisor).
+export async function canActOnBehalfOfClient(
+  actor: ComplaintActor,
+  complaint: { id: number; lead_id?: number | null },
+) {
+  if (isHead(actor.role)) return true;
+  if (!isSalesExecutiveRole(actor.role)) return false;
+  const match = await prisma.complaintMaster.findFirst({
+    where: {
+      id: complaint.id,
+      vendor_id: actor.vendorId,
+      lead: {
+        OR: [
+          { assign_to: actor.actorId },
+          { userMappings: { some: { user_id: actor.actorId, status: "active" } } },
+        ],
+      },
+    },
+    select: { id: true },
+  });
+  return !!match;
+}
 
 export function requireHead(actor: ComplaintActor, what: string) {
   if (!isHead(actor.role)) throw new ComplaintError(`Only HO can ${what}.`, 403);

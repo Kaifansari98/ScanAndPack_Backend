@@ -4,6 +4,7 @@ import logger from "../../utils/logger";
 import {
   canViewAllComplaints,
   canViewComplaints,
+  isSalesExecutiveRole,
   ComplaintActor,
   ComplaintError,
 } from "./clientComplaints.service";
@@ -31,7 +32,16 @@ function scope(
     vendor_id: actor.vendorId,
     ...(canViewAllComplaints(actor.role)
       ? {}
-      : { assigned_ss_id: actor.actorId }),
+      : isSalesExecutiveRole(actor.role)
+        ? {
+            lead: {
+              OR: [
+                { assign_to: actor.actorId },
+                { userMappings: { some: { user_id: actor.actorId, status: "active" } } },
+              ],
+            },
+          }
+        : { assigned_ss_id: actor.actorId }),
   };
 }
 

@@ -4,10 +4,10 @@ import { deleteWasabiObjects } from "../../utils/wasabiClient";
 import { ComplaintActor, ComplaintError, ComplaintUpload } from "./clientComplaints.service";
 import {
   attachmentRows,
+  canActOnBehalfOfClient,
   classifyUploads,
   clientReferenceOf,
   decisionData,
-  isComplaintStaff,
   isHead,
   isSuperAdmin,
   LoadedComplaint,
@@ -59,10 +59,10 @@ export async function closurePermissions(
   complaint: { id: number; status: ComplaintStatus; assigned_ss_id: number | null; current_cycle_id: number | null },
 ) {
   const head = isHead(actor.role);
-  const staff = isComplaintStaff(actor, complaint);
+  const canConfirm = await canActOnBehalfOfClient(actor, complaint);
   const awaitingClient = complaint.status === "AWAITING_CLIENT_CONFIRMATION";
   return {
-    can_record_client_confirmation: staff && awaitingClient,
+    can_record_client_confirmation: canConfirm && awaitingClient,
     can_close_without_response: head && awaitingClient,
     ho_closure:
       head && complaint.status === "AWAITING_HO_CLOSURE_APPROVAL" && complaint.current_cycle_id
@@ -130,8 +130,8 @@ export async function recordClientConfirmation(
   photos: ComplaintUpload[],
 ) {
   const complaint = await loadComplaint(actor, id);
-  if (!isComplaintStaff(actor, complaint))
-    throw new ComplaintError("Only HO or the assigned site supervisor can record the client's confirmation.", 403);
+  if (!(await canActOnBehalfOfClient(actor, complaint)))
+    throw new ComplaintError("Only HO or the assigned sales executive can record the client's confirmation.", 403);
   requireStatus(complaint, ["AWAITING_CLIENT_CONFIRMATION"], "record the client's confirmation");
   const version = versionOf(body.version);
   const satisfied = body.outcome === "SATISFIED";

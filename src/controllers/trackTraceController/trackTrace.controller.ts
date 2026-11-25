@@ -1508,6 +1508,27 @@ export const toggleProjectCategoryStatus = async (
     .json(ApiResponse.success(serviceResponse.data, serviceResponse.message, 200));
 };
 
+export const deleteProjectCategory = async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id);
+    if (!id || isNaN(id)) {
+      return res.status(400).json(ApiResponse.error("Valid ID is required", 400));
+    }
+
+    const serviceResponse = await trackTraceService.deleteProjectCategory(id);
+    if (serviceResponse.status === 0) {
+      return res.status(400).json(ApiResponse.error(serviceResponse.message, 400));
+    }
+
+    return res
+      .status(200)
+      .json(ApiResponse.success(serviceResponse.data, serviceResponse.message, 200));
+  } catch (err: any) {
+    console.error("deleteProjectCategory error:", err);
+    return res.status(500).json(ApiResponse.error(err?.message || "Internal server error", 500));
+  }
+};
+
 export const unsetBoxFromMapping = async (req: Request, res: Response) => {
   try {
     console.log("req.params:", req.params);
