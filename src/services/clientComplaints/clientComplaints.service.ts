@@ -46,7 +46,13 @@ export const canRegisterComplaints = (role: string) => role === "super-admin" ||
 
 export const canViewAllComplaints = canRegisterComplaints;
 
-export const canViewComplaints = (role: string) => canViewAllComplaints(role) || role === "site-supervisor";
+export const isSalesExecutiveRole = (role: string) => {
+  const normalized = (role || "").toLowerCase().replace(/[-_ ]/g, "");
+  return normalized === "salesexecutive" || normalized === "sales";
+};
+
+export const canViewComplaints = (role: string) =>
+  canViewAllComplaints(role) || role === "site-supervisor" || isSalesExecutiveRole(role);
 
 export async function requireComplaintsVendor(vendorId: number) {
   const vendor = await prisma.vendorMaster.findUnique({
@@ -932,7 +938,18 @@ export async function listComplaints(actor: ComplaintActor, query: Record<string
 
   const scope: Prisma.ComplaintMasterWhereInput = {
     vendor_id: actor.vendorId,
-    ...(canViewAllComplaints(actor.role) ? {} : { assigned_ss_id: actor.actorId }),
+    ...(canViewAllComplaints(actor.role)
+      ? {}
+      : isSalesExecutiveRole(actor.role)
+        ? {
+            lead: {
+              OR: [
+                { assign_to: actor.actorId },
+                { userMappings: { some: { user_id: actor.actorId, status: "active" } } },
+              ],
+            },
+          }
+        : { assigned_ss_id: actor.actorId }),
   };
   const where: Prisma.ComplaintMasterWhereInput = {
     ...scope,

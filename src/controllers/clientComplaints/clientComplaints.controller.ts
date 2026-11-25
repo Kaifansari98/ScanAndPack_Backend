@@ -258,6 +258,7 @@ export const executionComplete = step((req) =>
   completeExecution(actor(req), complaintId(req), param(req, "executionId"), multipartBody(req, "Completion report"), {
     before: uploads(req, "before"),
     after: uploads(req, "after"),
+    resolutionForm: uploads(req, "resolution_form"),
     paymentProof: uploads(req, "payment_proof"),
   }),
 );

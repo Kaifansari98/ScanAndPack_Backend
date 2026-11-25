@@ -1,4 +1,4 @@
-import { getOnlineLeadExecutiveMappings, saveOnlineLeadExecutiveMapping } from "../controllers/onlineLeadExecutiveMapping.controller";
+import { getOnlineLeadExecutiveMappings, saveOnlineLeadExecutiveMapping, getComplaintExecutiveMappings, saveComplaintExecutiveMapping } from "../controllers/onlineLeadExecutiveMapping.controller";
 import { Router } from "express";
 import { getCutlistHeaders, saveCutlistHeaders } from "../controllers/cutlistHeaders.controller";
 import {
@@ -29,6 +29,9 @@ const router = Router();
 
 router.get("/:vendor_id/online-lead-executive-mappings", verifyToken, getOnlineLeadExecutiveMappings);
 router.put("/:vendor_id/online-lead-executive-mappings", verifyToken, saveOnlineLeadExecutiveMapping);
+
+router.get("/:vendor_id/complaint-executive-mappings", verifyToken, getComplaintExecutiveMappings);
+router.put("/:vendor_id/complaint-executive-mappings", verifyToken, saveComplaintExecutiveMapping);
 
 router.get("/:vendor_id/cutlist-header-mappings", verifyToken, getCutlistHeaders);
 router.put("/:vendor_id/cutlist-header-mappings", verifyToken, saveCutlistHeaders);
