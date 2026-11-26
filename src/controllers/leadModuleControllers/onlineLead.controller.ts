@@ -659,7 +659,7 @@ export class OnlineLeadController {
         NOT: {
           online_lead_followup_status: {
             status_name: {
-              in: ["Store Assigned", "Store Visit Done", "Inactive"],
+              in: ["Store Assigned", "Store Visit Done", "Inactive", "Lost", "On Hold", "Mark On Hold", "On-Hold"],
               mode: "insensitive",
             },
           },
@@ -681,6 +681,14 @@ export class OnlineLeadController {
               where: {
                 ...baseLeadPoolFilter,
                 OR: [{ assign_to: userId }, { final_assigned_leads: userId }],
+                NOT: {
+                  online_lead_followup_status: {
+                    status_name: {
+                      in: ["Store Assigned", "Store Visit Done", "Inactive", "Lost", "On Hold", "Mark On Hold", "On-Hold"],
+                      mode: "insensitive",
+                    },
+                  },
+                },
               },
             })
           : Promise.resolve(0),
@@ -886,6 +894,14 @@ export class OnlineLeadController {
               where: {
                 ...baseLeadPoolFilter,
                 OR: [{ assign_to: userId }, { final_assigned_leads: userId }],
+                NOT: {
+                  online_lead_followup_status: {
+                    status_name: {
+                      in: ["Store Assigned", "Store Visit Done", "Inactive", "Lost", "On Hold", "Mark On Hold", "On-Hold"],
+                      mode: "insensitive",
+                    },
+                  },
+                },
               },
             })
           : Promise.resolve(0),
