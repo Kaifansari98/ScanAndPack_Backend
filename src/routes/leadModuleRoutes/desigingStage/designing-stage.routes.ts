@@ -63,6 +63,13 @@ DesigningStageRouter.get(
   DesigingStageController.getMeetingTypes,
 );
 
+// Super-admin only: adds a meeting type to the vendor's master.
+DesigningStageRouter.post(
+  "/vendor/:vendorId/meeting-types",
+  verifyToken,
+  DesigingStageController.createMeetingType,
+);
+
 // GET /api/leads/:vendorId/:leadId/design-meetings
 DesigningStageRouter.get(
   "/:vendorId/:leadId/design-meetings",

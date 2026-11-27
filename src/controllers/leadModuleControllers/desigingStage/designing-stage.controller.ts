@@ -1325,6 +1325,49 @@ export class DesigingStageController {
     }
   }
 
+  public static async createMeetingType(req: Request, res: Response) {
+    try {
+      const user = (req as any).user;
+      const vendorId = Number(req.params.vendorId);
+      if (!Number.isSafeInteger(vendorId) || Number(user?.vendor_id) !== vendorId) {
+        return res.status(403).json({ success: false, message: "Vendor access denied." });
+      }
+      const userType = String(user?.user_type ?? "").trim().toLowerCase().replace(/[_\s]+/g, "-");
+      if (userType !== "super-admin") {
+        return res.status(403).json({ success: false, message: "Only a super admin can add meeting types." });
+      }
+
+      const type = typeof req.body?.type === "string" ? req.body.type.trim().replace(/\s+/g, " ") : "";
+      if (!type) {
+        return res.status(400).json({ success: false, message: "Meeting type is required." });
+      }
+      if (type.length > 100) {
+        return res.status(400).json({ success: false, message: "Meeting type must be at most 100 characters." });
+      }
+
+      const existing = await prisma.meetingTypeMaster.findFirst({
+        where: { vendor_id: vendorId, type: { equals: type, mode: "insensitive" } },
+      });
+      if (existing) {
+        return res.status(409).json({ success: false, message: `“${existing.type}” already exists.` });
+      }
+
+      const meetingType = await prisma.meetingTypeMaster.create({
+        data: { vendor_id: vendorId, type },
+      });
+      return res.status(201).json({
+        success: true,
+        message: "Meeting type added",
+        data: meetingType,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to add meeting type",
+      });
+    }
+  }
+
   public static async uploadDesigns(req: Request, res: Response) {
     try {
       console.log("[BACKEND UPLOAD DESIGNS] req.body:", req.body);
