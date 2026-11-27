@@ -119,6 +119,7 @@ model VendorMaster {
   standardUnitClasses                          StandardUnitClass[]
   standardUnits                                StandardUnit[]
   standardUnitRelations                        StandardUnitRelation[]
+  categoryUnitSettings                         CategoryUnitSetting[]
   franchises                                   FranchiseMaster[]
   grns                                         GRNMaster[]                                    @relation("GRNVendor")
   grades                                       GradeMaster[]
@@ -4117,6 +4118,7 @@ model ProjectCategoriesMaster {
   cutLists                             CutList[]                              @relation("CutListCategory")
 
   namingStructure CategoryNamingStructure? @relation("CategoryNamingStructure")
+  unitSetting     CategoryUnitSetting?
 
   @@index([parent_id])
 }
@@ -8030,6 +8032,9 @@ model StandardUnit {
   unitClass       StandardUnitClass      @relation(fields: [unit_class_id], references: [id], onDelete: Cascade)
   conversionsFrom StandardUnitRelation[] @relation("StandardUnitRelationFrom")
   conversionsTo   StandardUnitRelation[] @relation("StandardUnitRelationTo")
+  purchaseFor     CategoryUnitSetting[]  @relation("CategoryPurchaseUnit")
+  stockFor        CategoryUnitSetting[]  @relation("CategoryStockUnit")
+  consumptionFor  CategoryUnitSetting[]  @relation("CategoryConsumptionUnit")
 
   @@unique([vendor_id, name])
   @@index([vendor_id, unit_class_id])
@@ -8056,4 +8061,26 @@ model StandardUnitRelation {
 
   @@unique([vendor_id, from_unit_id, to_unit_id])
   @@index([vendor_id, unit_class_id])
+}
+
+/// Purchase, stock and consumption units of a category, or of a sub-category
+/// when the category has sub-categories. Each unit is from a different class.
+model CategoryUnitSetting {
+  id                  Int                     @id @default(autoincrement())
+  vendor_id           Int
+  category_id         Int                     @unique
+  purchase_unit_id    Int?
+  stock_unit_id       Int?
+  consumption_unit_id Int?
+  created_by          Int?
+  updated_by          Int?
+  created_at          DateTime                @default(now())
+  updated_at          DateTime                @updatedAt
+  vendor              VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  category            ProjectCategoriesMaster @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  purchaseUnit        StandardUnit?           @relation("CategoryPurchaseUnit", fields: [purchase_unit_id], references: [id], onDelete: SetNull)
+  stockUnit           StandardUnit?           @relation("CategoryStockUnit", fields: [stock_unit_id], references: [id], onDelete: SetNull)
+  consumptionUnit     StandardUnit?           @relation("CategoryConsumptionUnit", fields: [consumption_unit_id], references: [id], onDelete: SetNull)
+
+  @@index([vendor_id])
 }

@@ -333,7 +333,8 @@ export const ModelName = {
   ProjectTrackerUpdateFile: 'ProjectTrackerUpdateFile',
   StandardUnitClass: 'StandardUnitClass',
   StandardUnit: 'StandardUnit',
-  StandardUnitRelation: 'StandardUnitRelation'
+  StandardUnitRelation: 'StandardUnitRelation',
+  CategoryUnitSetting: 'CategoryUnitSetting'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -5492,6 +5493,22 @@ export const StandardUnitRelationScalarFieldEnum = {
 } as const
 
 export type StandardUnitRelationScalarFieldEnum = (typeof StandardUnitRelationScalarFieldEnum)[keyof typeof StandardUnitRelationScalarFieldEnum]
+
+
+export const CategoryUnitSettingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  category_id: 'category_id',
+  purchase_unit_id: 'purchase_unit_id',
+  stock_unit_id: 'stock_unit_id',
+  consumption_unit_id: 'consumption_unit_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CategoryUnitSettingScalarFieldEnum = (typeof CategoryUnitSettingScalarFieldEnum)[keyof typeof CategoryUnitSettingScalarFieldEnum]
 
 
 export const SortOrder = {

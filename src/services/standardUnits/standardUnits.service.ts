@@ -307,3 +307,70 @@ export async function deleteRelation(actor: UnitActor, id: number) {
   await prisma.standardUnitRelation.delete({ where: { id } });
   return { id };
 }
+
+/* ----------------------------- Category units ----------------------------- */
+
+// Purchase, stock and consumption units of a category (or sub-category). Each
+// comes from a different unit class; count classes (Quantity, Packing) are
+// allowed for the purchase unit only.
+const CATEGORY_UNIT_ROLES = [
+  { key: "purchase_unit_id", label: "Purchase unit", countAllowed: true },
+  { key: "stock_unit_id", label: "Stock unit", countAllowed: false },
+  { key: "consumption_unit_id", label: "Consumption unit", countAllowed: false },
+] as const;
+const COUNT_CLASSES = new Set(["quantity", "packing"]);
+
+const categoryUnitSelect = {
+  category_id: true,
+  purchase_unit_id: true,
+  stock_unit_id: true,
+  consumption_unit_id: true,
+} as const;
+
+export async function getCategoryUnits(actor: UnitActor) {
+  return prisma.categoryUnitSetting.findMany({
+    where: { vendor_id: actor.vendorId },
+    select: categoryUnitSelect,
+  });
+}
+
+export async function saveCategoryUnits(actor: UnitActor, categoryId: number, body: Record<string, unknown>) {
+  const category = await prisma.projectCategoriesMaster.findFirst({
+    where: { id: categoryId, vendor_id: actor.vendorId },
+    select: { id: true },
+  });
+  if (!category) throw new UnitError("Category not found.", 404);
+
+  const ids = CATEGORY_UNIT_ROLES.map((role) => {
+    const value = body[role.key];
+    return value === null || value === undefined || value === "" ? null : idOf(value, role.label.toLowerCase());
+  });
+  const chosen = ids.filter((id): id is number => id !== null);
+  const units = await prisma.standardUnit.findMany({
+    where: { id: { in: chosen }, vendor_id: actor.vendorId },
+    select: { id: true, unitClass: { select: { id: true, name: true } } },
+  });
+  const usedClasses = new Map<number, string>();
+  CATEGORY_UNIT_ROLES.forEach((role, i) => {
+    if (ids[i] === null) return;
+    const unit = units.find((u) => u.id === ids[i]);
+    if (!unit) throw new UnitError(`${role.label} not found.`, 404);
+    if (!role.countAllowed && COUNT_CLASSES.has(unit.unitClass.name.toLowerCase()))
+      throw new UnitError(`${role.label} can't be from the ${unit.unitClass.name} class.`);
+    const takenBy = usedClasses.get(unit.unitClass.id);
+    if (takenBy) throw new UnitError(`${role.label} must be from a different unit class than the ${takenBy.toLowerCase()}.`);
+    usedClasses.set(unit.unitClass.id, role.label);
+  });
+
+  const data = {
+    purchase_unit_id: ids[0],
+    stock_unit_id: ids[1],
+    consumption_unit_id: ids[2],
+  };
+  return prisma.categoryUnitSetting.upsert({
+    where: { category_id: categoryId },
+    create: { vendor_id: actor.vendorId, category_id: categoryId, ...data, created_by: actor.userId },
+    update: { ...data, updated_by: actor.userId },
+    select: categoryUnitSelect,
+  });
+}

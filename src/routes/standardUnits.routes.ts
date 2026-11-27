@@ -3,7 +3,7 @@ import { verifyToken } from "../middlewares/auth.middleware";
 import logger from "../utils/logger";
 import * as units from "../services/standardUnits/standardUnits.service";
 
-// Standard units & unit relations: /standard-units/vendor/:vendorId
+// Standard units, unit relations and category units: /standard-units/vendor/:vendorId
 
 const router = Router();
 router.use(verifyToken);
@@ -49,5 +49,9 @@ router.delete(`${base}/units/:id`, handle("delete unit", (req, a) => units.delet
 router.post(`${base}/relations`, handle("create relation", (req, a) => units.createRelation(a, req.body ?? {})));
 router.put(`${base}/relations/:id`, handle("update relation", (req, a) => units.updateRelation(a, idOf(req), req.body ?? {})));
 router.delete(`${base}/relations/:id`, handle("delete relation", (req, a) => units.deleteRelation(a, idOf(req))));
+
+// Purchase / stock / consumption units of a category or sub-category.
+router.get(`${base}/category-units`, handle("list category units", (_req, a) => units.getCategoryUnits(a)));
+router.put(`${base}/category-units/:id`, handle("save category units", (req, a) => units.saveCategoryUnits(a, idOf(req), req.body ?? {})));
 
 export default router;
