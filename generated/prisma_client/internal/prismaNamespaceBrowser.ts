@@ -330,7 +330,10 @@ export const ModelName = {
   ProjectTrackerDateRevision: 'ProjectTrackerDateRevision',
   ProjectTrackerLog: 'ProjectTrackerLog',
   ProjectTrackerUpdate: 'ProjectTrackerUpdate',
-  ProjectTrackerUpdateFile: 'ProjectTrackerUpdateFile'
+  ProjectTrackerUpdateFile: 'ProjectTrackerUpdateFile',
+  StandardUnitClass: 'StandardUnitClass',
+  StandardUnit: 'StandardUnit',
+  StandardUnitRelation: 'StandardUnitRelation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -5439,6 +5442,56 @@ export const ProjectTrackerUpdateFileScalarFieldEnum = {
 } as const
 
 export type ProjectTrackerUpdateFileScalarFieldEnum = (typeof ProjectTrackerUpdateFileScalarFieldEnum)[keyof typeof ProjectTrackerUpdateFileScalarFieldEnum]
+
+
+export const StandardUnitClassScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  name: 'name',
+  sort_order: 'sort_order',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type StandardUnitClassScalarFieldEnum = (typeof StandardUnitClassScalarFieldEnum)[keyof typeof StandardUnitClassScalarFieldEnum]
+
+
+export const StandardUnitScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  unit_class_id: 'unit_class_id',
+  name: 'name',
+  is_base: 'is_base',
+  sort_order: 'sort_order',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type StandardUnitScalarFieldEnum = (typeof StandardUnitScalarFieldEnum)[keyof typeof StandardUnitScalarFieldEnum]
+
+
+export const StandardUnitRelationScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  unit_class_id: 'unit_class_id',
+  from_unit_id: 'from_unit_id',
+  from_qty: 'from_qty',
+  to_unit_id: 'to_unit_id',
+  to_qty: 'to_qty',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type StandardUnitRelationScalarFieldEnum = (typeof StandardUnitRelationScalarFieldEnum)[keyof typeof StandardUnitRelationScalarFieldEnum]
 
 
 export const SortOrder = {
