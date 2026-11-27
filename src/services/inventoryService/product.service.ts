@@ -24,6 +24,8 @@ type ProductPayload = {
   costing_method?: "FIFO" | "MANUAL";
 
   level1_price?: number | null;
+  purchase_expense_type?: "percent" | "amount" | null;
+  purchase_expense_value?: number | null;
 
   min_stock_qty?: number | null;
   min_stock_unit_id?: number | null;
@@ -63,6 +65,33 @@ type ProductPayload = {
 const toDecimal = (v: any) =>
   v === undefined || v === null || v === "" ? null : new Prisma.Decimal(v);
 
+/** Purchase expenses: % of the purchase rate or a ₹ amount; null when empty. */
+const purchaseExpenseRaw = (payload: ProductPayload) => {
+  const raw = payload.purchase_expense_value as unknown;
+  if (raw === undefined || raw === null || raw === "") return null;
+  return {
+    type: payload.purchase_expense_type === "amount" ? ("amount" as const) : ("percent" as const),
+    value: Number(raw),
+  };
+};
+
+const purchaseExpenseError = (payload: ProductPayload) => {
+  const expense = purchaseExpenseRaw(payload);
+  if (!expense) return null;
+  if (!Number.isFinite(expense.value) || expense.value < 0)
+    return "Purchase expenses must be a number of 0 or more.";
+  if (expense.type === "percent" && expense.value > 1000)
+    return "Purchase expenses can be at most 1000%.";
+  return null;
+};
+
+const purchaseExpenseOf = (payload: ProductPayload) => {
+  const expense = purchaseExpenseRaw(payload);
+  return expense
+    ? { purchase_expense_type: expense.type, purchase_expense_value: new Prisma.Decimal(expense.value.toFixed(2)) }
+    : { purchase_expense_type: null, purchase_expense_value: null };
+};
+
 const toIntOrNull = (v: any) =>
   v === undefined || v === null || v === "" ? null : Number(v);
 
@@ -101,6 +130,8 @@ const buildProductData = (payload: ProductPayload) => {
     costing_method: payload.costing_method || "FIFO",
 
     level1_price: toDecimal(payload.level1_price),
+
+    ...purchaseExpenseOf(payload),
 
     min_stock_qty: toDecimal(payload.min_stock_qty),
     min_stock_unit_id: toIntOrNull(payload.min_stock_unit_id),
@@ -769,6 +800,9 @@ export const createProduct = async (payload: ProductPayload) => {
     const supplierError = await validateProductSuppliers(payload);
     if (supplierError) return validationResponse(0, supplierError);
 
+    const expenseError = purchaseExpenseError(payload);
+    if (expenseError) return validationResponse(0, expenseError);
+
     const product = await prisma.$transaction(async (tx) => {
       const createdProduct = await tx.productMaster.create({
         data: buildProductData(payload) as any,
@@ -902,6 +936,9 @@ export const updateProduct = async (id: number, payload: ProductPayload) => {
 
     const supplierError = await validateProductSuppliers(payload);
     if (supplierError) return validationResponse(0, supplierError);
+
+    const expenseError = purchaseExpenseError(payload);
+    if (expenseError) return validationResponse(0, expenseError);
 
     const data = buildProductData(payload);
     delete (data as any).created_by;

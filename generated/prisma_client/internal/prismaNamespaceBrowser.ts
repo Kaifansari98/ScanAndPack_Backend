@@ -3248,6 +3248,8 @@ export const ProductMasterScalarFieldEnum = {
   installation_charges: 'installation_charges',
   item1_weight: 'item1_weight',
   level1_price: 'level1_price',
+  purchase_expense_type: 'purchase_expense_type',
+  purchase_expense_value: 'purchase_expense_value',
   level2_price: 'level2_price',
   level3_price: 'level3_price',
   moq: 'moq',
