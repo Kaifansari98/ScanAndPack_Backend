@@ -6,6 +6,8 @@ import {
   CreateSmallOrderRequestInput,
   getSmallOrderRequestsByLead,
   markSmallOrderRequestResolved,
+  reuploadSmallOrderRequestDocument,
+  SmallOrderDocumentError,
 } from "../../services/leadModuleServices/smallOrderRequest.service";
 
 const getSingleValue = (value: string | string[] | undefined) =>
@@ -160,5 +162,39 @@ export const markSmallOrderRequestResolvedController = async (
     const statusCode = message.includes("not found") ? 404 : 500;
 
     return res.status(statusCode).json(ApiResponse.error(message, statusCode));
+  }
+};
+
+/** Super-admin only: replace an approved document of a small order lead. */
+export const reuploadSmallOrderRequestDocumentController = async (req: Request, res: Response) => {
+  const file = req.file;
+  try {
+    const user = (req as any).user;
+    const vendorId = Number(req.params.vendorId);
+    const leadId = Number(req.params.leadId);
+    const requestDocumentId = Number(req.params.documentId);
+    const userType = String(user?.user_type ?? "").trim().toLowerCase().replace(/[_\s]+/g, "-");
+
+    if (!Number.isSafeInteger(vendorId) || Number(user?.vendor_id) !== vendorId)
+      return res.status(403).json(ApiResponse.error("Vendor access denied.", 403));
+    if (userType !== "super-admin")
+      return res.status(403).json(ApiResponse.error("Only a super admin can re-upload documents.", 403));
+    if (!Number.isSafeInteger(leadId) || leadId <= 0 || !Number.isSafeInteger(requestDocumentId) || requestDocumentId <= 0)
+      return res.status(400).json(ApiResponse.error("Invalid lead or document.", 400));
+    if (!file) return res.status(400).json(ApiResponse.error("Choose a file to upload.", 400));
+
+    const result = await reuploadSmallOrderRequestDocument({
+      vendorId,
+      leadId,
+      requestDocumentId,
+      userId: Number(user.id),
+      file,
+    });
+    return res.status(200).json(ApiResponse.success(result, "Document re-uploaded", 200));
+  } catch (error: any) {
+    if (error instanceof SmallOrderDocumentError)
+      return res.status(error.statusCode).json(ApiResponse.error(error.message, error.statusCode));
+    logger.error("[small-order] re-upload document", error);
+    return res.status(500).json(ApiResponse.error("Couldn't re-upload the document.", 500));
   }
 };

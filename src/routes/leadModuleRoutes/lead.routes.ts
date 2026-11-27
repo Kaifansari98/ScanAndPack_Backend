@@ -143,6 +143,7 @@ import {
   createSmallOrderRequestController,
   getSmallOrderRequestsByLeadController,
   markSmallOrderRequestResolvedController,
+  reuploadSmallOrderRequestDocumentController,
 } from "../../controllers/leadModuleControllers/smallOrderRequest.controller";
 import {
   createFastProductionRequestController,
@@ -236,6 +237,13 @@ leadsRouter.get(
 leadsRouter.patch(
   "/small-order-requests/vendor/:vendorId/request/:requestId/resolve",
   markSmallOrderRequestResolvedController,
+);
+// Super-admin: replace an approved document of a small order lead.
+leadsRouter.post(
+  "/small-order-requests/vendor/:vendorId/lead/:leadId/documents/:documentId/reupload",
+  verifyToken,
+  handleMulterUpload(uploadLeadSitePhotos.single("file")),
+  reuploadSmallOrderRequestDocumentController,
 );
 leadsRouter.get("/get-all-carcass-types/:vendor_id", fetchAllCarcassTypes);
 leadsRouter.post("/create-carcass-type", addCarcassType);

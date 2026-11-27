@@ -1769,3 +1769,91 @@ export const actOnSmallOrderRequestTask = async (
     created_lead: result.created_lead,
   };
 };
+
+export class SmallOrderDocumentError extends Error {
+  constructor(message: string, public statusCode = 400) {
+    super(message);
+  }
+}
+
+/**
+ * Super-admin: replaces one approved document of a small order lead (Order
+ * Login → Approved Documents). The new file takes the old one's place; the old
+ * file is kept as a deleted document for history.
+ */
+export const reuploadSmallOrderRequestDocument = async (input: {
+  vendorId: number;
+  leadId: number;
+  requestDocumentId: number;
+  userId: number;
+  file: Express.Multer.File;
+}) => {
+  const { vendorId, leadId, requestDocumentId, userId, file } = input;
+  try {
+    const lead = await prisma.leadMaster.findFirst({
+      where: { id: leadId, vendor_id: vendorId },
+      select: { id: true, lead_code: true, account_id: true, is_small_order_request: true },
+    });
+    if (!lead || !(lead as any).is_small_order_request || !lead.lead_code)
+      throw new SmallOrderDocumentError("This is not a small order lead.", 404);
+
+    const requestDoc = await prisma.smallOrderRequestDocument.findFirst({
+      where: {
+        id: requestDocumentId,
+        vendor_id: vendorId,
+        smallOrderRequest: { so_code: { equals: lead.lead_code.trim(), mode: "insensitive" } },
+      },
+      select: {
+        id: true,
+        document: {
+          select: { id: true, doc_og_name: true, doc_type_id: true, lead_id: true, account_id: true },
+        },
+      },
+    });
+    if (!requestDoc) throw new SmallOrderDocumentError("Document not found for this lead.", 404);
+
+    const [uploaded] = await uploadSmallOrderRequestFiles([file], vendorId, requestDoc.document.lead_id ?? leadId);
+
+    const newDocument = await prisma.$transaction(async (tx) => {
+      const created = await tx.leadDocuments.create({
+        data: {
+          doc_og_name: uploaded.originalName,
+          doc_sys_name: uploaded.sysName,
+          created_by: userId,
+          doc_type_id: requestDoc.document.doc_type_id,
+          account_id: requestDoc.document.account_id,
+          lead_id: requestDoc.document.lead_id,
+          vendor_id: vendorId,
+        },
+        select: { id: true, doc_og_name: true },
+      });
+      await tx.smallOrderRequestDocument.update({
+        where: { id: requestDoc.id },
+        data: { document_id: created.id, created_by: userId, created_at: new Date() },
+      });
+      await tx.leadDocuments.update({
+        where: { id: requestDoc.document.id },
+        data: { is_deleted: true, deleted_by: userId, deleted_at: new Date() },
+      });
+      return created;
+    });
+
+    await createLeadLog(prisma as any, {
+      account_id: lead.account_id ?? 0,
+      lead_id: lead.id,
+      vendor_id: vendorId,
+      created_by: userId,
+      action: `Approved document "${requestDoc.document.doc_og_name}" re-uploaded as "${newDocument.doc_og_name}"`,
+      action_type: "UPDATE",
+      history_type: "Lead",
+    }).catch(() => undefined);
+
+    return {
+      id: requestDoc.id,
+      document_id: newDocument.id,
+      original_name: newDocument.doc_og_name,
+    };
+  } finally {
+    await fs.unlink(file.path).catch(() => undefined);
+  }
+};
