@@ -80,6 +80,7 @@ import attendanceRoutes from "./attendance/attendance.routes";
 import leaveRoutes from "./leaves/leaves.routes";
 import complaintRoutes from "./complaints/complaint.routes";
 import standardUnitsRoutes from "./standardUnits.routes";
+import inventoryLocationsRoutes from "./inventoryLocations.routes";
   const router = Router();
 
   router.use("/dashboard", DashboardRouter);
@@ -158,6 +159,7 @@ router.use("/track-trace-project", tracktraceProjectRoutes);
 router.use("/themes", themeRoutes);
 router.use("/inventory", inventoryRoutes);
 router.use("/standard-units", standardUnitsRoutes);
+router.use("/inventory-locations", inventoryLocationsRoutes);
 router.use("/purchase-orders", purchaseOrderRoutes);
 router.use("/grn", grnRoutes);
 router.use("/architecture-masters", architectureMasterRoutes);

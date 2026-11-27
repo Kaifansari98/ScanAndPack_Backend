@@ -4289,6 +4289,7 @@ model ProductMaster {
   @@index([item_group_id])
   @@index([primary_unit_id])
   @@index([purchase_unit_id])
+  @@index([location_id])
   @@index([stock_unit_id])
   @@index([consumption_unit_id])
   @@index([min_stock_unit_id])

@@ -334,7 +334,8 @@ export const ModelName = {
   StandardUnitClass: 'StandardUnitClass',
   StandardUnit: 'StandardUnit',
   StandardUnitRelation: 'StandardUnitRelation',
-  CategoryUnitSetting: 'CategoryUnitSetting'
+  CategoryUnitSetting: 'CategoryUnitSetting',
+  InventoryLocation: 'InventoryLocation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -3250,6 +3251,7 @@ export const ProductMasterScalarFieldEnum = {
   level1_price: 'level1_price',
   purchase_expense_type: 'purchase_expense_type',
   purchase_expense_value: 'purchase_expense_value',
+  location_id: 'location_id',
   level2_price: 'level2_price',
   level3_price: 'level3_price',
   moq: 'moq',
@@ -5511,6 +5513,23 @@ export const CategoryUnitSettingScalarFieldEnum = {
 } as const
 
 export type CategoryUnitSettingScalarFieldEnum = (typeof CategoryUnitSettingScalarFieldEnum)[keyof typeof CategoryUnitSettingScalarFieldEnum]
+
+
+export const InventoryLocationScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  parent_id: 'parent_id',
+  level: 'level',
+  name: 'name',
+  sort_order: 'sort_order',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type InventoryLocationScalarFieldEnum = (typeof InventoryLocationScalarFieldEnum)[keyof typeof InventoryLocationScalarFieldEnum]
 
 
 export const SortOrder = {

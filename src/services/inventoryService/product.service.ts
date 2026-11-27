@@ -26,6 +26,7 @@ type ProductPayload = {
   level1_price?: number | null;
   purchase_expense_type?: "percent" | "amount" | null;
   purchase_expense_value?: number | null;
+  location_id?: number | null;
 
   min_stock_qty?: number | null;
   min_stock_unit_id?: number | null;
@@ -132,6 +133,7 @@ const buildProductData = (payload: ProductPayload) => {
     level1_price: toDecimal(payload.level1_price),
 
     ...purchaseExpenseOf(payload),
+    location_id: toIntOrNull(payload.location_id),
 
     min_stock_qty: toDecimal(payload.min_stock_qty),
     min_stock_unit_id: toIntOrNull(payload.min_stock_unit_id),
@@ -215,6 +217,14 @@ const validateProductReferences = async (payload: ProductPayload) => {
   });
 
   if (!category) return "Invalid item category";
+
+  if (payload.location_id) {
+    const location = await prisma.inventoryLocation.findFirst({
+      where: { id: Number(payload.location_id), vendor_id },
+      select: { id: true },
+    });
+    if (!location) return "Invalid location";
+  }
 
   if (payload.sub_category_id) {
     const subCategory = await prisma.projectCategoriesMaster.findFirst({

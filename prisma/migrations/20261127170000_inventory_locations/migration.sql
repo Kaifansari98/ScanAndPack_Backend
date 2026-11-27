@@ -21,3 +21,4 @@ DO $$ BEGIN
   ALTER TABLE "ProductMaster" ADD CONSTRAINT "ProductMaster_location_id_fkey"
     FOREIGN KEY ("location_id") REFERENCES "InventoryLocation"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+CREATE INDEX IF NOT EXISTS "ProductMaster_location_id_idx" ON "ProductMaster"("location_id");
