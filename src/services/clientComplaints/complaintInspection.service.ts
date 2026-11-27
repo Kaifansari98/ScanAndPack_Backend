@@ -296,6 +296,11 @@ export async function afterInspection(
   if (action === "START_QUOTATION" && !canPrepareQuotation(actor))
     throw new ComplaintError("Only HO can prepare quotations.", 403);
   const remarks = remarksOf(body.remarks, "Remarks");
+  // What the client pays for a quotation shared now (shown in the client app).
+  const amount =
+    action === "START_QUOTATION" && files.length && body.client_payable_amount !== undefined && body.client_payable_amount !== null && body.client_payable_amount !== ""
+      ? money(body.client_payable_amount, "Amount payable by the client", { allowZero: true })
+      : null;
   const uploaded =
     action === "START_QUOTATION" && files.length ? await uploadAll(actor, quotationFiles(files, false)) : [];
   let status: ComplaintStatus = complaint.status;
@@ -308,7 +313,7 @@ export async function afterInspection(
         await setComplaintStatus(tx, complaint, status);
         await log(tx, actor, complaint, { action: "QUOTATION_PREPARATION_STARTED", from_status: complaint.status, to_status: status, remarks });
         if (uploaded.length) {
-          await shareQuotationTx(tx, actor, { ...complaint, status }, uploaded, null);
+          await shareQuotationTx(tx, actor, { ...complaint, status }, uploaded, null, amount);
           status = "QUOTATION_SHARED";
         }
       } else if (action === "PROCEED_WITHOUT_QUOTATION") {

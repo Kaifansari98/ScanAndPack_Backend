@@ -81,6 +81,9 @@ model VendorMaster {
   is_furnixcrm_app_enabled                     Boolean                                        @default(false)
   is_client_complaints_enabled                 Boolean                                        @default(false)
   complaint_visit_fee                          Decimal                                        @default(800) @db.Decimal(12, 2)
+  /// UPI ID clients pay complaint charges to from the client app (QR + UPI link).
+  complaint_upi_id                             String?                                        @db.VarChar(100)
+  complaint_upi_name                           String?                                        @db.VarChar(150)
   accounts                                     AccountMaster[]
   additionalCostMasters                        AdditionalCostMaster[]                         @relation("AdditionalCostVendor")
   architechuremasters                          Architechuremaster[]
@@ -2126,6 +2129,7 @@ enum ClientChatAutoKind {
   VISIT
   DISPATCH
   PAYMENT
+  COMPLAINT
 }
 
 model ProductStructure {
@@ -7221,10 +7225,11 @@ model ComplaintPaymentAllocation {
   payment_id   Int
   charge_id    Int
   amount       Decimal  @db.Decimal(12, 2)
-  allocated_by Int
+  // Null when the client paid from the app (allocated to the charge they paid).
+  allocated_by Int?
   created_at   DateTime @default(now())
 
-  allocatedBy UserMaster @relation("ComplaintPaymentAllocationAllocatedBy", fields: [allocated_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
+  allocatedBy UserMaster? @relation("ComplaintPaymentAllocationAllocatedBy", fields: [allocated_by, vendor_id], references: [id, vendor_id], onDelete: Restrict)
 
   payment ComplaintPayment @relation("ComplaintPaymentAllocationPayment", fields: [payment_id, cycle_id], references: [id, cycle_id], onDelete: Restrict)
 

@@ -9,6 +9,7 @@ import { postAutoMessage } from "./clientChat.service";
 //   - stage changes (LeadStatusLogs), incl. dispatch details at "Dispatch"
 //   - visits scheduled (Final Measurements / Site Readiness tasks)
 //   - payments received (PaymentInfo)
+//   - complaint updates (ComplaintActivityLog)
 // Each source keeps its cursor in Redis. On the first run the cursor starts at
 // the newest row, so existing history isn't replayed into chats.
 
@@ -169,6 +170,78 @@ async function payments(vendors: Map<number, string>) {
   if (rows.length) await redis.set(c.key, String(rows[rows.length - 1].id));
 }
 
+// Complaint updates the client should hear about, from the complaint activity
+// log (staff actions; client's own actions only where noted).
+const scheduledDay = (meta: unknown) => {
+  const iso = (meta as { scheduled_for?: string } | null)?.scheduled_for;
+  return iso ? day(new Date(iso)) : null;
+};
+type ComplaintLog = { action: string; remarks: string | null; metadata: unknown; code: string };
+const COMPLAINT_UPDATES: Record<string, (l: ComplaintLog) => [string, string] | null> = {
+  COMPLAINT_REGISTERED: (l) => [`Complaint ${l.code} registered`, "We've received your complaint. Our team will review it and get back to you soon."],
+  VERIFICATION_APPROVED_FOR_VISIT: (l) => [
+    `Complaint ${l.code} approved`,
+    "We've approved a site visit for your complaint. Open the complaint to approve the visiting charges so we can schedule it.",
+  ],
+  VERIFICATION_MORE_INFORMATION_REQUIRED: (l) => [
+    "More details needed",
+    `Our team needs a few more details on complaint ${l.code}${l.remarks ? `: ${l.remarks}` : "."} Please reply from the complaint screen.`,
+  ],
+  VERIFICATION_REJECTED: (l) => [`Complaint ${l.code} not approved`, l.remarks ?? "Our team reviewed your complaint and could not approve it."],
+  VERIFICATION_REMOTE_RESOLUTION: (l) => [
+    "Fix shared for your complaint",
+    `Our team has shared steps to fix complaint ${l.code}. Please try them and confirm in the app.`,
+  ],
+  VISIT_SCHEDULE: (l) => ["Complaint visit scheduled", `${scheduledDay(l.metadata) ?? "Soon"}. Our team will visit your site for complaint ${l.code}.`],
+  VISIT_RESCHEDULE: (l) => ["Complaint visit rescheduled", `Your visit for complaint ${l.code} has moved to ${scheduledDay(l.metadata) ?? "a new date"}.`],
+  QUOTATION_SHARED: (l) => ["Quotation shared", `We've shared a quotation for complaint ${l.code}. Please review and accept it in the app.`],
+  VISIT_PAYMENT_VERIFIED: (l) => ["Payment verified", `Thanks! Your visit payment for complaint ${l.code} is confirmed.`],
+  REPAIR_PAYMENT_VERIFIED: (l) => ["Payment verified", `Thanks! Your repair payment for complaint ${l.code} is confirmed.`],
+  VISIT_PAYMENT_REJECTED: (l) => ["Payment not verified", `We couldn't verify your payment for complaint ${l.code}${l.remarks ? `: ${l.remarks}` : "."} Please pay again from the app.`],
+  REPAIR_PAYMENT_REJECTED: (l) => ["Payment not verified", `We couldn't verify your payment for complaint ${l.code}${l.remarks ? `: ${l.remarks}` : "."} Please pay again from the app.`],
+  EXECUTION_SCHEDULE_REPAIR: (l) => ["Repair visit scheduled", `${scheduledDay(l.metadata) ?? "Soon"}. Our team will fix complaint ${l.code}.`],
+  EXECUTION_RESCHEDULE_REPAIR: (l) => ["Repair visit rescheduled", `The repair for complaint ${l.code} has moved to ${scheduledDay(l.metadata) ?? "a new date"}.`],
+  EXECUTION_WORK_COMPLETED: (l) => ["Work completed", `The work on complaint ${l.code} is done. Please confirm and rate us in the app.`],
+  COMPLAINT_CLOSED: (l) => [`Complaint ${l.code} closed`, "Your complaint is now closed. Thank you for your patience!"],
+  COMPLAINT_CANCELLED: (l) => [`Complaint ${l.code} cancelled`, l.remarks ?? "This complaint has been cancelled."],
+};
+
+async function complaintUpdates(vendors: Map<number, string>) {
+  const c = await cursor("complaint", async () => (await prisma.complaintActivityLog.aggregate({ _max: { id: true } }))._max.id ?? 0);
+  const logs = await prisma.complaintActivityLog.findMany({
+    where: { id: { gt: c.from } },
+    select: {
+      id: true,
+      vendor_id: true,
+      complaint_id: true,
+      action: true,
+      actor_type: true,
+      remarks: true,
+      metadata: true,
+    },
+    orderBy: { id: "asc" },
+    take: BATCH,
+  });
+  for (const log of logs) {
+    const make = COMPLAINT_UPDATES[log.action];
+    // The client's own actions are not echoed back, except the registration receipt.
+    if (!make || !vendors.has(log.vendor_id) || (log.actor_type === "CLIENT" && log.action !== "COMPLAINT_REGISTERED")) continue;
+    const complaint = await prisma.complaintMaster.findUnique({
+      where: { id: log.complaint_id },
+      select: { complaint_code: true, lead_id: true, lead: { select: { is_complaint_placeholder: true } } },
+    });
+    if (!complaint?.lead_id || complaint.lead?.is_complaint_placeholder) continue;
+    const message = make({ action: log.action, remarks: log.remarks, metadata: log.metadata, code: complaint.complaint_code });
+    if (!message) continue;
+    await postAutoMessage(complaint.lead_id, "COMPLAINT", message[0], message[1], {
+      type: "client_complaint",
+      complaint_id: log.complaint_id,
+      lead_id: complaint.lead_id,
+    });
+  }
+  if (logs.length) await redis.set(c.key, String(logs[logs.length - 1].id));
+}
+
 let running = false;
 
 const LOCK = "cchat:auto:lock";
@@ -186,6 +259,7 @@ export async function processClientChatAutoMessages() {
     await stageChanges(vendors);
     await visits(vendors);
     await payments(vendors);
+    await complaintUpdates(vendors);
   } catch (error) {
     logger.error("[client-chat] auto messages failed", error);
   } finally {

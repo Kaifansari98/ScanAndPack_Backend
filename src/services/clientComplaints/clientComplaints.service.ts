@@ -166,7 +166,7 @@ export async function getComplaintMeta(actor: ComplaintActor) {
     }),
     prisma.vendorMaster.findUniqueOrThrow({
       where: { id: actor.vendorId },
-      select: { complaint_visit_fee: true },
+      select: { complaint_visit_fee: true, complaint_upi_id: true, complaint_upi_name: true },
     }),
     storeCities(actor.vendorId),
     prisma.miscellaneousTypeMaster.findMany({
@@ -183,6 +183,8 @@ export async function getComplaintMeta(actor: ComplaintActor) {
     components: Object.values(ComplaintComponent),
     can_register: canRegisterComplaints(actor.role),
     visit_fee: Number(vendor.complaint_visit_fee),
+    upi_id: vendor.complaint_upi_id,
+    upi_name: vendor.complaint_upi_name,
     can_configure: canConfigureComplaints(actor.role),
   };
 }
@@ -196,12 +198,25 @@ export async function updateComplaintSettings(actor: ComplaintActor, body: Recor
   const fee = Number(body.visit_fee);
   if (!Number.isFinite(fee) || fee < 0 || fee > 1_000_000 || Math.round(fee * 100) !== fee * 100)
     throw new ComplaintError("Enter a valid visiting charge (₹0 or more, up to 2 decimals).");
+  // UPI the client app pays complaint charges to; omitted fields stay as they are.
+  const data: Prisma.VendorMasterUpdateInput = { complaint_visit_fee: fee };
+  if (body.upi_id !== undefined) {
+    const upi = text(body.upi_id, "UPI ID", 100);
+    if (upi && !/^[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z][a-zA-Z0-9.\-]{1,64}$/.test(upi))
+      throw new ComplaintError("Enter a valid UPI ID, like name@bank.");
+    data.complaint_upi_id = upi;
+  }
+  if (body.upi_name !== undefined) data.complaint_upi_name = text(body.upi_name, "Payee name", 150);
   const vendor = await prisma.vendorMaster.update({
     where: { id: actor.vendorId },
-    data: { complaint_visit_fee: fee },
-    select: { complaint_visit_fee: true },
+    data,
+    select: { complaint_visit_fee: true, complaint_upi_id: true, complaint_upi_name: true },
   });
-  return { visit_fee: Number(vendor.complaint_visit_fee) };
+  return {
+    visit_fee: Number(vendor.complaint_visit_fee),
+    upi_id: vendor.complaint_upi_id,
+    upi_name: vendor.complaint_upi_name,
+  };
 }
 
 function leadForComplaintQuery(vendorId: number, leadCode: string) {
@@ -265,7 +280,7 @@ const HSS_TYPES = ["head-site-supervisor", "head site supervisor", "head_site_su
 
 // Spec 1: the complaint goes to the SS (and HSS) already assigned to the lead.
 // Only a lead without one falls back to whoever covers its franchise.
-async function complaintAssigneeOptions(vendorId: number, lead: { id: number; franchise_id: number | null }) {
+export async function complaintAssigneeOptions(vendorId: number, lead: { id: number; franchise_id: number | null }) {
   const franchiseId = lead.franchise_id;
   const userSelect = { id: true, user_name: true } as const;
   const [siteSupervisors, headSiteSupervisors] = franchiseId
@@ -483,7 +498,7 @@ export interface ComplaintUpload {
   originalname: string;
 }
 
-function validateUploads(photos: ComplaintUpload[], videos: ComplaintUpload[]) {
+export function validateUploads(photos: ComplaintUpload[], videos: ComplaintUpload[]) {
   if (photos.length === 0) throw new ComplaintError("Add at least one photo of the issue.");
   if (photos.length > COMPLAINT_MAX_PHOTOS) throw new ComplaintError(`Add up to ${COMPLAINT_MAX_PHOTOS} photos.`);
   if (videos.length > COMPLAINT_MAX_VIDEOS) throw new ComplaintError(`Add up to ${COMPLAINT_MAX_VIDEOS} videos.`);

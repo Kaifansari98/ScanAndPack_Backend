@@ -42,6 +42,9 @@ const DELETE_WINDOW_MS = 48 * 60 * 60 * 1000;
 const TYPING_MS = 6000;
 const ONLINE_MS = 2 * 60 * 1000;
 const STAFF_ALERT_GAP_S = 60;
+// Staff alerts for client messages are off until the staff app is built;
+// staff read and reply from the CRM lead page. Set CLIENT_CHAT_STAFF_ALERTS=true to turn them on.
+const STAFF_ALERTS_ON = process.env.CLIENT_CHAT_STAFF_ALERTS === "true";
 export const REACTIONS = ["👍", "❤️", "😂", "😮", "🙏", "🔥"];
 
 const isAdmin = (role: string) => ADMIN_ROLES.includes(role);
@@ -417,6 +420,7 @@ const preview = (kind: ClientChatKind, text: string) =>
 async function alertOtherSide(actor: ChatActor, lead: ChatLead, team: ChatMember[], body: string) {
   const clientName = `${lead.firstname} ${lead.lastname}`.trim();
   if (actor.kind === "client") {
+    if (!STAFF_ALERTS_ON) return;
     for (const m of team) {
       // One alert per person per chat per minute, so a burst of messages doesn't spam.
       const gate = `cchat:alert:${lead.id}:${m.id}`;
@@ -632,7 +636,13 @@ export async function staffInbox(actor: Extract<ChatActor, { kind: "staff" }>) {
 /* ----------------------------- Automatic posts ----------------------------- */
 
 /** Posts a CRM update (stage, visit, dispatch, payment) into the client chat. */
-export async function postAutoMessage(leadId: number, auto: ClientChatAutoKind, title: string, body: string) {
+export async function postAutoMessage(
+  leadId: number,
+  auto: ClientChatAutoKind,
+  title: string,
+  body: string,
+  pushData?: Record<string, unknown>,
+) {
   const lead = await prisma.leadMaster.findFirst({
     where: { id: leadId, is_deleted: false, vendor: { is_furnixcrm_app_enabled: true, status: "active" } },
     select: leadSelect,
@@ -646,6 +656,6 @@ export async function postAutoMessage(leadId: number, auto: ClientChatAutoKind, 
     await tx.clientChatRoom.update({ where: { id: room.id }, data: { last_message_at: m.created_at } });
     return m;
   });
-  if (lead.email) await sendClientPush(lead.email, { title, body: body.slice(0, 200), data: { type: "client_chat", lead_id: lead.id } }).catch(() => undefined);
+  if (lead.email) await sendClientPush(lead.email, { title, body: body.slice(0, 200), data: pushData ?? { type: "client_chat", lead_id: lead.id } }).catch(() => undefined);
   return message.id;
 }

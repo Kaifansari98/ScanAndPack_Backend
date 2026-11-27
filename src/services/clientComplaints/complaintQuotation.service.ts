@@ -12,6 +12,7 @@ import {
   isHead,
   loadComplaint,
   log,
+  money,
   moveStatus,
   remarksOf,
   requireHead,
@@ -96,6 +97,7 @@ export async function shareQuotationTx(
   complaint: LoadedComplaint,
   uploaded: Awaited<ReturnType<typeof uploadAll>>,
   remarks: string | null,
+  clientPayable: number | null = null,
 ) {
   const latest = await tx.complaintQuotation.findFirst({
     where: { complaint_id: complaint.id, cycle_id: complaint.current_cycle_id, status: { not: "SUPERSEDED" } },
@@ -126,9 +128,11 @@ export async function shareQuotationTx(
       created_by: actor.actorId,
       status: "SHARED",
       shared_at: new Date(),
-      subtotal: 0,
-      total_amount: 0,
-      client_payable_amount: 0,
+      // Optional amount HO enters from the file, so the client app can show it
+      // and prefill the UPI payment.
+      subtotal: clientPayable ?? 0,
+      total_amount: clientPayable ?? 0,
+      client_payable_amount: clientPayable ?? 0,
     },
   });
   await tx.complaintAttachment.createMany({
@@ -161,11 +165,15 @@ export async function uploadQuotation(
   requireStatus(complaint, ["QUOTATION_PREPARATION"], "upload the quotation");
   const version = versionOf(body.version);
   const remarks = remarksOf(body.remarks, "Remarks", false);
+  const amount =
+    body.client_payable_amount === undefined || body.client_payable_amount === null || body.client_payable_amount === ""
+      ? null
+      : money(body.client_payable_amount, "Amount payable by the client", { allowZero: true });
   const uploaded = await uploadAll(actor, quotationFiles(files, true));
   try {
     const quotation = await prisma.$transaction(async (tx) => {
       await moveStatus(tx, complaint, version, {});
-      return shareQuotationTx(tx, actor, complaint, uploaded, remarks);
+      return shareQuotationTx(tx, actor, complaint, uploaded, remarks, amount);
     });
     return { quotation_id: quotation.id, status: "QUOTATION_SHARED" as const };
   } catch (error) {

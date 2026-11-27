@@ -19,7 +19,7 @@ const DELIVERED_TAG = "Type 17";
  * leads (instance-aware for large-scale vendors). Complaint placeholder leads
  * and small-order leads, which that page hides, are left out.
  */
-async function deliveredProjectsScope(vendorId: number): Promise<Prisma.LeadMasterWhereInput> {
+export async function deliveredProjectsScope(vendorId: number): Promise<Prisma.LeadMasterWhereInput> {
   const [statuses, vendor] = await Promise.all([
     prisma.statusTypeMaster.findMany({
       where: { vendor_id: vendorId, tag: DELIVERED_TAG },
